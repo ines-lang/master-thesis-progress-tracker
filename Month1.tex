@@ -1,0 +1,330 @@
+\documentclass[11pt]{article}
+
+% ---------- PACKAGES ----------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+
+% ---------- COLORS ----------
+\definecolor{tumblue}{RGB}{0,101,189}
+\definecolor{openq}{RGB}{178,34,34}
+\definecolor{vincenzoq}{RGB}{204,153,0}
+\definecolor{todo}{RGB}{0,120,90}
+\definecolor{review}{RGB}{128,0,128}
+
+% ---------- HYPERLINK STYLE ----------
+\hypersetup{
+    colorlinks=true,
+    linkcolor=tumblue,
+    urlcolor=tumblue,
+    citecolor=tumblue
+}
+
+% ---------- SECTION STYLE ----------
+\titleformat{\section}{\Large\bfseries\color{tumblue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{tumblue!80!black}}{\thesubsection}{1em}{}
+
+% ---------- HEADER / FOOTER ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Month 1 Delivery}
+\fancyhead[R]{Ines Suarez Garcia}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+
+% ---------- CUSTOM COMMANDS FOR TRACKING ----------
+% Use these throughout to flag items that still need a decision or follow up.
+\newcommand{\openquestion}[1]{\textcolor{openq}{\textbf{Open question:}} #1}
+\newcommand{\vincenzoq}[1]{\textcolor{vincenzoq}{\textbf{Open question to Vincenzo:}} #1}
+\newcommand{\actionitem}[1]{\textcolor{todo}{\textbf{Action item:}} #1}
+\newcommand{\status}[1]{\textit{\textcolor{gray}{Status: #1}}}
+\newcommand{\review}[1]{\textcolor{review}{\textbf{Review this:}} #1}
+
+
+\title{\textbf{Optimal Central-Node Placement in OISL-Connected \\ Distributed Satellite Systems} \\[0.3cm] \large Master Thesis: Month 1 Delivery}
+\author{Ines Suarez Garcia \\ TUM Chair of Spacecraft Systems / NeuralAgent}
+\date{Last updated: \today}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\textcolor{gray}{\textbf{Supervisors:} Vincenzo Messina (TUM), Indraditya Bhattacharyya (NeuralAgent), Harald Bayerlein (NeuralAgent)}
+\end{center}
+
+\vspace{0.5cm}
+
+% =========================================================
+\section{Thesis Overview}
+% =========================================================
+
+\textbf{Objective:} Determine the optimal central-node distribution (number and orbital placement) for OISL-connected distributed satellite systems, and analyse how it affects coverage figures of merit (FOM), revisit times, and coordination/task allocation across the network.
+
+\textbf{Goal type:} Analysis and optimization. Central-node distributions are evaluated via a discrete sweep over candidate configurations (varying count and orbital placement), quantifying effects on routing stability, handover interruption time, and network availability, benchmarked as an outperformance case against centralized management.
+
+\textbf{Use case:} Wildfire detection and response.
+
+\textbf{Link types:} Although the title refers to OISL, the study is not limited to optical links. Inter-satellite and ground links in different frequency bands (e.g.\ S-band, Ka-band) are also considered.
+
+% =========================================================
+\section{Scope}
+% =========================================================
+
+\subsection{Out of Scope}
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Pre-detection.} This thesis is agnostic to how is identified that a wildfire exists in the first place.
+\end{itemize}
+
+\subsection{Working Assumptions}\label{sec:baseline}
+\begin{itemize}[leftmargin=1.2cm]
+    \item We assume a satellite preprocesses the wildfire signal and sends the initial task/alert into the network. From that point on, we study how the distributed architecture propagates, prioritizes, and acts on that information.
+    \item Our system's performance is compared against a visual-recognition baseline. \vincenzoq{How exactly will we measure this? Against public available information on the internet about the wildfire?}
+
+    \textbf{Proposal.} The baseline is built from the public record of the same satellites that form the sensing layer, so that differences in timing can be attributed to the network rather than to better sensors:
+    \begin{enumerate}
+        \item \textbf{Baseline timeline.} For each fire, the FIRMS hotspots (VIIRS and MODIS) within a fixed radius of the fire location (e.g.\ 10\,km) during the event window are selected. Their acquisition times are the public observation times $t_{obs}$; the first one defines the first alert $t_0$. 
+        \item \textbf{Availability.} The archive gives the acquisition time but not the time at which each record was published. Availability is therefore modeled as $t_{avail} = t_{obs} + L_{pub}$, with a nominal latency $L_{pub}$ that is varied (FIRMS states near-real-time availability within 3 hours of the overpass for Europe).
+        \item \textbf{Comparison.} For a fair comparison, the same fire, $t_0$, target point and event window are used in every scenario. A simulated pass only counts as an observation if the real sensor detected the fire on that pass in the record, which removes the effect of clouds and smoke without modeling them. Times are compared stage by stage (observation with observation, availability with availability), and the same processing delay is added to our results as in the public chain.
+    \end{enumerate}
+\end{itemize}
+
+% =========================================================
+\section{Core Research Questions}
+% =========================================================
+
+\subsection{Detection and First Observation Timing}
+\begin{itemize}[leftmargin=1.2cm]
+    \item How fast is the first dedicated observation of the fire, and how does this depend on: (a) how quickly the fire is growing (its (updated) size and growth trajectory
+    \item The predictions are feed into task prioritization (which fire gets observed next, and by which satellite).
+\end{itemize}
+
+\subsection{Task Allocation and Prioritization}
+\begin{itemize}[leftmargin=1.2cm]
+    \item Tasks are divided and re-prioritized dynamically as new information arrives (e.g. updated fire size, new fires).
+\end{itemize}
+
+\subsection{Coverage vs. Decentralization}
+\begin{itemize}[leftmargin=1.2cm]
+    \item The central question is how much decentralization helps, relative to a centralized architecture.
+    \item Two latency components to track explicitly:
+    \begin{enumerate}
+        \item Time for a satellite to change tasks after receiving a new task.
+        \item Time until downlink of the resulting observation
+    \end{enumerate}
+\end{itemize}
+
+\subsection{Communication Network Effects}\label{sec:comm}
+\begin{itemize}[leftmargin=1.2cm]
+    \item Communication topology and link availability determine how fast information propagates through the network and how reactive the architecture is to a newly detected fire.
+    \item \vincenzoq{How many ground stations, and where, still needs to be decided.}
+
+    \textbf{Suggestion.} A first set could combine polar and southern European stations:
+    \begin{itemize}
+        \item \textbf{Polar}. At these latitudes, sun-synchronous satellites are visible on almost every orbit, which is why polar stations are widely used for EO data downlink.
+        \item \textbf{Southern Europe}.
+    \end{itemize}
+    The same set should be used in all scenarios, since the number and location of stations directly affect the latency of the centralized case.
+\end{itemize}
+
+\subsubsection{Link Types and Frequency Bands}\label{sec:bands}
+    \begin{itemize}
+        \item \textbf{Optical}
+        \item \textbf{RF bands}: From research, existing EO missions typically use S-band for telemetry and command and higher bands for payload data downlink.
+    \end{itemize}
+\actionitem{Define which link types and bands are assigned to each satellite class (sensing, coordination, ground), and check with NeuralAgent how RF links can be represented in OrbiNet or approximated outside the simulator.}
+
+% =========================================================
+\section{Modeling Requirements and Data Needed}
+% =========================================================
+
+\subsection{Parameters Needed from OrbiNet Simulator}
+
+\textit{We need to implement observation time windows for specific events or be able to propagate inside the simulation for the complete event duration.}
+
+\subsubsection{State Parameters (Design Variables)}
+
+\begin{longtable}{p{4cm}p{2.3cm}p{7.4cm}}
+\toprule
+\textbf{Parameter} & \textbf{Status} & \textbf{Notes} \\
+\midrule
+\endhead
+Orbit architecture (altitude, inclination, planes, sats/plane, eccentricity, RAAN) & Available & Standard constellation inputs. \\
+Payload/sensor specs (FOV, look-angle limits, GSD) & \textcolor{openq}{Not present} & No EO payload/sensor model exists. \texttt{min\_elevation\_deg} is a comms link mask, not a sensor targeting limit. \actionitem{New payload model needed (FOV, GSD from altitude/aperture/pixel pitch).} \actionitem{Discuss the payload modeling approach with Vincenzo.} \\
+Spacecraft platform (mass, power, volume/SWaP, comm bands) & \textcolor{openq}{Needs to be defined} & \actionitem{Research standard values for this use case.} Comm bands are linked to the link types discussed in Section~\ref{sec:bands}. \\
+Ground segment (station distribution, dish elevation limits) & Available & \\
+\bottomrule
+\end{longtable}
+
+\subsubsection{Figures of Merit (FOM Metrics)}
+
+\begin{longtable}{p{4cm}p{2.3cm}p{7.4cm}}
+\toprule
+\textbf{Metric} & \textbf{Status} & \textbf{Notes} \\
+\midrule
+\endhead
+Revisit time, coverage \%, access duration/frequency & Available & \\
+View zenith angle & Available & Derivable. \\
+Solar zenith angle (at target) & \textcolor{openq}{Not present} & \actionitem{Needs new sun-position $\times$ target calculation.} \\
+Cost, risk, value (LCC, \$/km\textsuperscript{2}/day, risk score, utility score) & \textcolor{openq}{Not present} & No cost/risk/value model at all. Would need to be built from scratch, likely fed by mass/SWaP once those exist. \\
+\bottomrule
+\end{longtable}
+
+\subsubsection{Performance Variables}
+
+\begin{longtable}{p{4cm}p{2.3cm}p{7.4cm}}
+\toprule
+\textbf{Variable} & \textbf{Status} & \textbf{Notes} \\
+\midrule
+\endhead
+Access time ($t_{access}$) & Available & \\
+Revisit time gap ($\Delta t_{gap}$) & Available & \\
+Data latency ($\mathcal{L}_{total}$) & Partial & Only propagation (light-time) delay is available. Sensing delay, onboard storage wait, and ground-processing delay are all unmodeled. \actionitem{Do a comparison with NeuralAgent of the latency components; the missing components will only be implemented if they make the outputs more robust.} \\
+Data volume vs. storage capacity & Partial & Link data rate and access duration exist (so GB/day is derivable via rate $\times$ contact time) but this aggregation isn't currently computed. Storage buffer limits are absent. \\
+\bottomrule
+\end{longtable}
+
+\actionitem{Confirm with NeuralAgent which of the "not present" items (payload/sensor model, SWaP, cost/risk model, solar zenith, storage buffer) are worth adding to OrbiNet directly vs. approximating externally for this thesis.}
+
+\subsubsection{System Upper Bounds (to be modeled explicitly)}
+\begin{itemize}[leftmargin=1.2cm]
+    \item An upper limit on system performance/complexity needs to be derived from: cost, power, data volume, information-transfer budget, and overall system complexity.
+    \item \openquestion{Align the complexity metric/definition. Present my proposal to Vincenzo in the next weekly meeting.}
+    \item \actionitem{Confirm how cost is to be explicitly included as a constraint vs a qualitative discussion point.}
+\end{itemize}
+
+% =========================================================
+\section{Deliverables / Tables to Produce}
+% =========================================================
+
+\subsection{Dataset Trade-off Table}
+
+Datasets are assessed against three roles in the thesis:
+\begin{itemize}
+    \item \textbf{E}~= fire event input (first alert trigger),
+    \item \textbf{G}~= fire growth/size ground truth,
+    \item \textbf{B}~= baseline/reference detection timing.
+\end{itemize}
+
+\begin{longtable}{p{2.3cm}p{2.5cm}p{1.8cm}p{1.8cm}p{0.9cm}p{4.1cm}}
+\toprule
+\textbf{Dataset} & \textbf{Type} & \textbf{Coverage} & \textbf{Update freq.} & \textbf{Role} & \textbf{Notes} \\
+\midrule
+\endhead
+
+\multicolumn{6}{l}{\textit{Active fire (hotspot) products}} \\
+\midrule
+FIRMS (MODIS/\allowbreak VIIRS) & Point hotspots (thermal anomaly detections) & Global & Several passes/\allowbreak day (LEO) & E & Scattered points, no burn shape/size; false positives from industrial flares, agricultural burning, sun glint. Requires clustering to define individual fire events. \textbf{Selected} as event input. \\
+LSA SAF FRP-PIXEL (MSG SEVIRI) & Geostationary hotspots + Fire Radiative Power & Europe, Africa & 15\,min & B, G & Near-continuous temporal coverage gives the earliest operational satellite detection time; FRP time series is a proxy for fire intensity/growth. Coarse pixels ($\sim$3\,km at nadir, larger at European latitudes), misses small fires. \textbf{Selected} as detection baseline. \\
+MTG FCI fire products & Geostationary hotspots + FRP (successor to SEVIRI) & Europe, Africa & 10\,min & B, G & Better spatial resolution than SEVIRI ($\sim$2\,km IR at sub-satellite point). Record is short, and operational status of the fire products must be verified. Candidate replacement for SEVIRI for recent (2025+) fire events. \\
+Sentinel-3 SLSTR FRP & LEO hotspots + FRP (Copernicus) & Global & $\sim$1--2 passes/\allowbreak day per satellite & E, G & Independent LEO source to cross-check FIRMS; day and night FRP. Lower revisit than VIIRS constellation. \\
+\midrule
+
+\multicolumn{6}{l}{\textit{Burned area and fire perimeters}} \\
+\midrule
+EFFIS & Validated burnt-area polygons, fire database, fire-danger forecast (FWI) & Europe & Burnt areas updated up to daily during fire season; FWI forecast daily & G, B & Official EU reference: quality-checked perimeters (Rapid Damage Assessment, fires $\geq$30\,ha), national fire statistics with ignition dates, and risk-forecast layers FIRMS does not provide. Requires matching polygons to hotspot clusters. \textbf{Selected} as growth/size ground truth and reference record. \\
+GWIS & Global extension of EFFIS (hotspots, burnt areas, danger forecast, emissions) & Global & Up to 10x/day & G & Same methodology as EFFIS; redundant for a Europe-only scope. Relevant only if the study is later extended beyond Europe. \\
+MODIS MCD64A1 & Burned-area product (NASA) & Global & Monthly & G & 500\,m, daily burn date per pixel. Long historical record for burned-area trend analysis; too coarse in time for growth trajectories. \\
+ESA FireCCI & Burned-area product (Climate Change Initiative) & Global & Monthly & G & Alternative/cross-check to MCD64A1, with higher-resolution variants. Useful for historical statistics, not near-real-time. \\
+GlobFire & Event-based fire perimeter database (from MCD64A1) & Global & Historical & G & Pixels already grouped into individual fire events with start/end dates and daily growth; avoids custom clustering. \\
+Global Fire Atlas & Per-fire ignition, size, duration, spread speed and direction & Global & Historical (daily resolution) & G & Suitable for parameterizing realistic fire growth rates for simulated scenarios. \\
+\midrule
+
+\multicolumn{6}{l}{\textit{Reference and emissions products}} \\
+\midrule
+Copernicus EMS Rapid Mapping & Event-based damage/\allowbreak delineation maps (activation-based) & Global, strong EU usage & Per activation & G, B & High-resolution perimeters for major fires only; activation timestamps can serve as a reference for operational response timing. \\
+National fire records (e.g.\ ICNF Portugal, EGIF Spain) & Incident reports: ignition time, location, final area & Country-level & Annual/\allowbreak seasonal releases & B & Ground-based ignition and reporting times. Candidate reference for the visual-recognition baseline; availability and format vary by country. \\
+CAMS GFAS & Gridded daily FRP and emissions & Global & Daily & G & Easy access via Copernicus ADS; coarse (0.1$^\circ$), suited to intensity context rather than per-fire growth. \\
+\bottomrule
+\end{longtable}
+
+\noindent\textbf{Decision:} For the Europe target region, a three-source combination is selected.
+(1) \textbf{FIRMS} (VIIRS) as the fire event input for the OrbiNet overlay, since it is fast, simple, and high resolution.
+(2) \textbf{EFFIS} as the growth/size ground truth and official reference record, including perimeters, ignition dates and fire-danger forecasts.
+(3) \textbf{LSA SAF FRP-PIXEL (SEVIRI)}, or MTG FCI for recent events, as the reference for first satellite detection time. Following the proposal in Section~\ref{sec:baseline}, the FIRMS timeline is proposed as the main baseline and the geostationary products as context.
+\vincenzoq{Confirm with Vincenzo the visual-recognition baseline.}
+
+\subsection{Candidate EO Satellites / Missions}\label{subsec:candidate}
+\textit{Survey of existing/candidate satellites that make sense for this EO mission profile, to ground the constellation parameters in realistic hardware.}
+
+\begin{longtable}{p{3cm}p{4cm}p{3.8cm}p{3cm}}
+\toprule
+\textbf{Satellite / Mission} & \textbf{Relevant capability (FOV, revisit, etc.)} & \textbf{Why relevant} & \textbf{Source} \\
+\midrule
+\endhead
+Suomi NPP, NOAA-20, NOAA-21 (JPSS) & VIIRS: 375\,m thermal bands, $\sim$3000\,km swath; day and night detection & Main source of FIRMS active fire detections & NASA/NOAA \\
+Terra, Aqua (EOS) & MODIS: 1\,km thermal bands, $\sim$2300\,km swath & FIRMS active fire detections; longest fire record & NASA \\
+Sentinel-3A, Sentinel-3B & SLSTR: 1\,km thermal bands, $\sim$1400\,km nadir swath & Copernicus fire radiative power product; different local time than JPSS & ESA/Copernicus \\
+Sentinel-2 (optional) & MSI: 20\,m SWIR, 290\,km swath & Burnt-area mapping used by EFFIS; not a fire-detection mission & ESA/Copernicus \\
+\bottomrule
+\end{longtable}
+
+\textbf{Orbital and state parameters of the proposed sensing satellites.}
+
+\begin{longtable}{p{1.9cm}p{1.4cm}p{1.7cm}p{1.1cm}p{1.9cm}p{2.2cm}p{2.4cm}}
+\toprule
+\textbf{Satellite} & \textbf{ID} & \textbf{Altitude} & \textbf{Incl.} & \textbf{Local time (node)} & \textbf{Sensor, swath} \\
+\midrule
+\endhead
+Suomi NPP & 37849 & $\sim$824\,km & 98.7$^\circ$ & 13:30 (asc.) & VIIRS, $\sim$3040\,km \\
+NOAA-20 & 43013 & $\sim$824\,km & 98.7$^\circ$ & 13:30 (asc.) & VIIRS, $\sim$3040\,km \\
+NOAA-21 & 54234 & $\sim$824\,km & 98.7$^\circ$ & 13:30 (asc.) & VIIRS, $\sim$3040\,km  \\
+Terra & 25994 & $\sim$690\,km (nominal 705) & 98.2$^\circ$ & 10:30 (desc.), drifting & MODIS, $\sim$2330\,km \\
+Aqua & 27424 & $\sim$690\,km (nominal 705) & 98.2$^\circ$ & 13:30 (asc.), drifting & MODIS, $\sim$2330\,km \\
+Sentinel-3A & 41335 & $\sim$814\,km & 98.65$^\circ$ & 10:00 (desc.) & SLSTR, $\sim$1400\,km \\
+Sentinel-3B & 43437 & $\sim$814\,km & 98.65$^\circ$ & 10:00 (desc.) & SLSTR, $\sim$1400\,km \\
+\bottomrule
+\end{longtable}
+
+ID: NORAD catalogue number. All seven satellites are in sun-synchronous orbits, so they pass over the fire at fixed local times each day; a pass counts as an observation opportunity when the satellite rises above a minimum elevation angle derived from its sensor swath (about 20$^\circ$ for VIIRS, 25$^\circ$ for MODIS and 44$^\circ$ for SLSTR), which shows when the fire is in view but not whether it is actually detected, since clouds, smoke, a small or low-intensity fire, or the larger pixels at the swath edge can prevent detection. Payload data are downlinked in RF bands (typically X- or Ka-band, with S-band for telemetry and command); none of these missions carries an optical inter-satellite terminal, so their connection to the network is an assumption of the study. \actionitem{Verify the communication bands and platform values per mission from the mission documentation.}
+
+\textbf{GS and FOV of the proposed sensing satellites.}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{2.6cm} p{3.6cm} p{4.6cm} p{3.2cm}}
+\hline
+\textbf{Satellites} & \textbf{Sensor FOV} & \textbf{Science data downlink (X-band)} & \textbf{Command \& telemetry} \\
+\hline
+Suomi NPP, NOAA-20, NOAA-21 (JPSS) & VIIRS: $\pm 56^\circ$ cross-track ($\sim 112^\circ$ total), $\sim$3000\,km swath from 824\,km & Svalbard (KSAT) and McMurdo (Antarctica); Troll also used; TDRSS via White Sands optional. Continuous HRD direct broadcast to regional stations & Fairbanks (FCDAS), Svalbard \\
+Terra, Aqua (EOS) & MODIS: $\pm 55^\circ$ cross-track ($110^\circ$ total), 2330\,km swath from 705\,km & Terra: TDRSS relay to White Sands. Aqua: Svalbard and Poker Flat (Alaska). Continuous X-band direct broadcast & NASA polar stations and TDRSS, operated from GSFC \\
+Sentinel-3A, Sentinel-3B & SLSTR (conical scan): nadir view $\approx \pm 39^\circ$ equivalent, 1400\,km swath, shifted westward; oblique (rear) view 740\,km swath & Svalbard (KSAT, Copernicus core ground station) & Kiruna (ESA, S-band); satellites operated by EUMETSAT \\
+\hline
+\end{tabular}
+\caption{Ground segment and sensor field of view of the reference fire-detection missions.}
+\label{tab:fire_sats_gs}
+\end{table}
+
+% =========================================================
+\section{Month 1 Deliveries}
+% =========================================================
+
+Month 1 deliverables (per thesis guidelines): literature summary; list of discrete scenarios; candidate central-node distribution set and constellation definition; finalized use case.\\
+I believe they are complete and contained in this report.
+
+% =========================================================
+\section{Next steps}
+% =========================================================
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \actionitem{Finalize wildfire use case definition, especially parameters and assumptions on first-alert generation for comparison.}
+     \item \actionitem{Define the link types and frequency bands per satellite class.}
+    \item \actionitem{Discuss the payload with Vincenzo.}
+    \item \actionitem{Decide whether remaining parameters needed from NeuralAgent simulator add robustness to the outputs and if so create an strategy for its implementation in the simulator.}
+    \item \actionitem{Check that there is a functional API for the EO candidate datasets to be downloaded and start its implementation.}
+    \item \actionitem{Pull observation and communication time windows from OrbiNet for the candidate scenarios.}
+    \item \actionitem{Simulate the EO layer once confirmed, see Section~\ref{subsec:candidate}.}
+    \item \actionitem{Align the upper-bound modeling and complexity approach during next weekly meeting with Vincenzo.}
+\end{itemize}
+
+\printbibliography
+
+\end{document}
