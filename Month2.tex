@@ -524,25 +524,263 @@ Forest area EGIF (Table~\ref{tab:events}) / EFFIS area & 37{,}765 / 37{,}179\,ha
     \item \actionitem{Resolve the open link-type points, in particular the sensing-to-coordination link (Section~\ref{subsec:bandopen}).}
 \end{itemize}
 
-Action items coming from meeting with Vincenzo on the 20th of October:
-\begin{itemize}
-    \item \actionitem{Identify what are the limitations of existing observations.}
-    \item \actionitem{Including revisit time, estimated latency, sensor wavelength, resolution.}
-    \item \actionitem{Can we check from the declared wildfire starting time, how much time passes before the first satellite can do the observation?}
-    \item \actionitem{Classify and simulate the performances achievable from existing satellites in terms of revisit time and latency with the guessed suggestions.}
-    \item \actionitem{Ground station link can be maybe implemented as postprocessing. So initially we consider all the comm link valid and then we exclude some of them in the postprocessing.}
-    \item \actionitem{Propose structural complexity metrics alpha for different nodes and GS (Section~\ref{sec:complexity}).}
-    \item \actionitem{Propose also values or an equation for defining the complexity of links (beta) (Section~\ref{sec:complexity})}
-    \item \actionitem{[The link band can be fixed based on existing missions, similar mission or NeuralAgent architecture suggestion] }
-    \item \vincenzoq{What would be the difference between my coordination layer and the CN? What it is really the task of the CNs? How would they communicate with each other? Can the sensing layer talk with the coordination layer? Can the coordination layer talk to the GS?}
-    \item \actionitem{Research pixel size accuracy for each sensor in EO}
-    \item \actionitem{Research companies in the wilfire business such as \textbf{Auroratech} and \textbf{PlanetLab} and try to get the tle of their satellites to see if we implement them too as a third layer of private business providers}
+% =====================================================================
+% NEW SECTIONS: paste before \printbibliography.
+% They replace only the final list "Action items coming from meeting with
+% Vincenzo on the 20th of October" and "Decisions agreed on"; all earlier
+% sections stay unchanged. Upload figures/alert_paths_v2.png first.
+% =====================================================================
+
+% =========================================================
+\section{Meeting of 20 October: Discussion and Proposed Answers}\label{sec:meeting20oct}
+% =========================================================
+
+The meeting of 20 October reviewed the Month 2 work presented above and raised a set of questions on the role of the central nodes, the links between layers, the limits of the existing observations and the inclusion of private providers. This section records the decisions taken and the answer proposed for each point. From here on, these decisions move the architecture in a new direction, described in Sections~\ref{sec:architecture} to~\ref{sec:results_scenarios}. Statements in the earlier sections that no longer hold are listed in Section~\ref{sec:superseded}.
+
+\subsection{Decisions agreed}\label{subsec:decisions20oct}
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{RF only on the EO layer.} The sensing satellites communicate by RF, never by optical ISL.
+    \item \textbf{Ground links as post-processing.} All communication links are first treated as valid in the simulation; links that are not available (station set, elevation mask) are removed afterwards in post-processing.
+    \item \textbf{Fixed band per link type.} The band of each link is fixed from existing missions, similar missions or a NeuralAgent architecture suggestion, and is not swept.
+    \item \textbf{Complexity parameters.} I propose the component complexity $\alpha$ per node type, including ground stations, and a value or equation for the link complexity $\beta$ (Section~\ref{sec:complexity}).
 \end{itemize}
 
-Decisions agreed on:
-\begin{itemize}
-    \item EO layer will just use RF, not Optical ISL.
+\subsection{Questions on the coordination layer and the central nodes}\label{subsec:cn_questions}
+
+The central question of the meeting was the difference between the coordination layer and the central nodes (CN). The proposed answer separates \emph{roles}, set by the architecture, from \emph{links}, set by the terminals each satellite carries.
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{What is the difference between the coordination layer and the CN?} The coordination layer is the whole synthetic OISL constellation. Central nodes are a subset of its satellites that, in addition to relaying, take decisions. Every central node is a coordination satellite, but not every coordination satellite is a central node; the others are relays.
+    \item \textbf{What is the task of the CN?} A central node holds the fire and fleet state of its cluster, decides which satellite observes the fire next (task allocation), and acts as a gateway to the ground. The number and orbital placement of the central nodes is the variable swept in the thesis.
+    \item \textbf{How do the CN communicate with each other?} Over OISL through the coordination mesh, directly when in view or through relay satellites otherwise, exchanging fire state and task assignments.
+    \item \textbf{Can the sensing layer talk with the coordination layer?} Yes, through an assumed RF crosslink to the nearest coordination satellite, which routes the message to the responsible central node. The real sensing missions carry no such crosslink, so this is a stated what-if for the hybrid scenarios.
+    \item \textbf{Can the coordination layer talk to the GS?} Yes. Central nodes act as gateways by default; ground links of the other coordination satellites are a parameter, off by default, so that the effect of the gateway choice can be isolated.
 \end{itemize}
+
+With this definition, the centralized reference is the case with zero central nodes in orbit: all decisions are taken on the ground.
+
+\subsection{Action items and status}\label{subsec:actions20oct}
+
+\begin{longtable}{p{5.2cm}p{7.2cm}p{2.2cm}}
+\toprule
+\textbf{Action item} & \textbf{Proposed answer} & \textbf{Status} \\
+\midrule
+\endhead
+Identify the limitations of existing observations: revisit time, estimated latency, sensor wavelength, resolution. & Sensor table with fire bands, FOV, swath and pixel footprint (Section~\ref{sec:sensors}); revisit from the public record (Table~\ref{tab:baseline_results}); product latencies still missing. & Partly done \\
+From the declared starting time, how much time passes before the first satellite can observe? & Public record: 0.12\,h (Molezuelas) and 4.83\,h (Larouco) from official ignition to first detection, entirely waiting for a pass. Simulated first observation opportunity from the FOV windows still to be extracted (Section~\ref{sec:results_scenarios}). & Partly done \\
+Classify and simulate the performance achievable from existing satellites (revisit, latency). & This is scenario S1 (Section~\ref{sec:scenarios}): existing satellites, decisions on the ground. & Planned \\
+Ground station links as post-processing. & All links simulated as valid, station set and elevation mask applied afterwards (Section~\ref{subsec:gs_postproc}). & Adopted \\
+Propose $\alpha$ for nodes and GS, and $\beta$ for links. & One $\alpha$ per node type (sensing satellite, relay, central node, ground station) and one link class per link type (Section~\ref{subsec:linkrules}); values pending. & Open \\
+Fix the link band. & Fixed per link type from existing missions or NeuralAgent suggestion; sensing-to-coordination band still open (Table~\ref{tab:linkrules}). & Partly done \\
+Questions on the CN. & Section~\ref{subsec:cn_questions}. & Proposed \\
+Research pixel size for each EO sensor. & Section~\ref{sec:sensors}. & Done, edge values to verify \\
+Research private wildfire companies (OroraTech, Planet) and their TLEs, as a third layer. & Scenario S3 (Section~\ref{subsec:s3}). TLEs for August 2025 still to be collected. & Proposed \\
+\bottomrule
+\end{longtable}
+
+% =========================================================
+\section{Revised Network Architecture}\label{sec:architecture}
+% =========================================================
+
+\subsection{Node roles}\label{subsec:roles}
+
+The network contains four kinds of nodes. Their roles are independent of the links they can use.
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Sensing satellite.} One of the real EO missions of Section~\ref{sec:eo}. Observes the fire, never decides. RF only.
+    \item \textbf{Relay node.} Coordination satellite that forwards data over OISL and takes no decisions.
+    \item \textbf{Central node.} Coordination satellite that also holds the network state of its cluster and decides task allocation. By default it is also a gateway.
+    \item \textbf{Ground station.} One of the five stations of Section~\ref{sec:gs}. In the centralized case (S1), the ground is where all decisions are taken.
+\end{itemize}
+
+\subsection{Link rules}\label{subsec:linkrules}
+
+Table~\ref{tab:linkrules} extends Table~\ref{tab:linktypes} with the decisions of 20 October.
+
+\begin{longtable}{p{3.4cm}p{2.6cm}p{2.6cm}p{5.6cm}}
+\caption{Link rules of the revised architecture.}\label{tab:linkrules}\\
+\toprule
+\textbf{Link} & \textbf{Medium / band} & \textbf{Scenarios} & \textbf{Handling} \\
+\midrule
+\endhead
+Sensing to ground & RF, X-band (payload), S-band (TT\&C) & All & Simulated as valid, filtered in post-processing \\
+Sensing to nearest coordination node & RF crosslink, band to be fixed & Hybrid (S2, S3-H) & Assumed terminal, stated as a what-if \\
+Sensing to sensing & None & None & Not modeled \\
+Coordination to coordination & OISL & Hybrid & Mesh routing, computed in OrbiNet \\
+Central node to ground & RF, Ka-band & Hybrid & Gateway, filtered in post-processing \\
+Relay to ground & RF, Ka-band & Hybrid & Parameter, default off \\
+Central node to commercial operator & Ground request & S3, Tier C only & Request forwarded into the operator's tasking queue with a delay \\
+\bottomrule
+\end{longtable}
+
+\openquestion{Band of the sensing-to-coordination RF crosslink: to be fixed from an existing RF inter-satellite link or a NeuralAgent suggestion.}
+
+\subsection{Ground links as post-processing}\label{subsec:gs_postproc}
+
+Following the meeting, the simulation treats every ground link as valid. The station set (Section~\ref{sec:gs}) and the minimum elevation mask (Section~\ref{subsec:elev}) are applied afterwards, when the contact windows are filtered. A side benefit is that the 5$^\circ$ and 15$^\circ$ elevation sensitivity cases no longer require new simulation runs, only a different filter.
+
+\subsection{Updated alert paths}\label{subsec:alert_paths_v2}
+
+Figure~\ref{fig:alert_paths_v2} replaces Figure~\ref{fig:alert_paths}. The two alert paths and the definition of T0 do not change. What changes is how the alert travels and who acts on it afterwards.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\linewidth]{figures/alert_paths_v2.png}
+\caption{Alert paths and T0 in the revised architecture. Path A: an EO-layer satellite detects the fire; it always downlinks by RF to the ground and, in the hybrid scenarios, also sends the alert by an assumed RF crosslink to the coordination layer, whose OISL mesh routes it to the responsible central node. Path B: the geostationary SEVIRI detects the fire and the alert enters through the ground segment. Central nodes act as gateways to the ground. After T0, observations are always made by the EO layer; who decides the next observation depends on the scenario. Blue elements are modeled in the simulation, green ground links are filtered in post-processing, grey elements are public data only.}
+\label{fig:alert_paths_v2}
+\end{figure}
+
+% =========================================================
+\section{Scenarios}\label{sec:scenarios}
+% =========================================================
+
+Each scenario answers one question. Together they show whether central nodes help, by how much, and how reliably.
+
+\begin{longtable}{p{2.6cm}p{4.3cm}p{5.0cm}p{2.4cm}}
+\toprule
+\textbf{Scenario} & \textbf{Setup} & \textbf{Question it answers} & \textbf{Purpose} \\
+\midrule
+\endhead
+S0, public record & Timing of FIRMS, LSA SAF and EFFIS for the real events (Section~\ref{sec:public_record}) & How fast was the fire actually observed and alerted? & Reference \\
+S1, ground decides & EO layer and ground segment; zero central nodes & How well does the existing centralized approach perform? & Benchmark \\
+S2, orbit decides & S1 plus the coordination layer; number and placement of central nodes swept & How many central nodes, and where, give the largest gain over S1? & Optimization (main result) \\
+S3, more satellites & S1 and S2 rerun with additional public and private satellites (S3-C, S3-H) & Does the best central-node setup still hold with a denser, more realistic fleet? & Robustness and fidelity \\
+\bottomrule
+\end{longtable}
+
+The comparisons are read in pairs: S1 against S0 checks that the model reproduces reality, since S1 uses the same instruments that produced the public record; S2 against S1 gives the value of the central nodes; S3-H against S3-C repeats that comparison with a denser fleet.
+
+\subsection{S3: expanded sensing layer}\label{subsec:s3}
+
+S3 is run as a factorial design: the sensing level (public only, public plus private) is crossed with the decision architecture (ground, orbit). Decentralization is always measured within one sensing level, so that additional satellites are never counted as a benefit of the central nodes. The public record S0 only matches the public-only column.
+
+\begin{longtable}{p{3.4cm}p{5.6cm}p{5.6cm}}
+\toprule
+\textbf{Tier} & \textbf{Candidates} & \textbf{Role in the model} \\
+\midrule
+\endhead
+A, public passive & Landsat 8/9, Sentinel-2A/B & Additional observation opportunities; not taskable; ground downlink only \\
+B, private thermal & OroraTech FOREST; FireSat protoflight (Muon Space) & Additional fire-relevant revisits; not taskable \\
+C, private taskable (optional) & Agile high-resolution imagers, e.g.\ Planet SkySat or Pelican & Assets the coordination layer can task, through a request to the operator with a delay \\
+\bottomrule
+\end{longtable}
+
+Rules for S3:
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Time consistency.} Only satellites operating during the August 2025 events, with historical TLEs. Later launches (for example the 2026 FOREST satellites) are excluded.
+    \item \textbf{Validation criterion.} Criterion (b) of Section~\ref{sec:eo} (public fire data to validate against) applies to the S1 and S2 EO layer only. S3 tests robustness and does not need validation per satellite, so Landsat and Sentinel-2 are included there.
+    \item \textbf{Sensor model.} OrbiNet models only the FOV. Sensor limits enter through a detectability filter applied after the simulation: band class (thermal, SWIR, visible), a daylight-only rule for non-thermal sensors, and pixel footprint against fire size (Section~\ref{sec:sensors}).
+    \item \textbf{Exclusions.} PlanetScope is excluded as a detection source, since it has no thermal or SWIR fire band.
+    \item \textbf{Private sensor parameters} are approximations and are reported as ranges.
+\end{itemize}
+
+\actionitem{Collect historical TLEs for August 2025 (Space-Track or CelesTrak) for the Tier A and B satellites, and verify which OroraTech satellites and whether the FireSat protoflight were operational at that time.}
+
+\vincenzoq{Should S3 include Tier C, or remain limited to Tiers A and B, with Tier C as future work?}
+
+% =========================================================
+\section{EO Layer Sensor Characteristics}\label{sec:sensors}
+% =========================================================
+
+\status{FOV implemented in OrbiNet for the seven EO-layer satellites (Section~\ref{subsec:fov}). Pixel footprints collected below.}
+
+The pixel footprint is the ground area covered by one detector sample. It grows towards the swath edge, which matters for the FOV approximation: a pass at the edge of a wide swath is an observation opportunity with a much coarser pixel than a pass near nadir. The pixel footprint is not the smallest detectable fire. Active-fire algorithms detect sub-pixel fires, so a fire much smaller than the pixel can be detected if it is hot enough against its background.
+
+\begin{longtable}{p{2.6cm}p{1.4cm}p{2.5cm}p{2.0cm}p{2.3cm}p{3.0cm}}
+\caption{Fire-relevant sensor characteristics. Edge values marked [verify] still need a mission-document citation.}\label{tab:sensors}\\
+\toprule
+\textbf{Satellites} & \textbf{Sensor} & \textbf{Fire bands ($\mu$m)} & \textbf{Pixel at nadir} & \textbf{Pixel at swath edge} & \textbf{Swath, revisit} \\
+\midrule
+\endhead
+\multicolumn{6}{l}{\textit{EO layer (S1, S2)}} \\
+Suomi NPP, NOAA-20, NOAA-21 & VIIRS & I4 3.74, I5 11.45 (M13 4.05) & 375\,m $\times$ 375\,m (M: 750\,m) & $\approx$ 800\,m $\times$ 800\,m & 3040\,km; about 2 passes/day each \\
+Terra, Aqua & MODIS & 21/22 3.96, 31 11.0 & 1\,km $\times$ 1\,km & $\approx$ 2.0\,km $\times$ 4.8\,km & 2330\,km; about 2 passes/day each \\
+Sentinel-3A/B & SLSTR & S7/F1 3.74, S8/F2 10.85 & 1\,km $\times$ 1\,km (SWIR S5/S6: 500\,m) & [verify] & 1400\,km (nadir), 740\,km (oblique) \\
+\multicolumn{6}{l}{\textit{External alert source (not modeled)}} \\
+Meteosat-10 & SEVIRI & IR3.9, IR10.8 & 3\,km at sub-satellite point & $\approx$ 3.6 to 3.9\,km over NW Spain & Full disk, every 15\,min \\
+\multicolumn{6}{l}{\textit{S3 candidates}} \\
+Landsat 8/9 & OLI, TIRS & SWIR 1.61, 2.20; TIR 10.9, 12.0 & 30\,m (OLI), 100\,m (TIRS) & Narrow swath, small growth & 185\,km; 8 days combined \\
+Sentinel-2A/B & MSI & B11 1.61, B12 2.19 & 20\,m & Narrow swath, small growth & 290\,km; 5 days combined \\
+OroraTech FOREST & TIR imager & MWIR/LWIR [verify] & [verify] & [verify] & [verify] \\
+FireSat protoflight & Multispectral IR & [verify] & [verify] & [verify] & [verify] \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \actionitem{Add mission-document citations for all values, and the SLSTR edge-of-swath pixel size.}
+    \item \actionitem{Fill the OroraTech and FireSat rows from public mission documentation.}
+    \item \actionitem{Add the official product latencies (FIRMS NRT, LSA SAF FRP-PIXEL, SLSTR FRP) as the latency column of the observation-limits table.}
+\end{itemize}
+
+% =========================================================
+\section{Detection and Alert Times by Scenario}\label{sec:results_scenarios}
+% =========================================================
+
+\status{S0 values from Section~\ref{sec:public_record}; simulated values pending.}
+
+Two quantities answer the meeting question on the time to the first observation and must not be confused: the \emph{first observation opportunity}, the first pass with the fire inside the FOV (from the simulation), and the \emph{first detection}, the first FIRMS detection of the event (from the public record). The first opportunity can only be earlier than or equal to the first detection. Values below are given as Larouco / Molezuelas, in hours after official ignition unless stated otherwise.
+
+\begin{longtable}{p{4.2cm}p{2.4cm}p{1.6cm}p{1.6cm}p{1.6cm}p{1.6cm}}
+\caption{Detection, alert and tracking times by scenario (Larouco / Molezuelas).}\label{tab:results_scenarios}\\
+\toprule
+\textbf{Metric} & \textbf{S0} & \textbf{S1} & \textbf{S2} & \textbf{S3-C} & \textbf{S3-H} \\
+\midrule
+\endhead
+First observation opportunity & n/a & [TBD] & = S1 & [TBD] & = S3-C \\
+First detection / T0, path A & 4.83 / 0.12 & [TBD] & [TBD] & [TBD] & [TBD] \\
+T0, path B & 1.75 / 0.12 & [TBD] & [TBD] & [TBD] & [TBD] \\
+T0 to first observation delivered to ground & [product latency TBD] & [TBD] & [TBD] & [TBD] & [TBD] \\
+Update gap, median (common horizon) & 0.85 / 0.60 & [TBD] & [TBD] & [TBD] & [TBD] \\
+Update gap, p90 & 6.17 / 6.13 & [TBD] & [TBD] & [TBD] & [TBD] \\
+Update gap, maximum & 8.60 / 7.63 & [TBD] & [TBD] & [TBD] & [TBD] \\
+\bottomrule
+\end{longtable}
+
+Observation opportunities depend only on the sensing satellites, so S2 has the same opportunities as S1 and S3-H the same as S3-C. The central nodes change what happens after an opportunity: how fast the alert propagates, how fast tasks reach the satellites, and how fast the observation reaches the ground.
+
+% =========================================================
+\section{Statements Superseded by the 20 October Decisions}\label{sec:superseded}
+% =========================================================
+
+The earlier sections are kept as written. The following statements in them no longer hold.
+
+\begin{enumerate}[leftmargin=1.2cm]
+    \item \textbf{Section~\ref{subsec:alert_paths}, Figure~\ref{fig:alert_paths}.} The alert no longer travels from the sensing satellite through the OISL network: the sensing-to-coordination link is an RF crosslink. Tracking observations are still made by the EO layer only, but who decides them depends on the scenario. Replaced by Figure~\ref{fig:alert_paths_v2}.
+    \item \textbf{Section~\ref{subsec:bandopen}, sensing-to-coordination link.} Of options (a) to (c), option (b), an RF crosslink, is selected. Table~\ref{tab:linktypes} is extended by Table~\ref{tab:linkrules}.
+    \item \textbf{Section~\ref{subsec:complexity-links}, inconsistencies 3 and 4.} With the RF crosslink, sensing satellites are no longer isolated nodes, and the RF ISL terminal ($N^{\mathrm{RF}} = 1$) is the sensing-to-coordination link.
+    \item \textbf{Section~\ref{subsec:complexity-nodes}.} The request to Vincenzo for $\alpha$ values is replaced by an action item: I propose them, per node type and including ground stations.
+    \item \textbf{Section~\ref{sec:gs}.} Ground contacts are no longer restricted in the simulation; the station set and the elevation mask are applied in post-processing (Section~\ref{subsec:gs_postproc}).
+    \item \textbf{Section~\ref{sec:eo}, Landsat and Sentinel-2.} They remain outside the S1 and S2 EO layer, but are included in S3, where the validation criterion does not apply.
+    \item \textbf{Section~\ref{subsec:baseline_method}, simplification.} The statement that the problem stays the same with more sensors is no longer only assumed: S3 tests it.
+\end{enumerate}
+
+% =========================================================
+\section{Open Questions after 20 October}\label{sec:open20oct}
+% =========================================================
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \vincenzoq{Is the proposed definition of central nodes (decision role inside the coordination layer, plus gateway) the intended one?}
+    \item \vincenzoq{Is the RF crosslink on the sensing satellites acceptable as a stated what-if?}
+    \item \vincenzoq{Which alert path should the thesis study: A, B or both? (carried over from Section~\ref{subsec:baseline_next})}
+    \item \vincenzoq{Scope of S3: Tiers A and B only, or Tier C too? Core study or planned extension?}
+    \item \vincenzoq{Is the detectability filter (band, daylight, pixel footprint against fire size) a sufficient representation of the sensor limits?}
+    \item \openquestion{Can OrbiNet compute RF crosslink windows between sensing and coordination satellites, or must they be approximated by range and visibility?}
+    \item \openquestion{Which OroraTech satellites were operational in August 2025, and are their TLEs public?}
+\end{itemize}
+
+% =========================================================
+\section{Next Steps after 20 October}\label{sec:next20oct}
+% =========================================================
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \actionitem{Extract the first observation opportunity per event from the FOV windows and fill Table~\ref{tab:results_scenarios} for S1.}
+    \item \actionitem{Implement the ground-link post-processing filter (station set, elevation mask).}
+    \item \actionitem{Propose $\alpha$ per node type and the link classes for $\beta$.}
+    \item \actionitem{Fix the RF crosslink band and confirm it with NeuralAgent.}
+    \item \actionitem{Collect TLEs for the S3 candidates and complete Table~\ref{tab:sensors}.}
+    \item \actionitem{Add product latencies to both alert paths.}
+\end{itemize}
+
 \printbibliography
 
 \end{document}
