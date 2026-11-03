@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from lib.helpers import PROCESSED, PYTHON_DTYPES, dist_km, grid_clusters, in_box, region_dir  # noqa: E402
+from lib.helpers import KM_PER_DEG_LAT, PROCESSED, PYTHON_DTYPES, dist_km, grid_clusters, in_box, region_dir  # noqa: E402
 from lib.registry import load_registry, region_arg, utc  # noqa: E402
 
 # ---- parameters ----
@@ -73,11 +73,19 @@ df["pixel_size_km"] = np.sqrt(df["pixel_area_km2"])
 df["pixel_size_source"] = np.where(has_km, "scan_track", "nominal")
 
 # 6. static_proxy for rows without type (NOAA-21); empty for every other row
+#    Same test as v1 (dist_km from each row to every static pixel), computed per latitude strip of
+#    width STATIC_PROXY_DIST_KM: a static pixel two or more strips away is always farther than the
+#    threshold, so only the row's strip and its two neighbours are compared (fast enough for the globe).
 static = df[df["qc_flag"] == "non_vegetation"]
 df["static_proxy"] = pd.Series(pd.NA, index=df.index, dtype="object")
-for idx, row in df[df["qc_flag"] == "type_missing"].iterrows():
-    d = dist_km(row["latitude"], row["longitude"], static["latitude"].to_numpy(), static["longitude"].to_numpy())
-    df.loc[idx, "static_proxy"] = bool((d <= STATIC_PROXY_DIST_KM).any())
+strip_deg = STATIC_PROXY_DIST_KM / KM_PER_DEG_LAT
+static_strip = np.floor(static["latitude"].to_numpy() / strip_deg).astype(int)
+missing = df[df["qc_flag"] == "type_missing"]
+for strip, rows in missing.groupby(np.floor(missing["latitude"].to_numpy() / strip_deg).astype(int)):
+    near = static[np.abs(static_strip - strip) <= 1]
+    s_lat, s_lon = near["latitude"].to_numpy(), near["longitude"].to_numpy()
+    for idx, lat, lon in zip(rows.index, rows["latitude"].to_numpy(), rows["longitude"].to_numpy()):
+        df.loc[idx, "static_proxy"] = bool((dist_km(lat, lon, s_lat, s_lon) <= STATIC_PROXY_DIST_KM).any())
 
 # 7. fire clusters over the whole region box (1 km grid, 8 neighbours, all times pooled)
 df["fire_cluster"] = grid_clusters(df["latitude"].to_numpy(), df["longitude"].to_numpy(), CLUSTER_CELL_KM)

@@ -1,0 +1,34 @@
+candidate_id,name,continent,lat,lon,ignition_utc,ignition_kind,size_ha,cause_or_land,level,source,decision,reason
+red_canyon,"Red Canyon, WY",North America,43.6514,-108.01,2025-08-14T00:09:00Z,official discovery,50468,natural (lightning); BLM rangeland,verified (official query),NIFC WFIGS 2025-WYWBD-000254,selected,largest candidate with an official time
+mount_underwood,"Mount Underwood, BC",North America,49.1252,-124.7763,2025-08-12T01:30:42Z,record creation,3518,unknown,verified (official query),BC Wildfire Service V71498,alternative,official time is the record creation time
+sleeper_ranch,"Sleeper Ranch, WY",North America,44.252,-108.777,2025-08-14T13:44:00Z,official discovery,8360,natural; private land,verified (official query),NIFC WFIGS 2025-WYPAX-000256,not selected,smaller than Red Canyon
+mission_butte,"Mission Butte, MT",North America,45.592,-107.593,2025-08-13T03:26:00Z,official discovery,2488,undetermined; BIA land,verified (official query),NIFC WFIGS 2025-MTCRA-250811,not selected,smaller; cause undetermined
+box,"Box, ID",North America,42.5178,-117.0,2025-08-13T17:00:00Z,official discovery,1747,natural; BLM,verified (official query),NIFC WFIGS 2025-IDBOD-000997,not selected,smaller than Red Canyon
+spring_creek,"Spring Creek, WY",North America,43.952,-107.247,2025-08-13T19:32:45Z,official discovery,1454,natural; private land,verified (official query),NIFC WFIGS 2025-WYWAX-000252,not selected,smaller than Red Canyon
+rock,"Rock, ID",North America,44.6495,-116.1617,2025-08-13T06:27:00Z,official discovery,1132,natural; Boise NF,verified (official query),NIFC WFIGS 2025-IDBOF-000991,not selected,smaller than Red Canyon
+nwt,NWT complex,North America,65.69,-123.68,,none,,unidentified,unverified,none found,not selected,no ground truth
+derdara,"Derdara, Chefchaouen",Africa,35.10,-5.31,2025-08-12T13:00:00Z,press (about 14:00 local),500,forest (cork oak),press,North Africa Post; Hespress (ANEF area); Medias24 (night of 12 to 13 Aug),selected,only northern-hemisphere African wildfire
+ghanzi,"Ghanzi, Botswana",Africa,-23.71,21.28,,none,,Kalahari veld,unverified,none found,excluded,southern hemisphere (austral winter)
+kamchatka,Kamchatka,Asia,56.04,160.61,,none,,Klyuchevskoy volcano (lava),press,EastRussia (eruption),excluded,volcano
+yakutia,Yakutia / Irkutsk border,Asia,61.38,112.84,,none,,unidentified; possible gas flaring,unverified,none public,excluded,point source (likely gas flare)
+beni,"Beni, Bolivia",South America,-13.54,-62.18,,none,,likely land clearing,unverified,none,excluded,southern hemisphere (austral winter)
+amazon,Brazilian Amazon,South America,-7.00,-59.59,,none,,likely land clearing,unverified,none,excluded,southern hemisphere (austral winter)
+el_questro,"El Questro / King River, WA",Oceania,-16.09,128.35,,warnings from 13 Aug,,cause unknown,press,Broome Advertiser,excluded,southern hemisphere (austral winter); cause unknown
+larouco,"Larouco, Ourense",Europe,42.347,-7.162,2025-08-13T16:55:00Z,official (regional government),37765,forest and shrubland,verified (official press note),Xunta de Galicia; area MITECO EGIF,selected,second largest official area in Europe
+molezuelas,"Molezuelas de la Carballeda, Zamora",Europe,42.08,-6.18,2025-08-10T12:25:00Z,official (regional government),24426,forest and shrubland,verified (official dataset),Junta de Castilla y Leon open data (hora_de_inicio 14:25); area MITECO EGIF,selected,third largest official area in Europe
+piodao,"Piodao, Arganil",Europe,40.246,-7.852,2025-08-13T04:08:00Z,press citing ANEPC,65417,dry lightning (press),area official (ICNF); hour press,ICNF 8th provisional report; Sabado citing ANEPC,selected,largest official area in Europe
+oimbra,"Oimbra - A Granxa, Ourense",Europe,41.946,-7.531,2025-08-12T12:39:00Z,official (regional government),22414,forest and shrubland,verified (official press note),Xunta de Galicia; area MITECO EGIF,selected,fourth largest official area in Europe
+jarilla,"Jarilla, Caceres",Europe,40.145,-5.998,2025-08-12T16:17:00Z,official (regional government),16315,forest and shrubland,verified (official gazette),DOE Extremadura; area MITECO EGIF,not selected,smaller (four European events)
+barniedo,"Barniedo de la Reina, Leon",Europe,43.018,-4.832,2025-08-13T21:40:00Z,official (regional government),14462,lightning,verified (official dataset),Junta de Castilla y Leon open data; area MITECO EGIF,not selected,smaller (four European events)
+mezquita,"A Mezquita, Ourense",Europe,42.054,-7.075,2025-08-12T07:42:00Z,official (conflicting notes),10743,forest and shrubland,"official, conflicting",Xunta de Galicia (07:42 or 19:20 UTC); area MITECO EGIF,not selected,smaller; official hours conflict
+pera_do_moco,"Pera do Moco, Guarda",Europe,40.665,-7.232,2025-08-15T09:44:00Z,press citing ANEPC,7824,forest,area official (ICNF); hour press,ICNF 8th provisional report; CM Jornal,not selected,smaller (four European events)
+anllares,"Anllares del Sil, Leon",Europe,42.874,-6.536,2025-08-08T17:55:00Z,official (regional government),7159,forest and shrubland,verified (official dataset),Junta de Castilla y Leon open data; area MITECO EGIF,not selected,smaller (four European events)
+fasgar,"Fasgar, Leon",Europe,42.832,-6.262,2025-08-08T15:24:00Z,official (regional government),6091,lightning,verified (official dataset),Junta de Castilla y Leon open data; area MITECO EGIF,not selected,smaller (four European events)
+orallo,"Orallo - Genestoso, Leon",Europe,43.035,-6.371,2025-08-08T15:55:00Z,official (regional government),4248,lightning,verified (official dataset),Junta de Castilla y Leon open data; area MITECO EGIF,not selected,smaller (four European events)
+lousa,"Lousa, Coimbra",Europe,40.11,-8.197,2025-08-14T12:46:00Z,press (mayor),3317,forest,area official (ICNF); hour press,ICNF 8th provisional report; RTP,not selected,smaller (four European events)
+resoba,"Resoba, Palencia",Europe,42.974,-4.581,2025-08-10T09:37:00Z,official (regional government),1270,forest and shrubland,official; identification probable,Junta de Castilla y Leon open data; area MITECO EGIF,not selected,smaller (four European events)
+kuci,"Kuci, Podgorica",Europe,42.487,19.316,,none,,unknown,unverified,Copernicus EMS EMSR836 (fires from 10 Aug),not selected,no official ignition time or area
+chios,"Chios, North Aegean",Europe,38.516,25.942,,none,,power pole (press),unverified,Copernicus EMS EMSR834,not selected,no official ignition time or area
+preveza,"Agios Georgios, Preveza",Europe,39.263,20.888,,date only,,unknown,official date only,Hellenic Parliament document (12 Aug),not selected,no official ignition time or area
+kosovo,Northern Kosovo,Europe,43.097,20.985,,none,,unknown,unverified,EFFIS only,not selected,no official ignition time or area
+gramsh,"Gramsh, Elbasan",Europe,40.768,20.259,,none,,unknown,unverified,Balkanweb (press),not selected,no official ignition time or area

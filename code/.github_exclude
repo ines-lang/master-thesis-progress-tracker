@@ -24,3 +24,5 @@ code/**/notes/*log*.md
 code/**/notes/findings.md
 code/Input Data FIRMS/notes/firms_section.tex
 code/Input Data FIRMS/notes/firms_refs.bib
+# global FIRMS screen (426 MB, rebuilt by FIRMS 02_clean.py --region world)
+code/**/processed/world/

@@ -102,3 +102,11 @@ Official sources: Emergency WA / DFES and Bushfires NT give warning or notificat
 2. A wildfire check is needed per candidate: official record, protected-area / forest mask, or news.
 3. Only North America has a verified official ignition hour. Africa may have one.
 4. South America and Oceania are excluded (austral winter, no officially recorded wildfire in the window). Remaining new events: North America, Africa, Asia.
+
+## Update after the global FIRMS screen (3 Nov 2026)
+Scripts `scripts/01_screen_firms.py`, `02_criteria.py`, `03_figures.py`; candidates and decisions in `notes/candidates_ground_truth.csv`.
+- **Hemisphere rule (decision of Ines):** every complex south of the equator is excluded (austral winter), not only South America and Oceania. Ghanzi (Botswana) is excluded with it.
+- **Africa:** Derdara is the only African complex north of the equator passing all criteria; the rest are Saharan point sources (Algeria, Libya) or do not spread. No official hour exists: press says 14:00 local (North Africa Post) or the night of 12 to 13 Aug (Medias24). T0 reference: first SEVIRI detection.
+- **Asia:** Kamchatka is removed by the vegetation criterion (73% flagged); the six Siberian complexes are point sources (1.7 to 3.8 km, 6 to 13 cells), likely gas flares. No eligible Asian event.
+- **North America:** the 1 km screen gives Red Canyon's first detection at 14 Aug 04:20Z (+4.2 h after discovery). Mission Butte has no detection within 5 km of its WFIGS point.
+- The screen reproduces both Spanish T0s (Larouco 13 Aug 21:45Z, Molezuelas 10 Aug 12:32Z).

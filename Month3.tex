@@ -71,9 +71,10 @@
 
 Month 2 (architecture, cumulative scenarios S0 to S3) still holds and is not repeated. Month 3 addresses the action items of the meeting of 27 October:
 \begin{itemize}[leftmargin=1.2cm]
-    \item \textbf{Satellite census and sensor comparison} (Sections~\ref{sec:census} and~\ref{sec:sensorcomp}): not started.
+    \item \textbf{Satellite census} (Section~\ref{sec:census}): not started.
+    \item \textbf{Sensor comparison} (Section~\ref{sec:sensorcomp}): per band class and orbit; answers whether sensors give different information.
     \item \textbf{Simulation runs} (Section~\ref{sec:runs}): S0 and S1 first, then S2 with a 600-satellite, 20-plane Walker coordination layer.
-    \item \textbf{Additional events} (Section~\ref{sec:newevents}): official ignition sources researched, three continents retained, pipeline made region-agnostic.
+    \item \textbf{Additional events} (Section~\ref{sec:newevents}): global FIRMS screen, official sources, selection by official burned area; Pi\'od\~ao (Portugal), O\'imbra (Spain), Red Canyon (USA) and Derdara (Morocco) added; pipeline made region-agnostic.
     \item \textbf{Optimization methodology} (Section~\ref{sec:optim}): candidate methods listed.
 \end{itemize}
 
@@ -119,23 +120,53 @@ FireSat protoflight & Muon Space & IR [TBD] & [TBD] & [TBD] & [verify] \\
 \section{Sensor Comparison}\label{sec:sensorcomp}
 % =========================================================
 
-\status{Not started.}
+\status{Literature review done; values not traced to a primary document are marked approximate.}
 
-Do different sensors give different information about a fire, or the same information at different resolution and timing?
+Do different sensors give different information about a fire, or the same information at different resolution and timing? The comparison is made per spectral band class (Table~\ref{tab:sensorcomp}) and per orbit.
 
-\begin{longtable}{p{2.6cm}p{4.4cm}p{2.0cm}p{4.6cm}}
-\caption{Information provided by sensor class.}\label{tab:sensorcomp}\\
+\begin{longtable}{@{}p{0.13\textwidth}p{0.40\textwidth}p{0.20\textwidth}p{0.20\textwidth}@{}}
+\caption{Information about a fire by spectral band class.}\label{tab:sensorcomp}\\
 \toprule
-\textbf{Band class} & \textbf{Information about the fire} & \textbf{Day / night} & \textbf{Example sensors} \\
+\textbf{Band class} & \textbf{Information about the fire} & \textbf{Day / night} & \textbf{Example sensors (pixel)} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Band class} & \textbf{Information about the fire} & \textbf{Day / night} & \textbf{Example sensors (pixel)} \\
 \midrule
 \endhead
-MWIR + LWIR & [TBD] & [TBD] & VIIRS, MODIS, SLSTR, SEVIRI \\
-SWIR & [TBD] & [TBD] & [TBD] \\
-VNIR & [TBD] & [TBD] & [TBD] \\
 \bottomrule
+\endfoot
+MWIR ($\approx$3.7--4\,$\mu$m) &
+Main active-fire detection band: fire emission far exceeds the background, so sub-pixel fires are detected~\cite{giglio2016modis,schroeder2014viirs}. Fire radiative power (FRP) from the MWIR radiance excess, within $\pm$12\% for fire temperatures of 665--1365\,K, underestimated for smouldering fires; FRP integrated over time is linearly related to biomass consumed~\cite{wooster2005frp}. Saturation differs: VIIRS I4 saturates at 367\,K, so VIIRS FRP comes from the 750\,m M13 band~\cite{schroeder2014viirs}; MODIS uses channel 22 (331\,K) with channel 21 ($\approx$500\,K) as backup~\cite{justice2002modis}; SLSTR uses S7 ($\approx$311\,K) with the fire channel F1~\cite{xu2020slstr}. &
+Day and night. By day reflected sunlight raises the thresholds (VIIRS: 325\,K by day, 295\,K at night) and sunglint must be masked; small fires are detected more easily at night~\cite{schroeder2014viirs,justice2002modis}. Clouds are opaque. &
+VIIRS I4 375\,m, M13 750\,m~\cite{schroeder2014viirs}; MODIS 1\,km~\cite{giglio2016modis}; SLSTR 1\,km~\cite{xu2020slstr}; SEVIRI 3\,km at nadir~\cite{wooster2015seviri}; GOES ABI, Himawari AHI $\approx$2\,km~\cite{schmidt2020goesr}; MTG FCI 2\,km (1\,km high-resolution mode); OroraTech $\approx$200\,m (vendor). \\
+\addlinespace
+LWIR ($\approx$10--12\,$\mu$m) &
+Background surface temperature. The MWIR--LWIR difference separates fires from hot, bright fire-free surfaces, and LWIR screens clouds~\cite{giglio2016modis,schroeder2014viirs}; it rarely saturates (MODIS channel 31 $\approx$400\,K~\cite{justice2002modis}). With MWIR, the bi-spectral method gives sub-pixel fire temperature and area, i.e.\ flaming versus smouldering~\cite{dozier1981}, but only when the fire fills more than $\approx$0.5\% of the pixel and the bands are well co-registered~\cite{wooster2005frp}. &
+Day and night equally (thermal emission). Clouds are opaque. &
+VIIRS I5 375\,m, M15 750\,m; MODIS 1\,km; SLSTR 1\,km; Landsat TIRS 100\,m; GEO imagers 2--3\,km; OroraTech $\approx$200\,m (vendor). \\
+\addlinespace
+SWIR ($\approx$1.6 and 2.2\,$\mu$m) &
+\emph{Active fire:} only hot flaming fronts (above $\approx$1000\,K) emit strongly; at 20--30\,m pixels it maps the flaming front and much smaller fires, but pixels often saturate and give no calibrated FRP~\cite{schroeder2016landsat}. At night VIIRS SWIR/NIR bands add to MWIR in multi-band fits of fire temperature and area~\cite{elvidge2013nightfire}. \emph{Post-fire:} burned area and burn severity with the Normalized Burn Ratio, $(\mathrm{NIR}-\mathrm{SWIR}_{2.2})/(\mathrm{NIR}+\mathrm{SWIR}_{2.2})$, and its pre/post difference~\cite{keybenson2006}. &
+By day reflected sunlight dominates, so only intense flaming is detected~\cite{schroeder2016landsat}; at night flaming is detected well~\cite{elvidge2013nightfire}. Burn-scar mapping needs daylight and no clouds. &
+Landsat-8/9 OLI 30\,m~\cite{schroeder2016landsat}; Sentinel-2 MSI 20\,m; SLSTR, MODIS 500\,m; VIIRS 375--750\,m; MTG FCI 0.5\,km (high-resolution mode). \\
+\addlinespace
+VNIR incl.\ NIR ($\approx$0.4--0.9\,$\mu$m) &
+No active-fire detection by day: flame emission is weak against reflected sunlight; used only to mask clouds, sunglint and bright surfaces~\cite{justice2002modis,schroeder2016landsat}. Indirect information: smoke plume extent and direction, burn scars, pre-fire vegetation, the NIR term of NBR~\cite{keybenson2006}. At sub-metre resolution, visual context (structures, perimeter in clear areas) but no thermal information. &
+Daytime only. Blocked by clouds; dense smoke hides the surface. &
+Planet SkySat sub-metre (vendor); Sentinel-2 MSI 10\,m; Landsat OLI 30\,m; MODIS 250\,m; VIIRS 375\,m; SLSTR 500\,m. \\
+\addlinespace
+Low-light visible at night (VIIRS DNB) &
+Visible light of flaming combustion at night; adding it increases night-time detection of small or cool fires~\cite{polivka2016dnb}. Visible light divided by FRP indicates the combustion phase: low for smouldering (e.g.\ peat), high for flaming~\cite{wang2020dnb}. No temperature or FRP by itself. &
+Night only. Confused by city lights, gas flares and moonlight. &
+VIIRS DNB on Suomi NPP, NOAA-20, NOAA-21 ($\approx$750\,m). \\
 \end{longtable}
 
-\openquestion{Do sensor differences change what the central nodes decide, or only the detectability filter?}
+\textbf{LEO versus GEO.} Polar LEO imagers sample each location a few times per day at fixed overpass times. VIIRS covers a $\approx$3000\,km swath, about every 12\,h per satellite, and its 375\,m pixel grows to about 800\,m at the swath edge~\cite{schroeder2014viirs}; MODIS pixels grow considerably more, raising the minimum detectable fire off-nadir~\cite{giglio2016modis}, and the scan angle also changes SLSTR FRP~\cite{xu2020slstr}. Geostationary imagers observe every 5 to 15\,min, but with 2 to 3\,km pixels at the sub-satellite point that grow with distance from it, so at European latitudes pixels are coarser still~\cite{wooster2015seviri,schmidt2020goesr}. GEO misses many small or low-FRP fires but resolves the daily fire cycle, gives a continuous FRP time series and is often the first sensor to see a growing fire; LEO gives small fires and fire geometry at sparse times. The orbit therefore changes mainly \emph{when} and \emph{how small} a fire is seen, and also the information: only GEO gives a continuous FRP series, only fine-pixel LEO gives perimeter-scale geometry.
+
+\textbf{Same information or different information?} Within one band class, sensors give largely the same information at different resolution and timing: MWIR/LWIR detection by VIIRS, MODIS, SLSTR, GEO imagers or OroraTech uses the same physics and differs in minimum detectable fire, saturation, edge-of-swath degradation and revisit~\cite{giglio2016modis,schroeder2014viirs,xu2020slstr,wooster2015seviri}. Across band classes the information differs: calibrated MWIR is needed for FRP and combustion rate~\cite{wooster2005frp}; MWIR with LWIR for fire temperature and area, i.e.\ flaming versus smouldering~\cite{dozier1981}; the DNB adds a night-time combustion-phase indicator~\cite{wang2020dnb}; SWIR and NIR give the flaming-front position at high resolution, burned area and burn severity~\cite{schroeder2016landsat,keybenson2006}. VNIR alone (Planet SkySat) cannot detect an active fire by day. Even within the thermal class, a low saturation limit preserves detection but corrupts FRP for intense fires~\cite{schroeder2014viirs}.
+
+\textbf{Implications for central-node tasking.} Sensor differences change \emph{what} a central node should task, not only \emph{whether} a target is visible. A plausible policy: confirm an alert and estimate FRP with a thermal MWIR/LWIR sensor (VIIRS, SLSTR, FOREST, FireSat), preferably near nadir and at night; map the front and perimeter with a high-resolution SWIR sensor by day or SWIR/MWIR at night; keep VNIR-only assets such as SkySat for daytime context and damage assessment. Since the thesis studies T0 (first detection), a single detectability filter remains a reasonable simplification; it is not sufficient for follow-up observations that characterise the fire.
 
 % =========================================================
 \section{Simulation Runs}\label{sec:runs}
@@ -159,9 +190,121 @@ Pattern, inclination $i$, altitude, phasing $f$ & [TBD] & \\
 \section{Additional Wildfire Events}\label{sec:newevents}
 % =========================================================
 
-\status{Ignition sources researched; FIRMS-based selection pending.}
+\status{Selection done: Pi\'od\~ao and O\'imbra (Europe), Red Canyon (North America) and Derdara (Africa) added; no eligible event in Asia or in the southern hemisphere.}
 
-\textbf{Criteria.} One wildfire per continent igniting inside the fixed data window, 8 to 16 August 2025. Since the goal is T0 (first detection), not tracking, an event needs a reference for its ignition, not only size. T0 reference hierarchy: official ignition time, otherwise the first geostationary detection.
+\textbf{Selection rule.} Wildfires igniting inside the fixed data window, 8 to 16 August 2025, ranked by \emph{official final burned area}, as for the two Spanish events of Month 2. The T0 reference follows a fixed hierarchy: the official ignition time where one exists, otherwise the first geostationary detection. Europe keeps the four largest fires; every other continent keeps its largest.
+
+\subsection{Screen of the global FIRMS data}\label{subsec:screen}
+
+All FIRMS VIIRS and MODIS detections of 8 to 15 August 2025 (1.69 million) are cleaned and grouped into fire complexes with the same method as the Spanish events: type flags (volcano, static source), the NOAA-21 static proxy, and 1\,km clusters of all detections pooled over the window~\cite{schroeder2014viirs, giglio2016modis}. Only vegetation detections of nominal or high confidence are kept. The criteria are applied in order (Table~\ref{tab:funnel}):
+\begin{enumerate}[leftmargin=1.2cm]
+    \item \textbf{Vegetation fire}: less than half of the complex's detections flagged as volcano or static source.
+    \item \textbf{Onset inside the window}: first detection at least 24\,h after the data start (from 9 August).
+    \item \textbf{Size}: FIRMS burned-area estimate of at least 500\,ha (the Spanish GIF threshold), from the distinct 375\,m cells with a VIIRS detection. A filter only: it misses the burning after the FIRMS data end (Figure~\ref{fig:es_area}).
+    \item \textbf{Spreading fire}: at least 5\,km across and 20 cells of 0.01\textdegree; removes point sources such as gas flares.
+    \item \textbf{Hemisphere and continent rule}: every complex south of the equator excluded (austral winter: dry-season clearing, agricultural or prescribed burning); Asia restricted to Siberia and the Russian Far East.
+\end{enumerate}
+The largest remaining complexes are checked against official sources (Section~\ref{subsec:groundtruth}) and ranked by official final area. The screen reproduces the T0 of both Spanish events (Larouco 13 Aug 21:45, Molezuelas 10 Aug 12:32).
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Step} & \textbf{Europe} & \textbf{N. America} & \textbf{Africa} & \textbf{Asia} & \textbf{S. America} & \textbf{Oceania} \\
+\midrule
+All complexes & 7,264 & 6,627 & 108,877 & 11,517 & 22,960 & 3,538 \\
+1. Vegetation fire & 7,027 & 6,397 & 108,710 & 10,669 & 22,859 & 3,524 \\
+2. Onset inside the window & 6,060 & 5,058 & 85,796 & 8,707 & 20,170 & 2,737 \\
+3. Size & 73 & 36 & 727 & 24 & 109 & 78 \\
+4. Spreading fire & 50 & 25 & 460 & 17 & 46 & 48 \\
+5. Hemisphere and continent rule & 50 & 25 & 1 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Fire complexes per continent after each criterion.}
+\label{tab:funnel}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/event_selection_01_world_complexes.png}
+\caption{Fire complexes passing criteria 1 to 3 (dot area: FIRMS burned-area estimate), coloured by criteria 4 and 5, with the selected events.}
+\label{fig:es_world}
+\end{figure}
+
+\subsection{Ground truth: official ignition sources}\label{subsec:groundtruth}
+
+\begin{longtable}{p{2.0cm}p{4.2cm}p{5.0cm}p{2.6cm}}
+\caption{Official sources of ignition times per continent, August 2025.}\label{tab:groundtruth}\\
+\toprule
+\textbf{Region} & \textbf{Source} & \textbf{What it gives} & \textbf{Usable for T0?} \\
+\midrule
+\endhead
+Spain & Castilla y Le\'on open data~\cite{jcyl2025incendios}; Xunta de Galicia notes~\cite{xunta2025larouco,xunta2025oimbra}; DOE Extremadura~\cite{doe2025jarilla}; EGIF~\cite{miteco2025avance} & Official ignition hour; official area & Yes \\
+Portugal & ICNF~\cite{icnf2025relatorio8}; ANEPC (via press only) & Official area; hour only in press & No: SEVIRI \\
+Greece, Balkans & Fire services; Copernicus EMS & No official hour or area found & No \\
+Europe & EFFIS & Record start, which coincides with a FIRMS pass in 96\% of records & No, not independent \\
+North America & NIFC WFIGS~\cite{nifc2025wfigs} & Discovery time (UTC, minute), size, cause & Yes, verified by query \\
+North America & BC Wildfire Service~\cite{bcws2025underwood} & \texttt{discoveryDate}, equal to the record creation time & Partly \\
+North America & CWFIS / CNFDB (Canada) & Date only; no 2025 records yet & No \\
+Asia & ISDM-Rosleskhoz (Avialesookhrana) & Detection dates, no public per-fire access & No: Himawari \\
+Africa & ANEF (Morocco), via press & Date; hour only in press, and conflicting & No: SEVIRI \\
+Africa & Botswana DFRR; AFIS & No per-fire times; AFIS is itself satellite based & No \\
+South America & INPE BDQueimadas; Bolivian ministry; ICMBio / Prevfogo & Satellite detections; daily counts; dates & No \\
+Oceania & Emergency WA / DFES; Bushfires NT & Warning issue times only & No \\
+\bottomrule
+\end{longtable}
+
+\subsection{Candidates}\label{subsec:candidates}
+
+\begin{longtable}{p{2.6cm}p{1.9cm}p{2.6cm}p{1.3cm}p{1.9cm}p{3.6cm}}
+\caption{Candidates examined. First FIRMS detection of the matched complex (kept detections, VIIRS or MODIS).}\label{tab:candidates}\\
+\toprule
+\textbf{Candidate} & \textbf{Lat, lon} & \textbf{Ignition / discovery (UTC)} & \textbf{Size (ha)} & \textbf{First FIRMS (UTC)} & \textbf{Decision} \\
+\midrule
+\endhead
+\multicolumn{6}{l}{\textit{Europe (official area from EGIF~\cite{miteco2025avance} or ICNF~\cite{icnf2025relatorio8})}} \\
+Pi\'od\~ao, Arganil (PT) & 40.25, $-$7.85 & 13 Aug 04:08 (press~\cite{sabado2025piodao}) & 65,417 & 13 Aug 10:38 & \textbf{Selected}: largest; T0 reference SEVIRI \\
+Larouco, Ourense & 42.39, $-$7.13 & 13 Aug 16:55~\cite{xunta2025larouco} & 37,765 & 13 Aug 21:45 & \textbf{Selected} \\
+Molezuelas, Zamora & 42.14, $-$6.08 & 10 Aug 12:25~\cite{jcyl2025incendios} & 24,426 & 10 Aug 12:32 & \textbf{Selected} \\
+O\'imbra -- A Granxa, Ourense & 41.95, $-$7.53 & 12 Aug 12:39~\cite{xunta2025oimbra} & 22,414 & 12 Aug 14:57 & \textbf{Selected} \\
+Jarilla, C\'aceres & 40.15, $-$6.00 & 12 Aug 16:17~\cite{doe2025jarilla} & 16,315 & 13 Aug 02:43 & Fifth largest \\
+Barniedo de la Reina, Le\'on & 43.02, $-$4.83 & 13 Aug 21:40~\cite{jcyl2025incendios} & 14,462 & 14 Aug 01:10 & Smaller \\
+A Mezquita, Ourense & 42.05, $-$7.08 & 12 Aug 07:42 or 19:20 (conflicting) & 10,743 & 12 Aug 10:01 & Smaller; hours conflict \\
+Seven more (ES, PT) & & official or press & 1,270--7,824 & & Smaller \\
+Montenegro, Chios, Preveza, Kosovo, Albania & & none official & & 9--12 Aug & No official time or area \\
+\multicolumn{6}{l}{\textit{North America}} \\
+Red Canyon, WY & 43.65, $-$108.01 & 14 Aug 00:09~\cite{nifc2025wfigs} & 50,468 & 14 Aug 04:20 & \textbf{Selected}: largest with an official time, lightning \\
+Mount Underwood, BC & 49.13, $-$124.78 & 12 Aug 01:31~\cite{bcws2025underwood} & 3,518 & 12 Aug 04:41 & Alternative; time is record creation \\
+NWT complex & 65.7, $-$123.7 & not found & & 10 Aug 21:05 & No ground truth \\
+Rock, ID & 44.65, $-$116.16 & 13 Aug 06:27~\cite{nifc2025wfigs} & 1,132 & 13 Aug 05:19 & Smaller; first detection before discovery \\
+Box, ID & 42.52, $-$117.00 & 13 Aug 17:00~\cite{nifc2025wfigs} & 1,747 & 13 Aug 19:40 & Smaller \\
+Sleeper Ranch, WY & 44.25, $-$108.78 & 14 Aug 13:44~\cite{nifc2025wfigs} & 8,360 & 14 Aug 17:53 & Fewer detections \\
+Spring Creek, WY & 43.95, $-$107.25 & 13 Aug 19:32~\cite{nifc2025wfigs} & 1,454 & 13 Aug 20:53 & Smaller \\
+Mission Butte, MT & 45.59, $-$107.59 & 13 Aug 03:26~\cite{nifc2025wfigs} & 2,488 & none within 5\,km & Not detected near the reported point \\
+\multicolumn{6}{l}{\textit{Africa}} \\
+Derdara, Chefchaouen & 35.10, $-$5.31 & 12 Aug (ANEF); hour: 14:00 local~\cite{nap2025derdara} or night~\cite{medias24_2025incendies} & $\approx$500~\cite{hespress2025chefchaouen} & 12 Aug 13:10 & \textbf{Selected}: only northern-hemisphere African wildfire; T0 reference SEVIRI \\
+Ghanzi, Botswana & $-$23.7, 21.3 & none found & & 12 Aug 22:48 & Excluded: southern hemisphere (largest in Africa) \\
+\multicolumn{6}{l}{\textit{Asia (Siberia / Russian Far East)}} \\
+Kamchatka & 56.0, 160.6 & & & 9 Aug 15:46 & Excluded: Klyuchevskoy volcano~\cite{eastrussia2025klyuchevskoy}, 73\% flagged (criterion 1) \\
+Yakutia / Irkutsk border & 61.4, 112.8 & none public & & 10 Aug 05:28 & Excluded: point source, 3.3\,km, 12 cells (criterion 4) \\
+\multicolumn{6}{l}{\textit{South America}} \\
+Beni, Bolivia & $-$13.5, $-$62.2 & none & & 9 Aug 05:57 & Excluded: southern hemisphere \\
+Brazilian Amazon & $-$7.0, $-$59.6 & none & & 13 Aug 05:06 & Excluded: southern hemisphere \\
+Chapada dos Veadeiros NP & & 22 Aug & 829 & & Excluded: outside window~\cite{terra2025chapada} \\
+\multicolumn{6}{l}{\textit{Oceania}} \\
+El Questro / King River, WA & $-$16.1, 128.4 & warnings from 13 Aug~\cite{broome2025elquestro} & & 13 Aug 07:06 & Excluded: southern hemisphere; cause unknown \\
+\bottomrule
+\end{longtable}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/event_selection_02_top_by_continent.png}
+\caption{Largest complexes per continent after criteria 1 to 3. Bars: FIRMS burned-area estimate up to 15 August; diamonds: official final area. Selected events outside the top 8 are added with their rank.}
+\label{fig:es_top}
+\end{figure}
+
+\subsection{Selected events}\label{subsec:selected}
 
 \begin{longtable}{p{2.6cm}p{3.6cm}p{2.8cm}p{1.6cm}p{3.0cm}}
 \toprule
@@ -169,21 +312,39 @@ Pattern, inclination $i$, altitude, phasing $f$ & [TBD] & \\
 \midrule
 \endhead
 Spain & Larouco & 13 Aug, 16:55 & 37,765 & Xunta~\cite{xunta2025larouco}; area EGIF~\cite{miteco2025avance} \\
-Spain & Molezuelas de la Carballeda & 10 Aug, about 12:25 [verify] & 24,426 & Junta via press [verify]; area EGIF~\cite{miteco2025avance} \\
-North America & Red Canyon, Wyoming (candidate) & 14 Aug, 00:09 (discovery) & 50,468 & NIFC WFIGS~\cite{nifc2025wfigs} \\
-Africa & Derdara, Chefchaouen, Morocco (candidate) & 12 Aug, about 13:00 [verify] & about 500 [verify] & ANEF via press [verify] \\
-Asia & Siberia / Russian Far East [TBD] & [TBD] & [TBD] & none public: first Himawari detection \\
+Spain & Molezuelas de la Carballeda & 10 Aug, 12:25 & 24,426 & Castilla y Le\'on~\cite{jcyl2025incendios}; area EGIF~\cite{miteco2025avance} \\
+Spain & O\'imbra -- A Granxa & 12 Aug, 12:39 & 22,414 & Xunta~\cite{xunta2025oimbra}; area EGIF~\cite{miteco2025avance} \\
+Portugal & Pi\'od\~ao, Arganil & 13 Aug (hour in press only) & 65,417 & Area ICNF~\cite{icnf2025relatorio8}; T0 reference: first SEVIRI detection \\
+North America & Red Canyon, Wyoming & 14 Aug, 00:09 (discovery) & 50,468 & NIFC WFIGS~\cite{nifc2025wfigs} \\
+Africa & Derdara, Chefchaouen, Morocco & 12 Aug (date only) & about 500 & ANEF via press~\cite{nap2025derdara, hespress2025chefchaouen}; T0 reference: first SEVIRI detection \\
+Asia & none eligible & & & \\
 \bottomrule
 \end{longtable}
 
-\textbf{Excluded.} South America and Oceania: August is austral winter, the fires in the window are dry-season clearing, agricultural or prescribed burns, and no officially recorded wildfire ignited in the window. East Asia has almost no fire in the window, so the Asian event comes from Siberia or the Russian Far East; the largest Kamchatka hotspot is the Klyuchevskoy volcano [verify].
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/event_selection_03_ignition_to_first_detection.png}
+\caption{FIRMS detections per satellite pass against the reference time of each selected and alternative event. The first detection follows the reference by 0.1 to 6.5\,h. For Pi\'od\~ao, detections before the reference belong to the earlier Aldeia das Dez fire in the same complex.}
+\label{fig:es_timeline}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.62\linewidth]{figures/event_selection_04_official_vs_firms_area.png}
+\caption{Official final burned area against the FIRMS estimate up to 15 August. Fires still burning after the data end lie above the 1:1 line, so only the official area can rank the events.}
+\label{fig:es_area}
+\end{figure}
+
+\textbf{Africa.} After the hemisphere rule, Derdara is the only African complex passing all criteria; the other northern African complexes are Saharan point sources (oil and gas fields in Algeria and Libya) or do not spread. Its date is official (ANEF), but the hour is only reported by the press and the reports conflict (14:00 local~\cite{nap2025derdara} or the night of 12 to 13 August~\cite{medias24_2025incendies}), and the press hour is only 10\,min before the first FIRMS detection. Its T0 reference is therefore the first SEVIRI detection, which is independent of FIRMS.
+
+\textbf{Excluded regions.} The southern hemisphere (South America, southern Africa, Oceania): August is austral winter, the fires in the window are dry-season clearing, agricultural or prescribed burns, and no officially recorded wildfire ignited in the window. Asia: East Asia has almost no fire in the window, and in Siberia and the Russian Far East no complex passes the criteria: the volcano is removed by criterion 1 and the remaining complexes are point sources, most likely gas flares (criterion 4). The large Siberian fires of the 2025 season started before the window.
 
 \textbf{Pipeline.} The public-record pipeline (FIRMS, LSA SAF, EFFIS, comparison) now reads every region and event from one registry: adding an event is a registry entry, not a code change. Larouco and Molezuelas reproduce all previous outputs. Events are run one at a time, Spain first.
 
 \textbf{Geostationary source.} Each event uses the geostationary sensor covering it: SEVIRI (Europe, Africa), GOES ABI (North America), Himawari AHI (Siberia, Russian Far East). They produce no network links, so they stay outside the NeuralAgent simulator and only give the S0 first detection (path B).
 
 \begin{itemize}[leftmargin=1.2cm]
-    \item \actionitem{Confirm the Derdara ignition hour with an ANEF communiqué; choose the Asian event from FIRMS, excluding volcanoes and gas flares.}
+    \item \actionitem{Extract the first SEVIRI detection of Derdara (its T0 reference) from the LSA SAF data already downloaded.}
     \item \actionitem{Add GOES and Himawari readers; make the EFFIS step optional outside Europe.}
     \item \actionitem{Choose a global ground-station set once the events are fixed.}
 \end{itemize}
@@ -210,7 +371,7 @@ S2 asks how many central nodes there are and which coordination satellites they 
 
 \begin{itemize}[leftmargin=1.2cm]
     \item \openquestion{Walker pattern, inclination, altitude and phasing of the coordination layer.}
-    \item \openquestion{Asian event: no official ignition time is public; is the first Himawari detection an acceptable T0 reference?}
+    \item \openquestion{Asia has no eligible wildfire in the window: keep three continents, or relax a criterion (e.g.\ onset before 9 August) for Asia only?}
 \end{itemize}
 
 % =========================================================
@@ -219,8 +380,8 @@ S2 asks how many central nodes there are and which coordination satellites they 
 
 \begin{itemize}[leftmargin=1.2cm]
     \item \actionitem{Run S1, then S2 with the 600/20 Walker, for the Spanish events.}
-    \item \actionitem{Add Red Canyon to the registry and run it through the pipeline; then Derdara and the Asian event.}
-    \item \actionitem{Complete the satellite census and the sensor comparison.}
+    \item \actionitem{Add the new events to the registry and run them through the pipeline one at a time: O\'imbra, Pi\'od\~ao, Red Canyon, Derdara.}
+    \item \actionitem{Complete the satellite census.}
 \end{itemize}
 
 \printbibliography

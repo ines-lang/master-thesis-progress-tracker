@@ -4,11 +4,11 @@
 # master never contains code/, so ShareLaTeX never receives it.
 #
 # Usage (from anywhere):
-#   bash code/sync_github.sh "<one-line message explaining the changes>"
+#   bash code/sync_github.sh "<message following the commit rules in CLAUDE.md>"
 #   git push github github-full:master
 set -e
 MSG="$1"
-[ -n "$MSG" ] || { echo 'usage: bash code/sync_github.sh "<one-line message>"'; exit 1; }
+[ -n "$MSG" ] || { echo 'usage: bash code/sync_github.sh "<message following the commit rules in CLAUDE.md>"'; exit 1; }
 cd "$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
 BRANCH=github-full
 

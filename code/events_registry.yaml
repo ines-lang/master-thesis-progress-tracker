@@ -18,6 +18,9 @@ regions:
   iberia:
     box: {lat_min: 35.0, lat_max: 44.5, lon_min: -10.0, lon_max: 4.0}   # former iberia_box
     geo_source: lsasaf_msg0      # LSA SAF FRP-PIXEL, Meteosat 0 deg (SEVIRI)
+  world:
+    box: {lat_min: -90.0, lat_max: 90.0, lon_min: -180.0, lon_max: 180.0}
+    geo_source: none             # used only for the global event-selection screen (Event Selection/)
 
 conventions:
   overpass_window_min: 10
