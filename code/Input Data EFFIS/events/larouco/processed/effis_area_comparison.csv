@@ -1,0 +1,5 @@
+source,area_ha,basis,ratio_effis_to_source
+EFFIS records (sum),37179,"EFFIS burnt area, final record state",1.0
+official (Xunta de Galicia),31778,registry official_area_ha,1.17
+FIRMS members convex hull,10435,until 2025-08-15T21:26Z,3.563
+FIRMS members bounding box,13601,until 2025-08-15T21:26Z,2.734

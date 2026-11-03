@@ -1,0 +1,13 @@
+key,reference,expected,obtained,match
+firms_event_detections,upstream,1219,1219,True
+t0_utc,upstream,2025-08-10T12:32:00Z,2025-08-10T12:32:00Z,True
+t0_platform,upstream,NOAA-20,NOAA-20,True
+firms_overpasses_with_event,upstream,38,38,True
+baseline_gap_median_h,upstream,0.8,0.8,True
+baseline_gap_p90_h,upstream,6.74,6.74,True
+baseline_gap_max_h,upstream,24.07,24.07,True
+first_seviri_event_pixel_utc,upstream,2025-08-10T12:40:00Z,2025-08-10T12:40:00Z,True
+seviri_robust_onset_primary_utc,upstream,2025-08-10T12:40:00Z,2025-08-10T12:40:00Z,True
+seviri_robust_onset_sensitivity_utc,upstream,2025-08-10T12:40:00Z,2025-08-10T12:40:00Z,True
+seviri_slots_with_member_primary,upstream,182,182,True
+seviri_slots_with_member_sensitivity,upstream,182,182,True

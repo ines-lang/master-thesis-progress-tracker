@@ -1,0 +1,70 @@
+{
+  "event_id": "larouco",
+  "cluster_id": 15,
+  "seed_utc": "2025-08-13T21:45:00Z",
+  "seed_platform": "Terra",
+  "seed_dist_ref_km": 1.94,
+  "t0_utc": "2025-08-13T21:45:00Z",
+  "t0_platform": "Terra",
+  "t0_minus_ignition_min": 290.0,
+  "members_before_earliest_accepted": 0,
+  "firms_event_detections": 646,
+  "members_per_platform": {
+    "Aqua": 52,
+    "NOAA-20": 218,
+    "NOAA-21": 105,
+    "Suomi-NPP": 190,
+    "Terra": 81
+  },
+  "firms_overpasses_with_event": 26,
+  "baseline_gap_median_h": 0.85,
+  "baseline_gap_p90_h": 6.17,
+  "baseline_gap_max_h": 8.6,
+  "sensing_layer_passes_touching_search_box": 99,
+  "sensing_layer_passes_with_event": 26,
+  "event_observation_rows": 18156,
+  "regression_check": [
+    {
+      "key": "firms_event_detections",
+      "expected": 646,
+      "obtained": 646,
+      "match": true
+    },
+    {
+      "key": "t0_utc",
+      "expected": "2025-08-13T21:45:00Z",
+      "obtained": "2025-08-13T21:45:00Z",
+      "match": true
+    },
+    {
+      "key": "t0_platform",
+      "expected": "Terra",
+      "obtained": "Terra",
+      "match": true
+    },
+    {
+      "key": "firms_overpasses_with_event",
+      "expected": 26,
+      "obtained": 26,
+      "match": true
+    },
+    {
+      "key": "baseline_gap_median_h",
+      "expected": 0.85,
+      "obtained": 0.85,
+      "match": true
+    },
+    {
+      "key": "baseline_gap_p90_h",
+      "expected": 6.17,
+      "obtained": 6.17,
+      "match": true
+    },
+    {
+      "key": "baseline_gap_max_h",
+      "expected": 8.6,
+      "obtained": 8.6,
+      "match": true
+    }
+  ]
+}

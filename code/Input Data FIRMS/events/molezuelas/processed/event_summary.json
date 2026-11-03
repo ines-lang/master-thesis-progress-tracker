@@ -1,0 +1,27 @@
+{
+  "event_id": "molezuelas",
+  "cluster_id": 8,
+  "seed_utc": "2025-08-10T12:32:00Z",
+  "seed_platform": "NOAA-20",
+  "seed_dist_ref_km": 3.63,
+  "t0_utc": "2025-08-10T12:32:00Z",
+  "t0_platform": "NOAA-20",
+  "t0_minus_ignition_min": 7.0,
+  "members_before_earliest_accepted": 0,
+  "firms_event_detections": 1219,
+  "members_per_platform": {
+    "Aqua": 129,
+    "NOAA-20": 351,
+    "NOAA-21": 347,
+    "Suomi-NPP": 349,
+    "Terra": 43
+  },
+  "firms_overpasses_with_event": 38,
+  "baseline_gap_median_h": 0.8,
+  "baseline_gap_p90_h": 6.74,
+  "baseline_gap_max_h": 24.07,
+  "sensing_layer_passes_touching_search_box": 76,
+  "sensing_layer_passes_with_event": 38,
+  "event_observation_rows": 7443,
+  "regression_check": []
+}

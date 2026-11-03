@@ -1,0 +1,15 @@
+event molezuelas: 38 passes with event members
+all gaps: n=37, median 0.80 h, p90 6.74 h, max 24.07 h
+phase 1 (first member to 2025-08-12T14:57:00Z, 29 passes): n=28, median 0.77 h, p90 6.13 h, max 7.63 h
+after 2025-08-12T14:57:00Z (9 passes): gaps [21.5, 0.43, 0.38, 0.87, 0.43, 10.98, 0.88, 0.42, 24.07]
+
+gaps > 6 h and the sensing-layer passes inside them (detections in the search box):
+  Aqua_009 2025-08-10T15:17Z to Terra_006 2025-08-10T21:25Z: 6.13 h; 0 sensing-layer passes saw other fires in the search box but not the event
+  NOAA-21_014 2025-08-11T03:21Z to Terra_008 2025-08-11T10:59Z: 7.63 h; 1 sensing-layer passes saw other fires in the search box but not the event
+  Aqua_011 2025-08-11T14:18Z to Terra_009 2025-08-11T20:27Z: 6.15 h; 0 sensing-layer passes saw other fires in the search box but not the event
+  Aqua_012 2025-08-12T03:53Z to Terra_011 2025-08-12T10:01Z: 6.13 h; 0 sensing-layer passes saw other fires in the search box but not the event
+  Aqua_013 2025-08-12T14:57Z to NOAA-21_022 2025-08-13T12:27Z: 21.50 h; 4 sensing-layer passes saw other fires in the search box but not the event
+  Suomi-NPP_023 2025-08-13T14:34Z to NOAA-20_022 2025-08-14T01:33Z: 10.98 h; 2 sensing-layer passes saw other fires in the search box but not the event
+  Suomi-NPP_025 2025-08-14T02:51Z to NOAA-20_027 2025-08-15T02:55Z: 24.07 h; 13 sensing-layer passes saw other fires in the search box but not the event
+
+after the last event pass (2025-08-15T02:55Z): 9 sensing-layer passes with search-box detections, 0 with the event

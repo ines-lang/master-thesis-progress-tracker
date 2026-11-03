@@ -1,0 +1,26 @@
+# Files under code/ that are NOT published to GitHub (read by code/sync_github.sh).
+# Paths are relative to the LaTeX repo root, gitignore syntax.
+
+# raw downloads (re-downloadable; the LSA SAF conversion is above GitHub's 100 MB limit)
+code/Input Data FIRMS/DL_FIRE_*
+code/**/tile_cache/
+code/Input Data LSA SAF/lsasaf_frp_raw/
+code/Input Data LSA SAF/lsasaf_frp_pixels_*.csv
+code/Input Data EFFIS/raw/
+code/Input Data EFFIS/608dedc69b3c4e95977728cfa96fa32a*
+# merged copy of the FIRMS raw downloads (rebuilt by scripts/common/01_merge.py)
+code/**/firms_merged.csv.gz
+# Python environments and caches
+.venv/
+__pycache__/
+# frozen v1 copies (kept locally; read only by the v1 regression checks FIRMS 05_compare_v1.py and EFFIS 03_regression_check.py)
+code/**/archive_v1/
+# strategy files written as instructions for Claude (kept locally)
+code/**/STRATEGY_*.md
+# reports and work logs written by Claude (kept locally)
+code/**/REPORT_*.md
+code/**/*agent_report*.md
+code/**/notes/*log*.md
+code/**/notes/findings.md
+code/Input Data FIRMS/notes/firms_section.tex
+code/Input Data FIRMS/notes/firms_refs.bib

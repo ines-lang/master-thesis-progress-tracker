@@ -1,0 +1,135 @@
+{
+  "event_id": "larouco",
+  "ignition_utc": "2025-08-13T16:55:00Z",
+  "earliest_accepted_utc": "2025-08-13T16:55:00Z",
+  "firms_t0_utc": "2025-08-13T21:45:00Z",
+  "firms_bbox": {
+    "lat_min": 42.3385,
+    "lat_max": 42.4671,
+    "lon_min": -7.1878,
+    "lon_max": -7.072
+  },
+  "sensitivity_km": 2.0,
+  "rows_search_box_plus_margin": 22961,
+  "rows_in_search_box": 12946,
+  "slots_with_detection_in_search_box": 682,
+  "rows_before_earliest_in_bbox": 3,
+  "rules": {
+    "primary": {
+      "first_detection_utc": "2025-08-13T18:40:00Z",
+      "slots_with_member": 182,
+      "robust_onset_slot_utc": "2025-08-13T18:30:00Z",
+      "robust_onset_utc": "2025-08-13T18:40:00Z",
+      "blackouts": [
+        {
+          "start_slot_utc": "2025-08-13T22:45:00Z",
+          "end_slot_utc": "2025-08-14T12:45:00Z",
+          "n_slots": 56,
+          "hours": 14.0,
+          "open_until_data_end": false
+        },
+        {
+          "start_slot_utc": "2025-08-14T23:15:00Z",
+          "end_slot_utc": "2025-08-15T01:30:00Z",
+          "n_slots": 9,
+          "hours": 2.25,
+          "open_until_data_end": false
+        },
+        {
+          "start_slot_utc": "2025-08-15T01:45:00Z",
+          "end_slot_utc": "2025-08-15T11:45:00Z",
+          "n_slots": 40,
+          "hours": 10.0,
+          "open_until_data_end": false
+        },
+        {
+          "start_slot_utc": "2025-08-16T15:30:00Z",
+          "end_slot_utc": "2025-08-16T17:15:00Z",
+          "n_slots": 7,
+          "hours": 1.75,
+          "open_until_data_end": false
+        }
+      ],
+      "member_rows": 647,
+      "distinct_pixels": 8,
+      "first_detection_pixels": [
+        {
+          "latitude": 42.43,
+          "longitude": -7.16,
+          "frp_mw": 45.7,
+          "confidence_raw": "0.73",
+          "dist_firms_km": 0.189
+        }
+      ],
+      "first_minus_ignition_min": 105.0,
+      "vza_deg": [
+        45.05,
+        53.84
+      ],
+      "pixel_size_km": [
+        3.568,
+        3.905
+      ],
+      "last_detection_utc": "2025-08-16T23:11:00Z",
+      "robust_onset_minus_ignition_min": 105.0
+    },
+    "sensitivity": {
+      "first_detection_utc": "2025-08-13T18:40:00Z",
+      "slots_with_member": 191,
+      "robust_onset_slot_utc": "2025-08-13T18:30:00Z",
+      "robust_onset_utc": "2025-08-13T18:40:00Z",
+      "blackouts": [
+        {
+          "start_slot_utc": "2025-08-13T22:45:00Z",
+          "end_slot_utc": "2025-08-14T12:45:00Z",
+          "n_slots": 56,
+          "hours": 14.0,
+          "open_until_data_end": false
+        },
+        {
+          "start_slot_utc": "2025-08-14T23:15:00Z",
+          "end_slot_utc": "2025-08-15T01:30:00Z",
+          "n_slots": 9,
+          "hours": 2.25,
+          "open_until_data_end": false
+        },
+        {
+          "start_slot_utc": "2025-08-15T01:45:00Z",
+          "end_slot_utc": "2025-08-15T11:45:00Z",
+          "n_slots": 40,
+          "hours": 10.0,
+          "open_until_data_end": false
+        },
+        {
+          "start_slot_utc": "2025-08-16T16:00:00Z",
+          "end_slot_utc": "2025-08-16T17:15:00Z",
+          "n_slots": 5,
+          "hours": 1.25,
+          "open_until_data_end": false
+        }
+      ],
+      "member_rows": 1122,
+      "distinct_pixels": 14,
+      "first_detection_pixels": [
+        {
+          "latitude": 42.43,
+          "longitude": -7.16,
+          "frp_mw": 45.7,
+          "confidence_raw": "0.73",
+          "dist_firms_km": 0.189
+        }
+      ],
+      "first_minus_ignition_min": 105.0,
+      "vza_deg": [
+        45.04,
+        53.89
+      ],
+      "pixel_size_km": [
+        3.568,
+        3.908
+      ],
+      "last_detection_utc": "2025-08-16T23:26:00Z",
+      "robust_onset_minus_ignition_min": 105.0
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "event_id": "larouco",
+  "cluster_id": 15,
+  "n_members": 646,
+  "lat_min": 42.3385,
+  "lat_max": 42.4671,
+  "lon_min": -7.1878,
+  "lon_max": -7.072,
+  "first_member_utc": "2025-08-13T21:45:00Z",
+  "last_member_utc": "2025-08-15T21:26:00Z",
+  "note": "bounding box of FIRMS event members (pixel centres), whole FIRMS period"
+}

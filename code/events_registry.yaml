@@ -1,0 +1,80 @@
+# events_registry.yaml
+# Shared registry of the events studied in the thesis data window.
+# Location: code/events_registry.yaml (the old path events_registry.yaml in the thesis folder, two levels above code/, is a symlink to it)
+# Edited ONLY by Ines. Agents read it and PROPOSE changes in their reports (section 9 of the report template).
+# Times are UTC (ISO 8601, Z). Values marked "approximate" or "verify" must not be quoted in the thesis as exact.
+
+schema_version: 3   # v3: iberia_box replaced by regions; events carry region and t0_reference
+
+data_window:
+  start_utc: "2025-08-08T00:00:00Z"
+  end_utc: "2025-08-16T23:59:00Z"
+  firms_data_end_utc: "2025-08-15T21:26:00Z"   # FIRMS has nothing after this
+  lsasaf_data_end_utc: "2025-08-16T23:26:00Z"
+
+# Regions: the box every region-level output is cropped to (FIRMS clean / clusters / overpasses,
+# GEO export), and the geostationary source used for path B in S0 (kept outside the NeuralAgent simulator).
+regions:
+  iberia:
+    box: {lat_min: 35.0, lat_max: 44.5, lon_min: -10.0, lon_max: 4.0}   # former iberia_box
+    geo_source: lsasaf_msg0      # LSA SAF FRP-PIXEL, Meteosat 0 deg (SEVIRI)
+
+conventions:
+  overpass_window_min: 10
+  instant_time_firms: "first event-member detection of the pass"
+  instant_time_seviri: "earliest per-pixel acquisition time (ACQTIME) in the 15-min slot"
+  t0: "first polar baseline (FIRMS VIIRS + MODIS) event-member instant at or after (ignition_utc - ignition_tolerance_min)"
+  seviri_onset_robust: "first of at least 2 consecutive SEVIRI slots with an event-member pixel"
+  qc_keep: ["ok", "type_missing"]          # type_missing usable only if static_proxy is False (FIRMS)
+  conf_modes: {all: [low, nominal, high], nominal_high: [nominal, high]}
+  main_scope: "event_member"               # box-level stats are reported alongside, never as main
+  firms_cluster_cell_km: 1.0               # v1 clustering, unchanged so Larouco reproduces
+  seviri_membership_primary: "pixel centre inside the bounding box of the FIRMS event cluster"
+  seviri_membership_sensitivity_km: 2.0    # pixel centre within this distance of any FIRMS event detection
+
+events:
+
+  larouco:
+    name: "Larouco / A Rua (Ourense, Galicia)"
+    status: "v1 done; regression reference"
+    ignition_utc: "2025-08-13T16:55:00Z"
+    ignition_source: "Xunta de Galicia press note (18:55 local, parish Seadur)"
+    ignition_tolerance_min: 0
+    region: iberia
+    t0_reference: official             # official | geo | none (hierarchy decided 3 Nov 2026)
+    reference_point: {lat: 42.347, lon: -7.162, note: "Larouco village, approximate"}
+    seed_radius_km: 5.0
+    search_box: {lat_min: 41.9, lat_max: 42.7, lon_min: -7.8, lon_max: -6.6}   # former LAROUCO_BOX
+    firms_cluster_id_v1: 15
+    effis_ids: [278475]
+    official_area_ha: 31778
+    official_area_source: "Xunta de Galicia"
+    regression_expected:
+      firms_event_detections: 646
+      t0_utc: "2025-08-13T21:45:00Z"
+      t0_platform: "Terra"
+      firms_overpasses_with_event: 26
+      baseline_gap_median_h: 0.85
+      baseline_gap_p90_h: 6.17
+      baseline_gap_max_h: 8.60
+      first_seviri_event_pixel_utc: "2025-08-13T18:40:00Z"
+      effis_start_utc: "2025-08-14T01:34:00Z"
+      lsasaf_slots_with_detection_in_search_box: 682
+
+  molezuelas:
+    name: "Molezuelas de la Carballeda (Zamora) / Castrocalbon (Leon)"
+    status: "new, v2"
+    ignition_utc: "2025-08-10T12:25:00Z"
+    ignition_source: "Junta de Castilla y Leon via press: 14:25 local on Sun 10 Aug (another report: about 14:30). Two ignition points near the Tera river were reported. Verify."
+    ignition_tolerance_min: 60          # ignition time is approximate; detections up to 60 min earlier are accepted and reported
+    region: iberia
+    t0_reference: official
+    reference_point: {lat: 42.08, lon: -6.18, note: "Molezuelas de la Carballeda village, APPROXIMATE, verify with the FIRMS cluster"}
+    seed_radius_km: 10.0
+    search_box: {lat_min: 41.75, lat_max: 42.45, lon_min: -6.60, lon_max: -5.70}   # provisional crop, NOT the event
+    effis_candidate_ids: [277940]       # Zamora / Una de Quintana, start 2025-08-10 12:32 UTC, 40,081 ha (v1 EFFIS run). To confirm; the Leon part may be separate records.
+    official_area_ha: null              # Junta provisional about 31,500 ha (both provinces); media and Copernicus estimates about 37,000 to 38,000 ha. Verify before quoting.
+    known_context:
+      - "Crossed into Leon on 11 Aug (Valderia, Valduerna, Jamuz; Castrocalbon evacuated 11 Aug evening)."
+      - "Neighbouring fires that may merge into a FIRMS cluster: Puercas (Aliste, Zamora, started 11 Aug about 18:30 local), Yeres and Benuza (Leon, further west)."
+      - "Still active after the FIRMS data end; reported IGR 0 only about 22 Aug."

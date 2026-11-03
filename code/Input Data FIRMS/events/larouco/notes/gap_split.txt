@@ -1,0 +1,10 @@
+event larouco: 26 passes with event members
+all gaps: n=25, median 0.85 h, p90 6.17 h, max 8.60 h
+
+gaps > 6 h and the sensing-layer passes inside them (detections in the search box):
+  Aqua_018 2025-08-14T03:32Z to NOAA-21_026 2025-08-14T12:08Z: 8.60 h; 1 sensing-layer passes saw other fires in the search box but not the event
+  Aqua_019 2025-08-14T14:36Z to Terra_016 2025-08-14T20:46Z: 6.17 h; 0 sensing-layer passes saw other fires in the search box but not the event
+  Aqua_020 2025-08-15T04:11Z to Terra_017 2025-08-15T10:21Z: 6.17 h; 0 sensing-layer passes saw other fires in the search box but not the event
+  Aqua_021 2025-08-15T15:15Z to Terra_018 2025-08-15T21:26Z: 6.18 h; 0 sensing-layer passes saw other fires in the search box but not the event
+
+after the last event pass (2025-08-15T21:26Z): 0 sensing-layer passes with search-box detections, 0 with the event

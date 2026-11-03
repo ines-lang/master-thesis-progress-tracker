@@ -1,0 +1,7 @@
+source,area_ha,basis,ratio_effis_to_source
+EFFIS records (sum),40081.0,"EFFIS burnt area, final record state",1.0
+"Junta provisional, both provinces (registry comment)",31500.0,command line --area-refs (not in registry),1.272
+media / Copernicus estimate low (registry comment),37000.0,command line --area-refs (not in registry),1.083
+media / Copernicus estimate high (registry comment),38000.0,command line --area-refs (not in registry),1.055
+FIRMS members convex hull,29298.0,until 2025-08-15T21:26Z,1.368
+FIRMS members bounding box,51713.0,until 2025-08-15T21:26Z,0.775

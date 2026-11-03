@@ -1,0 +1,10 @@
+item,expected,obtained,match,expected_source
+effis_start_utc,2025-08-14T01:34:00Z,2025-08-14T01:34:00Z,True,registry regression_expected
+effis_id,278475,278475,True,archive_v1/processed/larouco_reference.csv
+province / commune,"Ourense / Rúa, A","Ourense / Rúa, A",True,archive_v1/processed/larouco_reference.csv
+start_utc,2025-08-14T01:34:00Z,2025-08-14T01:34:00Z,True,archive_v1/processed/larouco_reference.csv
+last_update_utc,2025-08-28T02:13:00Z,2025-08-28T02:13:00Z,True,archive_v1/processed/larouco_reference.csv
+area_ha,37179,37179,True,archive_v1/processed/larouco_reference.csv
+has_geometry,False,False,True,archive_v1/processed/larouco_reference.csv
+overpass coincidence (n within / n used),117 / 122,117 / 122,True,"v1 log, Step 4"
+overpass coincidence share (rounded %),96,96,True,"v1 log, Step 4"

@@ -1,0 +1,7 @@
+scope,source,rows,removed_qc,removed_static_proxy,removed_conf_all,removed_conf_nominal_high
+event_member,FIRMS,646,0,0,0,102
+event_member,LSASAF,647,0,0,0,1
+event_member_sensitivity,FIRMS,646,0,0,0,102
+event_member_sensitivity,LSASAF,1122,0,0,0,1
+search_box,FIRMS,12407,6,17,0,918
+search_box,LSASAF,12946,0,0,0,88

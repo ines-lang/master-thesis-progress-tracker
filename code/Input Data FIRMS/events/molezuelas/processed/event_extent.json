@@ -1,0 +1,12 @@
+{
+  "event_id": "molezuelas",
+  "cluster_id": 8,
+  "n_members": 1219,
+  "lat_min": 42.04804,
+  "lat_max": 42.2321,
+  "lon_min": -6.1975,
+  "lon_max": -5.8911,
+  "first_member_utc": "2025-08-10T12:32:00Z",
+  "last_member_utc": "2025-08-15T02:55:00Z",
+  "note": "bounding box of FIRMS event members (pixel centres), whole FIRMS period"
+}
