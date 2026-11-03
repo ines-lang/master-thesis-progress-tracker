@@ -1,0 +1,270 @@
+\documentclass[11pt]{article}
+
+% ---------- PACKAGES ----------
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{references.bib}   % with .bib here
+\usepackage{graphicx}
+
+% ---------- COLORS ----------
+\definecolor{tumblue}{RGB}{0,101,189}
+\definecolor{openq}{RGB}{178,34,34}
+\definecolor{vincenzoq}{RGB}{204,153,0}
+\definecolor{todo}{RGB}{0,120,90}
+\definecolor{review}{RGB}{128,0,128}
+
+% ---------- HYPERLINK STYLE ----------
+\hypersetup{
+    colorlinks=true,
+    linkcolor=tumblue,
+    urlcolor=tumblue,
+    citecolor=tumblue
+}
+
+% ---------- SECTION STYLE ----------
+\titleformat{\section}{\Large\bfseries\color{tumblue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries\color{tumblue!80!black}}{\thesubsection}{1em}{}
+
+% ---------- HEADER / FOOTER ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Month 3 Delivery}
+\fancyhead[R]{Ines Suarez Garcia}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+
+% ---------- CUSTOM COMMANDS FOR TRACKING ----------
+\newcommand{\openquestion}[1]{\textcolor{openq}{\textbf{Open question:}} #1}
+\newcommand{\vincenzoq}[1]{\textcolor{vincenzoq}{\textbf{Open question to Vincenzo:}} #1}
+\newcommand{\actionitem}[1]{\textcolor{todo}{\textbf{Action item:}} #1}
+\newcommand{\status}[1]{\textit{\textcolor{gray}{Status: #1}}}
+\newcommand{\review}[1]{\textcolor{review}{\textbf{Review this:}} #1}
+
+
+\title{\textbf{Optimal Central-Node Placement in ISL-Connected \\ Distributed Satellite Systems} \\[0.3cm] \large Master Thesis: Month 3 Delivery}
+\author{Ines Suarez Garcia \\ TUM Chair of Spacecraft Systems / NeuralAgent}
+\date{Last updated: \today}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\textcolor{gray}{\textbf{Supervisors:} Vincenzo Messina (TUM), Indraditya Bhattacharyya (NeuralAgent), Harald Bayerlein (NeuralAgent)}
+\end{center}
+
+\vspace{0.5cm}
+
+% =========================================================
+\section{Progress Since Month 2}
+% =========================================================
+
+This report builds on the Month 2 Delivery, whose architecture (node roles, link rules) and cumulative scenarios S0 to S3 remain valid and are not repeated here. During Month 3 the work focuses on the action items of the meeting of 27 October (Section~\ref{sec:meeting27oct}):
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Satellite census.} Public and private satellites used for wildfire detection, with orbital parameters (Section~\ref{sec:census}).
+    \item \textbf{Sensor comparison.} What information each sensor type provides about a fire (Section~\ref{sec:sensorcomp}).
+    \item \textbf{Simulation runs.} S0 and S1, then S2 with a Walker constellation of 600 satellites in 20 planes (Section~\ref{sec:runs}).
+    \item \textbf{Additional events.} Five new regions, with an event pipeline that is extendable by default (Section~\ref{sec:newevents}).
+    \item \textbf{Optimization methodology.} Candidate methods for the number and placement of central nodes (Section~\ref{sec:optim}).
+\end{itemize}
+
+% =========================================================
+\section{Meeting of 27 October: Action Items}\label{sec:meeting27oct}
+% =========================================================
+
+\begin{longtable}{p{6.2cm}p{6.2cm}p{1.8cm}}
+\toprule
+\textbf{Action item} & \textbf{Where / how} & \textbf{Status} \\
+\midrule
+\endhead
+Identify all publicly available satellites for wildfire detection. & Section~\ref{subsec:census_public} & Open \\
+Identify private satellites for wildfire detection, with orbital parameters and other public characteristics. & Section~\ref{subsec:census_private} & Open \\
+Check how the sensors differ and whether they provide different information about the fire. & Section~\ref{sec:sensorcomp} & Open \\
+Investigate the optimization methodology for the number and location of central nodes (future). & Section~\ref{sec:optim} & Open \\
+Run S0 and S1; then run S2 with a Walker of 600 satellites in 20 planes. & Section~\ref{sec:runs} & Open \\
+Add events in North America, South America, southern Africa, East Asia and Southeast Asia / Australia; pipeline extendable by default. & Section~\ref{sec:newevents} & Open \\
+\bottomrule
+\end{longtable}
+
+% =========================================================
+\section{Wildfire-Detection Satellite Census}\label{sec:census}
+% =========================================================
+
+\status{Not started. Candidate lists below are starting points; every row needs a mission-document citation.}
+
+A satellite enters the census if it carries a sensor used operationally or experimentally for active-fire detection or fire monitoring, i.e.\ a mid-wave or thermal infrared band, or a SWIR band used for fire products. For each satellite, the census records whether it was operational during the events studied, since only those can enter a scenario (time-consistency rule of Month 2, S3).
+
+\subsection{Public missions}\label{subsec:census_public}
+
+\begin{longtable}{p{2.6cm}p{1.6cm}p{1.6cm}p{2.4cm}p{2.2cm}p{2.6cm}}
+\caption{Public satellites with fire products. Values marked [TBD] to be filled from mission documentation.}\label{tab:census_public}\\
+\toprule
+\textbf{Satellite(s)} & \textbf{Orbit} & \textbf{Sensor} & \textbf{Orbital parameters (alt., incl., LTAN / longitude)} & \textbf{Fire product} & \textbf{In current EO layer?} \\
+\midrule
+\endhead
+\multicolumn{6}{l}{\textit{LEO}} \\
+Suomi NPP, NOAA-20, NOAA-21 & LEO SSO & VIIRS & [TBD] & FIRMS VIIRS & Yes \\
+Terra, Aqua & LEO SSO & MODIS & [TBD] & FIRMS MODIS & Yes \\
+Sentinel-3A/B & LEO SSO & SLSTR & [TBD] & SL\_2\_FRP & Yes \\
+Landsat-8/9 & LEO SSO & OLI/TIRS & [TBD] & FIRMS Landsat & No \\
+Sentinel-2A/B/C & LEO SSO & MSI & [TBD] & [TBD] & No \\
+\multicolumn{6}{l}{\textit{GEO}} \\
+Meteosat (MSG) & GEO & SEVIRI & [TBD] & LSA SAF FRP-PIXEL & External alert \\
+\multicolumn{6}{l}{\textit{Candidates to check}} \\
+\multicolumn{6}{l}{\small GOES-East/West (ABI), Himawari (AHI), MTG-I (FCI), GEO-KOMPSAT-2A (AMI), FengYun-3/-4, Metop (AVHRR), ECOSTRESS (ISS) [verify]} \\
+\bottomrule
+\end{longtable}
+
+\actionitem{Complete the candidate list (public agencies: NASA, NOAA, ESA/EUMETSAT, JMA, KMA, CMA, ISRO, INPE) and fill orbital parameters from mission documents or TLEs.}
+
+\subsection{Private missions}\label{subsec:census_private}
+
+\begin{longtable}{p{2.6cm}p{2.0cm}p{2.2cm}p{2.6cm}p{2.0cm}p{2.0cm}}
+\caption{Private satellites for wildfire detection. Parameters are approximations from public sources and are reported as ranges.}\label{tab:census_private}\\
+\toprule
+\textbf{Satellite(s)} & \textbf{Operator} & \textbf{Sensor / bands} & \textbf{Orbital parameters (alt., incl., LTAN)} & \textbf{NORAD ID / TLE} & \textbf{Operational Aug 2025?} \\
+\midrule
+\endhead
+FOREST series & OroraTech & TIR [TBD] & [TBD] & [TBD] & [verify] \\
+FireSat protoflight & Muon Space & IR [TBD] & [TBD] & [TBD] & [verify] \\
+\multicolumn{6}{l}{\textit{Candidates to check}} \\
+\multicolumn{6}{l}{\small Hydrosat, constellr, SatVu, other thermal-IR start-ups [verify]} \\
+\bottomrule
+\end{longtable}
+
+\actionitem{Retrieve historical TLEs (Space-Track or CelesTrak) for each private satellite at the epoch of each event.}
+
+% =========================================================
+\section{Sensor Comparison}\label{sec:sensorcomp}
+% =========================================================
+
+\status{Not started.}
+
+The question from the meeting is whether different sensors provide different information about a fire, or only the same information at different resolution and timing. The comparison is made per band class and per orbit type.
+
+\begin{longtable}{p{2.6cm}p{4.0cm}p{2.2cm}p{4.8cm}}
+\caption{Information provided by sensor class.}\label{tab:sensorcomp}\\
+\toprule
+\textbf{Band class} & \textbf{Information about the fire} & \textbf{Day / night} & \textbf{Example sensors} \\
+\midrule
+\endhead
+MWIR + LWIR & [TBD] & [TBD] & VIIRS, MODIS, SLSTR, SEVIRI \\
+SWIR & [TBD] & [TBD] & [TBD] \\
+VNIR & [TBD] & [TBD] & [TBD] \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \openquestion{Do differences between sensors change what the central nodes decide (e.g.\ a follow-up task only makes sense for a sensor that adds new information), or only the detectability filter?}
+\end{itemize}
+
+% =========================================================
+\section{Simulation Runs}\label{sec:runs}
+% =========================================================
+
+\status{Order agreed at the meeting: first S0 and S1, then S2.}
+
+\subsection{S0 and S1}\label{subsec:runs_s0s1}
+
+\actionitem{Run S1 (EO layer and ground segment, zero central nodes) for both Spanish events and fill the S1 column of the results table of Month 2.}
+
+\subsection{S2: Walker constellation of 600 satellites in 20 planes}\label{subsec:runs_s2}
+
+The coordination layer of S2 (relays and central nodes) is a Walker constellation with $t = 600$ satellites in $p = 20$ planes, i.e.\ 30 satellites per plane. In Walker notation $i\!:\!t/p/f = i\!:\!600/20/f$. Following the cumulative scenarios of Month 2, S2 keeps the EO layer and ground segment of S1 unchanged and only adds this constellation, so that S2 against S1 isolates the value of the central nodes.
+
+\begin{longtable}{p{4.5cm}p{3.0cm}p{6.5cm}}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Rationale} \\
+\midrule
+\endhead
+Total satellites $t$ & 600 & Meeting of 27 October \\
+Planes $p$ & 20 & Meeting of 27 October \\
+Satellites per plane & 30 & $t/p$ \\
+Pattern (delta / star) & [TBD] & \\
+Inclination $i$ & [TBD] & \\
+Altitude & [TBD] & \\
+Phasing factor $f$ & [TBD] & \\
+\bottomrule
+\end{longtable}
+
+% =========================================================
+\section{Additional Wildfire Events}\label{sec:newevents}
+% =========================================================
+
+\status{Not started.}
+
+The two Spanish events of Month 2 are extended with one event per region below. The selection criterion is kept from Month 2: the largest fire in the official statistics of the region, with ignition in a period where the satellites of each scenario were operational.
+
+\begin{longtable}{p{3.2cm}p{3.6cm}p{2.2cm}p{2.2cm}p{2.8cm}}
+\toprule
+\textbf{Region} & \textbf{Event} & \textbf{Ignition date} & \textbf{Area (ha)} & \textbf{Official source} \\
+\midrule
+\endhead
+Spain (Month 2) & Larouco & 13 Aug 2025 & 37,765.00 & MITECO EGIF \\
+Spain (Month 2) & Molezuelas de la Carballeda & 10 Aug 2025 & 24,426.00 & MITECO EGIF \\
+North America & [TBD] & [TBD] & [TBD] & [TBD] \\
+South America & [TBD] & [TBD] & [TBD] & [TBD] \\
+Southern Africa & [TBD] & [TBD] & [TBD] & [TBD] \\
+East Asia & [TBD] & [TBD] & [TBD] & [TBD] \\
+Southeast Asia / Australia & [TBD] & [TBD] & [TBD] & [TBD] \\
+\bottomrule
+\end{longtable}
+
+\textbf{Extendable pipeline.} Adding an event must not require code changes. Each event is defined by one configuration entry (name, region, bounding box, ignition time and its source, analysis window), and every stage (FIRMS and other public-record downloads, TLE epoch selection, OrbiNet access windows, post-processing) reads the event list from that configuration.
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \actionitem{Remove Spain-specific assumptions from the pipeline (e.g.\ the five ground stations).}
+\end{itemize}
+
+\textbf{Geostationary alert source per region.} SEVIRI does not cover all new regions, so each event uses the geostationary sensor whose disk contains it (e.g.\ GOES ABI for the Americas, Himawari AHI for East Asia and Australia). Geostationary satellites are not modeled in the NeuralAgent simulator, since they produce no links in the network. They are kept outside it, as SEVIRI in Month 2, and only answer the first-detection question of S0 (path B).
+
+\actionitem{For each new event, assign the geostationary source and its fire product, and add it to the S0 public-record pipeline as part of the event configuration.}
+
+% =========================================================
+\section{Central-Node Optimization Methodology}\label{sec:optim}
+% =========================================================
+
+\status{Future work; candidate methods to be investigated.}
+
+The problem of S2 is to choose how many central nodes there are, and which satellites of the coordination layer they are, so that the alert and tracking times are minimized, possibly traded against network complexity (Month 2, complexity model).
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Exhaustive or structured sweep.} Feasible only for small numbers of central nodes or with Walker symmetry (e.g.\ one central node per plane).
+    \item \textbf{Facility-location formulations.} $p$-median, $p$-center or set-covering models over the time-varying network graph, solved as integer programs.
+    \item \textbf{Metaheuristics.} Genetic algorithms, simulated annealing; multi-objective variants (e.g.\ NSGA-II) for the trade-off between time and complexity.
+    \item \textbf{Graph heuristics.} Centrality measures on the time-expanded graph as a fast baseline.
+\end{itemize}
+
+\actionitem{Review the literature on controller/central-node placement in satellite networks and choose one method, justified by problem size and objective.}
+
+% =========================================================
+\section{Open Questions}\label{sec:open3}
+% =========================================================
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \openquestion{Walker parameters of the coordination layer: pattern, inclination, altitude and phasing (Section~\ref{subsec:runs_s2}).}
+\end{itemize}
+
+% =========================================================
+\section{Next Steps}\label{sec:next3}
+% =========================================================
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \actionitem{Run S0 and S1, then S2 with the 600/20 Walker.}
+    \item \actionitem{Complete the satellite census and the sensor comparison.}
+    \item \actionitem{Select the five additional events and make the pipeline event-agnostic.}
+\end{itemize}
+
+\printbibliography
+
+\end{document}
