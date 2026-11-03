@@ -69,7 +69,7 @@
 \section{Progress Since Month 2}
 % =========================================================
 
-This report builds on the Month 2 Delivery, whose architecture (node roles, link rules) and cumulative scenarios S0 to S3 remain valid and are not repeated here. During Month 3 the work focuses on the action items of the meeting of 27 October (Section~\ref{sec:meeting27oct}):
+This report builds on the Month 2 Delivery, whose architecture (node roles, link rules) and cumulative scenarios S0 to S3 remain valid and are not repeated here. During Month 3 the work focuses on the action items of the meeting of 27 October:
 \begin{itemize}[leftmargin=1.2cm]
     \item \textbf{Satellite census.} Public and private satellites used for wildfire detection, with orbital parameters (Section~\ref{sec:census}).
     \item \textbf{Sensor comparison.} What information each sensor type provides about a fire (Section~\ref{sec:sensorcomp}).
@@ -77,24 +77,6 @@ This report builds on the Month 2 Delivery, whose architecture (node roles, link
     \item \textbf{Additional events.} Five new regions, with an event pipeline that is extendable by default (Section~\ref{sec:newevents}).
     \item \textbf{Optimization methodology.} Candidate methods for the number and placement of central nodes (Section~\ref{sec:optim}).
 \end{itemize}
-
-% =========================================================
-\section{Meeting of 27 October: Action Items}\label{sec:meeting27oct}
-% =========================================================
-
-\begin{longtable}{p{6.2cm}p{6.2cm}p{1.8cm}}
-\toprule
-\textbf{Action item} & \textbf{Where / how} & \textbf{Status} \\
-\midrule
-\endhead
-Identify all publicly available satellites for wildfire detection. & Section~\ref{subsec:census_public} & Open \\
-Identify private satellites for wildfire detection, with orbital parameters and other public characteristics. & Section~\ref{subsec:census_private} & Open \\
-Check how the sensors differ and whether they provide different information about the fire. & Section~\ref{sec:sensorcomp} & Open \\
-Investigate the optimization methodology for the number and location of central nodes (future). & Section~\ref{sec:optim} & Open \\
-Run S0 and S1; then run S2 with a Walker of 600 satellites in 20 planes. & Section~\ref{sec:runs} & Open \\
-Add events in North America, South America, southern Africa, East Asia and Southeast Asia / Australia; pipeline extendable by default. & Section~\ref{sec:newevents} & Open \\
-\bottomrule
-\end{longtable}
 
 % =========================================================
 \section{Wildfire-Detection Satellite Census}\label{sec:census}
@@ -201,9 +183,9 @@ Phasing factor $f$ & [TBD] & \\
 \section{Additional Wildfire Events}\label{sec:newevents}
 % =========================================================
 
-\status{Not started.}
+\status{Official ignition sources researched; candidates proposed, selection with FIRMS pending.}
 
-The two Spanish events of Month 2 are extended with one event per region below. The selection criterion is kept from Month 2: the largest fire in the official statistics of the region, with ignition in a period where the satellites of each scenario were operational.
+The two Spanish events of Month 2 are extended with one event per continent. The data window stays fixed at 8 to 16 August 2025 for all events, so every new event must ignite inside it. Since the goal is T0, i.e.\ the first detection, and not the tracking, events are selected by size and by the availability of an ignition reference. The selection is documented with its scripts, tables and figures.
 
 \begin{longtable}{p{3.2cm}p{3.6cm}p{2.2cm}p{2.2cm}p{2.8cm}}
 \toprule
@@ -212,13 +194,15 @@ The two Spanish events of Month 2 are extended with one event per region below. 
 \endhead
 Spain (Month 2) & Larouco & 13 Aug 2025 & 37,765.00 & MITECO EGIF \\
 Spain (Month 2) & Molezuelas de la Carballeda & 10 Aug 2025 & 24,426.00 & MITECO EGIF \\
-North America & [TBD] & [TBD] & [TBD] & [TBD] \\
-South America & [TBD] & [TBD] & [TBD] & [TBD] \\
-Southern Africa & [TBD] & [TBD] & [TBD] & [TBD] \\
-East Asia & [TBD] & [TBD] & [TBD] & [TBD] \\
-Southeast Asia / Australia & [TBD] & [TBD] & [TBD] & [TBD] \\
+North America & Red Canyon, Wyoming (candidate) & 14 Aug 2025, 00:09 UTC & 50,468 & NIFC WFIGS (discovery time) \\
+Africa & Derdara, Chefchaouen, Morocco (candidate) & 12 Aug 2025, about 13:00 UTC [verify] & about 500 [verify] & ANEF via press [verify] \\
+Asia (Siberia / Russian Far East) & [TBD] & [TBD] & [TBD] & none public; first Himawari detection \\
 \bottomrule
 \end{longtable}
+
+The reference for T0 follows a fixed hierarchy: the official ignition time where one exists, otherwise the first geostationary detection. Only North America has an official ignition time verified in an official database; for the Moroccan event the hour comes from the press and must be confirmed.
+
+\textbf{Continents without an event.} South America and Oceania are not included. August is winter in the southern hemisphere: the fires detected there in the window are dry-season land-clearing, agricultural or prescribed savanna burns, and no officially recorded wildfire ignited between 8 and 15 August 2025 (the nearest documented one, in Chapada dos Veadeiros National Park, Brazil, burned from 22 to 24 August). Since only wildfires are studied and the data window is fixed, these continents have no eligible event. For Asia, East Asia has almost no fire in the window, so the event is taken from Siberia or the Russian Far East; the largest Kamchatka hotspot in the window is the Klyuchevskoy volcano and is excluded.
 
 \textbf{Extendable pipeline.} Adding an event must not require code changes. Each event is defined by one configuration entry (name, region, bounding box, ignition time and its source, analysis window), and every stage (FIRMS and other public-record downloads, TLE epoch selection, OrbiNet access windows, post-processing) reads the event list from that configuration.
 
@@ -226,7 +210,7 @@ Southeast Asia / Australia & [TBD] & [TBD] & [TBD] & [TBD] \\
     \item \actionitem{Remove Spain-specific assumptions from the pipeline (e.g.\ the five ground stations).}
 \end{itemize}
 
-\textbf{Geostationary alert source per region.} SEVIRI does not cover all new regions, so each event uses the geostationary sensor whose disk contains it (e.g.\ GOES ABI for the Americas, Himawari AHI for East Asia and Australia). Geostationary satellites are not modeled in the NeuralAgent simulator, since they produce no links in the network. They are kept outside it, as SEVIRI in Month 2, and only answer the first-detection question of S0 (path B).
+\textbf{Geostationary alert source per region.} SEVIRI does not cover all new regions, so each event uses the geostationary sensor whose disk contains it (SEVIRI for Europe and Africa, GOES ABI for North America, Himawari AHI for Siberia and the Russian Far East). Geostationary satellites are not modeled in the NeuralAgent simulator, since they produce no links in the network. They are kept outside it, as SEVIRI in Month 2, and only answer the first-detection question of S0 (path B).
 
 \actionitem{For each new event, assign the geostationary source and its fire product, and add it to the S0 public-record pipeline as part of the event configuration.}
 
