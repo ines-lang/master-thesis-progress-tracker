@@ -1,7 +1,7 @@
 #!/bin/bash
 # Build the GitHub version of the repo on branch github-full, without checking it out:
-# the files of local master (LaTeX, as on ShareLaTeX) plus code/, minus the files in code/.github_exclude.
-# master never contains code/, so ShareLaTeX never receives it.
+# the files of local master (LaTeX, as on ShareLaTeX) plus code/ and artifacts/, minus the files in code/.github_exclude.
+# master never contains code/ or artifacts/, so ShareLaTeX never receives them.
 #
 # Usage (from anywhere):
 #   bash code/sync_github.sh "<message following the commit rules in CLAUDE.md>"
@@ -12,11 +12,11 @@ MSG="$1"
 cd "$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
 BRANCH=github-full
 
-# temporary index = master's tree + every non-excluded file under code/
+# temporary index = master's tree + every non-excluded file under code/ and artifacts/
 export GIT_INDEX_FILE="$(git rev-parse --git-dir)/index-github"
 rm -f "$GIT_INDEX_FILE"
 git read-tree master
-git ls-files --others -z --exclude-from=code/.github_exclude -- code | xargs -0 -r git update-index --add --
+git ls-files --others -z --exclude-from=code/.github_exclude -- code artifacts | xargs -0 -r git update-index --add --
 TREE=$(git write-tree)
 rm -f "$GIT_INDEX_FILE"
 unset GIT_INDEX_FILE

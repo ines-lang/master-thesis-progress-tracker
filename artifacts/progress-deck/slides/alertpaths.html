@@ -1,0 +1,73 @@
+<section id="alertpaths" data-transition="fade" style="display:flex; flex-direction:column; gap:20px; padding:128px; background:#f4f1ea; font-family:'IBM Plex Sans', Arial, sans-serif; color:#1c2430">
+  <div style="display:flex; flex-direction:column; gap:12px">
+    <h2 style="font-size:56px; font-weight:600; line-height:1.1; color:#1c2430">Alert, detection and tracking</h2>
+    <p style="font-size:24px; color:#5b6573">Three alert paths reach T0. In S1 the ground decides; from S2 on, alerts go only to a central node in view.</p>
+  </div>
+  <div style="position:relative; width:1664px; height:31px">
+    <p style="position:absolute; left:0; top:0; width:190px; font-size:24px; font-weight:600; color:#1f6f6b; text-align:center">Fire</p>
+    <p style="position:absolute; left:240px; top:0; width:320px; font-size:24px; font-weight:600; color:#1f6f6b; text-align:center">Detection</p>
+    <p style="position:absolute; left:700px; top:0; width:330px; font-size:24px; font-weight:600; color:#1f6f6b; text-align:center">Alert delivery</p>
+    <p style="position:absolute; left:1080px; top:0; width:160px; font-size:24px; font-weight:600; color:#1f6f6b; text-align:center">T0</p>
+    <p style="position:absolute; left:1300px; top:0; width:364px; font-size:24px; font-weight:600; color:#1f6f6b; text-align:center">Tracking</p>
+  </div>
+  <div style="position:relative; width:1664px; height:500px">
+    <div style="position:absolute; left:0; top:199px; width:190px; height:140px; display:flex; flex-direction:column; justify-content:center; gap:4px; padding:12px; background:#fbeee6; border:3px solid #c4501f; border-radius:16px">
+      <h3 style="font-size:28px; font-weight:600; color:#a8431a">Ignition</h3>
+      <p style="font-size:24px; line-height:1.3">official time (EGIF)</p>
+    </div>
+    <div style="position:absolute; left:240px; top:44px; width:320px; height:110px; display:flex; flex-direction:column; justify-content:center; gap:4px; padding:12px; background:#ebe8e1; border:3px dashed #8a929c; border-radius:16px">
+      <h3 style="font-size:28px; font-weight:600; color:#5b6573">B · SEVIRI (GEO)</h3>
+      <p style="font-size:24px; line-height:1.3">every 15 min</p>
+    </div>
+    <div style="position:absolute; left:700px; top:44px; width:330px; height:110px; display:flex; flex-direction:column; justify-content:center; gap:4px; padding:12px; background:#fbfaf6; border:3px solid #16263d; border-radius:16px">
+      <h3 style="font-size:28px; font-weight:600; color:#16263d">Ground segment</h3>
+      <p style="font-size:24px; line-height:1.3">decides in S1</p>
+    </div>
+    <div style="position:absolute; left:240px; top:214px; width:320px; height:110px; display:flex; flex-direction:column; justify-content:center; gap:4px; padding:12px; background:#e6efee; border:3px solid #1f6f6b; border-radius:16px">
+      <h3 style="font-size:28px; font-weight:600; color:#1f6f6b">A · EO layer</h3>
+      <p style="font-size:24px; line-height:1.3">S1 + public S3 sensors</p>
+    </div>
+    <div style="position:absolute; left:700px; top:214px; width:330px; height:280px; display:flex; flex-direction:column; justify-content:center; gap:8px; padding:16px; background:#e6efee; border:3px solid #1f6f6b; border-radius:16px">
+      <h3 style="font-size:28px; font-weight:600; color:#1f6f6b">Central nodes</h3>
+      <p style="font-size:24px; line-height:1.3">reached only when in view (S2 to S4); decide, task, gateway</p>
+    </div>
+    <div style="position:absolute; left:240px; top:384px; width:320px; height:110px; display:flex; flex-direction:column; justify-content:center; gap:4px; padding:12px; background:#f1eaf8; border:3px solid #7b4fb3; border-radius:16px">
+      <h3 style="font-size:28px; font-weight:600; color:#6a3fa0">C · Commercial</h3>
+      <p style="font-size:24px; line-height:1.3">S4, e.g. OroraTech</p>
+    </div>
+    <div style="position:absolute; left:1080px; top:189px; width:160px; height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#e6efee; border:4px solid #1f6f6b; border-radius:50%">
+      <p style="font-size:32px; font-weight:600; color:#1f6f6b">T0</p>
+      <p style="font-size:24px; line-height:1.2; text-align:center">alert in<br>network</p>
+    </div>
+    <div style="position:absolute; left:1300px; top:44px; width:364px; height:450px; display:flex; flex-direction:column; justify-content:center; gap:14px; padding:16px 24px; background:#e6efee; border:3px solid #1f6f6b; border-radius:16px">
+      <p style="font-size:24px; line-height:1.3"><b>S1</b> · EO layer, ground decides</p>
+      <p style="font-size:24px; line-height:1.3"><b>S2</b> · S1 + central nodes decide and task</p>
+      <p style="font-size:24px; line-height:1.3"><b>S3</b> · S2 + extended public layer</p>
+      <p style="font-size:24px; line-height:1.3; color:#6a3fa0"><b>S4</b> · S3 + commercial layer</p>
+      <p style="font-size:24px; line-height:1.3; color:#5b6573">Reference: FIRMS update gaps (S0)</p>
+    </div>
+    <x-connector x1="190" y1="230" x2="240" y2="110" style="color:#c4501f; border-width:4px"></x-connector>
+    <x-connector x1="190" y1="269" x2="240" y2="269" style="color:#c4501f; border-width:4px"></x-connector>
+    <x-connector x1="190" y1="308" x2="240" y2="430" style="color:#c4501f; border-width:4px"></x-connector>
+    <x-connector x1="560" y1="99" x2="700" y2="99" style="color:#8a929c; border-width:3px; border-style:dashed"></x-connector>
+    <x-connector x1="400" y1="214" x2="760" y2="154" style="color:#16263d; border-width:3px"></x-connector>
+    <x-connector x1="560" y1="269" x2="700" y2="269" style="color:#c2185b; border-width:4px; border-style:dashed"></x-connector>
+    <x-connector x1="560" y1="439" x2="700" y2="439" style="color:#8d6e63; border-width:4px; border-style:dotted"></x-connector>
+    <x-connector x1="960" y1="214" x2="960" y2="154" head="both" style="color:#b71c1c; border-width:4px"></x-connector>
+    <x-connector x1="1030" y1="99" x2="1111" y2="205" style="color:#16263d; border-width:4px"></x-connector>
+    <x-connector x1="1030" y1="354" x2="1093" y2="313" style="color:#1f6f6b; border-width:4px"></x-connector>
+    <x-connector x1="1240" y1="269" x2="1300" y2="269" style="color:#1f6f6b; border-width:4px"></x-connector>
+    <p style="position:absolute; left:244px; top:166px; width:150px; font-size:24px; color:#16263d">S1 alert</p>
+    <p style="position:absolute; left:840px; top:166px; width:110px; font-size:24px; color:#b71c1c">gateway</p>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:12px">
+    <div style="display:flex; flex-direction:row; gap:28px; align-items:center">
+      <div style="display:flex; flex-direction:row; gap:10px; align-items:center"><hr style="width:44px; border-top:4px solid #16263d"><p style="font-size:24px">S1 path via ground</p></div>
+      <div style="display:flex; flex-direction:row; gap:10px; align-items:center"><hr style="width:44px; border-top:4px dashed #c2185b"><p style="font-size:24px">EO to central node (assumed RF)</p></div>
+      <div style="display:flex; flex-direction:row; gap:10px; align-items:center"><hr style="width:44px; border-top:4px dotted #8d6e63"><p style="font-size:24px">Commercial to central node (assumed)</p></div>
+      <div style="display:flex; flex-direction:row; gap:10px; align-items:center"><hr style="width:44px; border-top:4px dashed #8a929c"><p style="font-size:24px">Not modeled</p></div>
+    </div>
+    <p style="font-size:24px; line-height:1.3; color:#5b6573"><b style="color:#8a6a14">Public data on the real event:</b> FIRMS (T0 of A) · LSA SAF / GOES (T0 of B) · official ignition and area · SLSTR FRP and FY-3D (planned). No public record for path C.</p>
+  </div>
+  <aside>S0 and S1 are the centralized cases: the ground decides. Path B: a geostationary imager (SEVIRI for Europe and Morocco, GOES for Red Canyon) sees the fire every 10 to 15 minutes; it is not modeled, and its alert reaches the ground segment, with timing from the public products. Path A: a public sensing satellite (EO layer, and from S3 the extended public layer) sees the fire. In S1 the alert goes down with its data to the ground segment. From S2 on it goes by an assumed RF crosslink straight to a central node, only when one is in view; the central node decides and distributes the next tasks, and the alert reaches the ground through any coordination satellite with a station in view. The sensor downlink keeps carrying raw data only. Path C, from S4: a commercial satellite such as OroraTech FOREST follows the same rule; the medium of that link is still open. All paths end at T0, the moment the alert is in the network. Commercial detection data are not public, so path C has no public-record reference.</aside>
+</section>

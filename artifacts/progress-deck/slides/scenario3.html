@@ -1,0 +1,24 @@
+<section id="scenario3" data-transition="fade" style="display:flex; flex-direction:column; gap:40px; padding:128px; background:#f4f1ea">
+  <div style="display:flex; flex-direction:column; gap:12px">
+    <h2 style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:56px; font-weight:600; line-height:1.1; color:#1c2430">Layers per scenario</h2>
+    <p style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; color:#5b6573">Each scenario adds one layer on top of the previous one; nothing in place changes.</p>
+  </div>
+  <table style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:28px; color:#1c2430; background:#fbfaf6">
+    <tr style="background:#16263d"><th style="width:12%; color:#f4f1ea"></th><th style="width:22%; color:#f4f1ea">EO layer (8)</th><th style="width:22%; color:#f4f1ea">Coordination</th><th style="width:22%; color:#f4f1ea">Extended public (14)</th><th style="width:22%; color:#f4f1ea">Commercial (3)</th></tr>
+    <tr><td>S1</td><td style="color:#1f6f6b">Yes</td><td style="color:#8a929c">No</td><td style="color:#8a929c">No</td><td style="color:#8a929c">No</td></tr>
+    <tr><td>S2</td><td style="color:#5b6573">Same</td><td style="color:#1f6f6b">Added</td><td style="color:#8a929c">No</td><td style="color:#8a929c">No</td></tr>
+    <tr style="background:#fbeee6"><td>S3</td><td style="color:#5b6573">Same</td><td style="color:#5b6573">Same</td><td style="color:#a8431a">Added</td><td style="color:#8a929c">No</td></tr>
+    <tr style="background:#f1eaf8"><td>S4</td><td style="color:#5b6573">Same</td><td style="color:#5b6573">Same</td><td style="color:#5b6573">Same</td><td style="color:#6a3fa0">Added</td></tr>
+  </table>
+  <div style="display:flex; flex-direction:row; gap:16px">
+    <div style="flex:1; display:flex; flex-direction:column; gap:8px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
+      <h3 style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:32px; font-weight:600; color:#1c2430">Same link rule for all sensors</h3>
+      <p style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; line-height:1.3; color:#1c2430">Downlink to ground, or RF crosslink to a central node in view. No relay links.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:8px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
+      <h3 style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:32px; font-weight:600; color:#1c2430">What stays fixed</h3>
+      <p style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; line-height:1.3; color:#1c2430">Coordination layer, ground stations, detectability filter per sensor.</p>
+    </div>
+  </div>
+  <aside>The extended public layer and the commercial layer are handled the same way: each joins the network with the same link rule as the EO layer and is added on top of the previous scenario, so S3 against S2 isolates the public sensors that do not share data today, and S4 against S3 the private ones. Sensor limits enter through the detectability filter: fire band, day or night use (Metop AVHRR fire band at night only; Landsat and Sentinel-2 daytime only), and pixel size against fire size. Commercial parameters are partly from press releases and are reported as ranges.</aside>
+</section>

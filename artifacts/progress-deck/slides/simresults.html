@@ -1,0 +1,24 @@
+<section id="simresults" data-transition="fade" style="display:flex; flex-direction:column; gap:40px; padding:128px; background:#f4f1ea">
+  <div style="display:flex; flex-direction:column; gap:12px">
+    <h2 style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:56px; font-weight:600; line-height:1.1; color:#1c2430">Detection and alert times by scenario</h2>
+    <p style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; color:#5b6573">Larouco / Molezuelas, hours after official ignition; the four new events follow. [TBD] values come from the simulation.</p>
+  </div>
+  <table style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; color:#1c2430; background:#fbfaf6">
+    <tr style="background:#16263d">
+      <th style="width:30%; color:#f4f1ea">Metric</th>
+      <th style="width:18%; color:#f4f1ea">S0 public record</th>
+      <th style="width:13%; color:#f4f1ea">S1</th>
+      <th style="width:13%; color:#f4f1ea">S2</th>
+      <th style="width:13%; color:#f4f1ea">S3</th>
+      <th style="width:13%; color:#f4f1ea">S4</th>
+    </tr>
+    <tr><td>First observation opportunity</td><td>n/a</td><td>[TBD]</td><td>= S1</td><td>[TBD]</td><td>[TBD]</td></tr>
+    <tr><td>T0, path A</td><td>4.83 / 0.12</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td></tr>
+    <tr><td>T0, path B</td><td>1.75 / 0.12</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td></tr>
+    <tr style="background:#f1eaf8"><td>T0, path C (commercial)</td><td>no public data</td><td>n/a</td><td>n/a</td><td>n/a</td><td>[TBD]</td></tr>
+    <tr><td>Alert on the ground</td><td>[product latency]</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td></tr>
+    <tr><td>Update gap, median</td><td>0.85 / 0.60</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td></tr>
+    <tr><td>Update gap, p90 / max</td><td>6.17 / 6.13 · 8.60 / 7.63</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td><td>[TBD]</td></tr>
+  </table>
+  <aside>First observation opportunity is the first pass with the fire inside the field of view, from the simulation; first detection is the first FIRMS detection, from the public record. S2 has the same opportunities as S1, because the coordination layer carries no sensors; S3 adds those of the extended public layer and S4 those of the commercial layer. What the central nodes change is how fast the alert reaches a decision, how fast tasks reach the satellites and how fast the alert reaches the ground. Gap statistics use the common horizon of 47.7 hours after T0.</aside>
+</section>

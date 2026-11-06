@@ -1,0 +1,55 @@
+{
+  "v": 4,
+  "attachments": {},
+  "cover": "cover",
+  "createdOnFiles": {
+    "at": "2026-09-24T12:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "faces": {
+    "ibm-plex-sans": {
+      "family": "IBM Plex Sans",
+      "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    }
+  },
+  "order": [
+    "cover",
+    "progress",
+    "events",
+    "eolayer",
+    "gaps",
+    "groundseg",
+    "scenarios",
+    "scenario3",
+    "roles",
+    "alertpaths",
+    "architecture",
+    "simresults",
+    "nextsteps",
+    "baseline"
+  ],
+  "sections": {
+    "s1": {
+      "description": "Title",
+      "start": "cover"
+    },
+    "s2": {
+      "description": "This week: action items, events, satellite census, coverage gaps and ground segment",
+      "start": "progress"
+    },
+    "s3": {
+      "description": "Scenarios S0 to S4, layers, link rules and the network",
+      "start": "scenarios"
+    },
+    "s4": {
+      "description": "Results by scenario and next steps",
+      "start": "simresults"
+    },
+    "s5": {
+      "description": "Backup: public record (S0) of the Spanish events",
+      "start": "baseline"
+    }
+  },
+  "title": "Thesis progress: update after 27 October"
+}

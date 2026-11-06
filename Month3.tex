@@ -69,22 +69,131 @@
 \section{Progress Since Month 2}
 % =========================================================
 
-The Month 2 architecture still holds and is not repeated; the cumulative scenarios are extended to S0 to S4 (Section~\ref{sec:runs}). Month 3 addresses the action items of the meeting of 27 October:
+The Month 2 architecture still holds and is not repeated here. This month addresses the action items of the meeting of 27 October:
+
 \begin{itemize}[leftmargin=1.2cm]
-    \item \textbf{Satellite census} (Section~\ref{sec:census}): public fire-capable satellites in orbit in the window identified; proposed EO layer of 22 satellites; commercial census in progress.
-    \item \textbf{Sensor comparison} (Section~\ref{sec:sensorcomp}): per band class and orbit; answers whether sensors give different information.
-    \item \textbf{Simulation runs} (Section~\ref{sec:runs}): S0 and S1 first, then S2 with a 600-satellite, 20-plane Walker coordination layer.
-    \item \textbf{Additional events} (Section~\ref{sec:newevents}): global FIRMS screen, official sources, selection by official burned area; Pi\'od\~ao (Portugal), O\'imbra (Spain), Red Canyon (USA) and Derdara (Morocco) added; pipeline made region-agnostic.
+    \item \textbf{Network design} (Section~\ref{sec:runs}): scenarios extended to S0 to S4, revised link rules, and the real ground segment of the baseline.
+    \item \textbf{Satellite census} (Section~\ref{sec:census}): all fire-capable satellites in orbit in August 2025, public and commercial, sorted into layers.
+    \item \textbf{Sensor comparison} (Section~\ref{sec:sensorcomp}): what each band class and orbit tells about a fire.
+    \item \textbf{Additional events} (Section~\ref{sec:newevents}): four new events, chosen by official burned area: Pi\'od\~ao (Portugal), O\'imbra (Spain), Red Canyon (USA) and Derdara (Morocco).
     \item \textbf{Optimization methodology} (Section~\ref{sec:optim}): candidate methods listed.
 \end{itemize}
+
+The goal of this month is to \emph{freeze the design}, that is, the layers and the ground stations, before running S1 and S2. The S2 central-node optimum depends on the EO layer, so changing the layers after the S2 sweep would mean redoing the main result.
+
+% =========================================================
+\section{Network Design}\label{sec:runs}
+% =========================================================
+
+\status{Scenarios and link rules revised; ground segment checked; Walker parameters open. S0 done for the Spanish events (Month 2); S1 and S2 pending.}
+
+\subsection{Scenarios}
+
+The scenarios are cumulative: each one adds a single layer on top of the previous one, so every comparison isolates one change. The census of Section~\ref{sec:census} adds a new scenario S3; the commercial layer, formerly S3, becomes S4.
+
+\begin{longtable}{p{3.2cm}p{5.0cm}p{6.6cm}}
+\toprule
+\textbf{Scenario} & \textbf{Setup} & \textbf{Question it answers} \\
+\midrule
+\endhead
+S0, public record & FIRMS, LSA SAF and EFFIS of the real fires & How fast was the fire actually detected? \\
+S1, ground decides & EO layer (8 satellites) and the real ground segment & Does the model reproduce reality (S1 against S0)? \\
+S2, orbit decides & S1 plus the coordination layer; central nodes swept & How many central nodes, and where, give the largest gain? (main result) \\
+S3, public extension & S2 plus the extended public layer (14 satellites) & What do the other public sensors add, and does the S2 optimum still hold? \\
+S4, commercial & S3 plus the commercial layer (3 satellites) & What do private satellites add on top? \\
+\bottomrule
+\end{longtable}
+
+S1 contains only satellites with a global public fire product, so S1 against S0 is a clean validation. The S3 and S4 satellites are simulated without validation; for them a conservative detectability filter is written before running, so any gain they show is a lower bound.
+
+\subsection{Link rules}
+
+The link rules are revised compared with Month 2. Every satellite that observes fires (EO layer, extended public layer and commercial layer, here called \emph{sensors}) follows the same rule.
+
+\begin{longtable}{p{5.2cm}p{3.0cm}p{6.6cm}}
+\toprule
+\textbf{Link} & \textbf{Medium} & \textbf{Use} \\
+\midrule
+\endhead
+Sensor to its own ground station & RF & S1: alert and data. From S2 on: raw data only \\
+Sensor to a central node in view & RF crosslink (assumed) & From S2 on: the only path for alerts \\
+Relay to its central node & OISL or RF & Each central node is the centre of a star of relays \\
+Central node to central node & OISL or RF & Connects the clusters \\
+Coordination satellite to ground & RF & Any relay or central node can downlink (gateway) \\
+Sensor to relay, sensor to sensor, relay to relay & none & Not allowed \\
+\bottomrule
+\end{longtable}
+
+What changes with respect to Month 2:
+\begin{itemize}[leftmargin=1.2cm]
+    \item A sensor no longer reaches the network through the nearest relay. It sends its alert only to a central node in view, so an alert waits until one is in view.
+    \item Relays no longer form a mesh. Each relay links only to its central node, and central nodes link to each other.
+    \item Links inside the coordination layer can be optical or RF.
+    \item Every coordination satellite can downlink, not only the central nodes. Decisions stay with the central nodes.
+\end{itemize}
+
+\subsection{Coordination layer}
+
+In S2 the coordination layer (relays and central nodes) is a Walker constellation~\cite{walker1984} of $t = 600$ satellites in $p = 20$ planes, i.e.\ 30 satellites per plane, written $i\!:\!600/20/f$. The EO layer and the ground segment stay those of S1, so S2 against S1 isolates the value of the central nodes.
+
+\begin{longtable}{p{4.0cm}p{2.5cm}p{6.0cm}}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Source} \\
+\midrule
+\endhead
+Satellites $t$ / planes $p$ & 600 / 20 & Meeting of 27 October \\
+Pattern, inclination $i$, altitude, phasing $f$ & [TBD] & \\
+\bottomrule
+\end{longtable}
+
+\subsection{Ground segment of the baseline}
+
+In Month 2 every satellite could use all five polar stations. In reality each satellite downlinks its stored data to its own stations:
+
+\begin{longtable}{p{4.8cm}p{10.0cm}}
+\toprule
+\textbf{Satellite} & \textbf{Stored-data downlink in 2025} \\
+\midrule
+\endhead
+Suomi NPP, Sentinel-3A/B & Svalbard only \\
+NOAA-20, NOAA-21 & Svalbard and McMurdo (Troll as backup) \\
+Aqua & Svalbard and Poker Flat \\
+FY-3D & Beijing, Guangzhou, Urumqi, Jiamusi (CMA) and Kiruna \\
+Terra & TDRSS relay satellites (not representable with direct-view stations) \\
+US direct readout & Madison, Hampton, Mayaguez: receive passes over the United States in real time \\
+\bottomrule
+\end{longtable}
+
+For every S1 pass over the six events, the time from the observation to the first ground contact was computed with both station sets (10$^\circ$ elevation mask, Terra excluded):
+\begin{itemize}[leftmargin=1.2cm]
+    \item Month 2 set: median 8\,min, maximum 37\,min.
+    \item Real ground segments: median 26\,min, maximum 114\,min. Suomi NPP and Sentinel-3 often wait a full orbit for Svalbard.
+    \item With the US direct-readout stations, Red Canyon passes are received while the satellite still sees the fire (median 0\,min). No such fire path exists for Europe or Morocco.
+\end{itemize}
+
+The Month 2 set was therefore optimistic: it made S1 too fast and would understate the gain of the central nodes. The baseline uses the real ground segment of each satellite plus the US direct-readout stations. The same set is used in all scenarios; since ground links are filtered in post-processing, other sets can be tested later without new runs. Processing latency (under 3\,h for FIRMS and SL\_2\_FRP) is not modelled.
 
 % =========================================================
 \section{Wildfire-Detection Satellite Census}\label{sec:census}
 % =========================================================
 
-\status{Public and commercial satellites identified and checked. Goal: freeze all layers and the ground stations before running the scenarios.}
+\status{Public and commercial satellites identified and checked.}
 
-\textbf{Method.} All payloads and not yet identified objects with an orbit record between 8 and 16 August 2025 were downloaded from Space-Track~\cite{spacetrack2025} (15,735). Being in orbit does not mean working (satellites from the 1970s are still tracked), so each candidate mission is checked by hand for its fire band, its operational status in the window (WMO OSCAR/Space~\cite{oscar2025} and agency notices) and its fire products. Rules: a satellite is \emph{fire-capable} if it has a MWIR fire band or a high-resolution SWIR band with a documented active-fire method (LWIR-only imagers are not); it must be operational in the window. Public (government or intergovernmental) satellites with a global public fire product form the EO layer (S1), since they can be validated against S0; the other public ones form the extended public layer (S3); private ones the commercial layer (S4). GEO and HEO imagers are census only (S0 alert and T0 reference).
+\subsection{Method}
+
+All payloads and not yet identified objects with an orbit record between 8 and 16 August 2025 were downloaded from Space-Track~\cite{spacetrack2025}, 15,735 objects in total. Being in orbit does not mean working (satellites from the 1970s are still tracked), so each candidate mission was checked by hand for its fire band, its operational status in the window (WMO OSCAR/Space~\cite{oscar2025} and agency notices) and its fire products.
+
+The rules are:
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Fire-capable:} a MWIR fire band, or a high-resolution SWIR band with a documented active-fire method. Imagers with LWIR only do not count.
+    \item \textbf{Operational} on 8 to 16 August 2025.
+    \item \textbf{S1 EO layer:} public (government or intergovernmental) satellites with a global public fire product, so that they can be validated against S0.
+    \item \textbf{S3 extended public layer:} all other public satellites.
+    \item \textbf{S4 commercial layer:} private satellites.
+    \item \textbf{GEO and HEO imagers:} census only. They give the S0 alert and, where no official ignition hour exists, the T0 reference, but they are not part of the network.
+\end{itemize}
+
+\subsection{Layers}
 
 \begin{longtable}{p{3.4cm}p{3.0cm}p{2.1cm}p{2.4cm}p{3.0cm}}
 \caption{Fire-capable LEO satellites operational on 8 to 16 August 2025, by layer.}\label{tab:eolayer}\\
@@ -111,9 +220,28 @@ FireSat protoflight & Muon Space / EFA & IR radiometer & demo only & none \\
 \bottomrule
 \end{longtable}
 
-\textbf{Census only (GEO/HEO, 15):} GOES-18/19, Himawari-9, Meteosat-9/10/11/12, GEO-KOMPSAT-2A, FY-4A/B, INSAT-3DR/3DS, Elektro-L 3/4, Arktika-M~2. \textbf{Excluded:} no MWIR fire band or no active-fire method (e.g.\ CBERS-4, ECOSTRESS, and the LWIR-only commercial imagers constellr SkyBee and Hydrosat VanZyl); not operational in the window (NOAA-15/18/19, whose data service ended on 16 June 2025~\cite{noaa2025poes}; Meteor-M 2-2, Landsat 7; SatVu HotSat-1); backup or commissioning (GOES-16, Himawari-8, Metop-SG-A1, and the eight OroraTech satellites launched in March 2025).
+\textbf{Census only (GEO/HEO, 15 satellites):} GOES-18/19, Himawari-9, Meteosat-9/10/11/12, GEO-KOMPSAT-2A, FY-4A/B, INSAT-3DR/3DS, Elektro-L 3/4 and Arktika-M~2.
 
-\textbf{What the S3 satellites add.} Within the thermal band class they give the same information as VIIRS and MODIS (Section~\ref{sec:sensorcomp}); their value is mainly \emph{when} they observe (Figure~\ref{fig:overpass}). The S1 layer passes in four clusters (about 01--03, 09--10, 13--15 and 21--22 local solar time) and leaves two gaps, 15--21\,h and 03--09\,h. The FIRMS first detections of Larouco (+4.8\,h), Red Canyon (+4.2\,h) and Pi\'od\~ao (+6.5\,h) are explained by these gaps: all three ignited inside one. FY-3E, the only satellite in an early-morning orbit (about 05:40 and 17:40), passes inside both gaps. Metop-B/C add only night passes for fire, since their 3.7\,$\mu$m channel works at night only. HJ-2A/B (48\,m) and Kanopus-V-IK (200\,m) add resolution (smaller fires, front shape) but have narrow swaths or restricted data. The gain in time to first detection per event, with each sensor's swath and detection limit, is quantified next (Section~\ref{sec:next3}).
+\textbf{Excluded:}
+\begin{itemize}[leftmargin=1.2cm]
+    \item No MWIR fire band or no active-fire method: e.g.\ CBERS-4, ECOSTRESS, and the LWIR-only commercial imagers constellr SkyBee and Hydrosat VanZyl.
+    \item Not operational in the window: NOAA-15/18/19, whose data service ended on 16 June 2025~\cite{noaa2025poes}; Meteor-M 2-2; Landsat 7; SatVu HotSat-1.
+    \item Backup or commissioning: GOES-16, Himawari-8, Metop-SG-A1, and the eight OroraTech satellites launched in March 2025.
+\end{itemize}
+
+\subsection{What the S3 satellites add}
+
+Within the thermal band class, the S3 satellites give the same information as VIIRS and MODIS (Section~\ref{sec:sensorcomp}). Their value lies mainly in \emph{when} they observe (Figure~\ref{fig:overpass}).
+
+The S1 layer passes in four clusters, at about 01--03, 09--10, 13--15 and 21--22 local solar time. This leaves two daily gaps, 15--21\,h and 03--09\,h. The FIRMS first detections of Larouco (+4.8\,h), Red Canyon (+4.2\,h) and Pi\'od\~ao (+6.5\,h) are explained by these gaps: all three fires ignited inside one.
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{FY-3E} is the only satellite in an early-morning orbit (about 05:40 and 17:40), so it passes inside both gaps.
+    \item \textbf{Metop-B/C} add only night passes for fire, since their 3.7\,$\mu$m channel works at night only.
+    \item \textbf{HJ-2A/B} (96\,m) and \textbf{Kanopus-V-IK} (200\,m) add resolution, i.e.\ smaller fires and the front shape, but have narrow swaths or restricted data.
+\end{itemize}
+
+The gain in time to first detection per event and satellite, including each sensor's swath and detection limit, is the next step (Section~\ref{sec:next3}).
 
 \begin{figure}[h]
 \centering
@@ -122,7 +250,9 @@ FireSat protoflight & Muon Space / EFA & IR radiometer & demo only & none \\
 \label{fig:overpass}
 \end{figure}
 
-\textbf{Commercial layer (S4).} Catalogue names are unreliable for private satellites (OroraTech FOREST-2 is listed as ``LEMUR 2 EMBRIONOVIS''), so they are matched by NORAD identifier. Only FOREST-2 had an operational thermal fire product in the window; FOREST-3 was an experimental testbed and the FireSat protoflight a demonstration. Open: a Chinese commercial infrared wildfire satellite launched in May 2024 is in orbit but not yet identified among its launch objects.
+\subsection{Commercial layer}
+
+Catalogue names are unreliable for private satellites (OroraTech FOREST-2 is listed as ``LEMUR 2 EMBRIONOVIS''), so they were matched by NORAD identifier. Only FOREST-2 had an operational thermal fire product in the window. FOREST-3 was an experimental testbed, and the FireSat protoflight a demonstration.
 
 % =========================================================
 \section{Sensor Comparison}\label{sec:sensorcomp}
@@ -130,7 +260,7 @@ FireSat protoflight & Muon Space / EFA & IR radiometer & demo only & none \\
 
 \status{Literature review done; values not traced to a primary document are marked approximate.}
 
-Do different sensors give different information about a fire, or the same information at different resolution and timing? The comparison is made per spectral band class (Table~\ref{tab:sensorcomp}) and per orbit.
+The question from the meeting was whether different sensors give different information about a fire, or the same information at different resolution and timing. Table~\ref{tab:sensorcomp} compares the spectral band classes; the subsections below compare the orbits and draw the conclusions.
 
 \begin{longtable}{@{}p{0.13\textwidth}p{0.40\textwidth}p{0.20\textwidth}p{0.20\textwidth}@{}}
 \caption{Information about a fire by spectral band class.}\label{tab:sensorcomp}\\
@@ -170,33 +300,32 @@ Night only. Confused by city lights, gas flares and moonlight. &
 VIIRS DNB on Suomi NPP, NOAA-20, NOAA-21 ($\approx$750\,m). \\
 \end{longtable}
 
-\textbf{LEO versus GEO.} Polar LEO imagers sample each location a few times per day at fixed overpass times. VIIRS covers a $\approx$3000\,km swath, about every 12\,h per satellite, and its 375\,m pixel grows to about 800\,m at the swath edge~\cite{schroeder2014viirs}; MODIS pixels grow considerably more, raising the minimum detectable fire off-nadir~\cite{giglio2016modis}, and the scan angle also changes SLSTR FRP~\cite{xu2020slstr}. Geostationary imagers observe every 5 to 15\,min, but with 2 to 3\,km pixels at the sub-satellite point that grow with distance from it, so at European latitudes pixels are coarser still~\cite{wooster2015seviri,schmidt2020goesr}. GEO misses many small or low-FRP fires but resolves the daily fire cycle, gives a continuous FRP time series and is often the first sensor to see a growing fire; LEO gives small fires and fire geometry at sparse times. The orbit therefore changes mainly \emph{when} and \emph{how small} a fire is seen, and also the information: only GEO gives a continuous FRP series, only fine-pixel LEO gives perimeter-scale geometry.
+\subsection{LEO versus GEO}
 
-\textbf{Same information or different information?} Within one band class, sensors give largely the same information at different resolution and timing: MWIR/LWIR detection by VIIRS, MODIS, SLSTR, GEO imagers or OroraTech uses the same physics and differs in minimum detectable fire, saturation, edge-of-swath degradation and revisit~\cite{giglio2016modis,schroeder2014viirs,xu2020slstr,wooster2015seviri}. Across band classes the information differs: calibrated MWIR is needed for FRP and combustion rate~\cite{wooster2005frp}; MWIR with LWIR for fire temperature and area, i.e.\ flaming versus smouldering~\cite{dozier1981}; the DNB adds a night-time combustion-phase indicator~\cite{wang2020dnb}; SWIR and NIR give the flaming-front position at high resolution, burned area and burn severity~\cite{schroeder2016landsat,keybenson2006}. VNIR alone (Planet SkySat) cannot detect an active fire by day. Even within the thermal class, a low saturation limit preserves detection but corrupts FRP for intense fires~\cite{schroeder2014viirs}.
+\textbf{Polar LEO imagers} sample each location a few times per day, at fixed overpass times. VIIRS covers a swath of about 3000\,km, about every 12\,h per satellite, and its 375\,m pixel grows to about 800\,m at the swath edge~\cite{schroeder2014viirs}. MODIS pixels grow much more, which raises the minimum detectable fire off-nadir~\cite{giglio2016modis}; the scan angle also changes the SLSTR FRP~\cite{xu2020slstr}.
 
-\textbf{Implications for central-node tasking.} Sensor differences change \emph{what} a central node should task, not only \emph{whether} a target is visible. A plausible policy: confirm an alert and estimate FRP with a thermal MWIR/LWIR sensor (VIIRS, SLSTR, FOREST, FireSat), preferably near nadir and at night; map the front and perimeter with a high-resolution SWIR sensor by day or SWIR/MWIR at night; keep VNIR-only assets such as SkySat for daytime context and damage assessment. Since the thesis studies T0 (first detection), a single detectability filter remains a reasonable simplification; it is not sufficient for follow-up observations that characterise the fire.
+\textbf{Geostationary imagers} observe every 5 to 15\,min, but with pixels of 2 to 3\,km at the sub-satellite point, which grow with distance from it; at European latitudes they are coarser still~\cite{wooster2015seviri,schmidt2020goesr}.
 
-% =========================================================
-\section{Simulation Runs}\label{sec:runs}
-% =========================================================
+As a result, GEO misses many small or weak fires, but it resolves the daily fire cycle and is often the first sensor to see a growing fire. LEO sees small fires and the fire geometry, but only at sparse times. The orbit therefore mainly changes \emph{when} and \emph{how small} a fire is seen.
 
-\status{S0 done for both Spanish events (Month 2); S1 and S2 pending.}
+\subsection{Same information or different information?}
 
-Scenarios (cumulative; each adds one layer, renumbered after the census of Section~\ref{sec:census}): S0 public record; S1 EO layer (8 validated satellites) and ground segment; S2 S1 plus the coordination layer, central nodes swept (main result); S3 S2 plus the extended public layer (14), which tests whether the S2 optimum still holds; S4 S3 plus the commercial layer (the former S3). One fixed ground-station set is used in all scenarios; as ground links are filtered in post-processing, other sets can be tested afterwards without new runs.
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Within one band class, largely the same information.} MWIR/LWIR detection by VIIRS, MODIS, SLSTR, GEO imagers or OroraTech uses the same physics. The sensors differ in minimum detectable fire, saturation, edge-of-swath degradation and revisit~\cite{giglio2016modis,schroeder2014viirs,xu2020slstr,wooster2015seviri}.
+    \item \textbf{Across band classes, different information.} Calibrated MWIR gives FRP and the combustion rate~\cite{wooster2005frp}; MWIR with LWIR gives fire temperature and area, i.e.\ flaming versus smouldering~\cite{dozier1981}; the VIIRS DNB adds a night-time combustion-phase indicator~\cite{wang2020dnb}; SWIR and NIR give the flaming-front position at high resolution, the burned area and the burn severity~\cite{schroeder2016landsat,keybenson2006}.
+    \item VNIR alone (e.g.\ Planet SkySat) cannot detect an active fire by day.
+    \item Even within the thermal class, a low saturation limit keeps detection but corrupts the FRP of intense fires~\cite{schroeder2014viirs}.
+\end{itemize}
 
-\textbf{Ground segment of the baseline.} Month 2 lets every satellite use all five polar stations, but the real ground segments differ: Suomi NPP and Sentinel-3 downlink their data at Svalbard only, NOAA-20/21 at Svalbard and McMurdo, Aqua at Svalbard and Poker Flat, FY-3D at the CMA stations (Beijing, Guangzhou, Urumqi, Jiamusi) and Kiruna, and Terra through the TDRSS relays. For every S1 pass over the six events (Terra excluded, as a relay cannot be modelled with direct-view stations), the time to the first ground contact rises from a median of 8\,min (maximum 37\,min) with the Month 2 set to 26\,min (maximum 114\,min) with the real segments. US direct-readout stations, which feed the FIRMS ultra-real-time product over the United States, receive Red Canyon passes while the satellite still sees the fire (median 0\,min); no such fire path exists for Europe or Morocco. The baseline therefore uses the real ground segment of each satellite plus the US direct-readout stations; the Month 2 set was optimistic and would understate the gain of the central nodes. Processing latency (under 3\,h for FIRMS and SL\_2\_FRP) is not modelled.
+\subsection{Implications for central-node tasking}
 
-S1 is run first. In S2 the coordination layer (relays and central nodes) is a Walker constellation~\cite{walker1984} of $t = 600$ satellites in $p = 20$ planes (30 per plane), $i\!:\!600/20/f$. The EO layer and ground segment stay those of S1, so S2 against S1 isolates the value of the central nodes.
-
-\begin{longtable}{p{4.0cm}p{2.5cm}p{6.0cm}}
-\toprule
-\textbf{Parameter} & \textbf{Value} & \textbf{Source} \\
-\midrule
-\endhead
-Satellites $t$ / planes $p$ & 600 / 20 & Meeting of 27 October \\
-Pattern, inclination $i$, altitude, phasing $f$ & [TBD] & \\
-\bottomrule
-\end{longtable}
+Sensor differences change \emph{what} a central node should task, not only \emph{whether} a fire is visible. A plausible policy would be:
+\begin{itemize}[leftmargin=1.2cm]
+    \item confirm an alert and estimate FRP with a thermal MWIR/LWIR sensor (VIIRS, SLSTR, FOREST, FireSat), preferably near nadir and at night;
+    \item map the front and the perimeter with a high-resolution SWIR sensor by day, or SWIR/MWIR at night;
+    \item keep VNIR-only satellites such as SkySat for daytime context and damage assessment.
+\end{itemize}
+Since this thesis studies T0, the first detection, a single detectability filter remains a reasonable simplification. It would not be sufficient for follow-up observations that characterise the fire.
 
 % =========================================================
 \section{Additional Wildfire Events}\label{sec:newevents}
@@ -204,7 +333,14 @@ Pattern, inclination $i$, altitude, phasing $f$ & [TBD] & \\
 
 \status{Selection done: Pi\'od\~ao and O\'imbra (Europe), Red Canyon (North America) and Derdara (Africa) added; no eligible event in Asia or in the southern hemisphere.}
 
-\textbf{Selection rule.} Wildfires igniting inside the fixed data window, 8 to 16 August 2025, ranked by \emph{official final burned area}, as for the two Spanish events of Month 2. The T0 reference follows a fixed hierarchy: the official ignition time where one exists, otherwise the first geostationary detection. Europe keeps the four largest fires; every other continent keeps its largest.
+\subsection{Selection rule}
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item Wildfires igniting inside the fixed data window, 8 to 16 August 2025.
+    \item Ranked by \emph{official final burned area}, as for the two Spanish events of Month 2.
+    \item Europe keeps its four largest fires; every other continent keeps its largest.
+    \item T0 reference: the official ignition hour where one exists, otherwise the first geostationary detection.
+\end{itemize}
 
 \subsection{Screen of the global FIRMS data}\label{subsec:screen}
 
@@ -347,18 +483,23 @@ Asia & none eligible & & & \\
 \label{fig:es_area}
 \end{figure}
 
-\textbf{Africa.} After the hemisphere rule, Derdara is the only African complex passing all criteria; the other northern African complexes are Saharan point sources (oil and gas fields in Algeria and Libya) or do not spread. Its date is official (ANEF), but the hour is only reported by the press and the reports conflict (14:00 local~\cite{nap2025derdara} or the night of 12 to 13 August~\cite{medias24_2025incendies}), and the press hour is only 10\,min before the first FIRMS detection. Its T0 reference is therefore the first SEVIRI detection, which is independent of FIRMS.
+\subsection{Notes on the selection}
 
-\textbf{Excluded regions.} The southern hemisphere (South America, southern Africa, Oceania): August is austral winter, the fires in the window are dry-season clearing, agricultural or prescribed burns, and no officially recorded wildfire ignited in the window. Asia: East Asia has almost no fire in the window, and in Siberia and the Russian Far East no complex passes the criteria: the volcano is removed by criterion 1 and the remaining complexes are point sources, most likely gas flares (criterion 4). The large Siberian fires of the 2025 season started before the window.
+\textbf{Africa.} After the hemisphere rule, Derdara is the only African complex passing all criteria; the other northern African complexes are Saharan point sources (oil and gas fields in Algeria and Libya) or do not spread. Its date is official (ANEF), but the hour is only reported by the press, and the reports conflict: 14:00 local~\cite{nap2025derdara} or the night of 12 to 13 August~\cite{medias24_2025incendies}. The press hour is also only 10\,min before the first FIRMS detection. Its T0 reference is therefore the first SEVIRI detection, which is independent of FIRMS.
 
-\textbf{Pipeline.} The public-record pipeline (FIRMS, LSA SAF, EFFIS, comparison) now reads every region and event from one registry: adding an event is a registry entry, not a code change. Larouco and Molezuelas reproduce all previous outputs. Events are run one at a time, Spain first.
+\textbf{Excluded regions.}
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Southern hemisphere} (South America, southern Africa, Oceania): August is austral winter. The fires in the window are dry-season clearing, agricultural or prescribed burns, and no officially recorded wildfire ignited in the window.
+    \item \textbf{Asia:} East Asia has almost no fire in the window. In Siberia and the Russian Far East no complex passes the criteria: the volcano is removed by criterion 1 and the remaining complexes are point sources, most likely gas flares (criterion 4). The large Siberian fires of the 2025 season started before the window.
+\end{itemize}
 
-\textbf{Geostationary source.} Each event uses the geostationary sensor covering it: SEVIRI (Europe, Africa), GOES ABI (North America), Himawari AHI (Siberia, Russian Far East). They produce no network links, so they stay outside the NeuralAgent simulator and only give the S0 first detection (path B).
+\textbf{Pipeline.} The public-record pipeline (FIRMS, LSA SAF, EFFIS, comparison) now reads every region and event from one registry, so adding an event is a registry entry, not a code change. Larouco and Molezuelas reproduce all previous outputs. Events are run one at a time, Spain first.
+
+\textbf{Geostationary source.} Each event uses the geostationary sensor that covers it: SEVIRI for Europe and Africa, GOES ABI for North America, Himawari AHI for Siberia and the Russian Far East. They produce no network links, so they stay outside the NeuralAgent simulator and only give the S0 first detection (path B).
 
 \begin{itemize}[leftmargin=1.2cm]
-    \item \actionitem{Extract the first SEVIRI detection of Derdara (its T0 reference) from the LSA SAF data already downloaded.}
-    \item \actionitem{Add GOES and Himawari readers; make the EFFIS step optional outside Europe.}
-    \item \actionitem{Choose a global ground-station set once the events are fixed.}
+    \item \actionitem{Extract the first SEVIRI detection of Derdara and Pi\'od\~ao (their T0 reference) from the LSA SAF data already downloaded.}
+    \item \actionitem{Add a GOES reader for Red Canyon; make the EFFIS step optional outside Europe.}
 \end{itemize}
 
 % =========================================================
@@ -384,6 +525,7 @@ S2 asks how many central nodes there are and which coordination satellites they 
 \begin{itemize}[leftmargin=1.2cm]
     \item \openquestion{Walker pattern, inclination, altitude and phasing of the coordination layer.}
     \item \openquestion{Asia has no eligible wildfire in the window: keep three continents, or relax a criterion (e.g.\ onset before 9 August) for Asia only?}
+    \item \openquestion{FY-3D fire data for August 2025 need an NSMC account (requested). If access is refused, FY-3D moves from S1 to S3.}
 \end{itemize}
 
 % =========================================================
@@ -391,7 +533,7 @@ S2 asks how many central nodes there are and which coordination satellites they 
 % =========================================================
 
 \begin{itemize}[leftmargin=1.2cm]
-    \item \actionitem{Finish the commercial census; quantify the time-to-first-detection gain of each new EO-layer satellite per event (swath and detection limit).}
+    \item \actionitem{Quantify the time-to-first-detection gain of each S3 and S4 satellite per event (swath and detection limit).}
     \item \actionitem{Freeze the layers and choose the ground stations: use the real ground segment of each satellite plus the US direct-readout stations; add the FY-3D fire product to S0 (needs an NSMC data account), since FY-3D is now in S1.}
     \item \actionitem{Add the new events to the registry and run them through the public-record pipeline one at a time: O\'imbra, Pi\'od\~ao, Red Canyon, Derdara.}
     \item \actionitem{Run S1, then S2 with the 600/20 Walker, on the frozen design.}

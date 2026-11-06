@@ -1,0 +1,20 @@
+<section id="scenarios" data-transition="fade" style="display:flex; flex-direction:column; gap:36px; padding:128px; background:#f4f1ea">
+  <div style="display:flex; flex-direction:column; gap:12px">
+    <h2 style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:56px; font-weight:600; line-height:1.1; color:#1c2430">Five scenarios, five questions</h2>
+    <p style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; color:#5b6573">Cumulative: each scenario adds one layer, so each comparison isolates one change.</p>
+  </div>
+  <table style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; color:#1c2430; background:#fbfaf6">
+    <tr style="background:#16263d"><th style="width:22%; color:#f4f1ea">Scenario</th><th style="width:34%; color:#f4f1ea">Setup</th><th style="width:44%; color:#f4f1ea">Question it answers</th></tr>
+    <tr><td>S0 · Public record</td><td>FIRMS, LSA SAF, EFFIS of the real fires</td><td>How fast was the fire actually detected?</td></tr>
+    <tr><td>S1 · Ground decides</td><td>EO layer (8) + real ground segment</td><td>Does the model reproduce reality (S1 vs S0)?</td></tr>
+    <tr style="background:#e6efee"><td>S2 · Orbit decides</td><td>S1 + Walker 600/20, central nodes swept</td><td>How many central nodes, and where? (main result)</td></tr>
+    <tr><td>S3 · Public extension</td><td>S2 + extended public layer (14)</td><td>What do all other public sensors add; does the optimum hold?</td></tr>
+    <tr style="background:#f1eaf8"><td>S4 · Commercial</td><td>S3 + commercial layer (3)</td><td>What do private satellites add on top?</td></tr>
+  </table>
+  <div style="display:flex; flex-direction:row; gap:16px">
+    <p style="flex:1; padding:20px 24px; font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; color:#f4f1ea; background:#16263d; border-radius:12px"><b>S1 vs S0</b> Validation</p>
+    <p style="flex:1; padding:20px 24px; font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; color:#f4f1ea; background:#16263d; border-radius:12px"><b>S2 vs S1</b> Value of central nodes</p>
+    <p style="flex:1; padding:20px 24px; font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; color:#f4f1ea; background:#16263d; border-radius:12px"><b>S3, S4 vs S2</b> Does the answer survive?</p>
+  </div>
+  <aside>S0 is not simulated: it is the timing of the public records. S1 uses only satellites with a global public fire product, so S1 against S0 is a clean validation. S2 is the main sweep. The extended public layer (S3) is simulated without validation, with a conservative detectability filter written before running, so any gain it shows is a lower bound; S3 then checks only the S2 optimum and nearby setups, not a full new sweep. S4 is the former S3, the commercial layer. One fixed ground-station set is used in all scenarios.</aside>
+</section>
