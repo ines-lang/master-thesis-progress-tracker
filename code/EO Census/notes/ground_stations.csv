@@ -1,0 +1,27 @@
+station,lat,lon,operator,satellites,station_set,source,level
+Svalbard (SvalSat),78.23,15.41,KSAT,all,month2,Month 2 Table (Ground Segment),Month 2
+Fairbanks (FCDAS),64.98,-147.52,NOAA,all,month2,Month 2 Table (Ground Segment),Month 2
+McMurdo,-77.85,166.67,NASA / NOAA,all,month2,Month 2 Table (Ground Segment),Month 2
+Troll (TrollSat),-72.02,2.53,KSAT,all,month2,Month 2 Table (Ground Segment),Month 2
+Kiruna (Esrange),67.89,21.11,SSC / ESA,all,month2,Month 2 Table (Ground Segment),Month 2
+Svalbard (SvalSat),78.23,15.41,KSAT,Suomi NPP;NOAA-20;NOAA-21;Aqua;Sentinel-3A;Sentinel-3B,real,NOAA OSPO notices 2024; ESA Sentinel-3 data flow; NASA Aqua IDD,official
+McMurdo,-77.85,166.67,NASA / NOAA,NOAA-20;NOAA-21,real,NOAA OSPO notices 2024,official
+Troll (TrollSat),-72.02,2.53,KSAT,NOAA-20;NOAA-21;FY-3D,real,NOAA OSPO notice Oct 2024 (McMurdo backup); WMO DBNet slide (FY-3D),official / secondary
+Poker Flat,65.12,-147.47,NASA EOS Polar Ground Network,Aqua,real,NASA Aqua IDD (2002),official
+Kiruna (Esrange),67.89,21.11,SSC for CMA,FY-3D,real,NSMC LEO system; SSC,official
+Beijing (NSMC),40.0,116.0,CMA,FY-3D,real,NSMC 2021 slides (coordinates approximate),secondary
+Guangzhou,23.0,113.0,CMA,FY-3D,real,NSMC 2021 slides (coordinates approximate),secondary
+Urumqi,43.9,87.6,CMA,FY-3D,real,NSMC 2021 slides (coordinates approximate),secondary
+Jiamusi,46.8,130.4,CMA,FY-3D,real,NSMC 2021 slides (coordinates approximate),secondary
+Svalbard (SvalSat),78.23,15.41,KSAT,Suomi NPP;NOAA-20;NOAA-21;Aqua;Sentinel-3A;Sentinel-3B,real + US direct readout,as real,official
+McMurdo,-77.85,166.67,NASA / NOAA,NOAA-20;NOAA-21,real + US direct readout,as real,official
+Troll (TrollSat),-72.02,2.53,KSAT,NOAA-20;NOAA-21;FY-3D,real + US direct readout,as real,official / secondary
+Poker Flat,65.12,-147.47,NASA EOS Polar Ground Network,Aqua,real + US direct readout,as real,official
+Kiruna (Esrange),67.89,21.11,SSC for CMA,FY-3D,real + US direct readout,as real,official
+Beijing (NSMC),40.0,116.0,CMA,FY-3D,real + US direct readout,as real,secondary
+Guangzhou,23.0,113.0,CMA,FY-3D,real + US direct readout,as real,secondary
+Urumqi,43.9,87.6,CMA,FY-3D,real + US direct readout,as real,secondary
+Jiamusi,46.8,130.4,CMA,FY-3D,real + US direct readout,as real,secondary
+Madison WI (SSEC),43.07,-89.40,UW-Madison SSEC,Suomi NPP;NOAA-20;NOAA-21;Terra;Aqua,real + US direct readout,NASA Earthdata FIRMS URT (city coordinates),official / city level
+Hampton VA,37.03,-76.35,NASA,Suomi NPP;NOAA-20;NOAA-21;Terra;Aqua,real + US direct readout,NASA Earthdata FIRMS URT (city coordinates),official / city level
+Mayaguez PR,18.20,-67.14,University of Puerto Rico,Suomi NPP;NOAA-20;NOAA-21;Terra;Aqua,real + US direct readout,NASA Earthdata FIRMS URT (city coordinates),official / city level

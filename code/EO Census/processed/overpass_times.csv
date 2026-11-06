@@ -1,0 +1,51 @@
+mission,group,instrument,direction,local_time_h,spread_h,crossings
+Aqua,S1 EO layer,MODIS,ascending,14.83,0.01,15
+Aqua,S1 EO layer,MODIS,descending,2.83,0.01,14
+FY-3D,S1 EO layer,MERSI-II,ascending,15.2,0.01,14
+FY-3D,S1 EO layer,MERSI-II,descending,3.2,0.01,14
+NOAA-20,S1 EO layer,VIIRS,ascending,13.41,0.01,14
+NOAA-20,S1 EO layer,VIIRS,descending,1.41,0.01,14
+NOAA-21,S1 EO layer,VIIRS,ascending,13.42,0.01,14
+NOAA-21,S1 EO layer,VIIRS,descending,1.42,0.01,14
+Sentinel-3A,S1 EO layer,SLSTR,ascending,22.01,0.01,14
+Sentinel-3A,S1 EO layer,SLSTR,descending,10.01,0.01,14
+Sentinel-3B,S1 EO layer,SLSTR,ascending,22.02,0.01,14
+Sentinel-3B,S1 EO layer,SLSTR,descending,10.02,0.01,15
+Suomi NPP,S1 EO layer,VIIRS,ascending,13.46,0.01,14
+Suomi NPP,S1 EO layer,VIIRS,descending,1.46,0.01,14
+Terra,S1 EO layer,MODIS,ascending,21.29,0.01,15
+Terra,S1 EO layer,MODIS,descending,9.29,0.01,14
+FY-3E,S3 extended public layer,MERSI-LL,ascending,17.69,0.01,14
+FY-3E,S3 extended public layer,MERSI-LL,descending,5.69,0.01,15
+FY-3F,S3 extended public layer,MERSI-III,ascending,22.24,0.01,14
+FY-3F,S3 extended public layer,MERSI-III,descending,10.24,0.01,14
+HJ-2A,S3 extended public layer,IRS (IRMSS-2 HJ),ascending,22.9,0.01,15
+HJ-2A,S3 extended public layer,IRS (IRMSS-2 HJ),descending,10.91,0.01,14
+HJ-2B,S3 extended public layer,IRS (IRMSS-2 HJ),ascending,22.96,0.01,14
+HJ-2B,S3 extended public layer,IRS (IRMSS-2 HJ),descending,10.96,0.01,15
+Kanopus-V-IK,S3 extended public layer,MSU-IK-SR,ascending,11.32,0.01,15
+Kanopus-V-IK,S3 extended public layer,MSU-IK-SR,descending,23.32,0.01,16
+Landsat 8,S3 extended public layer,OLI (+TIRS),ascending,22.21,0.01,14
+Landsat 8,S3 extended public layer,OLI (+TIRS),descending,10.21,0.01,15
+Landsat 9,S3 extended public layer,OLI-2 (+TIRS-2),ascending,22.21,0.01,15
+Landsat 9,S3 extended public layer,OLI-2 (+TIRS-2),descending,10.21,0.01,14
+Meteor-M 2-3,S3 extended public layer,MSU-MR,ascending,21.26,0.01,14
+Meteor-M 2-3,S3 extended public layer,MSU-MR,descending,9.26,0.01,14
+Meteor-M 2-4,S3 extended public layer,MSU-MR,ascending,14.82,0.01,15
+Meteor-M 2-4,S3 extended public layer,MSU-MR,descending,2.82,0.01,14
+Metop-B,S3 extended public layer,AVHRR/3,ascending,21.05,0.01,14
+Metop-B,S3 extended public layer,AVHRR/3,descending,9.05,0.01,14
+Metop-C,S3 extended public layer,AVHRR/3,ascending,21.53,0.01,14
+Metop-C,S3 extended public layer,AVHRR/3,descending,9.53,0.01,14
+Sentinel-2A,S3 extended public layer,MSI,ascending,22.51,0.01,14
+Sentinel-2A,S3 extended public layer,MSI,descending,10.51,0.01,14
+Sentinel-2B,S3 extended public layer,MSI,ascending,22.51,0.01,14
+Sentinel-2B,S3 extended public layer,MSI,descending,10.51,0.01,14
+Sentinel-2C,S3 extended public layer,MSI,ascending,22.51,0.01,14
+Sentinel-2C,S3 extended public layer,MSI,descending,10.51,0.01,14
+FireSat protoflight,S4 commercial layer,6-band IR radiometer,ascending,10.39,0.01,15
+FireSat protoflight,S4 commercial layer,6-band IR radiometer,descending,22.39,0.01,15
+OroraTech FOREST-2,S4 commercial layer,SAFIRE,ascending,2.23,0.01,15
+OroraTech FOREST-2,S4 commercial layer,SAFIRE,descending,14.23,0.01,15
+OroraTech FOREST-3,S4 commercial layer,thermal imager,ascending,22.83,0.01,16
+OroraTech FOREST-3,S4 commercial layer,thermal imager,descending,10.83,0.01,15

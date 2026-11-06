@@ -69,9 +69,9 @@
 \section{Progress Since Month 2}
 % =========================================================
 
-Month 2 (architecture, cumulative scenarios S0 to S3) still holds and is not repeated. Month 3 addresses the action items of the meeting of 27 October:
+The Month 2 architecture still holds and is not repeated; the cumulative scenarios are extended to S0 to S4 (Section~\ref{sec:runs}). Month 3 addresses the action items of the meeting of 27 October:
 \begin{itemize}[leftmargin=1.2cm]
-    \item \textbf{Satellite census} (Section~\ref{sec:census}): not started.
+    \item \textbf{Satellite census} (Section~\ref{sec:census}): public fire-capable satellites in orbit in the window identified; proposed EO layer of 22 satellites; commercial census in progress.
     \item \textbf{Sensor comparison} (Section~\ref{sec:sensorcomp}): per band class and orbit; answers whether sensors give different information.
     \item \textbf{Simulation runs} (Section~\ref{sec:runs}): S0 and S1 first, then S2 with a 600-satellite, 20-plane Walker coordination layer.
     \item \textbf{Additional events} (Section~\ref{sec:newevents}): global FIRMS screen, official sources, selection by official burned area; Pi\'od\~ao (Portugal), O\'imbra (Spain), Red Canyon (USA) and Derdara (Morocco) added; pipeline made region-agnostic.
@@ -82,39 +82,47 @@ Month 2 (architecture, cumulative scenarios S0 to S3) still holds and is not rep
 \section{Wildfire-Detection Satellite Census}\label{sec:census}
 % =========================================================
 
-\status{Not started. Every row needs a mission-document citation.}
+\status{Public and commercial satellites identified and checked. Goal: freeze all layers and the ground stations before running the scenarios.}
 
-A satellite is included if it carries a band used for active-fire products (mid-wave or thermal infrared, or SWIR) and was operational in August 2025 (time-consistency rule, Month 2).
+\textbf{Method.} All payloads and not yet identified objects with an orbit record between 8 and 16 August 2025 were downloaded from Space-Track~\cite{spacetrack2025} (15,735). Being in orbit does not mean working (satellites from the 1970s are still tracked), so each candidate mission is checked by hand for its fire band, its operational status in the window (WMO OSCAR/Space~\cite{oscar2025} and agency notices) and its fire products. Rules: a satellite is \emph{fire-capable} if it has a MWIR fire band or a high-resolution SWIR band with a documented active-fire method (LWIR-only imagers are not); it must be operational in the window. Public (government or intergovernmental) satellites with a global public fire product form the EO layer (S1), since they can be validated against S0; the other public ones form the extended public layer (S3); private ones the commercial layer (S4). GEO and HEO imagers are census only (S0 alert and T0 reference).
 
-\begin{longtable}{p{2.8cm}p{1.5cm}p{1.6cm}p{2.6cm}p{2.4cm}p{2.2cm}}
-\caption{Public satellites with fire products.}\label{tab:census_public}\\
+\begin{longtable}{p{3.4cm}p{3.0cm}p{2.1cm}p{2.4cm}p{3.0cm}}
+\caption{Fire-capable LEO satellites operational on 8 to 16 August 2025, by layer.}\label{tab:eolayer}\\
 \toprule
-\textbf{Satellite(s)} & \textbf{Orbit} & \textbf{Sensor} & \textbf{Alt., incl., LTAN / lon.} & \textbf{Fire product} & \textbf{EO layer?} \\
+\textbf{Satellites} & \textbf{Owner} & \textbf{Sensor} & \textbf{Data access} & \textbf{Validation vs.\ S0} \\
 \midrule
 \endhead
-Suomi NPP, NOAA-20, NOAA-21 & LEO SSO & VIIRS & [TBD] & FIRMS VIIRS~\cite{schroeder2014viirs} & Yes \\
-Terra, Aqua & LEO SSO & MODIS & [TBD] & FIRMS MODIS~\cite{giglio2016modis} & Yes \\
-Sentinel-3A/B & LEO SSO & SLSTR & [TBD] & SL\_2\_FRP & Yes \\
-Landsat-8/9 & LEO SSO & OLI/TIRS & [TBD] & FIRMS Landsat & No \\
-Sentinel-2A/B/C & LEO SSO & MSI & [TBD] & [TBD] & No \\
-Meteosat (MSG) & GEO & SEVIRI & [TBD] & LSA SAF FRP-PIXEL & Alert only \\
-\multicolumn{6}{l}{\small To check: GOES-East/West (ABI), Himawari (AHI), MTG-I (FCI), GEO-KOMPSAT-2A (AMI), FengYun-3/-4, Metop (AVHRR), ECOSTRESS.} \\
+\multicolumn{5}{l}{\textit{S1 EO layer (8): validated against S0}} \\
+Suomi NPP, NOAA-20, NOAA-21 & NASA / NOAA & VIIRS & open & FIRMS~\cite{schroeder2014viirs} \\
+Terra, Aqua & NASA & MODIS & open & FIRMS~\cite{giglio2016modis} \\
+Sentinel-3A/B & ESA / EUMETSAT & SLSTR & open & SL\_2\_FRP~\cite{xu2020slstr} \\
+FY-3D & CMA (China) & MERSI-II & registration & FY-3D fire product~\cite{chen2022fy3d} \\
+\multicolumn{5}{l}{\textit{S3 extended public layer (14): simulated, not validated}} \\
+FY-3E, FY-3F & CMA (China) & MERSI-LL, MERSI-III & registration & none \\
+Metop-B/C & EUMETSAT & AVHRR/3 & open & none \\
+Meteor-M 2-3, 2-4 & Roshydromet (Russia) & MSU-MR & direct broadcast & none \\
+Kanopus-V-IK & Roscosmos (Russia) & MSU-IK-SR & restricted & none \\
+HJ-2A/B & MEE / MEM (China) & IRS & restricted & none \\
+Landsat 8/9 & USGS / NASA & OLI & open & FIRMS, US and Canada only~\cite{schroeder2016landsat} \\
+Sentinel-2A/B/C & ESA / EC & MSI & open & none \\
+\multicolumn{5}{l}{\textit{S4 commercial layer (3)}} \\
+FOREST-2, FOREST-3 & OroraTech & thermal imagers & commercial & none \\
+FireSat protoflight & Muon Space / EFA & IR radiometer & demo only & none \\
 \bottomrule
 \end{longtable}
 
-\begin{longtable}{p{2.8cm}p{2.0cm}p{2.2cm}p{2.6cm}p{2.0cm}p{1.8cm}}
-\caption{Private satellites for wildfire detection (public values, reported as ranges).}\label{tab:census_private}\\
-\toprule
-\textbf{Satellite(s)} & \textbf{Operator} & \textbf{Sensor} & \textbf{Alt., incl., LTAN} & \textbf{NORAD ID} & \textbf{Aug 2025?} \\
-\midrule
-\endhead
-FOREST series & OroraTech & TIR [TBD] & [TBD] & [TBD] & [verify] \\
-FireSat protoflight & Muon Space & IR [TBD] & [TBD] & [TBD] & [verify] \\
-\multicolumn{6}{l}{\small To check: Hydrosat, constellr, SatVu, other thermal-infrared start-ups.} \\
-\bottomrule
-\end{longtable}
+\textbf{Census only (GEO/HEO, 15):} GOES-18/19, Himawari-9, Meteosat-9/10/11/12, GEO-KOMPSAT-2A, FY-4A/B, INSAT-3DR/3DS, Elektro-L 3/4, Arktika-M~2. \textbf{Excluded:} no MWIR fire band or no active-fire method (e.g.\ CBERS-4, ECOSTRESS, and the LWIR-only commercial imagers constellr SkyBee and Hydrosat VanZyl); not operational in the window (NOAA-15/18/19, whose data service ended on 16 June 2025~\cite{noaa2025poes}; Meteor-M 2-2, Landsat 7; SatVu HotSat-1); backup or commissioning (GOES-16, Himawari-8, Metop-SG-A1, and the eight OroraTech satellites launched in March 2025).
 
-\actionitem{Complete both tables from mission documents and historical TLEs (Space-Track or CelesTrak) at each event epoch.}
+\textbf{What the S3 satellites add.} Within the thermal band class they give the same information as VIIRS and MODIS (Section~\ref{sec:sensorcomp}); their value is mainly \emph{when} they observe (Figure~\ref{fig:overpass}). The S1 layer passes in four clusters (about 01--03, 09--10, 13--15 and 21--22 local solar time) and leaves two gaps, 15--21\,h and 03--09\,h. The FIRMS first detections of Larouco (+4.8\,h), Red Canyon (+4.2\,h) and Pi\'od\~ao (+6.5\,h) are explained by these gaps: all three ignited inside one. FY-3E, the only satellite in an early-morning orbit (about 05:40 and 17:40), passes inside both gaps. Metop-B/C add only night passes for fire, since their 3.7\,$\mu$m channel works at night only. HJ-2A/B (48\,m) and Kanopus-V-IK (200\,m) add resolution (smaller fires, front shape) but have narrow swaths or restricted data. The gain in time to first detection per event, with each sensor's swath and detection limit, is quantified next (Section~\ref{sec:next3}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.78\linewidth]{figures/eo_census_01_overpass_times.png}
+\caption{Local solar time of the equator crossings of the fire-capable LEO satellites by layer, from the 13 August 2025 orbits. Sun-synchronous satellites pass every location at about these local times.}
+\label{fig:overpass}
+\end{figure}
+
+\textbf{Commercial layer (S4).} Catalogue names are unreliable for private satellites (OroraTech FOREST-2 is listed as ``LEMUR 2 EMBRIONOVIS''), so they are matched by NORAD identifier. Only FOREST-2 had an operational thermal fire product in the window; FOREST-3 was an experimental testbed and the FireSat protoflight a demonstration. Open: a Chinese commercial infrared wildfire satellite launched in May 2024 is in orbit but not yet identified among its launch objects.
 
 % =========================================================
 \section{Sensor Comparison}\label{sec:sensorcomp}
@@ -173,6 +181,10 @@ VIIRS DNB on Suomi NPP, NOAA-20, NOAA-21 ($\approx$750\,m). \\
 % =========================================================
 
 \status{S0 done for both Spanish events (Month 2); S1 and S2 pending.}
+
+Scenarios (cumulative; each adds one layer, renumbered after the census of Section~\ref{sec:census}): S0 public record; S1 EO layer (8 validated satellites) and ground segment; S2 S1 plus the coordination layer, central nodes swept (main result); S3 S2 plus the extended public layer (14), which tests whether the S2 optimum still holds; S4 S3 plus the commercial layer (the former S3). One fixed ground-station set is used in all scenarios; as ground links are filtered in post-processing, other sets can be tested afterwards without new runs.
+
+\textbf{Ground segment of the baseline.} Month 2 lets every satellite use all five polar stations, but the real ground segments differ: Suomi NPP and Sentinel-3 downlink their data at Svalbard only, NOAA-20/21 at Svalbard and McMurdo, Aqua at Svalbard and Poker Flat, FY-3D at the CMA stations (Beijing, Guangzhou, Urumqi, Jiamusi) and Kiruna, and Terra through the TDRSS relays. For every S1 pass over the six events (Terra excluded, as a relay cannot be modelled with direct-view stations), the time to the first ground contact rises from a median of 8\,min (maximum 37\,min) with the Month 2 set to 26\,min (maximum 114\,min) with the real segments. US direct-readout stations, which feed the FIRMS ultra-real-time product over the United States, receive Red Canyon passes while the satellite still sees the fire (median 0\,min); no such fire path exists for Europe or Morocco. The baseline therefore uses the real ground segment of each satellite plus the US direct-readout stations; the Month 2 set was optimistic and would understate the gain of the central nodes. Processing latency (under 3\,h for FIRMS and SL\_2\_FRP) is not modelled.
 
 S1 is run first. In S2 the coordination layer (relays and central nodes) is a Walker constellation~\cite{walker1984} of $t = 600$ satellites in $p = 20$ planes (30 per plane), $i\!:\!600/20/f$. The EO layer and ground segment stay those of S1, so S2 against S1 isolates the value of the central nodes.
 
@@ -379,9 +391,10 @@ S2 asks how many central nodes there are and which coordination satellites they 
 % =========================================================
 
 \begin{itemize}[leftmargin=1.2cm]
-    \item \actionitem{Run S1, then S2 with the 600/20 Walker, for the Spanish events.}
-    \item \actionitem{Add the new events to the registry and run them through the pipeline one at a time: O\'imbra, Pi\'od\~ao, Red Canyon, Derdara.}
-    \item \actionitem{Complete the satellite census.}
+    \item \actionitem{Finish the commercial census; quantify the time-to-first-detection gain of each new EO-layer satellite per event (swath and detection limit).}
+    \item \actionitem{Freeze the layers and choose the ground stations: use the real ground segment of each satellite plus the US direct-readout stations; add the FY-3D fire product to S0 (needs an NSMC data account), since FY-3D is now in S1.}
+    \item \actionitem{Add the new events to the registry and run them through the public-record pipeline one at a time: O\'imbra, Pi\'od\~ao, Red Canyon, Derdara.}
+    \item \actionitem{Run S1, then S2 with the 600/20 Walker, on the frozen design.}
 \end{itemize}
 
 \printbibliography

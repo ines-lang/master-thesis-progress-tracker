@@ -26,3 +26,5 @@ code/Input Data FIRMS/notes/firms_section.tex
 code/Input Data FIRMS/notes/firms_refs.bib
 # global FIRMS screen (426 MB, rebuilt by FIRMS 02_clean.py --region world)
 code/**/processed/world/
+# FY-3D fire product downloads (NSMC account; re-downloadable)
+code/Input Data FY3D/raw/

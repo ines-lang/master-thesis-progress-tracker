@@ -1,0 +1,64 @@
+norad_id,mission,sector,agency,instrument,fire_bands,band_class,pixel_fire_band,public_fire_product,product_coverage,status_aug2025,level,source
+37849,Suomi NPP,public,NASA/NOAA,VIIRS,I4 3.74 / M13 4.05 / I5 11.45 um,thermal,375 m,FIRMS VIIRS 375 m (NASA),global,operational,official,Schroeder et al. 2014; NASA FIRMS
+43013,NOAA-20,public,NOAA,VIIRS,I4 3.74 / M13 4.05 / I5 11.45 um,thermal,375 m,FIRMS VIIRS 375 m (NASA),global,operational,official,NASA FIRMS
+54234,NOAA-21,public,NOAA,VIIRS,I4 3.74 / M13 4.05 / I5 11.45 um,thermal,375 m,FIRMS VIIRS 375 m NRT (NASA),global,operational,official,NASA FIRMS
+25994,Terra,public,NASA,MODIS,21/22 3.96 / 31 11.0 um,thermal,1 km,FIRMS MODIS C6.1 (NASA),global,operational (drifting orbit),official,Giglio et al. 2016; NASA FIRMS
+27424,Aqua,public,NASA,MODIS,21/22 3.96 / 31 11.0 um,thermal,1 km,FIRMS MODIS C6.1 (NASA),global,operational (drifting orbit),official,Giglio et al. 2016; NASA FIRMS
+41335,Sentinel-3A,public,ESA/EUMETSAT,SLSTR,S7/F1 3.74 / S8/F2 10.85 um,thermal,1 km,SL_2_FRP (Copernicus),global,operational,official,Xu et al. 2020; Copernicus
+43437,Sentinel-3B,public,ESA/EUMETSAT,SLSTR,S7/F1 3.74 / S8/F2 10.85 um,thermal,1 km,SL_2_FRP (Copernicus),global,operational,official,Xu et al. 2020; Copernicus
+39084,Landsat 8,public,USGS/NASA,OLI (+TIRS),SWIR 1.6 / 2.2 um,high-res SWIR,30 m,FIRMS Landsat 30 m (NASA),US and Canada only,operational,official,Schroeder et al. 2016; NASA FIRMS
+49260,Landsat 9,public,USGS/NASA,OLI-2 (+TIRS-2),SWIR 1.6 / 2.2 um,high-res SWIR,30 m,FIRMS Landsat 30 m (NASA),US and Canada only,operational,official,Schroeder et al. 2016; NASA FIRMS
+25682,Landsat 7,public,USGS/NASA,ETM+,SWIR 1.6 / 2.2 um,high-res SWIR,30 m,none,,decommissioned before the window,to verify,USGS mission status
+40697,Sentinel-2A,public,ESA,MSI,SWIR 1.61 / 2.19 um,high-res SWIR,20 m,none (research methods only),,operational (extended campaign since 13 Mar 2025),official (ESA/Copernicus),Copernicus Sentinel-2A extended campaign notices
+42063,Sentinel-2B,public,ESA,MSI,SWIR 1.61 / 2.19 um,high-res SWIR,20 m,none (research methods only),,operational,official,ESA
+60989,Sentinel-2C,public,ESA,MSI,SWIR 1.61 / 2.19 um,high-res SWIR,20 m,none (research methods only),,operational,official,ESA
+25338,NOAA-15,public,NOAA,AVHRR/3,3B 3.74 / 4 10.8 um,thermal,1.1 km,none operational and public,,not operational (POES data service ended 16 Jun 2025; decommissioned 19 Aug 2025),official (NOAA OSPO),NOAA OSPO POES status and messages 2025
+28654,NOAA-18,public,NOAA,AVHRR/3,3B 3.74 / 4 10.8 um,thermal,1.1 km,none operational and public,,decommissioned 6 Jun 2025,official (NOAA OSPO),NOAA OSPO POES status
+33591,NOAA-19,public,NOAA,AVHRR/3,3B 3.74 / 4 10.8 um,thermal,1.1 km,none operational and public,,not operational (POES data service ended 16 Jun 2025; decommissioned 13 Aug 2025),official (NOAA OSPO),NOAA OSPO POES status and messages 2025
+38771,Metop-B,public,EUMETSAT,AVHRR/3,"3B 3.74 um (night only, time-shared with 3A) / 4 10.8 um",thermal,1.1 km,"none (HMS uses ABI, VIIRS, MODIS only)",,operational (VIS channels degraded),official (OSCAR; NOAA OSPO),OSCAR metop_b; NOAA OSPO HMS; FEDEO AVHRR L1B
+43689,Metop-C,public,EUMETSAT,AVHRR/3,"3B 3.74 um (night only, time-shared with 3A) / 4 10.8 um",thermal,1.1 km,"none (HMS uses ABI, VIIRS, MODIS only)",,operational,official (OSCAR; NOAA OSPO),OSCAR metop_c; NOAA OSPO HMS
+65159,Metop-SG-A1,public,EUMETSAT/ESA,METimage,MWIR / LWIR,thermal,500 m,none,,launched 13 Aug 2025 (commissioning),official,launch date in catalog
+43010,FY-3D,public,CMA,MERSI-II,3.8 / 10.8 / 12.0 um,thermal,250 m to 1 km,FY-3D global active fire product (NSMC; figshare mirror),global,operational,official,Chen et al. 2022 ESSD 14:3489; NSMC portal
+49008,FY-3E,public,CMA,MERSI-LL,4.05 / 10.8 um,thermal,1 km,"none (NSMC lists only L1, OLR, SST)",,operational (early-morning orbit),"official (OSCAR, asterisked; NSMC)",OSCAR fy_3e; NSMC FY-3E data page
+57490,FY-3F,public,CMA,MERSI-III,3.8 / 10.8 / 12.0 um,thermal,250 m to 1 km,none found,,operational,"official (OSCAR, asterisked)",OSCAR fy_3f; NSMC MERSI-3
+39260,FY-3C,public,CMA,VIRR / MERSI,3.7 / 10.8 um,thermal,1 km,none current,,end of operations,to verify,CMA
+57166,Meteor-M 2-3,public,Roshydromet,MSU-MR,3.5 to 4.1 / 10.5 / 11.5 um,thermal,1 km,none public,,operational (MSU-MR via direct broadcast only; X-band failed),"official (OSCAR, asterisked)",OSCAR meteor_m_n2_3
+59051,Meteor-M 2-4,public,Roshydromet,MSU-MR,3.5 to 4.1 / 10.5 / 11.5 um,thermal,1 km,none public,,operational,"official (OSCAR, asterisked)",OSCAR meteor_m_n2_4
+44387,Meteor-M 2-2,public,Roshydromet,MSU-MR,3.5 to 4.1 / 10.5 / 11.5 um,thermal,1 km,none public,,not operational (MSU-MR inactive since Dec 2024; end of life Jan 2025),official (OSCAR),OSCAR meteor_m_n2_2
+42825,Kanopus-V-IK,public,Roscosmos,MSU-IK-SR,3.5-4.5 / 8.4-9.4 um,thermal,"200 m, 2000 km swath",none public (restricted),,operational,"official (OSCAR, asterisked); bands secondary",OSCAR kanopus_v_ik_1; eoPortal Kanopus-V-IK
+46478,HJ-2A,public,CMA/MEE,IRS (IRMSS-2 HJ),SWIR 1.55-1.75 / MWIR 3.50-3.90 / TIR 10.5-12.5 um,thermal,"48 m (TIR 48 or 96 m), 720 km swath",none public,,operational,"official (OSCAR, asterisked)","OSCAR hj_2a, irmss_2_hj; MDPI Remote Sens. 17(8):1387"
+46479,HJ-2B,public,CMA/MEE,IRS (IRMSS-2 HJ),SWIR 1.55-1.75 / MWIR 3.50-3.90 / TIR 10.5-12.5 um,thermal,"48 m (TIR 48 or 96 m), 720 km swath",none public,,operational,"official (OSCAR, asterisked)","OSCAR hj_2b, irmss_2_hj; MDPI Remote Sens. 17(8):1387"
+40336,CBERS-4,public,INPE/CAST,IRS (IRMSS-2),"SWIR 1.55-1.75 / 2.08-2.35 um (40 m), TIR 10.4-12.5 um (80 m); no MWIR",SWIR without active-fire method,40 to 80 m,none,,operational,"official (OSCAR, asterisked); bands secondary",OSCAR cbers_4; eoPortal CBERS-3/4
+41866,GOES-16,public,NOAA,ABI,7 3.9 / 14 11.2 um,thermal,2 km,ABI FDC (NOAA),Americas,standby since GOES-19 took over GOES-East,to verify,NOAA
+51850,GOES-18,public,NOAA,ABI,7 3.9 / 14 11.2 um,thermal,2 km,ABI FDC (NOAA),Americas / Pacific,operational (GOES-West),official,NOAA
+60133,GOES-19,public,NOAA,ABI,7 3.9 / 14 11.2 um,thermal,2 km,ABI FDC (NOAA),Americas / Atlantic,operational (GOES-East since Apr 2025),to verify,NOAA
+41836,Himawari-9,public,JMA,AHI,7 3.9 / 14 11.2 um,thermal,2 km,JAXA Himawari wildfire (registration),East Asia / Oceania,operational,official,JMA / JAXA P-Tree
+40267,Himawari-8,public,JMA,AHI,7 3.9 / 14 11.2 um,thermal,2 km,JAXA Himawari wildfire (registration),East Asia / Oceania,backup,official,JMA
+40732,Meteosat-11,public,EUMETSAT,SEVIRI,IR3.9 / IR10.8 um,thermal,3 km,LSA SAF FRP-PIXEL,Europe / Africa,operational (0 deg),official,Wooster et al. 2015; LSA SAF (data used in Month 2)
+38552,Meteosat-10,public,EUMETSAT,SEVIRI,IR3.9 / IR10.8 um,thermal,3 km,LSA SAF FRP-PIXEL,Europe (rapid scan),operational (rapid scan),to verify,EUMETSAT
+28912,Meteosat-9,public,EUMETSAT,SEVIRI,IR3.9 / IR10.8 um,thermal,3 km,LSA SAF FRP-PIXEL (IODC),Indian Ocean,operational (IODC),to verify,EUMETSAT
+54743,Meteosat-12 (MTG-I1),public,EUMETSAT,FCI,IR3.8 / IR10.5 um,thermal,1 to 2 km,FCI fire product (status to verify),Europe / Africa,operational,to verify,EUMETSAT
+64723,MTG-S1,public,EUMETSAT,IRS / UVN,sounder (no imager fire band),none,,none,,launched 1 Jul 2025 (commissioning),official,launch date in catalog
+43823,GEO-KOMPSAT-2A,public,KMA,AMI,3.8 / 10.5 um,thermal,2 km,KMA AMI fire product,East Asia,operational,to verify,KMA NMSC
+41882,FY-4A,public,CMA,AGRI,3.75 / 10.8 um,thermal,2 to 4 km,CMA fire product (registration),East Asia,operational,to verify,CMA NSMC
+48808,FY-4B,public,CMA,AGRI,3.75 / 10.8 um,thermal,2 to 4 km,CMA fire product (registration),East Asia,operational,to verify,CMA NSMC
+41752,INSAT-3DR,public,ISRO/IMD,Imager,3.9 / 10.8 um,thermal,4 km,MOSDAC fire product (registration),South Asia,operational,to verify,ISRO MOSDAC
+58990,INSAT-3DS,public,ISRO/IMD,Imager,3.9 / 10.8 um,thermal,4 km,MOSDAC fire product (registration),South Asia,operational,to verify,ISRO MOSDAC
+39216,INSAT-3D,public,ISRO/IMD,Imager,3.9 / 10.8 um,thermal,4 km,MOSDAC fire product,South Asia,end of operations,to verify,ISRO MOSDAC
+44903,Elektro-L 3,public,Roshydromet,MSU-GS,3.5 to 4.0 / 10.7 um,thermal,4 km,none public,,operational,to verify,Roshydromet
+55506,Elektro-L 4,public,Roshydromet,MSU-GS,3.5 to 4.0 / 10.7 um,thermal,4 km,none public,,operational,to verify,Roshydromet
+58584,Arktika-M 2,public,Roshydromet,MSU-GS,3.5 to 4.0 / 10.7 um,thermal,4 km,none public,,operational,to verify,Roshydromet
+43065,GCOM-C,public,JAXA,SGLI,SWIR / LWIR (no MWIR),none,250 m to 1 km,none,,operational,to verify,JAXA
+25544,ISS (ECOSTRESS),public,NASA,ECOSTRESS,LWIR only (no MWIR),none,70 m,none (no active-fire product),,operational,to verify,NASA JPL
+56970,OroraTech FOREST-2,private,OroraTech,SAFIRE,MWIR 3.4-4.2 / LWIR 10.4-12.5 um,thermal,"200 m, 2 x 210 km swath",OroraTech Wildfire Solution (commercial),global,operational,official (NASA CSDA),NASA CSDA vendor OroraTech; Gunter's Space Page
+62682,OroraTech FOREST-3,private,OroraTech,thermal imager,multispectral thermal (bands not published),thermal,not found,none (internal testbed),,operational (experimental testbed),official status; bands not found,OroraTech 2025 review; Gunter's Space Page
+63256,FireSat protoflight,private,Muon Space / Earth Fire Alliance,6-band IR radiometer,MWIR about 3.7 / LWIR about 11 um,thermal,"about 80 m, 1500 km swath",none (demo imagery only),,operational (demonstration; first light Jun 2025),official launch and first light; bands secondary (OSCAR),Muon Space press; WMO OSCAR radiometer_firesat
+63351,"OroraTech OTC-P1 (8 satellites, 63351-63358)",private,OroraTech,SAFIRE,MWIR 3.4-4.2 / LWIR 10.4-12.5 um,thermal,200 m,none in the window,,commissioning (operations from 2026),"official (Rocket Lab, Spire, NASA CSDA)",CelesTrak 2025-061; Rocket Lab; Spire; NASA CSDA
+64573,Hydrosat VanZyl-2,private,Hydrosat,thermal imager,LWIR 10.6-11.19 / 11.5-12.51 um (no MWIR),LWIR only,"70 m, 70 km swath",none,,commissioning,secondary,Gunter's Space Page; Muon Space press
+60504,Hydrosat VanZyl-1,private,Hydrosat,thermal imager,LWIR 10.6-11.19 / 11.5-12.51 um (no MWIR),LWIR only,"70 m, 70 km swath",none (LST only),,"imaging, not confirmed for the window",bands official (NASA CSDA); status unverified,NASA CSDA vendor Hydrosat
+62671,constellr SkyBee-1,private,constellr,HiVE,TIR 8.6 / 9.2 / 10.6 / 11.75 um (no MWIR),LWIR only,"30 m, about 18 km swath",none (LST only),,operational,official,constellr; UP42; CEOS LSI-VC-18
+64544,constellr SkyBee-2,private,constellr,HiVE,TIR 8.6 / 9.2 / 10.6 / 11.75 um (no MWIR),LWIR only,30 m,none,,status not found,secondary,SatNOGS; ESA constellr page
+63227,Albedo Clarity-1,private,Albedo,thermal imager,TIR 7.5-13.5 um (no MWIR),LWIR only,2 m,none,,probably not imaging (payload cover not yet ejected),official status as of Jun 2025,Albedo newsletter Jun 2025
+56954,SatVu HotSat-1,private,SatVu,thermal imager,LWIR (no MWIR),LWIR only,3.5 m,none,,not operational (camera failed Dec 2023),secondary,press
+56958,"Orbital Sidekick GHOSt-3 (also GHOSt-4/5: 59133, 59130)",private,Orbital Sidekick,hyperspectral,400-2500 nm,SWIR without active-fire method,"8.3 m, 4.3 km swath",none (fire use only from 2026),,status not found,official specs; status unverified,NASA CSDA vendor Orbital Sidekick
+52775,Aistech GUARDIAN,private,Aistech,RGB / NIR / TIR imager,TIR (bands not found),unknown,about 40 m,none,,"status not found (decaying, 345 km)",unverified,aggregator sources
