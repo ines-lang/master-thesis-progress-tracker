@@ -472,7 +472,7 @@ Asia & none eligible & & & \\
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/event_selection_03_ignition_to_first_detection.png}
-\caption{FIRMS detections per satellite pass and every VIIRS and MODIS overpass of each selected and alternative event, against its reference time. Grey ticks: overpasses (event inside the swath), computed from the orbits; hollow marker: low-confidence detection only. The shaded band runs from the last overpass without a detection to the first detection: the fire became detectable inside it.}
+\caption{FIRMS detections per satellite pass and every VIIRS and MODIS overpass of each selected and alternative event, against its reference time. Grey ticks: overpasses (event inside the swath), computed from the orbits; a tick without a marker has no FIRMS detection, which means no fire, a fire below the detection limit, or a fire hidden by cloud or smoke. Light ticks after the dashed line fall after the end of the FIRMS data and carry no information. Hollow marker: low-confidence detection only. The shaded band runs from the last overpass without a detection to the first detection: the fire became detectable inside it.}
 \label{fig:es_timeline}
 \end{figure}
 
@@ -484,6 +484,15 @@ Asia & none eligible & & & \\
     \item A missing detection does not prove that there was no fire: clouds, smoke and the large pixels at the swath edge can hide a small fire. The last empty overpasses before the reference of Molezuelas ($-$0.2\,h) and Pi\'od\~ao ($-$0.6\,h) were both about 1,400\,km off track, at the swath edge.
     \item For Pi\'od\~ao, the matched FIRMS complex also contains the earlier Aldeia das Dez fire, 7 to 10\,km away, detected from 62 to 24\,h before the reference. It is a different fire and is not counted.
 \end{itemize}
+
+\textbf{What an empty overpass means.} An overpass without a FIRMS detection has two different readings:
+\begin{itemize}[leftmargin=1.2cm]
+    \item \emph{After the FIRMS data end} (15 Aug, 21:26\,UTC; dashed line in Figure~\ref{fig:es_timeline}) an overpass carries no information, because the downloaded record stops there. This affects Red Canyon from +45\,h and Larouco from +53\,h, and these overpasses are drawn faded.
+    \item \emph{Before the data end} it only means that FIRMS has no fire pixel within 15\,min of the pass. The cause can be no fire, a fire below the detection limit, cloud or smoke, a large pixel at the swath edge, sun glint, or missing data. FIRMS cannot tell these apart, because it keeps only the fire pixels.
+\end{itemize}
+The Level-2 fire products behind FIRMS (VNP14IMG, VJ114IMG, VJ214IMG for VIIRS; MOD14, MYD14 for MODIS) keep a per-pixel fire mask with the classes \emph{not processed}, \emph{water}, \emph{cloud}, \emph{clear land without fire} and \emph{fire}~\cite{schroeder2014viirs, giglio2016modis}. Reading this mask at the event location separates the cases. This matters for the shaded band: it assumes that the last empty overpass saw clear ground. If that pass was cloudy, the fire may have become detectable earlier, and the band should start at the last \emph{clear} empty overpass.
+
+A catalogue search (NASA CMR) for the 57 empty overpasses between 12\,h before the reference and the first detection gives a fire granule and a geolocation granule for 56 of them (7\,GB in total). The missing one is the Aqua pass 1.2\,h before the Pi\'od\~ao reference: it is 1158\,km off track, inside the nominal 1165\,km MODIS half-swath used for the overpasses, but outside the footprint of the delivered granules. The fire was therefore not observed on that pass. The nominal half-swath slightly overstates coverage at the edge, so the coverage check should use the granule footprints. Unlike FIRMS and the catalogue, the Level-2 granules are only served to registered users, so a NASA Earthdata account was created for this check (6 Nov 2026). The masks are read within 2\,km of each event point, since the reference locations are official or press ignition points. The download is pending the activation of the account login.
 
 \begin{figure}[h]
 \centering
@@ -509,6 +518,7 @@ Asia & none eligible & & & \\
 \begin{itemize}[leftmargin=1.2cm]
     \item \actionitem{Extract the first SEVIRI detection of Derdara and Pi\'od\~ao (their T0 reference) from the LSA SAF data already downloaded.}
     \item \actionitem{Add a GOES reader for Red Canyon; make the EFFIS step optional outside Europe.}
+    \item \actionitem{Read the Level-2 fire mask (cloud, clear, missing) at each event for the 56 empty overpasses before the first detection, and start the shaded band of Figure~\ref{fig:es_timeline} at the last clear one.}
 \end{itemize}
 
 % =========================================================

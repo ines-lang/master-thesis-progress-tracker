@@ -39,6 +39,7 @@ DECISION_GROUP = {"selected": "selected", "alternative": "alternative", "not sel
                   "no ground truth": "not selected", "not examined": "not selected", "excluded": "excluded",
                   "to check": "not selected"}
 PASS_COLOR, FAIL_COLOR = "#2a78d6", "#a3a29c"
+AFTER_END_COLOR = "#d6d5ce"   # overpass ticks after the FIRMS data end
 TIMELINE_EVENTS = ["piodao", "larouco", "molezuelas", "oimbra", "red_canyon", "mount_underwood", "derdara"]
 SENSOR_MARKER = {"VIIRS": "o", "MODIS": "D"}
 REFERENCE_LABEL = {"official (regional government)": "official ignition", "press (approximate)": "ignition, press",
@@ -155,7 +156,11 @@ def fig03_timelines():
         o = ovp[ovp.event == cid].copy()
         o["seen"] = [((p.platform == r.platform) & ((p.t - r.pass_utc).abs() <= pd.Timedelta(minutes=PASS_MATCH_MIN))).any()
                      for r in o.itertuples()]
-        ax.vlines(o.hours_from_reference, y - 0.16, y + 0.16, color=MUTED, lw=0.6, zorder=1)
+        end_h = (firms_end - ign).total_seconds() / 3600
+        # passes after the FIRMS data end cannot show a detection: drawn faded, they carry no information
+        after = o.hours_from_reference > end_h
+        ax.vlines(o.hours_from_reference[~after], y - 0.16, y + 0.16, color=MUTED, lw=0.6, zorder=1)
+        ax.vlines(o.hours_from_reference[after], y - 0.16, y + 0.16, color=AFTER_END_COLOR, lw=0.6, zorder=1)
         # the event starts after the last pass without detection before the reference time; detections before
         # it belong to an earlier fire merged into the same 1 km cluster (Piodao: a fire 7 to 10 km away, -62 to -24 h)
         empty = o.loc[~o.seen, "hours_from_reference"]
@@ -177,7 +182,7 @@ def fig03_timelines():
         ax.annotate(label, (first_any, y), xytext=(0, 9), textcoords="offset points", fontsize=6.5, color=INK, ha="left")
         ax.annotate(f"no detection {last_clear:+.1f} h", (last_clear, y), xytext=(-2, 9),
                     textcoords="offset points", fontsize=6, color=INK_2, ha="right")
-        ax.plot([(firms_end - ign).total_seconds() / 3600] * 2, [y - 0.35, y + 0.35], color=MUTED, lw=1)
+        ax.plot([end_h] * 2, [y - 0.35, y + 0.35], color=INK_2, lw=1, ls=(0, (2, 1.5)), zorder=2)
         rows.append(dict(event=cid, last_pass_without_detection_h=round(last_clear, 2),
                          first_detection_any_confidence_h=round(first_any, 2), first_kept_detection_h=round(first_kept, 2)))
     pd.DataFrame(rows).to_csv(PROC / "detection_bracket.csv", index=False)
@@ -193,10 +198,13 @@ def fig03_timelines():
                for (s, m), c in zip(SENSOR_MARKER.items(), [PASS_COLOR, "#eb6834"])]
     handles += [Line2D([], [], marker="o", ls="", markerfacecolor="white", markeredgecolor=PASS_COLOR, markersize=7,
                        label="low confidence only"),
-                Line2D([], [], marker="|", ls="", color=MUTED, markersize=8, label="overpass (VIIRS, MODIS)"),
+                Line2D([], [], marker="|", ls="", color=MUTED, markersize=8,
+                       label="overpass (VIIRS, MODIS); no marker: no FIRMS detection"),
                 Patch(color="#f2d5c7", label="last pass without detection to first detection"),
-                Line2D([], [], color=MUTED, lw=1, label="FIRMS data end")]
-    ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.45, -0.13), ncol=4, fontsize=6.5, frameon=False)
+                Line2D([], [], color=INK_2, lw=1, ls=(0, (2, 1.5)), label="FIRMS data end"),
+                Line2D([], [], marker="|", ls="", color=AFTER_END_COLOR, markersize=8,
+                       label="overpass after the data end (no data)")]
+    ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.45, -0.13), ncol=3, fontsize=6.5, frameon=False)
     ax.set_title("FIRMS detections per pass (marker area proportional to detections) and every VIIRS / MODIS overpass",
                  loc="left", fontsize=9)
     fig.tight_layout()

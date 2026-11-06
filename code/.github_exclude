@@ -28,3 +28,5 @@ code/Input Data FIRMS/notes/firms_refs.bib
 code/**/processed/world/
 # FY-3D fire product downloads (NSMC account; re-downloadable)
 code/Input Data FY3D/raw/
+# Level-2 fire mask and geolocation granules (NASA Earthdata account; re-downloadable, 7 GB)
+code/Event Selection/raw/
