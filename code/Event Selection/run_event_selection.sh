@@ -15,8 +15,9 @@ run scripts/common/02_clean.py --region world > /dev/null
 cd "$ES"
 [ "$1" = "--query" ] && run scripts/00_wfigs_query.py
 
-# 3. screen, criteria, figures
+# 3. screen, criteria, overpasses, figures
 run scripts/01_screen_firms.py > /dev/null
 run scripts/02_criteria.py > /dev/null
-run scripts/03_figures.py > /dev/null
+run scripts/03_overpasses.py > /dev/null
+run scripts/04_figures.py > /dev/null
 echo "done: processed/ and figures/ updated"

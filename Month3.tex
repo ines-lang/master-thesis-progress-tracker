@@ -472,9 +472,18 @@ Asia & none eligible & & & \\
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/event_selection_03_ignition_to_first_detection.png}
-\caption{FIRMS detections per satellite pass against the reference time of each selected and alternative event. The first detection follows the reference by 0.1 to 6.5\,h. For Pi\'od\~ao, detections before the reference belong to the earlier Aldeia das Dez fire in the same complex.}
+\caption{FIRMS detections per satellite pass and every VIIRS and MODIS overpass of each selected and alternative event, against its reference time. Grey ticks: overpasses (event inside the swath), computed from the orbits; hollow marker: low-confidence detection only. The shaded band runs from the last overpass without a detection to the first detection: the fire became detectable inside it.}
 \label{fig:es_timeline}
 \end{figure}
+
+\textbf{Overpasses before the reference time.} The reference time is when the authorities recorded the fire, not necessarily when it started, and a small fire may already burn before it. FIRMS lists only detections, so a pass that saw nothing leaves no record. The overpasses of Suomi NPP, NOAA-20/21, Terra and Aqua are therefore computed from their orbits (24\,h before to 54\,h after the reference) and shown in Figure~\ref{fig:es_timeline}. The result:
+\begin{itemize}[leftmargin=1.2cm]
+    \item Every event has an overpass without a detection 0.2 to 3.0\,h before its reference time. If the fire was already burning then, it was too small or hidden to be detected.
+    \item Derdara is the only event detected before its reference: one low-confidence NOAA-21 detection 16\,min before the press hour. The confident detections follow 10\,min after it.
+    \item For O\'imbra and Pi\'od\~ao the last empty overpass falls after the reference (+1.8 and +0.4\,h), so the fire became detectable later than the reference.
+    \item A missing detection does not prove that there was no fire: clouds, smoke and the large pixels at the swath edge can hide a small fire. The last empty overpasses before the reference of Molezuelas ($-$0.2\,h) and Pi\'od\~ao ($-$0.6\,h) were both about 1,400\,km off track, at the swath edge.
+    \item For Pi\'od\~ao, the matched FIRMS complex also contains the earlier Aldeia das Dez fire, 7 to 10\,km away, detected from 62 to 24\,h before the reference. It is a different fire and is not counted.
+\end{itemize}
 
 \begin{figure}[h]
 \centering
@@ -485,7 +494,7 @@ Asia & none eligible & & & \\
 
 \subsection{Notes on the selection}
 
-\textbf{Africa.} After the hemisphere rule, Derdara is the only African complex passing all criteria; the other northern African complexes are Saharan point sources (oil and gas fields in Algeria and Libya) or do not spread. Its date is official (ANEF), but the hour is only reported by the press, and the reports conflict: 14:00 local~\cite{nap2025derdara} or the night of 12 to 13 August~\cite{medias24_2025incendies}. The press hour is also only 10\,min before the first FIRMS detection. Its T0 reference is therefore the first SEVIRI detection, which is independent of FIRMS.
+\textbf{Africa.} After the hemisphere rule, Derdara is the only African complex passing all criteria; the other northern African complexes are Saharan point sources (oil and gas fields in Algeria and Libya) or do not spread. Its date is official (ANEF), but the hour is only reported by the press, and the reports conflict: 14:00 local~\cite{nap2025derdara} or the night of 12 to 13 August~\cite{medias24_2025incendies}. The press hour is also only 10\,min before the first confident FIRMS detection, and a low-confidence detection precedes it by 16\,min (Figure~\ref{fig:es_timeline}). Its T0 reference is therefore the first SEVIRI detection, which is independent of FIRMS.
 
 \textbf{Excluded regions.}
 \begin{itemize}[leftmargin=1.2cm]

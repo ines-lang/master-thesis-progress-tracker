@@ -1,12 +1,14 @@
-"""Step 2.3: event-selection figures (PNG, 300 dpi, times in UTC) in figures/.
+"""Step 2.4: event-selection figures (PNG, 300 dpi, times in UTC) in figures/.
 
 01_world_complexes.png     complexes passing criteria 1 to 3, coloured by criteria 4 and 5; selected events marked
 02_top_by_continent.png    largest complexes per continent by FIRMS area after criteria 1 to 3, coloured by decision,
                            with the official final burned area where known
-03_ignition_to_first_detection.png   kept FIRMS detections per pass against the official ignition, selected events
+03_ignition_to_first_detection.png   FIRMS detections per pass (low confidence hollow) and every overpass
+                                     (processed/candidate_overpasses.csv) against the reference time;
+                                     writes processed/detection_bracket.csv
 04_official_vs_firms_area.png        official final burned area against the FIRMS estimate up to the data end, per candidate
 
-Usage: python scripts/03_figures.py
+Usage: python scripts/04_figures.py
 """
 import sys
 import textwrap
@@ -43,6 +45,7 @@ REFERENCE_LABEL = {"official (regional government)": "official ignition", "press
                    "official discovery": "official discovery", "record creation": "record creation",
                    "press (about 14:00 local)": "ignition, press", "press citing ANEPC": "ignition, press"}
 PASS_GAP_MIN = 10                 # detections of one platform within this many minutes = one pass
+PASS_MATCH_MIN = 15               # an overpass saw the fire if its platform has a detection this close in time
 WORLD_LAT = (-58, 78)
 BASEMAP = cx.providers.Esri.WorldGrayCanvas
 LABEL_OFFSET = {"larouco": (-58, 10), "molezuelas": (8, 8), "oimbra": (-58, -4), "piodao": (-50, -12),
@@ -132,41 +135,70 @@ def passes(det):
     new = det.groupby("platform")["obs_time_utc"].diff().gt(pd.Timedelta(minutes=PASS_GAP_MIN)) | \
         det["platform"].ne(det["platform"].shift())
     det["pass_id"] = new.cumsum()
-    return det.groupby("pass_id").agg(t=("obs_time_utc", "min"), n=("latitude", "size"),
+    return det.groupby("pass_id").agg(t=("obs_time_utc", "min"), n=("latitude", "size"), kept=("kept", "any"),
                                       sensor=("sensor", "first"), platform=("platform", "first"))
 
 
 def fig03_timelines():
     det = pd.read_csv(PROC / "candidate_detections.csv", parse_dates=["obs_time_utc"])
+    det = det[det["sensor"].isin(SENSOR_MARKER) & ~det["non_vegetation"].astype(bool)]
+    ovp = pd.read_csv(PROC / "candidate_overpasses.csv", parse_dates=["pass_utc"])
     firms_end = utc(reg["data_window"]["firms_data_end_utc"])
     ev = gt.set_index("candidate_id").loc[TIMELINE_EVENTS]
-    fig, ax = plt.subplots(figsize=(9.5, 4.8))
+    fig, ax = plt.subplots(figsize=(9.5, 5.6))
+    rows = []
     for y, (cid, row) in enumerate(ev.iloc[::-1].iterrows()):
         ign = pd.Timestamp(row.ignition_utc)
         p = passes(det[det.candidate_id == cid])
         h = (p.t - ign).dt.total_seconds() / 3600
+        # every overpass; a pass "saw the fire" if the same platform has a detection within PASS_MATCH_MIN
+        o = ovp[ovp.event == cid].copy()
+        o["seen"] = [((p.platform == r.platform) & ((p.t - r.pass_utc).abs() <= pd.Timedelta(minutes=PASS_MATCH_MIN))).any()
+                     for r in o.itertuples()]
+        ax.vlines(o.hours_from_reference, y - 0.16, y + 0.16, color=MUTED, lw=0.6, zorder=1)
+        # the event starts after the last pass without detection before the reference time; detections before
+        # it belong to an earlier fire merged into the same 1 km cluster (Piodao: a fire 7 to 10 km away, -62 to -24 h)
+        empty = o.loc[~o.seen, "hours_from_reference"]
+        start = empty[empty < 0].max()
+        first_any = h[h > start].min()
+        first_kept = h[p.kept & (h > start)].min()
+        last_clear = empty[empty < first_any].max()
+        ax.fill_betweenx([y - 0.28, y + 0.28], last_clear, first_any, color="#f2d5c7", lw=0, zorder=0)
         for sensor, m in SENSOR_MARKER.items():
-            s = p.sensor == sensor
-            ax.scatter(h[s], [y] * s.sum(), s=np.clip(p.n[s] * 1.5, 8, 160), marker=m, facecolor="#2a78d6" if
-                       sensor == "VIIRS" else "#eb6834", edgecolor="white", lw=0.4, alpha=0.85, zorder=3)
-        first = h[h >= 0].min()
-        ax.annotate(f"first detection +{first:.1f} h", (first, y), xytext=(0, 9), textcoords="offset points",
-                    fontsize=6.5, color=INK, ha="left")
+            for kept in (True, False):
+                s = (p.sensor == sensor) & (p.kept == kept)
+                c = PASS_COLOR if sensor == "VIIRS" else "#eb6834"
+                ax.scatter(h[s], [y] * s.sum(), s=np.clip(p.n[s] * 1.5, 8, 160), marker=m,
+                           facecolor=c if kept else "white", edgecolor="white" if kept else c,
+                           lw=0.4 if kept else 0.9, alpha=0.85, zorder=3)
+        label = f"first detection {first_kept:+.1f} h"
+        if first_any < first_kept:
+            label += f" (low confidence {first_any:+.1f} h)"
+        ax.annotate(label, (first_any, y), xytext=(0, 9), textcoords="offset points", fontsize=6.5, color=INK, ha="left")
+        ax.annotate(f"no detection {last_clear:+.1f} h", (last_clear, y), xytext=(-2, 9),
+                    textcoords="offset points", fontsize=6, color=INK_2, ha="right")
         ax.plot([(firms_end - ign).total_seconds() / 3600] * 2, [y - 0.35, y + 0.35], color=MUTED, lw=1)
+        rows.append(dict(event=cid, last_pass_without_detection_h=round(last_clear, 2),
+                         first_detection_any_confidence_h=round(first_any, 2), first_kept_detection_h=round(first_kept, 2)))
+    pd.DataFrame(rows).to_csv(PROC / "detection_bracket.csv", index=False)
     ax.axvline(0, color="#e34948", lw=1.2, zorder=2)
     ax.text(0, len(ev) - 0.45, " reference time", color="#e34948", fontsize=7, va="bottom")
     labels = [f"{r['name'].split(',')[0]}\n({REFERENCE_LABEL[r.ignition_kind]})" for _, r in ev.iloc[::-1].iterrows()]
     ax.set_yticks(range(len(ev)), labels, fontsize=7)
     ax.set_ylim(-0.6, len(ev) - 0.2)
-    ax.set_xlim(-6, 54)
+    ax.set_xlim(-12, 54)
     ax.grid(axis="y", visible=False)
     ax.set_xlabel("Hours since the reference time (official ignition, official discovery, record creation or press)")
     handles = [Line2D([], [], marker=m, ls="", markerfacecolor=c, markeredgecolor="white", markersize=7, label=f"{s} pass")
-               for (s, m), c in zip(SENSOR_MARKER.items(), ["#2a78d6", "#eb6834"])]
-    handles.append(Line2D([], [], color=MUTED, lw=1, label="FIRMS data end"))
-    ax.legend(handles=handles, loc="lower right", fontsize=7, frameon=True, facecolor="white", edgecolor="none")
-    ax.set_title("Kept FIRMS detections per satellite pass (marker area proportional to detections), selected and "
-                 "alternative events", loc="left", fontsize=9)
+               for (s, m), c in zip(SENSOR_MARKER.items(), [PASS_COLOR, "#eb6834"])]
+    handles += [Line2D([], [], marker="o", ls="", markerfacecolor="white", markeredgecolor=PASS_COLOR, markersize=7,
+                       label="low confidence only"),
+                Line2D([], [], marker="|", ls="", color=MUTED, markersize=8, label="overpass (VIIRS, MODIS)"),
+                Patch(color="#f2d5c7", label="last pass without detection to first detection"),
+                Line2D([], [], color=MUTED, lw=1, label="FIRMS data end")]
+    ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.45, -0.13), ncol=4, fontsize=6.5, frameon=False)
+    ax.set_title("FIRMS detections per pass (marker area proportional to detections) and every VIIRS / MODIS overpass",
+                 loc="left", fontsize=9)
     fig.tight_layout()
     fig.savefig(FIGS / "03_ignition_to_first_detection.png", dpi=DPI)
     plt.close(fig)

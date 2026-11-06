@@ -5,7 +5,8 @@ type flags, NOAA-21 static proxy and 1 km clustering as for the Spanish events.
 Outputs (processed/):
   complexes.csv               one row per cluster with >= 1 kept detection
   candidate_matches.csv       each candidate of notes/candidates_ground_truth.csv and its cluster
-  candidate_detections.csv    all kept detections of the matched clusters (for the timelines)
+  candidate_detections.csv    all detections of the matched clusters, column kept = passes the keep rule
+                              (the timelines also show the low-confidence ones)
 
 Usage: python scripts/01_screen_firms.py
 """
@@ -89,10 +90,11 @@ for c in gt.itertuples():
         continue
     cl = near["fire_cluster"].value_counts().index[0]
     rows.append(dict(candidate_id=c.candidate_id, cluster_id=int(cl), nearest_detection_km=round(float(d.min()), 1)))
-    members.append(k[k["fire_cluster"] == cl].assign(candidate_id=c.candidate_id))
+    members.append(df[df["fire_cluster"] == cl].assign(candidate_id=c.candidate_id, kept=keep[df["fire_cluster"] == cl]))
 matches = pd.DataFrame(rows).merge(cx, on="cluster_id", how="left")
 matches.to_csv(OUT / "candidate_matches.csv", index=False, date_format="%Y-%m-%dT%H:%M:%SZ", float_format="%.4f")
-cols = ["candidate_id", "fire_cluster", "obs_time_utc", "platform", "sensor", "latitude", "longitude", "frp"]
+cols = ["candidate_id", "fire_cluster", "obs_time_utc", "platform", "sensor", "latitude", "longitude", "frp",
+        "confidence_class", "non_vegetation", "kept"]
 pd.concat(members)[cols].to_csv(OUT / "candidate_detections.csv", index=False, date_format="%Y-%m-%dT%H:%M:%SZ")
 
 # ---- report ----

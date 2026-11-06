@@ -12,9 +12,10 @@ Run everything: `bash run_event_selection.sh` (add `--query` to re-query WFIGS).
 | ground truth | `notes/candidates_ground_truth.csv` | One row per candidate: official ignition time, official area, source, verification level, **decision and reason** (edited by hand) |
 | ground truth | `notes/ground_truth.md` | Official sources per continent and the research behind each row |
 | 0 | `scripts/00_wfigs_query.py` | Official US discovery times (NIFC WFIGS) -> `processed/wfigs_candidates.csv` |
-| 1 | `scripts/01_screen_firms.py` | One row per fire complex, FIRMS burned-area proxy, candidate matching -> `processed/complexes.csv`, `candidate_matches.csv`, `candidate_detections.csv` |
+| 1 | `scripts/01_screen_firms.py` | One row per fire complex, FIRMS burned-area proxy, candidate matching -> `processed/complexes.csv`, `candidate_matches.csv`, `candidate_detections.csv` (all confidences, column `kept`) |
 | 2 | `scripts/02_criteria.py` | Criteria 1 to 5, funnel, ranking -> `processed/complexes_criteria.csv`, `criteria_funnel.csv`, `ranking.csv` |
-| 3 | `scripts/03_figures.py` | `figures/01` world map, `02` largest complexes per continent, `03` ignition to first detection, `04` official vs FIRMS area |
+| 3 | `scripts/03_overpasses.py` | Every VIIRS / MODIS overpass of each timeline event, 24 h before to 54 h after the reference time (S1 TLEs from `../EO Census`) -> `processed/candidate_overpasses.csv` |
+| 4 | `scripts/04_figures.py` | `figures/01` world map, `02` largest complexes per continent, `03` reference time to first detection with all overpasses, `04` official vs FIRMS area; `processed/detection_bracket.csv` (last pass without detection, first detection) |
 
 Criteria: 1 vegetation fire (< 50% flagged volcano / static), 2 onset at least 24 h after the window start,
 3 FIRMS area >= 500 ha (filter only), 4 spreading (>= 5 km and >= 20 cells; removes gas flares),
