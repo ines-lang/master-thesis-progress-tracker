@@ -18,7 +18,7 @@ norad_id,mission,sector,agency,instrument,fire_bands,band_class,pixel_fire_band,
 38771,Metop-B,public,EUMETSAT,AVHRR/3,"3B 3.74 um (night only, time-shared with 3A) / 4 10.8 um",thermal,1.1 km,"none (HMS uses ABI, VIIRS, MODIS only)",,operational (VIS channels degraded),official (OSCAR; NOAA OSPO),OSCAR metop_b; NOAA OSPO HMS; FEDEO AVHRR L1B
 43689,Metop-C,public,EUMETSAT,AVHRR/3,"3B 3.74 um (night only, time-shared with 3A) / 4 10.8 um",thermal,1.1 km,"none (HMS uses ABI, VIIRS, MODIS only)",,operational,official (OSCAR; NOAA OSPO),OSCAR metop_c; NOAA OSPO HMS
 65159,Metop-SG-A1,public,EUMETSAT/ESA,METimage,MWIR / LWIR,thermal,500 m,none,,launched 13 Aug 2025 (commissioning),official,launch date in catalog
-43010,FY-3D,public,CMA,MERSI-II,3.8 / 10.8 / 12.0 um,thermal,250 m to 1 km,FY-3D global active fire product (NSMC; figshare mirror),global,operational,official,Chen et al. 2022 ESSD 14:3489; NSMC portal
+43010,FY-3D,public,CMA,MERSI-II,3.8 / 10.8 / 12.0 um,thermal,250 m to 1 km,FY-3D global active fire product (NSMC),NSMC account; not openly available in near real time,operational,official,Chen et al. 2022 ESSD 14:3489; NSMC portal
 49008,FY-3E,public,CMA,MERSI-LL,4.05 / 10.8 um,thermal,1 km,"none (NSMC lists only L1, OLR, SST)",,operational (early-morning orbit),"official (OSCAR, asterisked; NSMC)",OSCAR fy_3e; NSMC FY-3E data page
 57490,FY-3F,public,CMA,MERSI-III,3.8 / 10.8 / 12.0 um,thermal,250 m to 1 km,none found,,operational,"official (OSCAR, asterisked)",OSCAR fy_3f; NSMC MERSI-3
 39260,FY-3C,public,CMA,VIRR / MERSI,3.7 / 10.8 um,thermal,1 km,none current,,end of operations,to verify,CMA

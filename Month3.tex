@@ -97,14 +97,14 @@ The scenarios are cumulative: each one adds a single layer on top of the previou
 \midrule
 \endhead
 S0, public record & FIRMS, LSA SAF and EFFIS of the real fires & How fast was the fire actually detected? \\
-S1, ground decides & EO layer (8 satellites) and the real ground segment & Does the model reproduce reality (S1 against S0)? \\
+S1, ground decides & EO layer (7 satellites) and the real ground segment & How fast could the fire have been detected with openly available data? Does the model reproduce reality (S1 against S0)? \\
 S2, orbit decides & S1 plus the coordination layer; central nodes swept & How many central nodes, and where, give the largest gain? (main result) \\
-S3, public extension & S2 plus the extended public layer (14 satellites) & What do the other public sensors add, and does the S2 optimum still hold? \\
+S3, public extension & S2 plus the extended public layer (15 satellites) & What do the other public sensors add, and does the S2 optimum still hold? \\
 S4, commercial & S3 plus the commercial layer (3 satellites) & What do private satellites add on top? \\
 \bottomrule
 \end{longtable}
 
-S1 contains only satellites with a global public fire product, so S1 against S0 is a clean validation. The S3 and S4 satellites are simulated without validation; for them a conservative detectability filter is written before running, so any gain they show is a lower bound.
+S1 contains only the satellites whose fire data were openly available in near real time during the events (FIRMS, Copernicus SL\_2\_FRP), i.e.\ the satellites behind the public record. S1 against S0 is therefore a clean validation. The S3 and S4 satellites are simulated without validation; for them a conservative detectability filter is written before running, so any gain they show is a lower bound.
 
 \subsection{Link rules}
 
@@ -158,7 +158,6 @@ In Month 2 every satellite could use all five polar stations. In reality each sa
 Suomi NPP, Sentinel-3A/B & Svalbard only \\
 NOAA-20, NOAA-21 & Svalbard and McMurdo (Troll as backup) \\
 Aqua & Svalbard and Poker Flat \\
-FY-3D & Beijing, Guangzhou, Urumqi, Jiamusi (CMA) and Kiruna \\
 Terra & TDRSS relay satellites (not representable with direct-view stations) \\
 US direct readout & Madison, Hampton, Mayaguez: receive passes over the United States in real time \\
 \bottomrule
@@ -167,7 +166,7 @@ US direct readout & Madison, Hampton, Mayaguez: receive passes over the United S
 For every S1 pass over the six events, the time from the observation to the first ground contact was computed with both station sets (10$^\circ$ elevation mask, Terra excluded):
 \begin{itemize}[leftmargin=1.2cm]
     \item Month 2 set: median 8\,min, maximum 37\,min.
-    \item Real ground segments: median 26\,min, maximum 114\,min. Suomi NPP and Sentinel-3 often wait a full orbit for Svalbard.
+    \item Real ground segments: median 25\,min, maximum 114\,min. Suomi NPP and Sentinel-3 often wait a full orbit for Svalbard.
     \item With the US direct-readout stations, Red Canyon passes are received while the satellite still sees the fire (median 0\,min). No such fire path exists for Europe or Morocco.
 \end{itemize}
 
@@ -187,7 +186,7 @@ The rules are:
 \begin{itemize}[leftmargin=1.2cm]
     \item \textbf{Fire-capable:} a MWIR fire band, or a high-resolution SWIR band with a documented active-fire method. Imagers with LWIR only do not count.
     \item \textbf{Operational} on 8 to 16 August 2025.
-    \item \textbf{S1 EO layer:} public (government or intergovernmental) satellites with a global public fire product, so that they can be validated against S0.
+    \item \textbf{S1 EO layer:} public (government or intergovernmental) satellites whose global fire product was openly available in near real time during the events. These are the satellites behind the public record, so S1 can be validated against S0.
     \item \textbf{S3 extended public layer:} all other public satellites.
     \item \textbf{S4 commercial layer:} private satellites.
     \item \textbf{GEO and HEO imagers:} census only. They give the S0 alert and, where no official ignition hour exists, the T0 reference, but they are not part of the network.
@@ -201,12 +200,12 @@ The rules are:
 \textbf{Satellites} & \textbf{Owner} & \textbf{Sensor} & \textbf{Data access} & \textbf{Validation vs.\ S0} \\
 \midrule
 \endhead
-\multicolumn{5}{l}{\textit{S1 EO layer (8): validated against S0}} \\
+\multicolumn{5}{l}{\textit{S1 EO layer (7): validated against S0}} \\
 Suomi NPP, NOAA-20, NOAA-21 & NASA / NOAA & VIIRS & open & FIRMS~\cite{schroeder2014viirs} \\
 Terra, Aqua & NASA & MODIS & open & FIRMS~\cite{giglio2016modis} \\
 Sentinel-3A/B & ESA / EUMETSAT & SLSTR & open & SL\_2\_FRP~\cite{xu2020slstr} \\
-FY-3D & CMA (China) & MERSI-II & registration & FY-3D fire product~\cite{chen2022fy3d} \\
-\multicolumn{5}{l}{\textit{S3 extended public layer (14): simulated, not validated}} \\
+\multicolumn{5}{l}{\textit{S3 extended public layer (15): simulated, not validated}} \\
+FY-3D & CMA (China) & MERSI-II & account & product exists~\cite{chen2022fy3d}, not open in near real time \\
 FY-3E, FY-3F & CMA (China) & MERSI-LL, MERSI-III & registration & none \\
 Metop-B/C & EUMETSAT & AVHRR/3 & open & none \\
 Meteor-M 2-3, 2-4 & Roshydromet (Russia) & MSU-MR & direct broadcast & none \\
@@ -236,6 +235,7 @@ Within the thermal band class, the S3 satellites give the same information as VI
 The S1 layer passes in four clusters, at about 01--03, 09--10, 13--15 and 21--22 local solar time. This leaves two daily gaps, 15--21\,h and 03--09\,h. The FIRMS first detections of Larouco (+4.8\,h), Red Canyon (+4.2\,h) and Pi\'od\~ao (+6.5\,h) are explained by these gaps: all three fires ignited inside one.
 
 \begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{FY-3D} adds an afternoon pass at about 15:10, just after the VIIRS and Aqua cluster.
     \item \textbf{FY-3E} is the only satellite in an early-morning orbit (about 05:40 and 17:40), so it passes inside both gaps.
     \item \textbf{Metop-B/C} add only night passes for fire, since their 3.7\,$\mu$m channel works at night only.
     \item \textbf{HJ-2A/B} (96\,m) and \textbf{Kanopus-V-IK} (200\,m) add resolution, i.e.\ smaller fires and the front shape, but have narrow swaths or restricted data.
@@ -525,7 +525,6 @@ S2 asks how many central nodes there are and which coordination satellites they 
 \begin{itemize}[leftmargin=1.2cm]
     \item \openquestion{Walker pattern, inclination, altitude and phasing of the coordination layer.}
     \item \openquestion{Asia has no eligible wildfire in the window: keep three continents, or relax a criterion (e.g.\ onset before 9 August) for Asia only?}
-    \item \openquestion{FY-3D fire data for August 2025 need an NSMC account (requested). If access is refused, FY-3D moves from S1 to S3.}
 \end{itemize}
 
 % =========================================================
@@ -534,7 +533,8 @@ S2 asks how many central nodes there are and which coordination satellites they 
 
 \begin{itemize}[leftmargin=1.2cm]
     \item \actionitem{Quantify the time-to-first-detection gain of each S3 and S4 satellite per event (swath and detection limit).}
-    \item \actionitem{Freeze the layers and choose the ground stations: use the real ground segment of each satellite plus the US direct-readout stations; add the FY-3D fire product to S0 (needs an NSMC data account), since FY-3D is now in S1.}
+    \item \actionitem{Freeze the layers and the ground stations: the real ground segment of each S1 satellite plus the US direct-readout stations.}
+    \item \actionitem{Add the Sentinel-3 SL\_2\_FRP fire product to S0 for the six events, since Sentinel-3A/B are in S1 but not yet in the public record.}
     \item \actionitem{Add the new events to the registry and run them through the public-record pipeline one at a time: O\'imbra, Pi\'od\~ao, Red Canyon, Derdara.}
     \item \actionitem{Run S1, then S2 with the 600/20 Walker, on the frozen design.}
 \end{itemize}

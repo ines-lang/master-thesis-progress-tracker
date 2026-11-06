@@ -1,8 +1,6 @@
 mission,group,instrument,direction,local_time_h,spread_h,crossings
 Aqua,S1 EO layer,MODIS,ascending,14.83,0.01,15
 Aqua,S1 EO layer,MODIS,descending,2.83,0.01,14
-FY-3D,S1 EO layer,MERSI-II,ascending,15.2,0.01,14
-FY-3D,S1 EO layer,MERSI-II,descending,3.2,0.01,14
 NOAA-20,S1 EO layer,VIIRS,ascending,13.41,0.01,14
 NOAA-20,S1 EO layer,VIIRS,descending,1.41,0.01,14
 NOAA-21,S1 EO layer,VIIRS,ascending,13.42,0.01,14
@@ -15,6 +13,8 @@ Suomi NPP,S1 EO layer,VIIRS,ascending,13.46,0.01,14
 Suomi NPP,S1 EO layer,VIIRS,descending,1.46,0.01,14
 Terra,S1 EO layer,MODIS,ascending,21.29,0.01,15
 Terra,S1 EO layer,MODIS,descending,9.29,0.01,14
+FY-3D,S3 extended public layer,MERSI-II,ascending,15.2,0.01,14
+FY-3D,S3 extended public layer,MERSI-II,descending,3.2,0.01,14
 FY-3E,S3 extended public layer,MERSI-LL,ascending,17.69,0.01,14
 FY-3E,S3 extended public layer,MERSI-LL,descending,5.69,0.01,15
 FY-3F,S3 extended public layer,MERSI-III,ascending,22.24,0.01,14

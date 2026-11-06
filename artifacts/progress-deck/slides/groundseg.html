@@ -9,14 +9,13 @@
       <tr><td>Suomi NPP, Sentinel-3A/B</td><td>Svalbard only</td></tr>
       <tr><td>NOAA-20, NOAA-21</td><td>Svalbard, McMurdo (Troll backup)</td></tr>
       <tr><td>Aqua</td><td>Svalbard, Poker Flat</td></tr>
-      <tr><td>FY-3D</td><td>Beijing, Guangzhou, Urumqi, Jiamusi, Kiruna</td></tr>
       <tr><td>Terra</td><td>TDRSS relay (not modelled)</td></tr>
       <tr style="background:#e6efee"><td>US direct readout</td><td>Madison, Hampton, Mayaguez: Red Canyon only</td></tr>
     </table>
     <div style="display:flex; flex-direction:column; gap:16px; flex:1">
       <div style="display:flex; flex-direction:column; gap:4px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
         <p style="font-size:24px; color:#5b6573">Median wait to first contact</p>
-        <p style="font-size:56px; font-weight:600; color:#1f6f6b">8 &#8594; 26 min</p>
+        <p style="font-size:56px; font-weight:600; color:#1f6f6b">8 &#8594; 25 min</p>
         <p style="font-size:24px; color:#5b6573">Month 2 set &#8594; real segments</p>
       </div>
       <div style="display:flex; flex-direction:column; gap:4px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
@@ -26,5 +25,5 @@
     </div>
   </div>
   <p style="font-size:24px; color:#5b6573">One fixed set for all scenarios, applied in post-processing. Product latency (under 3 h) not modelled.</p>
-  <aside>Every S1 pass over the six events from the reference time to +24 h, elevation mask 10 degrees, Terra excluded because its downlink goes through the TDRSS relays. The Month 2 set was optimistic: Suomi NPP and Sentinel-3 downlink only at Svalbard and often wait a full orbit. US direct-readout stations, which feed the FIRMS ultra-real-time product, receive Red Canyon passes while the satellite still sees the fire; no such fire path exists for Europe or Morocco. A slower, realistic baseline avoids overstating the gain of the central nodes in S2. Sources: NOAA OSPO notices, ESA Sentinel-3 data flow, NASA Aqua interface document, NSMC, NASA Earthdata FIRMS URT.</aside>
+  <aside>Every S1 pass over the six events from the reference time to +24 h, elevation mask 10 degrees, Terra excluded because its downlink goes through the TDRSS relays. The Month 2 set was optimistic: Suomi NPP and Sentinel-3 downlink only at Svalbard and often wait a full orbit. US direct-readout stations, which feed the FIRMS ultra-real-time product, receive Red Canyon passes while the satellite still sees the fire; no such fire path exists for Europe or Morocco. A slower, realistic baseline avoids overstating the gain of the central nodes in S2. Sources: NOAA OSPO notices, ESA Sentinel-3 data flow, NASA Aqua interface document, NASA Earthdata FIRMS URT.</aside>
 </section>

@@ -8,7 +8,8 @@ Criteria (Strategy v3.1, decisions of 6 Nov 2026):
   B. fire-capable: thermal fire band (MWIR / LWIR) or high-resolution SWIR with an active-fire method
   C. operational in the window (not decommissioned, standby, backup or commissioning)
   D. layer (decisions of 6 Nov 2026; GEO and HEO stay census only, as S0 alert / T0 reference):
-     S1 EO layer:              public LEO mission with a global public active-fire product (validates S1 against S0)
+     S1 EO layer:              public LEO mission whose global active-fire product was openly available in near
+                               real time during the window (the public record S0 is built from these; S1 vs S0)
      S3 extended public layer: every other public LEO mission
      S4 commercial layer:      private LEO mission
   thermal = has a MWIR fire band; LWIR-only sensors are not fire-capable (same rule as ECOSTRESS)
@@ -54,7 +55,7 @@ census["role"] = np.select(
     default="excluded")
 census["validation"] = np.where(public & validated, "yes (global public product)",
                                 np.where(census["D_public_product"] & public,
-                                         "regional only: " + census["product_coverage"].fillna(""), "no public product"))
+                                         "limited: " + census["product_coverage"].fillna(""), "no public product"))
 census.loc[~census["A_in_orbit"], "reason"] = "not in orbit in the window"
 census.loc[census["A_in_orbit"] & ~census["B_fire_capable"], "reason"] = "no MWIR fire band and no high-res SWIR with an active-fire method"
 census.loc[census["A_in_orbit"] & census["B_fire_capable"] & ~census["C_operational"], "reason"] = \
