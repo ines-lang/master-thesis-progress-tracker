@@ -1,4 +1,4 @@
-"""Step 2: Standardize the EFFIS records into processed/effis_events_es.csv.
+"""Step 2: Standardize the EFFIS records (Spain, Portugal, Morocco) into processed/effis_events.csv.
 
 One row per EFFIS record. No geometry exists in the delivery (Step 1), so the
 centroid columns stay empty and has_geometry is False.
@@ -13,8 +13,11 @@ import pandas as pd
 
 # ---- parameters ----
 BASE_DIR = REPO_DIR
-RAW_CSV = BASE_DIR / "raw" / "608dedc69b3c4e95977728cfa96fa32a.csv"
-OUT_FILE = BASE_DIR / "processed" / "effis_events_es.csv"
+# burnt-area records ES, PT, MA (request of 7 Nov 2026); its 158 ES records equal the first, ES-only delivery
+# (raw/608dedc69b3c4e95977728cfa96fa32a.csv, 18 Oct 2026). The same request also delivered the EFFIS copies of the
+# MODIS (fd7b3171...) and VIIRS (a53d5d96...) hotspots, which duplicate FIRMS and are not used.
+RAW_CSV = BASE_DIR / "raw" / "80529a8d3d6148a8a1e21a44984d028a.csv"
+OUT_FILE = BASE_DIR / "processed" / "effis_events.csv"
 PERIOD_END_DAY = utc(load_registry()["data_window"]["end_utc"]).normalize()   # last day of the window
 N_LARGEST = 10
 LAND_COVER_COLS = [

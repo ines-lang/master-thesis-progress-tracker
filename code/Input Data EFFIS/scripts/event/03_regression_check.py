@@ -54,6 +54,7 @@ if v1_file.exists():
 
 # (3) repo-level overpass coincidence
 coin = pd.read_csv(COINCIDENCE_FILE)
+coin = coin[coin["country"] == "ES"]   # v1 covered Spain only; PT and MA were added on 7 Nov 2026
 used = coin[coin["excluded_reason"].isna()]
 check("overpass coincidence (n within / n used)",
       f"{V1_COINCIDENCE['n_within']} / {V1_COINCIDENCE['n_used']}",

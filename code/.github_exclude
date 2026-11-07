@@ -30,3 +30,7 @@ code/**/processed/world/
 code/Input Data FY3D/raw/
 # Level-2 fire mask and geolocation granules (NASA Earthdata account; re-downloadable, 7 GB)
 code/Event Selection/raw/
+# GOES ABI fire product downloads (NOAA open data on AWS; re-downloadable, about 2 GB)
+code/Input Data GOES/raw/
+# Sentinel-3 SL_2_FRP fire files (CDSE account; re-downloadable)
+code/Input Data SLSTR/raw/

@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 
 # ---- parameters ----
-EVENTS_FILE = REPO_DIR / "processed" / "effis_events_es.csv"
+EVENTS_FILE = REPO_DIR / "processed" / "effis_events.csv"
 OUT_FILE = REPO_DIR / "processed" / "effis_overpass_coincidence.csv"
 
 reg = load_registry()
@@ -39,7 +39,7 @@ ov = load_overpasses(REGION_ID)
 ov_t = np.sort(np.concatenate([ov["start_time_utc"].values, ov["end_time_utc"].values]))
 ev = pd.read_csv(EVENTS_FILE, dtype={"effis_id": str}, parse_dates=["start_date"])
 
-out = ev[["effis_id", "province", "commune", "start_date", "area_ha"]].copy()
+out = ev[["effis_id", "country", "province", "commune", "start_date", "area_ha"]].copy()
 out["gap_to_nearest_pass_min"] = nearest_gap_min(out["start_date"].values, ov_t).round(1)
 win = pd.Timedelta(minutes=WINDOW_MIN)
 out["platforms_within_window"] = [
@@ -62,4 +62,6 @@ print(f"used n={len(used)}: within +-{WINDOW_MIN} min of a pass {used['within_wi
       f"median gap {used['gap_to_nearest_pass_min'].median():.1f} min")
 print("matched platform(s): " + str(used.loc[used["within_window"], "platforms_within_window"]
                                     .value_counts().to_dict()))
+by_country = used.groupby("country")["within_window"].agg(["size", "mean"])
+print("by country: " + ", ".join(f"{c} {r['mean']:.0%} of {r['size']}" for c, r in by_country.iterrows()))
 print(f"written {OUT_FILE.name}")

@@ -1,159 +1,230 @@
-effis_id,province,commune,start_date,area_ha,gap_to_nearest_pass_min,platforms_within_window,within_window,excluded_reason
-277899,Pontevedra,Campo Lameiro,2025-08-08T01:45:00Z,1,0.0,NOAA-20,True,
-277911,Lugo,Ourol,2025-08-08T02:38:00Z,2,0.0,NOAA-21,True,
-277685,Ávila,"Navas del Marqués, Las",2025-08-08T12:46:00Z,792,1.0,Suomi-NPP,True,
-278868,Guadalajara,"Huerce, La",2025-08-08T13:10:00Z,19,0.0,NOAA-20,True,
-277676,Cáceres,Cáceres,2025-08-08T13:59:00Z,1214,0.0,Aqua/NOAA-21,True,
-278504,Ourense,Manzaneda,2025-08-08T13:59:00Z,24583,0.0,Aqua/NOAA-21,True,
-277682,Toledo,"Navalucillos, Los",2025-08-08T13:59:00Z,8,0.0,Aqua/NOAA-21,True,
-277679,Badajoz,Zalamea de la Serena,2025-08-09T00:00:00Z,140,39.0,,False,midnight_date_only
-277684,Madrid,Aranjuez,2025-08-09T01:05:00Z,263,1.0,Suomi-NPP,True,
-277944,León,Benuza,2025-08-09T01:28:00Z,26241,1.0,NOAA-20,True,
-277915,Pontevedra,Caldas de Reis,2025-08-09T01:28:00Z,2,1.0,NOAA-20,True,
-279431,Ourense,Sarreaus,2025-08-09T01:28:00Z,3,1.0,NOAA-20,True,
-277904,Ourense,Padrenda,2025-08-09T02:17:00Z,0,0.0,NOAA-21,True,
-277898,Lugo,Vilalba,2025-08-09T02:17:00Z,1,0.0,NOAA-21,True,
-277901,Ourense,Padrenda,2025-08-09T02:17:00Z,3,0.0,NOAA-21,True,
-279795,León,Cubillos del Sil,2025-08-09T02:17:00Z,8,0.0,NOAA-21,True,
-277900,Ourense,Padrenda,2025-08-09T02:17:00Z,33,0.0,NOAA-21,True,
-279254,A Coruña,Melide,2025-08-09T03:08:00Z,9,0.0,NOAA-20,True,
-279253,A Coruña,Melide,2025-08-09T03:08:00Z,9,0.0,NOAA-20,True,
-277953,León,Villablino,2025-08-09T12:02:00Z,4285,0.0,NOAA-21,True,
-278268,Ourense,Manzaneda,2025-08-09T12:53:00Z,418,2.0,NOAA-20,True,
-279672,Salamanca,Ciudad Rodrigo,2025-08-09T13:42:00Z,14,0.0,NOAA-21,True,
-279091,Ourense,Verín,2025-08-09T14:08:00Z,2,1.0,Suomi-NPP,True,
-277945,León,Carucedo,2025-08-09T14:31:00Z,4416,0.0,Aqua/NOAA-20,True,
-277687,Navarra,Carcastillo,2025-08-10T01:07:00Z,192,1.0,NOAA-20,True,
-277683,Cantabria,Cillorigo de Liébana,2025-08-10T01:07:00Z,166,1.0,NOAA-20,True,
-277677,Badajoz,Mérida,2025-08-10T01:09:00Z,17,0.0,NOAA-20,True,
-279492,Pontevedra,Ponteareas,2025-08-10T02:00:00Z,1,0.0,NOAA-21,True,
-279491,Pontevedra,Ponteareas,2025-08-10T02:00:00Z,1,0.0,NOAA-21,True,
-279417,León,Vega de Espinareda,2025-08-10T02:00:00Z,49,0.0,NOAA-21,True,
-277918,Ourense,Maceda,2025-08-10T02:00:00Z,4725,0.0,NOAA-21,True,
-277897,Lugo,Vilalba,2025-08-10T02:00:00Z,12,0.0,NOAA-21,True,
-277952,León,Páramo del Sil,2025-08-10T02:00:00Z,180,0.0,NOAA-21,True,
-279404,León,Peranzanes,2025-08-10T02:00:00Z,7821,0.0,NOAA-21,True,
-279194,León,Congosto,2025-08-10T10:19:00Z,127,1.0,Terra,True,
-277917,Pontevedra,"Estrada, A",2025-08-10T12:10:00Z,9,0.0,Suomi-NPP,True,
-277916,Pontevedra,"Estrada, A",2025-08-10T12:10:00Z,18,0.0,Suomi-NPP,True,
-278656,Palencia,"Pernía, La",2025-08-10T12:10:00Z,1603,0.0,Suomi-NPP,True,
-277940,Zamora,Uña de Quintana,2025-08-10T12:32:00Z,40081,0.0,NOAA-20,True,
-277686,Burgos,Torregalindo,2025-08-10T12:32:00Z,6,0.0,NOAA-20,True,
-278139,Pontevedra,Catoira,2025-08-10T14:14:00Z,1,1.0,NOAA-20,True,
-277912,Pontevedra,"Estrada, A",2025-08-10T21:25:00Z,9,0.0,Terra,True,
-277960,Ávila,Navalmoral,2025-08-11T00:00:00Z,15,49.0,,False,midnight_date_only
-277962,Navarra,Murillo el Fruto,2025-08-11T00:00:00Z,31,49.0,,False,midnight_date_only
-277921,Ourense,Xinzo de Limia,2025-08-11T01:39:00Z,3,0.0,NOAA-21,True,
-280196,Asturias,Ponga,2025-08-11T01:39:00Z,5,0.0,NOAA-21,True,
-278346,Ourense,Montederramo,2025-08-11T01:39:00Z,1028,0.0,NOAA-21,True,
-277931,Huelva,Villanueva de los Castillejos,2025-08-11T01:41:00Z,72,0.0,NOAA-21,True,
-279355,Cádiz,Tarifa,2025-08-11T10:01:07Z,2,38.1,,False,
-278332,Cádiz,Tarifa,2025-08-11T12:12:00Z,365,1.0,NOAA-20,True,
-277922,Ourense,Verín,2025-08-11T12:14:00Z,20,1.0,NOAA-20,True,
-277928,Cáceres,Villamiel,2025-08-11T12:14:00Z,10,1.0,NOAA-20,True,
-278423,Ourense,Vilardevós,2025-08-11T14:18:00Z,1107,1.0,Aqua,True,
-278914,Cáceres,Casares de las Hurdes,2025-08-12T00:00:00Z,15,82.0,,False,midnight_date_only
-278273,Madrid,Colmenar Viejo,2025-08-12T00:00:00Z,40,82.0,,False,midnight_date_only
-277936,Zamora,Gallegos del Río,2025-08-12T01:22:00Z,4317,0.0,NOAA-21,True,
-278334,Cáceres,Villar del Pedroso,2025-08-12T01:22:00Z,3084,0.0,NOAA-21,True,
-278333,Madrid,Madrid,2025-08-12T01:22:00Z,2037,0.0,NOAA-21,True,
-279208,Ourense,Cartelle,2025-08-12T01:47:00Z,32,0.0,Suomi-NPP,True,
-279209,Ourense,Cartelle,2025-08-12T01:47:00Z,1,0.0,Suomi-NPP,True,
-279361,Huelva,Bonares,2025-08-12T03:04:00Z,1,0.0,NOAA-21,True,
-278347,Ourense,"Mezquita, A",2025-08-12T10:02:00Z,12026,0.0,Terra,True,
-278484,Asturias,Cabrales,2025-08-12T10:02:00Z,1181,0.0,Terra,True,
-279359,Málaga,Almogía,2025-08-12T12:44:00Z,1,0.0,NOAA-21,True,
-278345,Pontevedra,Dozón,2025-08-12T12:46:00Z,377,0.0,NOAA-21,True,
-279348,Huelva,Arroyomolinos de León,2025-08-12T13:33:00Z,40,0.0,NOAA-20,True,
-277948,León,Villafranca del Bierzo,2025-08-12T21:25:00Z,542,19.0,,False,
-278330,León,Quintana del Castillo,2025-08-13T00:00:00Z,182,62.0,,False,midnight_date_only
-278339,Ourense,"Mezquita, A",2025-08-13T00:00:00Z,3,62.0,,False,midnight_date_only
-279766,Badajoz,Don Benito,2025-08-13T01:30:00Z,9,1.0,Suomi-NPP,True,
-278348,Ourense,Oímbra,2025-08-13T02:43:00Z,24471,0.0,NOAA-21,True,
-279768,Cáceres,Navaconcejo,2025-08-13T02:43:00Z,17317,0.0,NOAA-21,True,
-279568,Ourense,Viana do Bolo,2025-08-13T03:10:00Z,4,1.0,Suomi-NPP,True,
-279504,Ourense,Manzaneda,2025-08-13T03:10:00Z,3,1.0,Suomi-NPP,True,
-279192,Asturias,Cangas del Narcea,2025-08-13T03:10:00Z,357,1.0,Suomi-NPP,True,
-278910,Toledo,Calera y Chozas,2025-08-13T03:10:00Z,706,1.0,Suomi-NPP,True,
-278425,Zamora,Riofrío de Aliste,2025-08-13T03:10:00Z,2142,1.0,Suomi-NPP,True,
-279503,Ourense,Manzaneda,2025-08-13T03:10:00Z,10,1.0,Suomi-NPP,True,
-279338,Ourense,Verín,2025-08-13T03:32:00Z,5,0.0,NOAA-20,True,
-279339,Ourense,Verín,2025-08-13T03:32:00Z,1,0.0,NOAA-20,True,
-279421,León,Santa Colomba de Curueño,2025-08-13T10:41:00Z,24,0.0,Terra,True,
-278509,Asturias,Caso,2025-08-13T10:41:00Z,235,0.0,Terra,True,
-279806,Ciudad Real,Aldea del Rey,2025-08-13T12:25:00Z,30,0.0,NOAA-21,True,
-279784,Cáceres,Malpartida de Plasencia,2025-08-13T12:25:00Z,3,0.0,NOAA-21,True,
-279306,Ourense,"Pobra de Trives, A",2025-08-13T12:27:00Z,68,0.0,NOAA-21,True,
-278490,Cáceres,Trujillo,2025-08-13T12:53:00Z,369,0.0,Suomi-NPP,True,
-278498,Salamanca,Puertas,2025-08-13T13:16:00Z,10823,0.0,NOAA-20,True,
-280228,León,"Barrios de Luna, Los",2025-08-13T13:16:00Z,6,0.0,NOAA-20,True,
-279357,Cádiz,Jerez de la Frontera,2025-08-13T14:05:00Z,240,0.0,Aqua/NOAA-21,True,
-278855,Valencia/València,Teresa de Cofrentes,2025-08-13T14:05:00Z,462,0.0,Aqua/NOAA-21,True,
-278507,Asturias,Cangas del Narcea,2025-08-13T14:33:00Z,57,1.0,Suomi-NPP,True,
-278481,León,Burón,2025-08-14T01:09:00Z,19112,1.0,Suomi-NPP,True,
-278422,Ourense,Vilardevós,2025-08-14T01:34:00Z,1825,1.0,NOAA-20,True,
-278475,Ourense,"Rúa, A",2025-08-14T01:34:00Z,37179,1.0,NOAA-20,True,
-278557,Asturias,Quirós,2025-08-14T02:24:00Z,61,0.0,NOAA-21,True,
-279673,Salamanca,"Alberca, La",2025-08-14T12:08:00Z,33,0.0,NOAA-21,True,
-280199,Asturias,Cabrales,2025-08-14T12:08:00Z,6,0.0,NOAA-21,True,
-278912,Cáceres,Villa del Campo,2025-08-14T12:08:00Z,57,0.0,NOAA-21,True,
-278658,Ourense,Riós,2025-08-14T12:08:00Z,3,0.0,NOAA-21,True,
-278485,Badajoz,Llerena,2025-08-14T12:34:00Z,5829,1.0,Suomi-NPP,True,
-278908,Badajoz,Azuaga,2025-08-14T12:34:00Z,848,1.0,Suomi-NPP,True,
-278487,Badajoz,Alburquerque,2025-08-14T12:55:00Z,2346,0.0,NOAA-20,True,
-279807,Jaén,Vilches,2025-08-14T12:55:00Z,2,0.0,NOAA-20,True,
-279307,Ourense,Montederramo,2025-08-14T13:48:00Z,16,0.0,NOAA-21,True,
-278847,Ourense,Riós,2025-08-15T00:00:00Z,2,52.0,,False,midnight_date_only
-279257,Lugo,Palas de Rei,2025-08-15T00:00:00Z,10,52.0,,False,midnight_date_only
-279256,Lugo,Palas de Rei,2025-08-15T00:00:00Z,7,52.0,,False,midnight_date_only
-279260,Pontevedra,Gondomar,2025-08-15T00:00:00Z,1,52.0,,False,midnight_date_only
-279206,Ourense,Ramirás,2025-08-15T00:00:00Z,8,52.0,,False,midnight_date_only
-279258,Lugo,Chantada,2025-08-15T00:00:00Z,22,52.0,,False,midnight_date_only
-279210,Ourense,"Merca, A",2025-08-15T00:00:00Z,1,52.0,,False,midnight_date_only
-279207,Ourense,Ramirás,2025-08-15T00:00:00Z,0,52.0,,False,midnight_date_only
-278505,A Coruña,Toques,2025-08-15T01:13:00Z,368,1.0,NOAA-20,True,
-278846,Ourense,Vilardevós,2025-08-15T01:13:00Z,172,1.0,NOAA-20,True,
-278513,Badajoz,Burguillos del Cerro,2025-08-15T01:15:00Z,555,1.0,NOAA-20,True,
-278477,Ourense,"Veiga, A",2025-08-15T02:06:00Z,25953,0.0,NOAA-21,True,
-279337,Ourense,Castrelo do Val,2025-08-15T02:43:00Z,824,9.0,Suomi-NPP,True,
-279711,Cáceres,Cáceres,2025-08-15T10:21:00Z,8,0.0,Terra,True,
-278488,Cáceres,Cáceres,2025-08-15T10:21:00Z,3739,0.0,Terra,True,
-279776,Cáceres,Cáceres,2025-08-15T11:11:57Z,160,50.0,,False,
-279366,Valencia/València,Quart de les Valls,2025-08-15T12:14:00Z,0,1.0,Suomi-NPP,True,
-278506,Pontevedra,Agolada,2025-08-15T12:17:00Z,528,1.0,Suomi-NPP,True,
-278552,Lugo,"Saviñao, O",2025-08-15T12:17:00Z,156,1.0,Suomi-NPP,True,
-279405,Cantabria,Luena,2025-08-15T12:17:00Z,1,1.0,Suomi-NPP,True,
-278853,Salamanca,"Payo, El",2025-08-15T12:17:00Z,280,1.0,Suomi-NPP,True,
-279189,A Coruña,Muxía,2025-08-15T12:17:00Z,18,1.0,Suomi-NPP,True,
-279190,A Coruña,Muxía,2025-08-15T12:17:00Z,6,1.0,Suomi-NPP,True,
-278753,Ávila,Ávila,2025-08-15T12:17:00Z,2942,1.0,Suomi-NPP,True,
-279801,Badajoz,Casas de Don Pedro,2025-08-15T12:17:00Z,41,1.0,Suomi-NPP,True,
-278486,Huelva,Aroche,2025-08-15T12:25:00Z,544,9.0,Suomi-NPP,True,
-279600,León,Vega de Valcarce,2025-08-15T12:27:22Z,20,8.6,NOAA-20,True,
-280799,Pontevedra,Mondariz,2025-08-15T13:29:00Z,5,0.0,NOAA-21,True,
-278489,Cáceres,Casar de Cáceres,2025-08-15T13:55:00Z,3614,0.0,Suomi-NPP,True,
-278478,Ourense,Carballeda de Avia,2025-08-15T14:20:00Z,3096,1.0,NOAA-20,True,
-279818,Asturias,Tineo,2025-08-15T14:44:10Z,1,25.2,,False,
-279213,Ourense,Paderne de Allariz,2025-08-15T15:14:00Z,7,0.0,Aqua,True,
-280794,Lugo,Guntín,2025-08-15T17:14:56Z,8,119.9,,False,
-278570,A Coruña,Toques,2025-08-16T00:00:00Z,11,154.0,,False,after_firms_data_end
-278554,Ourense,Ourense,2025-08-16T00:00:00Z,105,154.0,,False,after_firms_data_end
-278491,Cáceres,Trujillo,2025-08-16T00:00:00Z,22,154.0,,False,after_firms_data_end
-278555,Ourense,San Cibrao das Viñas,2025-08-16T00:00:00Z,7,154.0,,False,after_firms_data_end
-279595,León,Borrenes,2025-08-16T00:00:01Z,2,154.0,,False,after_firms_data_end
-279602,Lugo,Becerreá,2025-08-16T01:45:00Z,6,259.0,,False,after_firms_data_end
-278510,Asturias,Ponga,2025-08-16T01:45:00Z,96,259.0,,False,after_firms_data_end
-278911,Cáceres,Cuacos de Yuste,2025-08-16T01:47:00Z,89,261.0,,False,after_firms_data_end
-278479,Ourense,Beade,2025-08-16T01:47:00Z,168,261.0,,False,after_firms_data_end
-280480,Sevilla,Gerena,2025-08-16T02:13:00Z,3,287.0,,False,after_firms_data_end
-278480,Lugo,Cervantes,2025-08-16T03:28:00Z,156,362.0,,False,after_firms_data_end
-278512,Asturias,Ponga,2025-08-16T11:00:00Z,39,814.0,,False,after_firms_data_end
-279039,Cáceres,Cáceres,2025-08-16T12:04:01Z,75,878.0,,False,after_firms_data_end
-279849,Granada,Padul,2025-08-16T12:17:00Z,11,891.0,,False,after_firms_data_end
-279407,Asturias,Caso,2025-08-16T12:19:00Z,18,893.0,,False,after_firms_data_end
-280781,Asturias,Somiedo,2025-08-16T12:53:31Z,3,927.5,,False,after_firms_data_end
-278920,Cáceres,Miajadas,2025-08-16T13:04:49Z,8,938.8,,False,after_firms_data_end
-279211,Ourense,San Cibrao das Viñas,2025-08-16T13:10:00Z,32,944.0,,False,after_firms_data_end
-280802,A Coruña,Ponteceso,2025-08-16T13:12:00Z,3,946.0,,False,after_firms_data_end
-278865,Córdoba,Villanueva del Rey,2025-08-16T13:57:00Z,453,991.0,,False,after_firms_data_end
-278483,Palencia,Guardo,2025-08-16T14:16:00Z,6862,1010.0,,False,after_firms_data_end
+effis_id,country,province,commune,start_date,area_ha,gap_to_nearest_pass_min,platforms_within_window,within_window,excluded_reason
+277665,PT,Beiras e Serra da Estrela,Mata de Lobos,2025-08-08T01:24:00Z,2774,1.0,Suomi-NPP,True,
+277899,ES,Pontevedra,Campo Lameiro,2025-08-08T01:45:00Z,1,0.0,NOAA-20,True,
+277911,ES,Lugo,Ourol,2025-08-08T02:38:00Z,2,0.0,NOAA-21,True,
+277685,ES,Ávila,"Navas del Marqués, Las",2025-08-08T12:46:00Z,792,1.0,Suomi-NPP,True,
+278868,ES,Guadalajara,"Huerce, La",2025-08-08T13:10:00Z,19,0.0,NOAA-20,True,
+277676,ES,Cáceres,Cáceres,2025-08-08T13:59:00Z,1214,0.0,Aqua/NOAA-21,True,
+277662,PT,Douro,Leomil,2025-08-08T13:59:00Z,2131,0.0,Aqua/NOAA-21,True,
+278504,ES,Ourense,Manzaneda,2025-08-08T13:59:00Z,24583,0.0,Aqua/NOAA-21,True,
+277682,ES,Toledo,"Navalucillos, Los",2025-08-08T13:59:00Z,8,0.0,Aqua/NOAA-21,True,
+277923,PT,Cávado,Cabanelas,2025-08-08T14:01:00Z,3,0.0,Aqua/NOAA-21,True,
+277891,PT,Tâmega e Sousa,Vila Boa de Quires e Maureles,2025-08-08T14:29:00Z,3,2.0,Suomi-NPP,True,
+277907,PT,Ave,Rossas,2025-08-09T00:00:00Z,9,39.0,,False,midnight_date_only
+277883,PT,Tâmega e Sousa,Fregim,2025-08-09T00:00:00Z,9,39.0,,False,midnight_date_only
+277679,ES,Badajoz,Zalamea de la Serena,2025-08-09T00:00:00Z,140,39.0,,False,midnight_date_only
+277884,PT,Tâmega e Sousa,Caíde de Rei,2025-08-09T00:00:00Z,12,39.0,,False,midnight_date_only
+277893,PT,Tâmega e Sousa,Penafiel,2025-08-09T00:00:00Z,2,39.0,,False,midnight_date_only
+277684,ES,Madrid,Aranjuez,2025-08-09T01:05:00Z,263,1.0,Suomi-NPP,True,
+277944,ES,León,Benuza,2025-08-09T01:28:00Z,26241,1.0,NOAA-20,True,
+277915,ES,Pontevedra,Caldas de Reis,2025-08-09T01:28:00Z,2,1.0,NOAA-20,True,
+279431,ES,Ourense,Sarreaus,2025-08-09T01:28:00Z,3,1.0,NOAA-20,True,
+277904,ES,Ourense,Padrenda,2025-08-09T02:17:00Z,0,0.0,NOAA-21,True,
+277898,ES,Lugo,Vilalba,2025-08-09T02:17:00Z,1,0.0,NOAA-21,True,
+277901,ES,Ourense,Padrenda,2025-08-09T02:17:00Z,3,0.0,NOAA-21,True,
+279795,ES,León,Cubillos del Sil,2025-08-09T02:17:00Z,8,0.0,NOAA-21,True,
+277900,ES,Ourense,Padrenda,2025-08-09T02:17:00Z,33,0.0,NOAA-21,True,
+279253,ES,A Coruña,Melide,2025-08-09T03:08:00Z,9,0.0,NOAA-20,True,
+279254,ES,A Coruña,Melide,2025-08-09T03:08:00Z,9,0.0,NOAA-20,True,
+277953,ES,León,Villablino,2025-08-09T12:02:00Z,4285,0.0,NOAA-21,True,
+278268,ES,Ourense,Manzaneda,2025-08-09T12:53:00Z,418,2.0,NOAA-20,True,
+277278,PT,Douro,Mondrões,2025-08-09T13:42:00Z,41,0.0,NOAA-21,True,
+279672,ES,Salamanca,Ciudad Rodrigo,2025-08-09T13:42:00Z,14,0.0,NOAA-21,True,
+279091,ES,Ourense,Verín,2025-08-09T14:08:00Z,2,1.0,Suomi-NPP,True,
+277945,ES,León,Carucedo,2025-08-09T14:31:00Z,4416,0.0,Aqua/NOAA-20,True,
+277906,PT,Ave,Anjos e Vilar do Chão,2025-08-09T14:31:00Z,5,0.0,Aqua/NOAA-20,True,
+277687,ES,Navarra,Carcastillo,2025-08-10T01:07:00Z,192,1.0,NOAA-20,True,
+277683,ES,Cantabria,Cillorigo de Liébana,2025-08-10T01:07:00Z,166,1.0,NOAA-20,True,
+277677,ES,Badajoz,Mérida,2025-08-10T01:09:00Z,17,0.0,NOAA-20,True,
+277952,ES,León,Páramo del Sil,2025-08-10T02:00:00Z,180,0.0,NOAA-21,True,
+279492,ES,Pontevedra,Ponteareas,2025-08-10T02:00:00Z,1,0.0,NOAA-21,True,
+279491,ES,Pontevedra,Ponteareas,2025-08-10T02:00:00Z,1,0.0,NOAA-21,True,
+279417,ES,León,Vega de Espinareda,2025-08-10T02:00:00Z,49,0.0,NOAA-21,True,
+279404,ES,León,Peranzanes,2025-08-10T02:00:00Z,7821,0.0,NOAA-21,True,
+279506,PT,Cávado,Bouro (Santa Marta),2025-08-10T02:00:00Z,2,0.0,NOAA-21,True,
+278349,PT,Viseu Dão Lafões,Ferreira de Aves,2025-08-10T02:00:00Z,13903,0.0,NOAA-21,True,
+277897,ES,Lugo,Vilalba,2025-08-10T02:00:00Z,12,0.0,NOAA-21,True,
+277918,ES,Ourense,Maceda,2025-08-10T02:00:00Z,4725,0.0,NOAA-21,True,
+277926,PT,Beiras e Serra da Estrela,Trancoso (São Pedro e Santa Maria) e Souto Maior,2025-08-10T02:00:00Z,62104,0.0,NOAA-21,True,
+279194,ES,León,Congosto,2025-08-10T10:19:00Z,127,1.0,Terra,True,
+279509,PT,Região de Coimbra,Lorvão,2025-08-10T10:21:00Z,1,0.0,Terra,True,
+277916,ES,Pontevedra,"Estrada, A",2025-08-10T12:10:00Z,18,0.0,Suomi-NPP,True,
+277917,ES,Pontevedra,"Estrada, A",2025-08-10T12:10:00Z,9,0.0,Suomi-NPP,True,
+278656,ES,Palencia,"Pernía, La",2025-08-10T12:10:00Z,1603,0.0,Suomi-NPP,True,
+279598,PT,Tâmega e Sousa,Caíde de Rei,2025-08-10T12:32:00Z,0,0.0,NOAA-20,True,
+279592,PT,Tâmega e Sousa,Constance,2025-08-10T12:32:00Z,1,0.0,NOAA-20,True,
+279603,PT,Tâmega e Sousa,Penafiel,2025-08-10T12:32:00Z,6,0.0,NOAA-20,True,
+279411,PT,Alto Minho,"Crasto, Ruivos e Grovelas",2025-08-10T12:32:00Z,8,0.0,NOAA-20,True,
+277887,PT,Tâmega e Sousa,Vila Boa de Quires e Maureles,2025-08-10T12:32:00Z,49,0.0,NOAA-20,True,
+277940,ES,Zamora,Uña de Quintana,2025-08-10T12:32:00Z,40081,0.0,NOAA-20,True,
+277686,ES,Burgos,Torregalindo,2025-08-10T12:32:00Z,6,0.0,NOAA-20,True,
+279522,PT,Tâmega e Sousa,Friande,2025-08-10T13:25:00Z,3,0.0,NOAA-21,True,
+279523,PT,Tâmega e Sousa,Friande,2025-08-10T13:25:00Z,2,0.0,NOAA-21,True,
+277924,PT,Tâmega e Sousa,Pinheiro,2025-08-10T13:25:00Z,16,0.0,NOAA-21,True,
+277927,PT,Beiras e Serra da Estrela,Sobral de São Miguel,2025-08-10T14:12:00Z,37619,1.0,NOAA-20,True,
+278139,ES,Pontevedra,Catoira,2025-08-10T14:14:00Z,1,1.0,NOAA-20,True,
+277912,ES,Pontevedra,"Estrada, A",2025-08-10T21:25:00Z,9,0.0,Terra,True,
+277930,PT,Baixo Alentejo,Messejana,2025-08-11T00:00:00Z,158,49.0,,False,midnight_date_only
+277960,ES,Ávila,Navalmoral,2025-08-11T00:00:00Z,15,49.0,,False,midnight_date_only
+277962,ES,Navarra,Murillo el Fruto,2025-08-11T00:00:00Z,31,49.0,,False,midnight_date_only
+278346,ES,Ourense,Montederramo,2025-08-11T01:39:00Z,1028,0.0,NOAA-21,True,
+280196,ES,Asturias,Ponga,2025-08-11T01:39:00Z,5,0.0,NOAA-21,True,
+277921,ES,Ourense,Xinzo de Limia,2025-08-11T01:39:00Z,3,0.0,NOAA-21,True,
+277931,ES,Huelva,Villanueva de los Castillejos,2025-08-11T01:41:00Z,72,0.0,NOAA-21,True,
+278350,PT,Região de Coimbra,Piódão,2025-08-11T03:15:00Z,30455,0.0,Aqua/NOAA-21,True,
+279355,ES,Cádiz,Tarifa,2025-08-11T10:01:07Z,2,38.1,,False,
+279515,PT,Alto Tâmega,Salto,2025-08-11T11:00:00Z,3,0.0,Terra,True,
+278332,ES,Cádiz,Tarifa,2025-08-11T12:12:00Z,365,1.0,NOAA-20,True,
+277922,ES,Ourense,Verín,2025-08-11T12:14:00Z,20,1.0,NOAA-20,True,
+277928,ES,Cáceres,Villamiel,2025-08-11T12:14:00Z,10,1.0,NOAA-20,True,
+279202,PT,Alto Minho,Cendufe,2025-08-11T13:04:00Z,85,0.0,NOAA-21,True,
+277890,PT,Tâmega e Sousa,Vila Boa de Quires e Maureles,2025-08-11T13:04:00Z,7,0.0,NOAA-21,True,
+279525,PT,Tâmega e Sousa,Vila Boa de Quires e Maureles,2025-08-11T13:04:00Z,13,0.0,NOAA-21,True,
+277929,PT,Baixo Alentejo,Ferreira do Alentejo e Canhestros,2025-08-11T13:53:00Z,43,1.0,NOAA-20,True,
+279500,PT,Baixo Alentejo,Ferreira do Alentejo e Canhestros,2025-08-11T13:53:00Z,4,1.0,NOAA-20,True,
+278423,ES,Ourense,Vilardevós,2025-08-11T14:18:00Z,1107,1.0,Aqua,True,
+279200,PT,Ave,"Aboim, Felgueiras, Gontim e Pedraído",2025-08-12T00:00:00Z,0,82.0,,False,midnight_date_only
+278914,ES,Cáceres,Casares de las Hurdes,2025-08-12T00:00:00Z,15,82.0,,False,midnight_date_only
+278273,ES,Madrid,Colmenar Viejo,2025-08-12T00:00:00Z,40,82.0,,False,midnight_date_only
+279199,PT,Ave,"Aboim, Felgueiras, Gontim e Pedraído",2025-08-12T00:00:00Z,14,82.0,,False,midnight_date_only
+279201,PT,Ave,Rossas,2025-08-12T00:00:00Z,8,82.0,,False,midnight_date_only
+277936,ES,Zamora,Gallegos del Río,2025-08-12T01:22:00Z,4317,0.0,NOAA-21,True,
+278333,ES,Madrid,Madrid,2025-08-12T01:22:00Z,2037,0.0,NOAA-21,True,
+278334,ES,Cáceres,Villar del Pedroso,2025-08-12T01:22:00Z,3084,0.0,NOAA-21,True,
+279209,ES,Ourense,Cartelle,2025-08-12T01:47:00Z,1,0.0,Suomi-NPP,True,
+279597,PT,Douro,Folhadela,2025-08-12T01:47:00Z,1,0.0,Suomi-NPP,True,
+279208,ES,Ourense,Cartelle,2025-08-12T01:47:00Z,32,0.0,Suomi-NPP,True,
+279361,ES,Huelva,Bonares,2025-08-12T03:04:00Z,1,0.0,NOAA-21,True,
+278484,ES,Asturias,Cabrales,2025-08-12T10:02:00Z,1181,0.0,Terra,True,
+278347,ES,Ourense,"Mezquita, A",2025-08-12T10:02:00Z,12026,0.0,Terra,True,
+278470,MA,Bab Taza,,2025-08-12T12:44:00Z,1538,0.0,NOAA-21,True,
+279359,ES,Málaga,Almogía,2025-08-12T12:44:00Z,1,0.0,NOAA-21,True,
+278345,ES,Pontevedra,Dozón,2025-08-12T12:46:00Z,377,0.0,NOAA-21,True,
+279348,ES,Huelva,Arroyomolinos de León,2025-08-12T13:33:00Z,40,0.0,NOAA-20,True,
+277948,ES,León,Villafranca del Bierzo,2025-08-12T21:25:00Z,542,19.0,,False,
+277882,PT,Douro,Tabuaço,2025-08-12T21:25:00Z,766,19.0,,False,
+278330,ES,León,Quintana del Castillo,2025-08-13T00:00:00Z,182,62.0,,False,midnight_date_only
+278339,ES,Ourense,"Mezquita, A",2025-08-13T00:00:00Z,3,62.0,,False,midnight_date_only
+279766,ES,Badajoz,Don Benito,2025-08-13T01:30:00Z,9,1.0,Suomi-NPP,True,
+278811,PT,Terras de Trás-os-Montes,Torre de Dona Chama,2025-08-13T01:52:00Z,94,0.0,NOAA-20,True,
+278348,ES,Ourense,Oímbra,2025-08-13T02:43:00Z,24471,0.0,NOAA-21,True,
+279768,ES,Cáceres,Navaconcejo,2025-08-13T02:43:00Z,17317,0.0,NOAA-21,True,
+279192,ES,Asturias,Cangas del Narcea,2025-08-13T03:10:00Z,357,1.0,Suomi-NPP,True,
+279504,ES,Ourense,Manzaneda,2025-08-13T03:10:00Z,3,1.0,Suomi-NPP,True,
+279568,ES,Ourense,Viana do Bolo,2025-08-13T03:10:00Z,4,1.0,Suomi-NPP,True,
+278910,ES,Toledo,Calera y Chozas,2025-08-13T03:10:00Z,706,1.0,Suomi-NPP,True,
+279503,ES,Ourense,Manzaneda,2025-08-13T03:10:00Z,10,1.0,Suomi-NPP,True,
+278425,ES,Zamora,Riofrío de Aliste,2025-08-13T03:10:00Z,2142,1.0,Suomi-NPP,True,
+279490,MA,Tetouan,,2025-08-13T03:13:00Z,122,1.0,Suomi-NPP,True,
+279339,ES,Ourense,Verín,2025-08-13T03:32:00Z,1,0.0,NOAA-20,True,
+279338,ES,Ourense,Verín,2025-08-13T03:32:00Z,5,0.0,NOAA-20,True,
+279421,ES,León,Santa Colomba de Curueño,2025-08-13T10:41:00Z,24,0.0,Terra,True,
+278509,ES,Asturias,Caso,2025-08-13T10:41:00Z,235,0.0,Terra,True,
+279806,ES,Ciudad Real,Aldea del Rey,2025-08-13T12:25:00Z,30,0.0,NOAA-21,True,
+279784,ES,Cáceres,Malpartida de Plasencia,2025-08-13T12:25:00Z,3,0.0,NOAA-21,True,
+279171,PT,Douro,Paços,2025-08-13T12:25:00Z,367,0.0,NOAA-21,True,
+279306,ES,Ourense,"Pobra de Trives, A",2025-08-13T12:27:00Z,68,0.0,NOAA-21,True,
+278490,ES,Cáceres,Trujillo,2025-08-13T12:53:00Z,369,0.0,Suomi-NPP,True,
+280228,ES,León,"Barrios de Luna, Los",2025-08-13T13:16:00Z,6,0.0,NOAA-20,True,
+278498,ES,Salamanca,Puertas,2025-08-13T13:16:00Z,10823,0.0,NOAA-20,True,
+279357,ES,Cádiz,Jerez de la Frontera,2025-08-13T14:05:00Z,240,0.0,Aqua/NOAA-21,True,
+278855,ES,Valencia/València,Teresa de Cofrentes,2025-08-13T14:05:00Z,462,0.0,Aqua/NOAA-21,True,
+278850,PT,Viseu Dão Lafões,Faíl e Vila Chã de Sá,2025-08-13T14:08:00Z,94,0.0,Aqua/NOAA-21,True,
+279310,PT,Terras de Trás-os-Montes,Quirás e Pinheiro Novo,2025-08-13T14:33:00Z,154,1.0,Suomi-NPP,True,
+278507,ES,Asturias,Cangas del Narcea,2025-08-13T14:33:00Z,57,1.0,Suomi-NPP,True,
+278481,ES,León,Burón,2025-08-14T01:09:00Z,19112,1.0,Suomi-NPP,True,
+278422,ES,Ourense,Vilardevós,2025-08-14T01:34:00Z,1825,1.0,NOAA-20,True,
+278475,ES,Ourense,"Rúa, A",2025-08-14T01:34:00Z,37179,1.0,NOAA-20,True,
+278851,PT,Tâmega e Sousa,Cinfães,2025-08-14T01:34:00Z,167,1.0,NOAA-20,True,
+278852,PT,Tâmega e Sousa,Cinfães,2025-08-14T01:34:00Z,24,1.0,NOAA-20,True,
+278557,ES,Asturias,Quirós,2025-08-14T02:24:00Z,61,0.0,NOAA-21,True,
+280199,ES,Asturias,Cabrales,2025-08-14T12:08:00Z,6,0.0,NOAA-21,True,
+279673,ES,Salamanca,"Alberca, La",2025-08-14T12:08:00Z,33,0.0,NOAA-21,True,
+278658,ES,Ourense,Riós,2025-08-14T12:08:00Z,3,0.0,NOAA-21,True,
+278912,ES,Cáceres,Villa del Campo,2025-08-14T12:08:00Z,57,0.0,NOAA-21,True,
+278485,ES,Badajoz,Llerena,2025-08-14T12:34:00Z,5829,1.0,Suomi-NPP,True,
+278908,ES,Badajoz,Azuaga,2025-08-14T12:34:00Z,848,1.0,Suomi-NPP,True,
+278487,ES,Badajoz,Alburquerque,2025-08-14T12:55:00Z,2346,0.0,NOAA-20,True,
+279807,ES,Jaén,Vilches,2025-08-14T12:55:00Z,2,0.0,NOAA-20,True,
+278501,PT,Alto Alentejo,São João Baptista,2025-08-14T13:48:00Z,884,0.0,NOAA-21,True,
+279307,ES,Ourense,Montederramo,2025-08-14T13:48:00Z,16,0.0,NOAA-21,True,
+278495,PT,Região de Coimbra,Lousã e Vilarinho,2025-08-14T13:48:00Z,3388,0.0,NOAA-21,True,
+279518,PT,Área Metropolitana do Porto,Valongo,2025-08-14T13:48:00Z,1,0.0,NOAA-21,True,
+278847,ES,Ourense,Riós,2025-08-15T00:00:00Z,2,52.0,,False,midnight_date_only
+279257,ES,Lugo,Palas de Rei,2025-08-15T00:00:00Z,10,52.0,,False,midnight_date_only
+279256,ES,Lugo,Palas de Rei,2025-08-15T00:00:00Z,7,52.0,,False,midnight_date_only
+279260,ES,Pontevedra,Gondomar,2025-08-15T00:00:00Z,1,52.0,,False,midnight_date_only
+279207,ES,Ourense,Ramirás,2025-08-15T00:00:00Z,0,52.0,,False,midnight_date_only
+279206,ES,Ourense,Ramirás,2025-08-15T00:00:00Z,8,52.0,,False,midnight_date_only
+279261,PT,Alto Minho,Bico e Cristelo,2025-08-15T00:00:00Z,1,52.0,,False,midnight_date_only
+279258,ES,Lugo,Chantada,2025-08-15T00:00:00Z,22,52.0,,False,midnight_date_only
+279210,ES,Ourense,"Merca, A",2025-08-15T00:00:00Z,1,52.0,,False,midnight_date_only
+278505,ES,A Coruña,Toques,2025-08-15T01:13:00Z,368,1.0,NOAA-20,True,
+279435,PT,Douro,Vila da Rua,2025-08-15T01:13:00Z,22,1.0,NOAA-20,True,
+278848,PT,Terras de Trás-os-Montes,Samões,2025-08-15T01:13:00Z,15,1.0,NOAA-20,True,
+278846,ES,Ourense,Vilardevós,2025-08-15T01:13:00Z,172,1.0,NOAA-20,True,
+278513,ES,Badajoz,Burguillos del Cerro,2025-08-15T01:15:00Z,555,1.0,NOAA-20,True,
+278477,ES,Ourense,"Veiga, A",2025-08-15T02:06:00Z,25953,0.0,NOAA-21,True,
+278572,PT,Alto Minho,Bico e Cristelo,2025-08-15T02:06:00Z,23,0.0,NOAA-21,True,
+279337,ES,Ourense,Castrelo do Val,2025-08-15T02:43:00Z,824,9.0,Suomi-NPP,True,
+278493,PT,Beiras e Serra da Estrela,Alverca da Beira/Bouça Cova,2025-08-15T10:21:00Z,9523,0.0,Terra,True,
+279711,ES,Cáceres,Cáceres,2025-08-15T10:21:00Z,8,0.0,Terra,True,
+278488,ES,Cáceres,Cáceres,2025-08-15T10:21:00Z,3739,0.0,Terra,True,
+279776,ES,Cáceres,Cáceres,2025-08-15T11:11:57Z,160,50.0,,False,
+279366,ES,Valencia/València,Quart de les Valls,2025-08-15T12:14:00Z,0,1.0,Suomi-NPP,True,
+279433,PT,Douro,Penso e Freixinho,2025-08-15T12:17:00Z,309,1.0,Suomi-NPP,True,
+278506,ES,Pontevedra,Agolada,2025-08-15T12:17:00Z,528,1.0,Suomi-NPP,True,
+278552,ES,Lugo,"Saviñao, O",2025-08-15T12:17:00Z,156,1.0,Suomi-NPP,True,
+278853,ES,Salamanca,"Payo, El",2025-08-15T12:17:00Z,280,1.0,Suomi-NPP,True,
+279405,ES,Cantabria,Luena,2025-08-15T12:17:00Z,1,1.0,Suomi-NPP,True,
+279434,PT,Douro,Vila da Ponte,2025-08-15T12:17:00Z,28,1.0,Suomi-NPP,True,
+279204,PT,Alto Minho,Portela e Extremo,2025-08-15T12:17:00Z,83,1.0,Suomi-NPP,True,
+279801,ES,Badajoz,Casas de Don Pedro,2025-08-15T12:17:00Z,41,1.0,Suomi-NPP,True,
+279189,ES,A Coruña,Muxía,2025-08-15T12:17:00Z,18,1.0,Suomi-NPP,True,
+279190,ES,A Coruña,Muxía,2025-08-15T12:17:00Z,6,1.0,Suomi-NPP,True,
+278753,ES,Ávila,Ávila,2025-08-15T12:17:00Z,2942,1.0,Suomi-NPP,True,
+278844,PT,Alto Tâmega,Tronco,2025-08-15T12:17:00Z,63,1.0,Suomi-NPP,True,
+278486,ES,Huelva,Aroche,2025-08-15T12:25:00Z,544,9.0,Suomi-NPP,True,
+279600,ES,León,Vega de Valcarce,2025-08-15T12:27:22Z,20,8.6,NOAA-20,True,
+280799,ES,Pontevedra,Mondariz,2025-08-15T13:29:00Z,5,0.0,NOAA-21,True,
+279521,PT,Tâmega e Sousa,Rans,2025-08-15T13:29:00Z,9,0.0,NOAA-21,True,
+278497,PT,Douro,Carviçais,2025-08-15T13:29:00Z,11932,0.0,NOAA-21,True,
+278489,ES,Cáceres,Casar de Cáceres,2025-08-15T13:55:00Z,3614,0.0,Suomi-NPP,True,
+278492,PT,Beiras e Serra da Estrela,Quintas de São Bartolomeu,2025-08-15T13:55:00Z,23594,0.0,Suomi-NPP,True,
+278478,ES,Ourense,Carballeda de Avia,2025-08-15T14:20:00Z,3096,1.0,NOAA-20,True,
+279818,ES,Asturias,Tineo,2025-08-15T14:44:10Z,1,25.2,,False,
+279213,ES,Ourense,Paderne de Allariz,2025-08-15T15:14:00Z,7,0.0,Aqua,True,
+280794,ES,Lugo,Guntín,2025-08-15T17:14:56Z,8,119.9,,False,
+278554,ES,Ourense,Ourense,2025-08-16T00:00:00Z,105,154.0,,False,after_firms_data_end
+278915,PT,Viseu Dão Lafões,Abrunhosa-a-Velha,2025-08-16T00:00:00Z,7,154.0,,False,after_firms_data_end
+278570,ES,A Coruña,Toques,2025-08-16T00:00:00Z,11,154.0,,False,after_firms_data_end
+278555,ES,Ourense,San Cibrao das Viñas,2025-08-16T00:00:00Z,7,154.0,,False,after_firms_data_end
+278503,PT,Tâmega e Sousa,Ribas,2025-08-16T00:00:00Z,58,154.0,,False,after_firms_data_end
+278491,ES,Cáceres,Trujillo,2025-08-16T00:00:00Z,22,154.0,,False,after_firms_data_end
+279042,PT,Alto Alentejo,"Espírito Santo, Nossa Senhora da Graça e São Simão",2025-08-16T00:00:00Z,23,154.0,,False,after_firms_data_end
+279595,ES,León,Borrenes,2025-08-16T00:00:01Z,2,154.0,,False,after_firms_data_end
+279602,ES,Lugo,Becerreá,2025-08-16T01:45:00Z,6,259.0,,False,after_firms_data_end
+278510,ES,Asturias,Ponga,2025-08-16T01:45:00Z,96,259.0,,False,after_firms_data_end
+278911,ES,Cáceres,Cuacos de Yuste,2025-08-16T01:47:00Z,89,261.0,,False,after_firms_data_end
+279205,PT,Alto Minho,Portela,2025-08-16T01:47:00Z,5,261.0,,False,after_firms_data_end
+278479,ES,Ourense,Beade,2025-08-16T01:47:00Z,168,261.0,,False,after_firms_data_end
+280480,ES,Sevilla,Gerena,2025-08-16T02:13:00Z,3,287.0,,False,after_firms_data_end
+279508,PT,Terras de Trás-os-Montes,Ervedosa,2025-08-16T02:36:00Z,6,310.0,,False,after_firms_data_end
+278480,ES,Lugo,Cervantes,2025-08-16T03:28:00Z,156,362.0,,False,after_firms_data_end
+278512,ES,Asturias,Ponga,2025-08-16T11:00:00Z,39,814.0,,False,after_firms_data_end
+279039,ES,Cáceres,Cáceres,2025-08-16T12:04:01Z,75,878.0,,False,after_firms_data_end
+279849,ES,Granada,Padul,2025-08-16T12:17:00Z,11,891.0,,False,after_firms_data_end
+279041,PT,Alto Alentejo,Gáfete,2025-08-16T12:19:00Z,124,893.0,,False,after_firms_data_end
+278502,PT,Tâmega e Sousa,Nevogilde,2025-08-16T12:19:00Z,89,893.0,,False,after_firms_data_end
+279407,ES,Asturias,Caso,2025-08-16T12:19:00Z,18,893.0,,False,after_firms_data_end
+280781,ES,Asturias,Somiedo,2025-08-16T12:53:31Z,3,927.5,,False,after_firms_data_end
+278920,ES,Cáceres,Miajadas,2025-08-16T13:04:49Z,8,938.8,,False,after_firms_data_end
+280736,PT,Tâmega e Sousa,Fregim,2025-08-16T13:10:00Z,3,944.0,,False,after_firms_data_end
+279211,ES,Ourense,San Cibrao das Viñas,2025-08-16T13:10:00Z,32,944.0,,False,after_firms_data_end
+279187,PT,Região de Coimbra,Góis,2025-08-16T13:10:00Z,3,944.0,,False,after_firms_data_end
+279186,PT,Região de Coimbra,Góis,2025-08-16T13:10:00Z,10,944.0,,False,after_firms_data_end
+280802,ES,A Coruña,Ponteceso,2025-08-16T13:12:00Z,3,946.0,,False,after_firms_data_end
+278865,ES,Córdoba,Villanueva del Rey,2025-08-16T13:57:00Z,453,991.0,,False,after_firms_data_end
+279514,PT,Viseu Dão Lafões,"Mamouros, Alva e Ribolhos",2025-08-16T13:59:00Z,2,993.0,,False,after_firms_data_end
+279513,PT,Viseu Dão Lafões,"Mamouros, Alva e Ribolhos",2025-08-16T13:59:00Z,7,993.0,,False,after_firms_data_end
+278483,ES,Palencia,Guardo,2025-08-16T14:16:00Z,6862,1010.0,,False,after_firms_data_end

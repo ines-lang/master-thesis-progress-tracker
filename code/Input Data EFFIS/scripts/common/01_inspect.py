@@ -66,7 +66,8 @@ def inspect_csv(path):
     for c in ["iso2", "country", "admlvl1", "admlvl2", "map_source"]:
         if c in df.columns:
             print(f"    {c}: {df[c].value_counts().to_dict()}")
-    print(f"    id unique: {df['id'].is_unique}")
+    if "id" in df.columns:   # burnt-area records only; the hotspot files have no id
+        print(f"    id unique: {df['id'].is_unique}")
 
 
 for path in sorted(RAW_DIR.iterdir()):

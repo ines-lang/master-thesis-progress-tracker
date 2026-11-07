@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 
 # ---- parameters (script level, no event values) ----
-EVENTS_FILE = REPO_DIR / "processed" / "effis_events_es.csv"
+EVENTS_FILE = REPO_DIR / "processed" / "effis_events.csv"
 COINCIDENCE_FILE = REPO_DIR / "processed" / "effis_overpass_coincidence.csv"
 LARGE_AREA_QUANTILE = 0.95     # merging flag: area above this quantile of all ES records (v1)
 LONG_DURATION_DAYS = 7         # merging flag: start to last update longer than this (v1)

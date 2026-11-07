@@ -452,6 +452,44 @@ El Questro / King River, WA & $-$16.1, 128.4 & warnings from 13 Aug~\cite{broome
 \label{fig:es_top}
 \end{figure}
 
+\review{Three alternatives to Figure~\ref{fig:es_top}, all ranked by official final area (the rule actually used); one will replace it.}
+
+\textbf{Alternative A: decision matrix.} The selection steps as rows, the continents as columns; it continues Table~\ref{tab:funnel}.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{p{3.3cm}p{2.5cm}p{2.3cm}p{1.6cm}p{1.6cm}p{1.4cm}p{1.4cm}}
+\toprule
+\textbf{Step} & \textbf{Europe} & \textbf{N. America} & \textbf{Africa} & \textbf{Asia} & \textbf{S. America} & \textbf{Oceania} \\
+\midrule
+After criteria 1 to 5 (Table~\ref{tab:funnel}) & 50 & 25 & 1 & 0 & 0 & 0 \\
+Largest checked against official sources & 18 & 8 & 1 & -- & -- & -- \\
+With official ignition time and final area & 13 & 7 & 1 & -- & -- & -- \\
+Rule & four largest & largest & only one & -- & -- & -- \\
+\midrule
+\textbf{Selected} & Pi\'od\~ao, Larouco, Molezuelas, O\'imbra & Red Canyon (alternative: Mount Underwood) & Derdara & none & none & none \\
+Why not more & next: Jarilla (16{,}315\,ha) & Mount Underwood: time is record creation & 459 others in austral winter & outside Siberia; in Siberia volcano, gas flares & austral winter & austral winter \\
+\bottomrule
+\end{tabular}
+\caption{Alternative A: from the screen to the seven events, per continent.}
+\label{tab:alt_a}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/event_selection_alt_B_candidates_official_area.png}
+\caption{Alternative B: every candidate with an official final area, grouped by continent and sorted by it. Bars: official final area; black line: FIRMS estimate up to 15 August. Asia, South America and Oceania have no candidate (volcano, gas flares or austral winter; Table~\ref{tab:funnel}).}
+\label{fig:alt_b}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/event_selection_alt_C_selection_funnel.png}
+\caption{Alternative C: number of fire complexes left after each step of the selection, and the reason the others were removed.}
+\label{fig:alt_c}
+\end{figure}
+
 \subsection{Selected events}\label{subsec:selected}
 
 \begin{longtable}{p{2.6cm}p{3.6cm}p{2.8cm}p{1.6cm}p{3.0cm}}
@@ -516,9 +554,78 @@ A catalogue search (NASA CMR) for the 57 empty overpasses between 12\,h before t
 \textbf{Geostationary source.} Each event uses the geostationary sensor that covers it: SEVIRI for Europe and Africa, GOES ABI for North America, Himawari AHI for Siberia and the Russian Far East. They produce no network links, so they stay outside the NeuralAgent simulator and only give the S0 first detection (path B).
 
 \begin{itemize}[leftmargin=1.2cm]
-    \item \actionitem{Extract the first SEVIRI detection of Derdara and Pi\'od\~ao (their T0 reference) from the LSA SAF data already downloaded.}
-    \item \actionitem{Add a GOES reader for Red Canyon; make the EFFIS step optional outside Europe.}
     \item \actionitem{Read the Level-2 fire mask (cloud, clear, missing) at each event for the 56 empty overpasses before the first detection, and start the shaded band of Figure~\ref{fig:es_timeline} at the last clear one.}
+\end{itemize}
+
+% =========================================================
+\section{Public Record (S0) of the Selected Events}\label{sec:s0}
+% =========================================================
+
+\status{Data complete for all seven events; first detections are preliminary (official-perimeter rule, not yet the per-event pipeline).}
+
+\subsection{Data}
+
+The Month 2 data were requested for Spain only. Table~\ref{tab:s0data} lists what S0 now holds for every event.
+
+\begin{longtable}{p{3.2cm}p{4.2cm}p{3.4cm}p{3.6cm}}
+\caption{Public-record data of S0, 8 to 16 August 2025.}\label{tab:s0data}\\
+\toprule
+\textbf{Source} & \textbf{Content} & \textbf{Coverage} & \textbf{Access} \\
+\midrule
+\endhead
+FIRMS & VIIRS (Suomi NPP, NOAA-20/21) and MODIS (Terra, Aqua) detections & global, until 15 Aug 21:26\,UTC & open (archive request) \\
+Sentinel-3 SL\_2\_FRP & SLSTR fire list (1\,km MWIR, 500\,m SWIR), 100 products & all seven events & CDSE account \\
+LSA SAF FRP-PIXEL & SEVIRI, every 15\,min & Meteosat disk: Europe, Africa & open \\
+GOES ABI FDC & GOES-18 and GOES-19, CONUS sector, every 5\,min & North America & open (NOAA on AWS) \\
+EFFIS burnt areas & records and final perimeters & Spain, Portugal, Morocco & request form; perimeters open (WFS) \\
+NIFC WFIGS & final perimeter & Red Canyon & open \\
+BC Wildfire Service & final perimeter & Mount Underwood & open \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Sentinel-3.} The products are downloaded from the Copernicus Data Space Ecosystem, for which an account was created (7 Nov 2026). Only the non-time-critical (NTC) products, delivered 1 to 2 days after sensing, are still archived for August 2025; the near-real-time products that were public during the fires have been removed. The acquisition times are the same, but the NTC fire list is a reprocessing and can differ slightly from what was available at the time. Only the three fire files of each product are fetched (about 1\,MB instead of 75\,MB).
+    \item \textbf{GOES.} The North American counterpart of LSA SAF (path B): GOES-19 (East, 75.2\,$^\circ$W) and GOES-18 (West, 137.2\,$^\circ$W) both see Red Canyon; GOES-18 is the better view of Mount Underwood.
+    \item \textbf{EFFIS.} The new request (Spain, Portugal, Morocco) contains the same 158 Spanish records as before plus 69 Portuguese and 2 Moroccan ones. The table export has no geometry; the final perimeters come from the EFFIS map service (layer \texttt{modis.ba.poly.2025}). The start dates of the new records also fall on FIRMS passes: 98\% in Portugal and both Moroccan records (Spain 96\%), so EFFIS stays a reference, never a T0.
+\end{itemize}
+
+\textbf{EFFIS records of the new events.}
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{O\'imbra} (278348, 24{,}471\,ha) starts 13 Aug 02:43\,UTC, about 14\,h after the official ignition.
+    \item \textbf{Pi\'od\~ao} (278350, 30{,}455\,ha) starts 11 Aug 03:15\,UTC, two days before the reference: EFFIS merges the earlier Aldeia das Dez fire, as the FIRMS complex does.
+    \item \textbf{Derdara} (278470, Bab Taza, 1{,}538\,ha) starts 12 Aug 12:44\,UTC, the time of the low-confidence FIRMS detection.
+\end{itemize}
+
+\subsection{First detection per source}
+
+Until the new events are in the registry and run through the per-event pipeline, one comparable number per event and source is taken: the first fire pixel whose centre lies inside the official final perimeter, buffered by 2\,km, from 1\,h before the reference time. The perimeter is the same, independent footprint for every source. The rule reproduces the existing results: the FIRMS column equals the first detections of Figure~\ref{fig:es_timeline} for all seven events, and the SEVIRI time of Larouco (18:40\,UTC) equals the pipeline value.
+
+\begin{longtable}{lrrrr}
+\caption{Preliminary first detection per source, hours after the reference time. Geostationary: SEVIRI for Europe and Africa, GOES for North America (earlier of GOES-18 and GOES-19; the other detects at +0.54\,h for Red Canyon and +0.34\,h for Mount Underwood).}\label{tab:s0first}\\
+\toprule
+\textbf{Event} & \textbf{FIRMS} & \textbf{Sentinel-3} & \textbf{SEVIRI} & \textbf{GOES} \\
+\midrule
+\endhead
+Larouco & 4.83 & 5.06 & 1.75 & -- \\
+Molezuelas & 0.12 & 9.19 & 0.25 & -- \\
+O\'imbra & 2.30 & 22.00 & 3.02 & -- \\
+Pi\'od\~ao & 6.55 & 6.52 & 0.78 & -- \\
+Derdara & 0.17 & 8.74 & 0.17 & -- \\
+Red Canyon & 4.18 & 4.57 & -- & $-$0.21 (GOES-19) \\
+Mount Underwood & 3.17 & 4.10 & -- & 0.18 (GOES-18) \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{SEVIRI} is first for Larouco (3.1\,h before FIRMS) and Pi\'od\~ao (5.8\,h before FIRMS, which had a gap after the ignition), equal for Derdara, and slightly later for Molezuelas and O\'imbra.
+    \item \textbf{GOES} is first for both North American events. GOES-19 detects Red Canyon at 23:56\,UTC on 13 Aug, 13\,min before the official discovery and 4.4\,h before FIRMS; no GOES pixel lies in the perimeter in the 24\,h before, so it is not a static source. GOES-18 detects Mount Underwood 11\,min after the record creation, 3\,h before FIRMS.
+    \item \textbf{Sentinel-3} is never clearly first: for Pi\'od\~ao it detects 2\,min before FIRMS, for the others 0.2 to 20\,h after. Its two satellites add few passes to the five FIRMS satellites at the first detection; their value for tracking is still to be measured.
+    \item \textbf{Derdara:} its T0 reference, the first SEVIRI detection, is 13:10\,UTC, the same as the first confident FIRMS detection.
+    \item \textbf{Detections before the window} inside the perimeters: SEVIRI 3 for Larouco and 2 for O\'imbra (neighbouring fires within one 3\,km SEVIRI pixel are possible), FIRMS 1 for Pi\'od\~ao (Aldeia das Dez). To be checked in the per-event pipeline.
+\end{itemize}
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item \actionitem{Add O\'imbra, Pi\'od\~ao, Red Canyon and Derdara (and Mount Underwood if kept) to the registry and run them through the per-event pipeline with the FIRMS-cluster rule; make the EFFIS step optional outside Europe and Morocco.}
 \end{itemize}
 
 % =========================================================
@@ -553,7 +660,6 @@ S2 asks how many central nodes there are and which coordination satellites they 
 \begin{itemize}[leftmargin=1.2cm]
     \item \actionitem{Quantify the time-to-first-detection gain of each S3 and S4 satellite per event (swath and detection limit).}
     \item \actionitem{Freeze the layers and the ground stations: the real ground segment of each S1 satellite plus the US direct-readout stations.}
-    \item \actionitem{Add the Sentinel-3 SL\_2\_FRP fire product to S0 for the six events, since Sentinel-3A/B are in S1 but not yet in the public record.}
     \item \actionitem{Add the new events to the registry and run them through the public-record pipeline one at a time: O\'imbra, Pi\'od\~ao, Red Canyon, Derdara.}
     \item \actionitem{Run S1, then S2 with the 600/20 Walker, on the frozen design.}
 \end{itemize}

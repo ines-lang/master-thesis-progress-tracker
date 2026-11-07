@@ -22,7 +22,7 @@ from registry import REPO_DIR, event_dir, get_event, utc  # noqa: E402
 import pandas as pd
 
 # ---- parameters (script level) ----
-EVENTS_FILE = REPO_DIR / "processed" / "effis_events_es.csv"
+EVENTS_FILE = REPO_DIR / "processed" / "effis_events.csv"
 COINCIDENCE_FILE = REPO_DIR / "processed" / "effis_overpass_coincidence.csv"
 LARGE_AREA_QUANTILE = 0.95
 LONG_DURATION_DAYS = 7
