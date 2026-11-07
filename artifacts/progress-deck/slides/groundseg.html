@@ -1,40 +1,37 @@
-<section id="groundseg" data-transition="fade" style="display:flex; flex-direction:column; gap:32px; padding:128px 128px 160px; background:#f4f1ea; font-family:'IBM Plex Sans', Arial, sans-serif; color:#1c2430">
-  <h2 style="font-size:56px; font-weight:600; line-height:1.1">Real downlinks make the baseline three times slower</h2>
-  <div style="display:flex; flex-direction:row; gap:32px">
-    <div style="flex:1; display:flex; flex-direction:column; gap:4px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
-      <p style="font-size:24px; color:#5b6573">Median wait, observation to ground</p>
-      <p style="font-size:56px; font-weight:600; color:#a8431a">8.5 &#8594; 25 min</p>
+<section id="groundseg" data-transition="fade" style="display:flex; flex-direction:column; gap:40px; padding:128px 128px 160px; background:#f4f1ea; font-family:'IBM Plex Sans', Arial, sans-serif; color:#1c2430">
+  <h2 style="font-size:56px; font-weight:600; line-height:1.1">Real ground stations triple the wait for the data</h2>
+  <div style="display:flex; flex-direction:row; gap:64px; align-items:center">
+    <div style="display:flex; flex-direction:column; gap:4px; width:820px">
+      <p style="font-size:96px; font-weight:700; line-height:1.05; color:#a8431a">8.5 &#8594; 25 min</p>
+      <p style="font-size:24px; color:#5b6573">median wait from observing the fire to the first ground station that can receive the data</p>
     </div>
-    <div style="flex:1; display:flex; flex-direction:column; gap:4px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
-      <p style="font-size:24px; color:#5b6573">Passes waiting over 1 hour</p>
-      <p style="font-size:56px; font-weight:600; color:#a8431a">0 &#8594; 26 of 101</p>
-    </div>
-    <div style="flex:1; display:flex; flex-direction:column; gap:4px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
-      <p style="font-size:24px; color:#5b6573">Longest wait</p>
-      <p style="font-size:56px; font-weight:600; color:#a8431a">37 &#8594; 114 min</p>
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px">
+      <p style="font-size:32px; line-height:1.25"><b style="color:#a8431a">26 of 101</b> passes now wait over an hour (Month 2: none)</p>
+      <p style="font-size:32px; line-height:1.25">Longest wait <b style="color:#a8431a">37 &#8594; 114 min</b></p>
     </div>
   </div>
-  <div style="display:flex; flex-direction:row; gap:32px">
-    <table style="width:1060px; font-size:24px; color:#1c2430; background:#fbfaf6">
-      <tr style="background:#16263d"><th style="width:30%; color:#f4f1ea">Satellite</th><th style="width:42%; color:#f4f1ea">Downlinks its data at</th><th style="width:28%; color:#f4f1ea">Median wait</th></tr>
-      <tr><td>Suomi NPP</td><td>Svalbard only</td><td style="color:#a8431a"><b>47 min</b></td></tr>
-      <tr><td>Sentinel-3A / 3B</td><td>Svalbard only</td><td>11 / <b style="color:#a8431a">83 min</b></td></tr>
-      <tr><td>Aqua</td><td>Svalbard, Poker Flat</td><td style="color:#a8431a"><b>79 min</b></td></tr>
-      <tr><td>NOAA-20</td><td>Svalbard, McMurdo</td><td>32 min</td></tr>
-      <tr><td>NOAA-21</td><td>Svalbard, McMurdo</td><td>12 min</td></tr>
-      <tr><td>Terra</td><td>TDRSS relay</td><td>25 min (fixed)</td></tr>
-    </table>
-    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
-      <div style="display:flex; flex-direction:column; gap:8px; padding:24px; background:#e6efee; border-radius:16px">
-        <h3 style="font-size:32px; font-weight:600; color:#1f6f6b">Real time only in the US</h3>
-        <p style="font-size:24px; line-height:1.3">Direct-readout stations receive 10 of 17 Red Canyon passes at 0 min. Europe and Morocco: no such path.</p>
+  <div style="display:flex; flex-direction:column; gap:16px">
+    <h3 style="font-size:32px; font-weight:600">What changed from Month 2</h3>
+    <div style="display:flex; flex-direction:row; gap:24px">
+      <div style="flex:1; display:flex; flex-direction:column; gap:8px; padding:24px; background:#fbfaf6; border-top:6px solid #a8431a; border-radius:12px">
+        <p style="font-size:24px; font-weight:700; color:#a8431a">Own stations only</p>
+        <p style="font-size:24px; line-height:1.3">Before: any of five polar stations. Now: Svalbard, plus McMurdo or Poker Flat for some</p>
       </div>
-      <div style="display:flex; flex-direction:column; gap:8px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
-        <h3 style="font-size:32px; font-weight:600; color:#1c2430">Why it matters</h3>
-        <p style="font-size:24px; line-height:1.3">S1 is slower than Month 2 assumed, so the S2 central nodes have more to gain.</p>
+      <div style="flex:1; display:flex; flex-direction:column; gap:8px; padding:24px; background:#fbfaf6; border-top:6px solid #a8431a; border-radius:12px">
+        <p style="font-size:24px; font-weight:700; color:#a8431a">Terra via relay</p>
+        <p style="font-size:24px; line-height:1.3">TDRSS relay satellites on a schedule: fixed 25 min</p>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; gap:8px; padding:24px; background:#fbfaf6; border-top:6px solid #1f6f6b; border-radius:12px">
+        <p style="font-size:24px; font-weight:700; color:#1f6f6b">Real time over the US</p>
+        <p style="font-size:24px; line-height:1.3">Direct readout: 10 of 17 Red Canyon passes at 0 min</p>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; gap:8px; padding:24px; background:#fbfaf6; border-top:6px solid #16263d; border-radius:12px">
+        <p style="font-size:24px; font-weight:700; color:#16263d">Frozen for S1 to S4</p>
+        <p style="font-size:24px; line-height:1.3">Same stations in every scenario</p>
       </div>
     </div>
   </div>
-  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#5b6573">Month 2: every satellite could use all five polar stations. Six events, every S1 pass to +24 h, 10&#176; mask; processing latency not modelled.</p>
-  <aside>Wait = time from the observation of the fire to the first ground station that can receive the stored data. Month 2 let every satellite use all five polar stations (median 8.5 min, maximum 37 min, no pass over one hour). In reality each satellite downlinks to its own stations: median 25 min, maximum 114 min, 26 of 101 passes wait more than one hour. Most data wait for Svalbard (68 of 101 passes): Suomi NPP, Sentinel-3B and Aqua often wait almost a full orbit. Terra sends its data through the TDRSS relay satellites on a schedule, so a fixed mean wait of 25 min (a quarter orbit) is used. Troll is only a backup for NOAA-20/21 and is not modelled. The medians per satellite pool all six events. US direct-readout stations (Madison, Hampton, Mayaguez) receive a pass only while they see the satellite at the observation time: 10 of 17 Red Canyon passes at 0 min. The baseline uses the real segments plus the US direct readout, one fixed set for all scenarios, applied in post-processing. Values are a few minutes optimistic: first contact is the rise above the elevation mask, and every visible pass is assumed to be used for a downlink. Processing latency (under 3 h for FIRMS and SL_2_FRP) is not modelled. Sources: NOAA OSPO notices, ESA Sentinel-3 data flow, NASA Aqua interface document, LANCE 2010, NASA Earthdata FIRMS URT.</aside>
+  <p style="font-size:32px; line-height:1.25"><b style="color:#1f6f6b">So:</b> S1 is slower than Month 2 assumed, and the S2 central nodes have more to gain.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#5b6573">Every S1 pass over the six events to +24 h, 10&#176; elevation mask; processing on the ground not included.</p>
+  <aside>Wait = time from the observation of the fire to the first ground station that can receive the satellite's data. What changed from Month 2 to Month 3. Month 2 let every satellite downlink to any of five polar stations (Svalbard, Fairbanks, McMurdo, Troll, Kiruna), which no satellite really does. Month 3 uses each satellite's own stations: Suomi NPP and Sentinel-3A/B only Svalbard; NOAA-20 and NOAA-21 Svalbard and McMurdo (Troll is only their backup and is not modelled); Aqua Svalbard and Poker Flat. Terra sends its stored data through the TDRSS relay satellites on a schedule, so a fixed mean wait of 25 min (a quarter orbit) is used. New: the US direct-readout stations of the FIRMS ultra-real-time product (Madison, Hampton, Mayaguez) receive a pass while they see the satellite at the observation time: 10 of 17 Red Canyon passes at 0 min; no such path for Europe or Morocco. The set is frozen for all scenarios S1 to S4 (slide 9). Why three times slower: 68 of 101 passes wait for Svalbard; Suomi NPP, Sentinel-3B and Aqua often wait almost a full orbit. Median wait per satellite: Suomi NPP 47 min, Sentinel-3A 11, Sentinel-3B 83, Aqua 79, NOAA-20 32, NOAA-21 12, Terra 25 (fixed). Values are a few minutes optimistic: first contact is the rise above the elevation mask, and every visible pass is assumed to be used for a downlink. Sources: NOAA OSPO notices, ESA Sentinel-3 data flow, NASA Aqua interface document, LANCE 2010, NASA Earthdata FIRMS URT.</aside>
 </section>

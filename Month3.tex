@@ -7,7 +7,7 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{hyperref}
 \usepackage{parskip}
 \usepackage{fancyhdr}
@@ -21,6 +21,12 @@
 \definecolor{vincenzoq}{RGB}{204,153,0}
 \definecolor{todo}{RGB}{0,120,90}
 \definecolor{review}{RGB}{128,0,128}
+% tables: grid with shaded header, soft grey rules, a little more row height
+\colorlet{tablehead}{tumblue!14}
+\colorlet{tablegroup}{tumblue!5}
+\arrayrulecolor{black!45}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{5pt}
 
 % ---------- HYPERLINK STYLE ----------
 \hypersetup{
@@ -79,29 +85,32 @@ The Month 2 architecture still holds and is not repeated here. This month addres
     \item \textbf{Optimization methodology} (Section~\ref{sec:optim}): candidate methods listed.
 \end{itemize}
 
-The goal of this month is to \emph{freeze the design}, that is, the layers and the ground stations, before running S1 and S2. The S2 central-node optimum depends on the EO layer, so changing the layers after the S2 sweep would mean redoing the main result.
+The goal of this month is to \emph{freeze the design}, that is, the layers and the ground stations, before running S1 and S2. 
 
 % =========================================================
 \section{Network Design}\label{sec:runs}
 % =========================================================
 
-\status{Scenarios and link rules revised; ground segment checked; Walker parameters open. S0 done for the Spanish events (Month 2); S1 and S2 pending.}
-
 \subsection{Scenarios}
 
 The scenarios are cumulative: each one adds a single layer on top of the previous one, so every comparison isolates one change. The census of Section~\ref{sec:census} adds a new scenario S3; the commercial layer, formerly S3, becomes S4.
 
-\begin{longtable}{p{3.2cm}p{5.0cm}p{6.6cm}}
-\toprule
+\begin{longtable}{|p{3.2cm}|p{5.0cm}|p{6.6cm}|}
+\hline
+\rowcolor{tablehead}
 \textbf{Scenario} & \textbf{Setup} & \textbf{Question it answers} \\
-\midrule
+\hline
 \endhead
 S0, public record & FIRMS, LSA SAF and EFFIS of the real fires & How fast was the fire actually detected? \\
+\hline
 S1, ground decides & EO layer (7 satellites) and the real ground segment & How fast could the fire have been detected with openly available data? Does the model reproduce reality (S1 against S0)? \\
+\hline
 S2, orbit decides & S1 plus the coordination layer; central nodes swept & How many central nodes, and where, give the largest gain? (main result) \\
+\hline
 S3, public extension & S2 plus the extended public layer (15 satellites) & What do the other public sensors add, and does the S2 optimum still hold? \\
+\hline
 S4, commercial & S3 plus the commercial layer (3 satellites) & What do private satellites add on top? \\
-\bottomrule
+\hline
 \end{longtable}
 
 S1 contains only the satellites whose fire data were openly available in near real time during the events (FIRMS, Copernicus SL\_2\_FRP), i.e.\ the satellites behind the public record. S1 against S0 is therefore a clean validation. The S3 and S4 satellites are simulated without validation; for them a conservative detectability filter is written before running, so any gain they show is a lower bound.
@@ -110,18 +119,24 @@ S1 contains only the satellites whose fire data were openly available in near re
 
 The link rules are revised compared with Month 2. Every satellite that observes fires (EO layer, extended public layer and commercial layer, here called \emph{sensors}) follows the same rule.
 
-\begin{longtable}{p{5.2cm}p{3.0cm}p{6.6cm}}
-\toprule
+\begin{longtable}{|p{5.2cm}|p{3.0cm}|p{6.6cm}|}
+\hline
+\rowcolor{tablehead}
 \textbf{Link} & \textbf{Medium} & \textbf{Use} \\
-\midrule
+\hline
 \endhead
 Sensor to its own ground station & RF & S1: alert and data. From S2 on: raw data only \\
+\hline
 Sensor to a central node in view & RF crosslink (assumed) & From S2 on: the only path for alerts \\
+\hline
 Relay to its central node & OISL or RF & Each central node is the centre of a star of relays \\
+\hline
 Central node to central node & OISL or RF & Connects the clusters \\
+\hline
 Coordination satellite to ground & RF & Any relay or central node can downlink (gateway) \\
+\hline
 Sensor to relay, sensor to sensor, relay to relay & none & Not allowed \\
-\bottomrule
+\hline
 \end{longtable}
 
 What changes with respect to Month 2:
@@ -136,31 +151,38 @@ What changes with respect to Month 2:
 
 In S2 the coordination layer (relays and central nodes) is a Walker constellation~\cite{walker1984} of $t = 600$ satellites in $p = 20$ planes, i.e.\ 30 satellites per plane, written $i\!:\!600/20/f$. The EO layer and the ground segment stay those of S1, so S2 against S1 isolates the value of the central nodes.
 
-\begin{longtable}{p{4.0cm}p{2.5cm}p{6.0cm}}
-\toprule
+\begin{longtable}{|p{4.0cm}|p{2.5cm}|p{6.0cm}|}
+\hline
+\rowcolor{tablehead}
 \textbf{Parameter} & \textbf{Value} & \textbf{Source} \\
-\midrule
+\hline
 \endhead
 Satellites $t$ / planes $p$ & 600 / 20 & Meeting of 27 October \\
+\hline
 Pattern, inclination $i$, altitude, phasing $f$ & [TBD] & \\
-\bottomrule
+\hline
 \end{longtable}
 
 \subsection{Ground segment of the baseline}
 
 In Month 2 every satellite could use all five polar stations. In reality each satellite downlinks its stored data to its own stations:
 
-\begin{longtable}{p{4.8cm}p{10.0cm}}
-\toprule
+\begin{longtable}{|p{4.8cm}|p{10.0cm}|}
+\hline
+\rowcolor{tablehead}
 \textbf{Satellite} & \textbf{Stored-data downlink in 2025} \\
-\midrule
+\hline
 \endhead
 Suomi NPP, Sentinel-3A/B & Svalbard only~\cite{esa2026s3dataflow} \\
+\hline
 NOAA-20, NOAA-21 & Svalbard and McMurdo. Troll is only a backup and is not modelled \\
+\hline
 Aqua & Svalbard and Poker Flat~\cite{nasa2002aquaidd} \\
+\hline
 Terra & TDRSS relay satellites, two contacts per orbit~\cite{nasa2010lance}. The contacts follow a schedule, not the geometry, so a fixed mean wait of 25\,min (a quarter orbit) is used \\
+\hline
 US direct readout & Madison, Hampton, Mayaguez: receive passes over the United States in real time \\
-\bottomrule
+\hline
 \end{longtable}
 
 A direct-readout station receives only what the satellite observes while the station sees it, so it counts only if it sees the satellite at the observation time. For every S1 pass over the six events, the time from the observation to the first ground contact was computed with each station set (10$^\circ$ elevation mask):
@@ -170,60 +192,51 @@ A direct-readout station receives only what the satellite observes while the sta
     \item With the US direct-readout stations, 10 of the 17 Red Canyon passes are received while the satellite still sees the fire (median 0\,min). No such fire path exists for Europe or Morocco.
 \end{itemize}
 
-The first contact is the time the satellite rises above the elevation mask, not the time its stored data have been downlinked, and every visible pass is assumed to be used for a downlink. Both assumptions make these values a few minutes optimistic.
+The first contact is the time the satellite rises above the elevation mask, not the time its stored data have been downlinked, and every visible pass is assumed to be used for a downlink. Both assumptions make these values optimistic.
 
-The Month 2 set was therefore optimistic: it made S1 too fast and would understate the gain of the central nodes. The baseline uses the real ground segment of each satellite plus the US direct-readout stations. The same set is used in all scenarios; since ground links are filtered in post-processing, other sets can be tested later without new runs. The processing on the ground is added in Section~\ref{subsec:latency}.
+The previous Month 2 set was therefore optimistic: it made S1 too fast and would understate the gain of the central nodes. The baseline uses the real ground segment of each satellite plus the US direct-readout stations. 
 
-\textbf{Design freeze: one ground segment for all scenarios.} The ground segment is frozen as the stations of the table above: Svalbard, McMurdo and Poker Flat for stored data, the TDRSS relay for Terra, and Madison, Hampton and Mayag\"uez for direct readout over the United States. The satellites added in S3 and S4 downlink only to these stations, and only satellites that broadcast their data directly can use the direct-readout stations. The reason is comparability: with the same stations in every scenario, a difference between scenarios comes from the space segment alone, not from a different ground network.
+The same set is used in all scenarios; since ground links are filtered in post-processing, other sets can be tested later without new runs. The processing on the ground is added in Section~\ref{subsec:s1latency}. \textbf{Design freeze: one ground segment for all scenarios.} The ground segment is frozen as the stations of the table above: Svalbard, McMurdo and Poker Flat for stored data, the TDRSS relay for Terra, and Madison, Hampton and Mayag\"uez for direct readout over the United States. The satellites added in S3 and S4 downlink only to these stations, and only satellites that broadcast their data directly can use the direct-readout stations. The reason is comparability: with the same stations in every scenario, a difference between scenarios comes from the space segment alone, not from a different ground network.
 \begin{itemize}[leftmargin=1.2cm]
     \item \textbf{Not public, but realistic.} The stations serve public missions but are not open to any satellite: Svalbard and Troll belong to a commercial operator (KSAT) that rents antennas to NASA, NOAA and ESA; McMurdo, Poker Flat and TDRSS are NASA's; the direct-readout stations belong to universities and NASA. A commercial S4 satellite could buy Svalbard passes, so the assumption is plausible, but it is a modelling choice, not the satellites' real network.
-    \item \textbf{What it changes.} Some S3 satellites have their own stations, e.g.\ FY-3D downlinks to Kiruna and four stations in China (Section~\ref{sec:census}). Their real segment is kept as a sensitivity case, which costs no new run because ground links are filtered in post-processing.
+    \item \textbf{What it changes.} Some S3 satellites have their own stations, e.g.\ FY-3D downlinks to Kiruna and four stations in China (Section~\ref{sec:census}). Their real segment is kept as a sensitivity case, which costs no new run because ground links are filtered in post-processing. \vincenzoq{Will we really do this?} \actionitem{Then we should consider this GS since the beginning in the set: check}
     \item \textbf{Checked candidates.} Sentinel-3 sends its science data to Svalbard only; Kiruna and Troll handle commands~\cite{esa2026s3dataflow}. The US direct-readout set matches the stations NASA names for the FIRMS ultra-real-time product~\cite{nasa2022firmsurt}; the network has since grown (5 own and 15 partner stations in 2026~\cite{flynn2026dbrtn}), so the set may be incomplete. In Europe, EUMETSAT's EARS network relays VIIRS data from regional stations~\cite{eumetsat2022viirs}, but as data, not as a public fire product; it is a candidate fast path for S1 to S4, not part of S0.
 \end{itemize}
 \vincenzoq{Is a common ground segment for all scenarios acceptable, with each satellite's real segment as a sensitivity case? Which stations should the coordination layer (central nodes) of S2 use: the same set, or a dedicated one?}
 
-\subsection{Latency of the S1 layer}\label{subsec:latency}
+\subsection{Latency of the S1 layer}\label{subsec:s1latency}
 
-The time from an observation to a public fire detection has two parts: the wait for a ground station, which the simulation computes from the orbits, and the ground processing up to the fire product being online, which it does not. The ingestion into FIRMS after the file is online is not included.
+The latency is the time from the observation to the fire product being online. The providers publish only an upper bound, ``within 3\,h''~\cite{nasa2026datalatency,mecklenburg2015s3ops}. Table~\ref{tab:s1latency} gives the measured median over the study window, 8 to 16 August 2025, split into the wait for a ground station and the processing on the ground.
 
-The near-real-time fire files of August 2025 are no longer online (LANCE keeps them for about 7 days~\cite{nasa2026lancenrt}), so the latency in the study window (8 to 16 August 2025) is measured on products of the same processing chains that are still archived with their creation time:
-\begin{itemize}[leftmargin=1.2cm]
-    \item \textbf{Sentinel-3:} the SLSTR aerosol product SL\_2\_AOD NR~\cite{cdse2026catalogue}, made by the same near-real-time chain and centre as SL\_2\_FRP NR. For the same granule the fire product is created 0.7\,min before it (median of 3{,}400 pairs, interquartile range 0.1\,min), so the offset is applied.
-    \item \textbf{VIIRS:} the NOAA I-band SDR files~\cite{noaa2025jpssaws}, the calibrated radiances the fire product is made from. The LANCE fire product follows the last SDR of its 6-min granule by a delay measured on the files still online for the same granules (median 68\,min for Suomi NPP, 105\,min for NOAA-20, 80\,min for NOAA-21), which is added as a random draw so that its spread is kept.
-    \item \textbf{MODIS:} no timing of August 2025 is archived; only the EOSDIS weekly metrics~\cite{esdis2025metrics} report the share of files within 3\,h.
-\end{itemize}
-The latency runs from the end of the observation to the product being created. The downlink wait is the orbit average of the time to the first contact with the real ground segment; the processing is the difference of the two medians.
-
-\begin{longtable}{p{1.9cm}p{2.6cm}p{1.9cm}p{1.3cm}p{1.4cm}p{1.6cm}p{1.5cm}}
-\caption{Near-real-time latency of the S1 fire products in the study window, 8 to 16 August 2025, in minutes: median (90th percentile). Within 3\,h: share of the estimated latencies and share reported by EOSDIS for the land products over the four weeks to 18 and to 25 August 2025.}\label{tab:latency}\\
-\toprule
-\textbf{Satellite} & \textbf{Product (measured on)} & \textbf{Latency} & \textbf{Within 3\,h} & \textbf{Within 3\,h (EOSDIS)} & \textbf{Downlink wait (model)} & \textbf{Processing} \\
-\midrule
+\begin{longtable}{|p{2.1cm}|p{1.6cm}|p{1.9cm}|p{1.8cm}|p{6.4cm}|}
+\caption{Latency of the S1 fire products, median over 8 to 16 August 2025, in minutes. Wait: orbit average to the first ground contact (Section~\ref{sec:runs}). Processing: latency minus wait.}\label{tab:s1latency}\\
+\hline
+\rowcolor{tablehead}
+\textbf{Satellite} & \textbf{Latency} & \textbf{Wait for a ground station} & \textbf{Processing} & \textbf{Source of the latency} \\
+\hline
 \endhead
-Terra & MOD14 (--) & 69 (99)$^{a}$ & -- & $>$95\,\% & 25 (relay) & 44$^{a}$ \\
-Aqua & MYD14 (--) & 98 (139)$^{a}$ & -- & $>$95\,\% & 38 (78) & 61$^{a}$ \\
-Suomi NPP & VNP14IMG (NOAA SDR) & 152 (543) & 67\,\% & 72--73\,\% & 51 (161) & 101 \\
-NOAA-20 & VJ114IMG (NOAA SDR) & 138 (191) & 88\,\% & 93--$>$95\,\% & 21 (68) & 117 \\
-NOAA-21 & VJ214IMG (NOAA SDR) & 116 (332) & 85\,\% & 80--83\,\% & 20 (54) & 96 \\
-Sentinel-3A & SL\_2\_FRP NR (SL\_2\_AOD NR) & 96 (138) & 100\,\% & -- & 50 (166) & 46 \\
-Sentinel-3B & SL\_2\_FRP NR (SL\_2\_AOD NR) & 95 (136) & 100\,\% & -- & 52 (141) & 43 \\
-\bottomrule
-\multicolumn{7}{p{14.9cm}}{\footnotesize $^{a}$ No per-file timing of August 2025 is archived for MODIS, and the published ``within 3\,h'' is only an upper bound. The median is therefore measured on the LANCE MOD14 and MYD14 files online at the time of writing (November 2026, about 2{,}000 each). The processing chain is unchanged, and the share within 3\,h agrees with the August 2025 EOSDIS figure (over 95\,\%).} \\
+Terra & 69 & 25 & 44 & LANCE MOD14 files~\cite{nasa2026lancenrt}$^{a}$ \\
+\hline
+Aqua & 98 & 38 & 61 & LANCE MYD14 files~\cite{nasa2026lancenrt}$^{a}$ \\
+\hline
+Suomi NPP & 152 & 51 & 101 & NOAA VIIRS files~\cite{noaa2025jpssaws}$^{b}$ \\
+\hline
+NOAA-20 & 138 & 21 & 117 & NOAA VIIRS files~\cite{noaa2025jpssaws}$^{b}$ \\
+\hline
+NOAA-21 & 116 & 20 & 96 & NOAA VIIRS files~\cite{noaa2025jpssaws}$^{b}$ \\
+\hline
+Sentinel-3A & 96 & 50 & 46 & Sentinel-3 SL\_2\_AOD NR files~\cite{cdse2026catalogue}$^{c}$ \\
+\hline
+Sentinel-3B & 95 & 52 & 43 & Sentinel-3 SL\_2\_AOD NR files~\cite{cdse2026catalogue}$^{c}$ \\
+\hline
+\multicolumn{5}{|p{15.2cm}|}{\footnotesize
+$^{a}$ MODIS files of August 2025 are not archived; the files of 31 October to 7 November 2026 are used. Their share within 3\,h matches August 2025~\cite{esdis2025metrics}. \newline
+$^{b}$ The VIIRS fire files of August 2025 are deleted. Latency = creation time of NOAA's input files plus the measured delay of the LANCE fire product after them. \newline
+$^{c}$ The Sentinel-3 fire files of August 2025 are deleted. The aerosol product of the same chain is created within 1\,min of them.} \\
+\hline
 \end{longtable}
 
-\begin{itemize}[leftmargin=1.2cm]
-    \item The processing depends on the processing chain, not on the satellite: about 45\,min for Sentinel-3 and Terra, 60\,min for Aqua, 100 to 120\,min for VIIRS. VIIRS is the slowest although NOAA-20/21 have the shortest downlink wait.
-    \item The published ``within 3\,h'' is an upper bound, not a typical value: the medians are 1.5 to 2.5\,h. In the window, 12 to 33\,\% of the VIIRS granules missed it; no Sentinel-3 granule did.
-    \item The EOSDIS shares agree with the estimated ones within a few percent, which supports the VIIRS proxy. EOSDIS reports delays of the Suomi NPP and NOAA-20 products on 10 and 12 August 2025 (faulty hardware, late raw data), which may explain the long tail of Suomi NPP.
-\end{itemize}
-
-The latency model is refined in steps, each one keeping the previous as a bound:
-\begin{enumerate}[leftmargin=1.2cm]
-    \item Downlink wait only (the runs so far): a lower bound.
-    \item Downlink wait plus the median processing of each chain (Table~\ref{tab:latency}): the baseline for S1 against S0.
-    \item Downlink wait plus a processing time drawn from the measured files: the spread of the detection time, not only its median.
-    \item Consistency check: the modelled total over the study window should reproduce the measured distribution.
-\end{enumerate}
+The processing depends on the processing chain, not on the satellite. The simulation therefore uses two constants: \textbf{50\,min for MODIS and Sentinel-3, 105\,min for VIIRS}. The wait for a ground station is computed by the simulation itself. The time from the product being online to the user (e.g.\ FIRMS ingestion) is not measured and is taken as 0.
 
 % =========================================================
 \section{Wildfire-Detection Satellite Census}\label{sec:census}
@@ -247,29 +260,48 @@ The rules are:
 
 \subsection{Layers}
 
-\begin{longtable}{p{3.4cm}p{3.0cm}p{2.1cm}p{2.4cm}p{3.0cm}}
+\begin{longtable}{|p{3.4cm}|p{3.0cm}|p{2.1cm}|p{2.4cm}|p{3.0cm}|}
 \caption{Fire-capable LEO satellites operational on 8 to 16 August 2025, by layer.}\label{tab:eolayer}\\
-\toprule
+\hline
+\rowcolor{tablehead}
 \textbf{Satellites} & \textbf{Owner} & \textbf{Sensor} & \textbf{Data access} & \textbf{Validation vs.\ S0} \\
-\midrule
+\hline
 \endhead
-\multicolumn{5}{l}{\textit{S1 EO layer (7): validated against S0}} \\
+\rowcolor{tablegroup}
+\multicolumn{5}{|l|}{\textit{S1 EO layer (7): validated against S0}} \\
+\hline
 Suomi NPP, NOAA-20, NOAA-21 & NASA / NOAA & VIIRS & open & FIRMS~\cite{schroeder2014viirs} \\
+\hline
 Terra, Aqua & NASA & MODIS & open & FIRMS~\cite{giglio2016modis} \\
+\hline
 Sentinel-3A/B & ESA / EUMETSAT & SLSTR & open & SL\_2\_FRP~\cite{xu2020slstr} \\
-\multicolumn{5}{l}{\textit{S3 extended public layer (15): simulated, not validated}} \\
+\hline
+\rowcolor{tablegroup}
+\multicolumn{5}{|l|}{\textit{S3 extended public layer (15): simulated, not validated}} \\
+\hline
 FY-3D & CMA (China) & MERSI-II & account & product exists~\cite{chen2022fy3d}, not open in near real time \\
+\hline
 FY-3E, FY-3F & CMA (China) & MERSI-LL, MERSI-III & registration & none \\
+\hline
 Metop-B/C & EUMETSAT & AVHRR/3 & open & none \\
+\hline
 Meteor-M 2-3, 2-4 & Roshydromet (Russia) & MSU-MR & direct broadcast & none \\
+\hline
 Kanopus-V-IK & Roscosmos (Russia) & MSU-IK-SR & restricted & none \\
+\hline
 HJ-2A/B & MEE / MEM (China) & IRS & restricted & none \\
+\hline
 Landsat 8/9 & USGS / NASA & OLI & open & FIRMS, US and Canada only~\cite{schroeder2016landsat} \\
+\hline
 Sentinel-2A/B/C & ESA / EC & MSI & open & none \\
-\multicolumn{5}{l}{\textit{S4 commercial layer (3)}} \\
+\hline
+\rowcolor{tablegroup}
+\multicolumn{5}{|l|}{\textit{S4 commercial layer (3)}} \\
+\hline
 FOREST-2, FOREST-3 & OroraTech & thermal imagers & commercial & none \\
+\hline
 FireSat protoflight & Muon Space / EFA & IR radiometer & demo only & none \\
-\bottomrule
+\hline
 \end{longtable}
 
 \textbf{Census only (GEO/HEO, 15 satellites):} GOES-18/19, Himawari-9, Meteosat-9/10/11/12, GEO-KOMPSAT-2A, FY-4A/B, INSAT-3DR/3DS, Elektro-L 3/4 and Arktika-M~2.
@@ -315,38 +347,40 @@ Catalogue names are unreliable for private satellites (OroraTech FOREST-2 is lis
 
 The question from the meeting was whether different sensors give different information about a fire, or the same information at different resolution and timing. Table~\ref{tab:sensorcomp} compares the spectral band classes; the subsections below compare the orbits and draw the conclusions.
 
-\begin{longtable}{@{}p{0.13\textwidth}p{0.40\textwidth}p{0.20\textwidth}p{0.20\textwidth}@{}}
+\begin{longtable}{|p{0.13\textwidth}|p{0.38\textwidth}|p{0.19\textwidth}|p{0.20\textwidth}|}
 \caption{Information about a fire by spectral band class.}\label{tab:sensorcomp}\\
-\toprule
+\hline
+\rowcolor{tablehead}
 \textbf{Band class} & \textbf{Information about the fire} & \textbf{Day / night} & \textbf{Example sensors (pixel)} \\
-\midrule
+\hline
 \endfirsthead
-\toprule
+\hline
+\rowcolor{tablehead}
 \textbf{Band class} & \textbf{Information about the fire} & \textbf{Day / night} & \textbf{Example sensors (pixel)} \\
-\midrule
+\hline
 \endhead
-\bottomrule
+\hline
 \endfoot
 MWIR ($\approx$3.7--4\,$\mu$m) &
 Main active-fire detection band: fire emission far exceeds the background, so sub-pixel fires are detected~\cite{giglio2016modis,schroeder2014viirs}. Fire radiative power (FRP) from the MWIR radiance excess, within $\pm$12\% for fire temperatures of 665--1365\,K, underestimated for smouldering fires; FRP integrated over time is linearly related to biomass consumed~\cite{wooster2005frp}. Saturation differs: VIIRS I4 saturates at 367\,K, so VIIRS FRP comes from the 750\,m M13 band~\cite{schroeder2014viirs}; MODIS uses channel 22 (331\,K) with channel 21 ($\approx$500\,K) as backup~\cite{justice2002modis}; SLSTR uses S7 ($\approx$311\,K) with the fire channel F1~\cite{xu2020slstr}. &
 Day and night. By day reflected sunlight raises the thresholds (VIIRS: 325\,K by day, 295\,K at night) and sunglint must be masked; small fires are detected more easily at night~\cite{schroeder2014viirs,justice2002modis}. Clouds are opaque. &
 VIIRS I4 375\,m, M13 750\,m~\cite{schroeder2014viirs}; MODIS 1\,km~\cite{giglio2016modis}; SLSTR 1\,km~\cite{xu2020slstr}; SEVIRI 3\,km at nadir~\cite{wooster2015seviri}; GOES ABI, Himawari AHI $\approx$2\,km~\cite{schmidt2020goesr}; MTG FCI 2\,km (1\,km high-resolution mode); OroraTech $\approx$200\,m (vendor). \\
-\addlinespace
+\hline
 LWIR ($\approx$10--12\,$\mu$m) &
 Background surface temperature. The MWIR--LWIR difference separates fires from hot, bright fire-free surfaces, and LWIR screens clouds~\cite{giglio2016modis,schroeder2014viirs}; it rarely saturates (MODIS channel 31 $\approx$400\,K~\cite{justice2002modis}). With MWIR, the bi-spectral method gives sub-pixel fire temperature and area, i.e.\ flaming versus smouldering~\cite{dozier1981}, but only when the fire fills more than $\approx$0.5\% of the pixel and the bands are well co-registered~\cite{wooster2005frp}. &
 Day and night equally (thermal emission). Clouds are opaque. &
 VIIRS I5 375\,m, M15 750\,m; MODIS 1\,km; SLSTR 1\,km; Landsat TIRS 100\,m; GEO imagers 2--3\,km; OroraTech $\approx$200\,m (vendor). \\
-\addlinespace
+\hline
 SWIR ($\approx$1.6 and 2.2\,$\mu$m) &
 \emph{Active fire:} only hot flaming fronts (above $\approx$1000\,K) emit strongly; at 20--30\,m pixels it maps the flaming front and much smaller fires, but pixels often saturate and give no calibrated FRP~\cite{schroeder2016landsat}. At night VIIRS SWIR/NIR bands add to MWIR in multi-band fits of fire temperature and area~\cite{elvidge2013nightfire}. \emph{Post-fire:} burned area and burn severity with the Normalized Burn Ratio, $(\mathrm{NIR}-\mathrm{SWIR}_{2.2})/(\mathrm{NIR}+\mathrm{SWIR}_{2.2})$, and its pre/post difference~\cite{keybenson2006}. &
 By day reflected sunlight dominates, so only intense flaming is detected~\cite{schroeder2016landsat}; at night flaming is detected well~\cite{elvidge2013nightfire}. Burn-scar mapping needs daylight and no clouds. &
 Landsat-8/9 OLI 30\,m~\cite{schroeder2016landsat}; Sentinel-2 MSI 20\,m; SLSTR, MODIS 500\,m; VIIRS 375--750\,m; MTG FCI 0.5\,km (high-resolution mode). \\
-\addlinespace
+\hline
 VNIR incl.\ NIR ($\approx$0.4--0.9\,$\mu$m) &
 No active-fire detection by day: flame emission is weak against reflected sunlight; used only to mask clouds, sunglint and bright surfaces~\cite{justice2002modis,schroeder2016landsat}. Indirect information: smoke plume extent and direction, burn scars, pre-fire vegetation, the NIR term of NBR~\cite{keybenson2006}. At sub-metre resolution, visual context (structures, perimeter in clear areas) but no thermal information. &
 Daytime only. Blocked by clouds; dense smoke hides the surface. &
 Planet SkySat sub-metre (vendor); Sentinel-2 MSI 10\,m; Landsat OLI 30\,m; MODIS 250\,m; VIIRS 375\,m; SLSTR 500\,m. \\
-\addlinespace
+\hline
 Low-light visible at night (VIIRS DNB) &
 Visible light of flaming combustion at night; adding it increases night-time detection of small or cool fires~\cite{polivka2016dnb}. Visible light divided by FRP indicates the combustion phase: low for smouldering (e.g.\ peat), high for flaming~\cite{wang2020dnb}. No temperature or FRP by itself. &
 Night only. Confused by city lights, gas flares and moonlight. &
@@ -410,17 +444,23 @@ The largest remaining complexes are checked against official sources (Section~\r
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{lrrrrrr}
-\toprule
+\begin{tabular}{|l|r|r|r|r|r|r|}
+\hline
+\rowcolor{tablehead}
 \textbf{Step} & \textbf{Europe} & \textbf{N. America} & \textbf{Africa} & \textbf{Asia} & \textbf{S. America} & \textbf{Oceania} \\
-\midrule
+\hline
 All complexes & 7,264 & 6,627 & 108,877 & 11,517 & 22,960 & 3,538 \\
+\hline
 1. Vegetation fire & 7,027 & 6,397 & 108,710 & 10,669 & 22,859 & 3,524 \\
+\hline
 2. Onset inside the window & 6,060 & 5,058 & 85,796 & 8,707 & 20,170 & 2,737 \\
+\hline
 3. Size & 73 & 36 & 727 & 24 & 109 & 78 \\
+\hline
 4. Spreading fire & 50 & 25 & 460 & 17 & 46 & 48 \\
+\hline
 5. Hemisphere and continent rule & 50 & 25 & 1 & 0 & 0 & 0 \\
-\bottomrule
+\hline
 \end{tabular}
 \caption{Fire complexes per continent after each criterion.}
 \label{tab:funnel}
@@ -435,67 +475,116 @@ All complexes & 7,264 & 6,627 & 108,877 & 11,517 & 22,960 & 3,538 \\
 
 \subsection{Ground truth: official ignition sources}\label{subsec:groundtruth}
 
-\begin{longtable}{p{2.0cm}p{4.2cm}p{5.0cm}p{2.6cm}}
+\begin{longtable}{|p{2.0cm}|p{4.2cm}|p{5.0cm}|p{2.6cm}|}
 \caption{Official sources of ignition times per continent, August 2025.}\label{tab:groundtruth}\\
-\toprule
+\hline
+\rowcolor{tablehead}
 \textbf{Region} & \textbf{Source} & \textbf{What it gives} & \textbf{Usable for T0?} \\
-\midrule
+\hline
 \endhead
 Spain & Castilla y Le\'on open data~\cite{jcyl2025incendios}; Xunta de Galicia notes~\cite{xunta2025larouco,xunta2025oimbra}; DOE Extremadura~\cite{doe2025jarilla}; EGIF~\cite{miteco2025avance} & Official ignition hour; official area & Yes \\
+\hline
 Portugal & ICNF~\cite{icnf2025relatorio8}; ANEPC (via press only) & Official area; hour only in press & No: SEVIRI \\
+\hline
 Greece, Balkans & Fire services; Copernicus EMS & No official hour or area found & No \\
+\hline
 Europe & EFFIS & Record start, which coincides with a FIRMS pass in 96\% of records & No, not independent \\
+\hline
 North America & NIFC WFIGS~\cite{nifc2025wfigs} & Discovery time (UTC, minute), size, cause & Yes, verified by query \\
+\hline
 North America & BC Wildfire Service~\cite{bcws2025underwood} & \texttt{discoveryDate}, equal to the record creation time & Partly \\
+\hline
 North America & CWFIS / CNFDB (Canada) & Date only; no 2025 records yet & No \\
+\hline
 Asia & ISDM-Rosleskhoz (Avialesookhrana) & Detection dates, no public per-fire access & No: Himawari \\
+\hline
 Africa & ANEF (Morocco), via press & Date; hour only in press, and conflicting & No: SEVIRI \\
+\hline
 Africa & Botswana DFRR; AFIS & No per-fire times; AFIS is itself satellite based & No \\
+\hline
 South America & INPE BDQueimadas; Bolivian ministry; ICMBio / Prevfogo & Satellite detections; daily counts; dates & No \\
+\hline
 Oceania & Emergency WA / DFES; Bushfires NT & Warning issue times only & No \\
-\bottomrule
+\hline
 \end{longtable}
 
 \subsection{Candidates}\label{subsec:candidates}
 
-\begin{longtable}{p{2.6cm}p{1.9cm}p{2.6cm}p{1.3cm}p{1.9cm}p{3.6cm}}
+\begin{longtable}{|p{2.6cm}|p{1.9cm}|p{2.6cm}|p{1.3cm}|p{1.9cm}|p{3.6cm}|}
 \caption{Candidates examined. First FIRMS detection of the matched complex (kept detections, VIIRS or MODIS).}\label{tab:candidates}\\
-\toprule
+\hline
+\rowcolor{tablehead}
 \textbf{Candidate} & \textbf{Lat, lon} & \textbf{Ignition / discovery (UTC)} & \textbf{Size (ha)} & \textbf{First FIRMS (UTC)} & \textbf{Decision} \\
-\midrule
+\hline
 \endhead
-\multicolumn{6}{l}{\textit{Europe (official area from EGIF~\cite{miteco2025avance} or ICNF~\cite{icnf2025relatorio8})}} \\
+\rowcolor{tablegroup}
+\multicolumn{6}{|l|}{\textit{Europe (official area from EGIF~\cite{miteco2025avance} or ICNF~\cite{icnf2025relatorio8})}} \\
+\hline
 Pi\'od\~ao, Arganil (PT) & 40.25, $-$7.85 & 13 Aug 04:08 (press~\cite{sabado2025piodao}) & 65,417 & 13 Aug 10:38 & \textbf{Selected}: largest; T0 reference SEVIRI \\
+\hline
 Larouco, Ourense & 42.39, $-$7.13 & 13 Aug 16:55~\cite{xunta2025larouco} & 37,765 & 13 Aug 21:45 & \textbf{Selected} \\
+\hline
 Molezuelas, Zamora & 42.14, $-$6.08 & 10 Aug 12:25~\cite{jcyl2025incendios} & 24,426 & 10 Aug 12:32 & \textbf{Selected} \\
+\hline
 O\'imbra -- A Granxa, Ourense & 41.95, $-$7.53 & 12 Aug 12:39~\cite{xunta2025oimbra} & 22,414 & 12 Aug 14:57 & \textbf{Selected} \\
+\hline
 Jarilla, C\'aceres & 40.15, $-$6.00 & 12 Aug 16:17~\cite{doe2025jarilla} & 16,315 & 13 Aug 02:43 & Fifth largest \\
+\hline
 Barniedo de la Reina, Le\'on & 43.02, $-$4.83 & 13 Aug 21:40~\cite{jcyl2025incendios} & 14,462 & 14 Aug 01:10 & Smaller \\
+\hline
 A Mezquita, Ourense & 42.05, $-$7.08 & 12 Aug 07:42 or 19:20 (conflicting) & 10,743 & 12 Aug 10:01 & Smaller; hours conflict \\
+\hline
 Seven more (ES, PT) & & official or press & 1,270--7,824 & & Smaller \\
+\hline
 Montenegro, Chios, Preveza, Kosovo, Albania & & none official & & 9--12 Aug & No official time or area \\
-\multicolumn{6}{l}{\textit{North America}} \\
+\hline
+\rowcolor{tablegroup}
+\multicolumn{6}{|l|}{\textit{North America}} \\
+\hline
 Red Canyon, WY & 43.65, $-$108.01 & 14 Aug 00:09~\cite{nifc2025wfigs} & 50,468 & 14 Aug 04:20 & \textbf{Selected}: largest with an official time, lightning \\
+\hline
 Mount Underwood, BC & 49.13, $-$124.78 & 12 Aug 01:31~\cite{bcws2025underwood} & 3,518 & 12 Aug 04:41 & Alternative; time is record creation \\
+\hline
 NWT complex & 65.7, $-$123.7 & not found & & 10 Aug 21:05 & No ground truth \\
+\hline
 Rock, ID & 44.65, $-$116.16 & 13 Aug 06:27~\cite{nifc2025wfigs} & 1,132 & 13 Aug 05:19 & Smaller; first detection before discovery \\
+\hline
 Box, ID & 42.52, $-$117.00 & 13 Aug 17:00~\cite{nifc2025wfigs} & 1,747 & 13 Aug 19:40 & Smaller \\
+\hline
 Sleeper Ranch, WY & 44.25, $-$108.78 & 14 Aug 13:44~\cite{nifc2025wfigs} & 8,360 & 14 Aug 17:53 & Fewer detections \\
+\hline
 Spring Creek, WY & 43.95, $-$107.25 & 13 Aug 19:32~\cite{nifc2025wfigs} & 1,454 & 13 Aug 20:53 & Smaller \\
+\hline
 Mission Butte, MT & 45.59, $-$107.59 & 13 Aug 03:26~\cite{nifc2025wfigs} & 2,488 & none within 5\,km & Not detected near the reported point \\
-\multicolumn{6}{l}{\textit{Africa}} \\
+\hline
+\rowcolor{tablegroup}
+\multicolumn{6}{|l|}{\textit{Africa}} \\
+\hline
 Derdara, Chefchaouen & 35.10, $-$5.31 & 12 Aug (ANEF); hour: 14:00 local~\cite{nap2025derdara} or night~\cite{medias24_2025incendies} & $\approx$500~\cite{hespress2025chefchaouen} & 12 Aug 13:10 & \textbf{Selected}: only northern-hemisphere African wildfire; T0 reference SEVIRI \\
+\hline
 Ghanzi, Botswana & $-$23.7, 21.3 & none found & & 12 Aug 22:48 & Excluded: southern hemisphere (largest in Africa) \\
-\multicolumn{6}{l}{\textit{Asia (Siberia / Russian Far East)}} \\
+\hline
+\rowcolor{tablegroup}
+\multicolumn{6}{|l|}{\textit{Asia (Siberia / Russian Far East)}} \\
+\hline
 Kamchatka & 56.0, 160.6 & & & 9 Aug 15:46 & Excluded: Klyuchevskoy volcano~\cite{eastrussia2025klyuchevskoy}, 73\% flagged (criterion 1) \\
+\hline
 Yakutia / Irkutsk border & 61.4, 112.8 & none public & & 10 Aug 05:28 & Excluded: point source, 3.3\,km, 12 cells (criterion 4) \\
-\multicolumn{6}{l}{\textit{South America}} \\
+\hline
+\rowcolor{tablegroup}
+\multicolumn{6}{|l|}{\textit{South America}} \\
+\hline
 Beni, Bolivia & $-$13.5, $-$62.2 & none & & 9 Aug 05:57 & Excluded: southern hemisphere \\
+\hline
 Brazilian Amazon & $-$7.0, $-$59.6 & none & & 13 Aug 05:06 & Excluded: southern hemisphere \\
+\hline
 Chapada dos Veadeiros NP & & 22 Aug & 829 & & Excluded: outside window~\cite{terra2025chapada} \\
-\multicolumn{6}{l}{\textit{Oceania}} \\
+\hline
+\rowcolor{tablegroup}
+\multicolumn{6}{|l|}{\textit{Oceania}} \\
+\hline
 El Questro / King River, WA & $-$16.1, 128.4 & warnings from 13 Aug~\cite{broome2025elquestro} & & 13 Aug 07:06 & Excluded: southern hemisphere; cause unknown \\
-\bottomrule
+\hline
 \end{longtable}
 
 Figure~\ref{fig:es_funnel} summarises the whole selection. It is read from top to bottom: each box is a step, the number on its right is how many fire complexes are left after it, and the arrow beside the step says how many were removed and why. A fire complex is a group of FIRMS detections in neighbouring 1\,km cells, pooled over the window, so one large fire is one complex and 1.69 million detections become 160{,}783 complexes.
@@ -524,19 +613,26 @@ Figure~\ref{fig:es_candidates} shows the last step: the 20 candidates with an of
 
 \subsection{Selected events}\label{subsec:selected}
 
-\begin{longtable}{p{2.6cm}p{3.6cm}p{2.8cm}p{1.6cm}p{3.0cm}}
-\toprule
+\begin{longtable}{|p{2.6cm}|p{3.6cm}|p{2.8cm}|p{1.6cm}|p{3.0cm}|}
+\hline
+\rowcolor{tablehead}
 \textbf{Region} & \textbf{Event} & \textbf{Ignition (UTC)} & \textbf{Area (ha)} & \textbf{Ignition source} \\
-\midrule
+\hline
 \endhead
 Spain & Larouco & 13 Aug, 16:55 & 37,765 & Xunta~\cite{xunta2025larouco}; area EGIF~\cite{miteco2025avance} \\
+\hline
 Spain & Molezuelas de la Carballeda & 10 Aug, 12:25 & 24,426 & Castilla y Le\'on~\cite{jcyl2025incendios}; area EGIF~\cite{miteco2025avance} \\
+\hline
 Spain & O\'imbra -- A Granxa & 12 Aug, 12:39 & 22,414 & Xunta~\cite{xunta2025oimbra}; area EGIF~\cite{miteco2025avance} \\
+\hline
 Portugal & Pi\'od\~ao, Arganil & 13 Aug (hour in press only) & 65,417 & Area ICNF~\cite{icnf2025relatorio8}; T0 reference: first SEVIRI detection \\
+\hline
 North America & Red Canyon, Wyoming & 14 Aug, 00:09 (discovery) & 50,468 & NIFC WFIGS~\cite{nifc2025wfigs} \\
+\hline
 Africa & Derdara, Chefchaouen, Morocco & 12 Aug (date only) & about 500 & ANEF via press~\cite{nap2025derdara, hespress2025chefchaouen}; T0 reference: first SEVIRI detection \\
+\hline
 Asia & none eligible & & & \\
-\bottomrule
+\hline
 \end{longtable}
 
 \begin{figure}[h]
@@ -599,20 +695,27 @@ A catalogue search (NASA CMR) for the 57 empty overpasses between 12\,h before t
 
 The Month 2 data were requested for Spain only. Table~\ref{tab:s0data} lists what S0 now holds for every event.
 
-\begin{longtable}{p{3.2cm}p{4.2cm}p{3.4cm}p{3.6cm}}
+\begin{longtable}{|p{3.2cm}|p{4.2cm}|p{3.4cm}|p{3.6cm}|}
 \caption{Public-record data of S0, 8 to 16 August 2025.}\label{tab:s0data}\\
-\toprule
+\hline
+\rowcolor{tablehead}
 \textbf{Source} & \textbf{Content} & \textbf{Coverage} & \textbf{Access} \\
-\midrule
+\hline
 \endhead
 FIRMS & VIIRS (Suomi NPP, NOAA-20/21) and MODIS (Terra, Aqua) detections & global, until 15 Aug 21:26\,UTC & open (archive request) \\
+\hline
 Sentinel-3 SL\_2\_FRP & SLSTR fire list (1\,km MWIR, 500\,m SWIR), 100 products & all seven events & CDSE account \\
+\hline
 LSA SAF FRP-PIXEL & SEVIRI, every 15\,min & Meteosat disk: Europe, Africa & open \\
+\hline
 GOES ABI FDC & GOES-18 and GOES-19, US sector (CONUS, PACUS), every 5\,min & North America & open (NOAA on AWS) \\
+\hline
 EFFIS burnt areas & records and final perimeters & Spain, Portugal, Morocco & request form; perimeters open (WFS) \\
+\hline
 NIFC WFIGS & final perimeter & Red Canyon & open \\
+\hline
 BC Wildfire Service & final perimeter & Mount Underwood & open \\
-\bottomrule
+\hline
 \end{longtable}
 
 \begin{itemize}[leftmargin=1.2cm]
@@ -632,20 +735,27 @@ BC Wildfire Service & final perimeter & Mount Underwood & open \\
 
 Until the new events are in the registry and run through the per-event pipeline, one comparable number per event and source is taken: the first fire pixel whose centre lies inside the official final perimeter, buffered by 2\,km, from 1\,h before the reference time. The perimeter is the same, independent footprint for every source. The rule reproduces the existing results: the FIRMS column equals the first detections of Figure~\ref{fig:es_timeline} for all seven events, and the SEVIRI time of Larouco (18:40\,UTC) equals the pipeline value.
 
-\begin{longtable}{lrrrr}
+\begin{longtable}{|l|r|r|r|r|}
 \caption{Preliminary first detection per source, hours after the reference time. Geostationary: SEVIRI for Europe and Africa, GOES for North America (earlier of GOES-18 and GOES-19; the other detects at +0.54\,h for Red Canyon and +0.34\,h for Mount Underwood).}\label{tab:s0first}\\
-\toprule
+\hline
+\rowcolor{tablehead}
 \textbf{Event} & \textbf{FIRMS} & \textbf{Sentinel-3} & \textbf{SEVIRI} & \textbf{GOES} \\
-\midrule
+\hline
 \endhead
 Larouco & 4.83 & 5.06 & 1.75 & -- \\
+\hline
 Molezuelas & 0.12 & 9.19 & 0.25 & -- \\
+\hline
 O\'imbra & 2.30 & 22.00 & 3.02 & -- \\
+\hline
 Pi\'od\~ao & 6.55 & 6.52 & 0.78 & -- \\
+\hline
 Derdara & 0.17 & 8.74 & 0.17 & -- \\
+\hline
 Red Canyon & 4.18 & 4.57 & -- & $-$0.21 (GOES-19) \\
+\hline
 Mount Underwood & 3.17 & 4.10 & -- & 0.18 (GOES-18) \\
-\bottomrule
+\hline
 \end{longtable}
 
 \begin{itemize}[leftmargin=1.2cm]
@@ -666,20 +776,24 @@ Mount Underwood & 3.17 & 4.10 & -- & 0.18 (GOES-18) \\
 
 The first detections above are observation times. A user could only act on them once the product was published. Table~\ref{tab:latency} gives the time from the observation to the product for each source.
 
-\begin{longtable}{p{3.4cm}p{3.6cm}p{3.6cm}p{4.2cm}}
+\begin{longtable}{|p{3.4cm}|p{3.6cm}|p{3.6cm}|p{4.0cm}|}
 \caption{Time from the observation to the product. Geostationary values measured from the downloaded files (GOES: scan start to file creation in the file name, 5{,}179 files; LSA SAF: acquisition to product time in the file attributes, 864 files). Product creation, not arrival at the user.}\label{tab:latency}\\
-\toprule
+\hline
+\rowcolor{tablehead}
 \textbf{Product} & \textbf{Observation to ground} & \textbf{Processing} & \textbf{Source of the value} \\
-\midrule
+\hline
 \endhead
 GOES ABI FDC & none (permanent contact) & 3\,min (max.\ 10\,min) & measured \\
+\hline
 LSA SAF FRP-PIXEL (SEVIRI) & none (permanent contact) & 17.5\,min (max.\ 21\,min) & measured; includes the 15\,min scan \\
-FIRMS (VIIRS, MODIS) & median 25\,min, up to 114\,min & under 3\,h & ground: computed (Section~\ref{sec:runs}); processing: provider statement, not measured \\
-Sentinel-3 SL\_2\_FRP & Svalbard only, often a full orbit & under 3\,h & as FIRMS \\
-\bottomrule
+\hline
+FIRMS (VIIRS, MODIS) & median 25\,min, up to 114\,min & 50\,min (MODIS), 105\,min (VIIRS) & ground: computed (Section~\ref{sec:runs}); processing: measured (Section~\ref{subsec:s1latency}) \\
+\hline
+Sentinel-3 SL\_2\_FRP & Svalbard only, often a full orbit & 50\,min & as FIRMS \\
+\hline
 \end{longtable}
 
-\textbf{Conclusion.} In the public record, the delay after the detection is set by the ground and processing chain, not by the observation. Geostationary products appear within 3 to 18\,min. Polar products first wait for a ground station (median 25\,min, up to about 2\,h) and then for processing (up to 3\,h). Where a polar satellite sees the fire first, which is the case for Molezuelas and O\'imbra, the public alert can therefore come hours after the detection. The gain of a faster space segment (S2) must be measured against this whole chain, not against the detection time alone. The polar processing time is the provider's upper bound: FIRMS publishes no production time, and only the reprocessed Sentinel-3 products remain archived, so it cannot be measured here.
+\textbf{Conclusion.} In the public record, the delay after the detection is set by the ground and processing chain, not by the observation. Geostationary products appear within 3 to 18\,min. Polar products first wait for a ground station (median 25\,min, up to about 2\,h) and then for processing (50 to 105\,min). Where a polar satellite sees the fire first, which is the case for Molezuelas and O\'imbra, the public alert can therefore come hours after the detection. The gain of a faster space segment (S2) must be measured against this whole chain, not against the detection time alone.
 
 \textbf{Implications (ideas, not results).} The finding points to ways of shortening the chain beyond the network links studied here:
 \begin{itemize}[leftmargin=1.2cm]
