@@ -174,33 +174,47 @@ The first contact is the time the satellite rises above the elevation mask, not 
 
 The Month 2 set was therefore optimistic: it made S1 too fast and would understate the gain of the central nodes. The baseline uses the real ground segment of each satellite plus the US direct-readout stations. The same set is used in all scenarios; since ground links are filtered in post-processing, other sets can be tested later without new runs. The processing on the ground is added in Section~\ref{subsec:latency}.
 
+\textbf{Design freeze: one ground segment for all scenarios.} The ground segment is frozen as the stations of the table above: Svalbard, McMurdo and Poker Flat for stored data, the TDRSS relay for Terra, and Madison, Hampton and Mayag\"uez for direct readout over the United States. The satellites added in S3 and S4 downlink only to these stations, and only satellites that broadcast their data directly can use the direct-readout stations. The reason is comparability: with the same stations in every scenario, a difference between scenarios comes from the space segment alone, not from a different ground network.
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Not public, but realistic.} The stations serve public missions but are not open to any satellite: Svalbard and Troll belong to a commercial operator (KSAT) that rents antennas to NASA, NOAA and ESA; McMurdo, Poker Flat and TDRSS are NASA's; the direct-readout stations belong to universities and NASA. A commercial S4 satellite could buy Svalbard passes, so the assumption is plausible, but it is a modelling choice, not the satellites' real network.
+    \item \textbf{What it changes.} Some S3 satellites have their own stations, e.g.\ FY-3D downlinks to Kiruna and four stations in China (Section~\ref{sec:census}). Their real segment is kept as a sensitivity case, which costs no new run because ground links are filtered in post-processing.
+    \item \textbf{Checked candidates.} Sentinel-3 sends its science data to Svalbard only; Kiruna and Troll handle commands~\cite{esa2026s3dataflow}. The US direct-readout set matches the stations NASA names for the FIRMS ultra-real-time product~\cite{nasa2022firmsurt}; the network has since grown (5 own and 15 partner stations in 2026~\cite{flynn2026dbrtn}), so the set may be incomplete. In Europe, EUMETSAT's EARS network relays VIIRS data from regional stations~\cite{eumetsat2022viirs}, but as data, not as a public fire product; it is a candidate fast path for S1 to S4, not part of S0.
+\end{itemize}
+\vincenzoq{Is a common ground segment for all scenarios acceptable, with each satellite's real segment as a sensitivity case? Which stations should the coordination layer (central nodes) of S2 use: the same set, or a dedicated one?}
+
 \subsection{Latency of the S1 layer}\label{subsec:latency}
 
 The time from an observation to a public fire detection has two parts: the wait for a ground station, which the simulation computes from the orbits, and the ground processing up to the fire product being online, which it does not. The ingestion into FIRMS after the file is online is not included.
 
-The near-real-time files are kept online only for days (LANCE~\cite{nasa2026lancenrt} about 7 days, Sentinel-3 NR products on the Copernicus Data Space Ecosystem~\cite{cdse2026catalogue} about two weeks), so those of August 2025 no longer exist. The latency was therefore measured on all files online on 7 November 2026, as the time from the end of the observation to the file being online. The downlink wait is the orbit average of the time to the first contact with the real ground segment; the processing is the difference of the two medians.
+The near-real-time fire files of August 2025 are no longer online (LANCE keeps them for about 7 days~\cite{nasa2026lancenrt}), so the latency in the study window (8 to 16 August 2025) is measured on products of the same processing chains that are still archived with their creation time:
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Sentinel-3:} the SLSTR aerosol product SL\_2\_AOD NR~\cite{cdse2026catalogue}, made by the same near-real-time chain and centre as SL\_2\_FRP NR. For the same granule the fire product is created 0.7\,min before it (median of 3{,}400 pairs, interquartile range 0.1\,min), so the offset is applied.
+    \item \textbf{VIIRS:} the NOAA I-band SDR files~\cite{noaa2025jpssaws}, the calibrated radiances the fire product is made from. The LANCE fire product follows the last SDR of its 6-min granule by a delay measured on the files still online for the same granules (median 68\,min for Suomi NPP, 105\,min for NOAA-20, 80\,min for NOAA-21), which is added as a random draw so that its spread is kept.
+    \item \textbf{MODIS:} no timing of August 2025 is archived; only the EOSDIS weekly metrics~\cite{esdis2025metrics} report the share of files within 3\,h.
+\end{itemize}
+The latency runs from the end of the observation to the product being created. The downlink wait is the orbit average of the time to the first contact with the real ground segment; the processing is the difference of the two medians.
 
-\begin{longtable}{p{2.1cm}p{2.3cm}p{1.0cm}p{2.2cm}p{1.3cm}p{2.2cm}p{1.8cm}}
-\caption{Near-real-time latency of the S1 fire products, from the end of the observation to the file being online, in minutes: median (90th percentile). LANCE files 31 October to 7 November 2026, Sentinel-3 files 24 October to 7 November 2026.}\label{tab:latency}\\
+\begin{longtable}{p{1.9cm}p{2.6cm}p{1.9cm}p{1.3cm}p{1.4cm}p{1.6cm}p{1.5cm}}
+\caption{Near-real-time latency of the S1 fire products in the study window, 8 to 16 August 2025, in minutes: median (90th percentile). Within 3\,h: share of the estimated latencies and share reported by EOSDIS for the land products over the four weeks to 18 and to 25 August 2025.}\label{tab:latency}\\
 \toprule
-\textbf{Satellite} & \textbf{Product} & \textbf{Files} & \textbf{Measured latency} & \textbf{Within 3\,h} & \textbf{Downlink wait (model)} & \textbf{Processing} \\
+\textbf{Satellite} & \textbf{Product (measured on)} & \textbf{Latency} & \textbf{Within 3\,h} & \textbf{Within 3\,h (EOSDIS)} & \textbf{Downlink wait (model)} & \textbf{Processing} \\
 \midrule
 \endhead
-Terra & MOD14 & 2021 & 69 (99) & 100\,\% & 25 (relay) & 44 \\
-Aqua & MYD14 & 2000 & 98 (139) & 99.6\,\% & 38 (78) & 61 \\
-Suomi NPP & VNP14IMG & 528 & 151 (512) & 73.9\,\% & 51 (161) & 100 \\
-NOAA-20 & VJ114IMG & 1599 & 141 (179) & 90.5\,\% & 21 (68) & 120 \\
-NOAA-21 & VJ214IMG & 1645 & 120 (322) & 85.4\,\% & 20 (54) & 100 \\
-Sentinel-3A & SL\_2\_FRP NR & 6786 & 104 (149) & 92.7\,\% & 50 (166) & 54 \\
-Sentinel-3B & SL\_2\_FRP NR & 6785 & 102 (144) & 94.7\,\% & 52 (141) & 51 \\
+Terra & MOD14 (--) & 69 (99)$^{a}$ & -- & $>$95\,\% & 25 (relay) & 44$^{a}$ \\
+Aqua & MYD14 (--) & 98 (139)$^{a}$ & -- & $>$95\,\% & 38 (78) & 61$^{a}$ \\
+Suomi NPP & VNP14IMG (NOAA SDR) & 152 (543) & 67\,\% & 72--73\,\% & 51 (161) & 101 \\
+NOAA-20 & VJ114IMG (NOAA SDR) & 138 (191) & 88\,\% & 93--$>$95\,\% & 21 (68) & 117 \\
+NOAA-21 & VJ214IMG (NOAA SDR) & 116 (332) & 85\,\% & 80--83\,\% & 20 (54) & 96 \\
+Sentinel-3A & SL\_2\_FRP NR (SL\_2\_AOD NR) & 96 (138) & 100\,\% & -- & 50 (166) & 46 \\
+Sentinel-3B & SL\_2\_FRP NR (SL\_2\_AOD NR) & 95 (136) & 100\,\% & -- & 52 (141) & 43 \\
 \bottomrule
+\multicolumn{7}{p{14.9cm}}{\footnotesize $^{a}$ No per-file timing of August 2025 is archived for MODIS, and the published ``within 3\,h'' is only an upper bound. The median is therefore measured on the LANCE MOD14 and MYD14 files online at the time of writing (November 2026, about 2{,}000 each). The processing chain is unchanged, and the share within 3\,h agrees with the August 2025 EOSDIS figure (over 95\,\%).} \\
 \end{longtable}
 
 \begin{itemize}[leftmargin=1.2cm]
-    \item The processing depends on the processing chain, not on the satellite: about 45 to 60\,min for MODIS and Sentinel-3, 100 to 120\,min for VIIRS. VIIRS is the slowest although NOAA-20/21 have the shortest downlink wait.
-    \item The published ``within 3\,h'' is an upper bound, not a typical value: the medians are 1 to 2.5\,h. Between 5 and 15\,\% of the VIIRS and Sentinel-3 files miss it.
-    \item Suomi NPP was measured in its last three days of data delivery (it ended on 2 November 2026), so its row is not representative; the NOAA-20/21 processing applies to it as well.
-    \item The values are from November 2026, not August 2025. The EOSDIS weekly metrics~\cite{esdis2025metrics} give the share of LANCE files within 3\,h for August 2025 and can show whether the two periods are comparable.
+    \item The processing depends on the processing chain, not on the satellite: about 45\,min for Sentinel-3 and Terra, 60\,min for Aqua, 100 to 120\,min for VIIRS. VIIRS is the slowest although NOAA-20/21 have the shortest downlink wait.
+    \item The published ``within 3\,h'' is an upper bound, not a typical value: the medians are 1.5 to 2.5\,h. In the window, 12 to 33\,\% of the VIIRS granules missed it; no Sentinel-3 granule did.
+    \item The EOSDIS shares agree with the estimated ones within a few percent, which supports the VIIRS proxy. EOSDIS reports delays of the Suomi NPP and NOAA-20 products on 10 and 12 August 2025 (faulty hardware, late raw data), which may explain the long tail of Suomi NPP.
 \end{itemize}
 
 The latency model is refined in steps, each one keeping the previous as a bound:
@@ -208,7 +222,7 @@ The latency model is refined in steps, each one keeping the previous as a bound:
     \item Downlink wait only (the runs so far): a lower bound.
     \item Downlink wait plus the median processing of each chain (Table~\ref{tab:latency}): the baseline for S1 against S0.
     \item Downlink wait plus a processing time drawn from the measured files: the spread of the detection time, not only its median.
-    \item Consistency check: the modelled total, over the same days and orbits as the measured files, should reproduce the measured distribution.
+    \item Consistency check: the modelled total over the study window should reproduce the measured distribution.
 \end{enumerate}
 
 % =========================================================
@@ -711,7 +725,7 @@ S2 asks how many central nodes there are and which coordination satellites they 
 
 \begin{itemize}[leftmargin=1.2cm]
     \item \actionitem{Quantify the time-to-first-detection gain of each S3 and S4 satellite per event (swath and detection limit).}
-    \item \actionitem{Freeze the layers and the ground stations: the real ground segment of each S1 satellite plus the US direct-readout stations.}
+    \item \actionitem{Apply the frozen ground segment to the S3 and S4 satellites in the post-processing, with each satellite's real segment as a sensitivity case; fix the stations of the coordination layer after the answer from Vincenzo.}
     \item \actionitem{Add the new events to the registry and run them through the public-record pipeline one at a time: O\'imbra, Pi\'od\~ao, Red Canyon, Derdara.}
     \item \actionitem{Run S1, then S2 with the 600/20 Walker, on the frozen design.}
 \end{itemize}

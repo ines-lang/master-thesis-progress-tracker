@@ -1,0 +1,6 @@
+satellite,proxy,files,pairs,offset_median_min,offset_iqr_min,latency_median_min,latency_p90_min,within_3h_pct,sdr_latency_median_min
+Sentinel-3A,SL_2_AOD NR creation,2567,3393,-0.7,0.1,96,138,100.0,
+Sentinel-3B,SL_2_AOD NR creation,2562,3396,-0.7,0.1,95,136,100.0,
+Suomi NPP,NOAA I4 SDR creation + LANCE offset,2160,527,67.7,79.6,152,543,67.4,66.0
+NOAA-20,NOAA I4 SDR creation + LANCE offset,2160,1599,105.2,19.3,138,191,87.7,28.0
+NOAA-21,NOAA I4 SDR creation + LANCE offset,2160,1645,80.0,40.8,116,332,84.9,28.0
