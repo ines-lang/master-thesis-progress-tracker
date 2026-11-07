@@ -6,17 +6,17 @@ larouco,Aqua,MODIS,2025-08-14T14:37:00Z,21.7,220.0,month2,Kiruna (Esrange),4.5
 larouco,Aqua,MODIS,2025-08-14T14:37:00Z,21.7,220.0,real,Svalbard (SvalSat),6.0
 larouco,Aqua,MODIS,2025-08-14T14:37:00Z,21.7,220.0,real + US direct readout,Svalbard (SvalSat),6.0
 larouco,NOAA-20,VIIRS,2025-08-14T01:34:00Z,8.65,1046.0,month2,Troll (TrollSat),27.5
-larouco,NOAA-20,VIIRS,2025-08-14T01:34:00Z,8.65,1046.0,real,Troll (TrollSat),27.5
-larouco,NOAA-20,VIIRS,2025-08-14T01:34:00Z,8.65,1046.0,real + US direct readout,Troll (TrollSat),27.5
+larouco,NOAA-20,VIIRS,2025-08-14T01:34:00Z,8.65,1046.0,real,McMurdo,35.5
+larouco,NOAA-20,VIIRS,2025-08-14T01:34:00Z,8.65,1046.0,real + US direct readout,McMurdo,35.5
 larouco,NOAA-20,VIIRS,2025-08-14T03:14:00Z,10.32,968.0,month2,Troll (TrollSat),33.5
-larouco,NOAA-20,VIIRS,2025-08-14T03:14:00Z,10.32,968.0,real,Troll (TrollSat),33.5
-larouco,NOAA-20,VIIRS,2025-08-14T03:14:00Z,10.32,968.0,real + US direct readout,Troll (TrollSat),33.5
+larouco,NOAA-20,VIIRS,2025-08-14T03:14:00Z,10.32,968.0,real,McMurdo,36.0
+larouco,NOAA-20,VIIRS,2025-08-14T03:14:00Z,10.32,968.0,real + US direct readout,McMurdo,36.0
 larouco,NOAA-20,VIIRS,2025-08-14T12:57:30Z,20.04,466.0,month2,Kiruna (Esrange),3.0
 larouco,NOAA-20,VIIRS,2025-08-14T12:57:30Z,20.04,466.0,real,Svalbard (SvalSat),5.5
 larouco,NOAA-20,VIIRS,2025-08-14T12:57:30Z,20.04,466.0,real + US direct readout,Svalbard (SvalSat),5.5
 larouco,NOAA-21,VIIRS,2025-08-14T02:25:00Z,9.5,69.0,month2,Troll (TrollSat),29.5
-larouco,NOAA-21,VIIRS,2025-08-14T02:25:00Z,9.5,69.0,real,Troll (TrollSat),29.5
-larouco,NOAA-21,VIIRS,2025-08-14T02:25:00Z,9.5,69.0,real + US direct readout,Troll (TrollSat),29.5
+larouco,NOAA-21,VIIRS,2025-08-14T02:25:00Z,9.5,69.0,real,McMurdo,36.0
+larouco,NOAA-21,VIIRS,2025-08-14T02:25:00Z,9.5,69.0,real + US direct readout,McMurdo,36.0
 larouco,NOAA-21,VIIRS,2025-08-14T12:09:00Z,19.23,1420.0,month2,Kiruna (Esrange),1.0
 larouco,NOAA-21,VIIRS,2025-08-14T12:09:00Z,19.23,1420.0,real,Svalbard (SvalSat),3.5
 larouco,NOAA-21,VIIRS,2025-08-14T12:09:00Z,19.23,1420.0,real + US direct readout,Svalbard (SvalSat),3.5
@@ -38,6 +38,12 @@ larouco,Suomi NPP,VIIRS,2025-08-14T12:35:00Z,19.67,968.0,real + US direct readou
 larouco,Suomi NPP,VIIRS,2025-08-14T14:15:00Z,21.33,1047.0,month2,Svalbard (SvalSat),7.5
 larouco,Suomi NPP,VIIRS,2025-08-14T14:15:00Z,21.33,1047.0,real,Svalbard (SvalSat),7.5
 larouco,Suomi NPP,VIIRS,2025-08-14T14:15:00Z,21.33,1047.0,real + US direct readout,Svalbard (SvalSat),7.5
+larouco,Terra,MODIS,2025-08-13T21:45:30Z,4.84,586.0,month2,Svalbard (SvalSat),7.0
+larouco,Terra,MODIS,2025-08-13T21:45:30Z,4.84,586.0,real,TDRSS relay,25.0
+larouco,Terra,MODIS,2025-08-13T21:45:30Z,4.84,586.0,real + US direct readout,TDRSS relay,25.0
+larouco,Terra,MODIS,2025-08-14T09:42:30Z,16.79,674.0,month2,Troll (TrollSat),27.5
+larouco,Terra,MODIS,2025-08-14T09:42:30Z,16.79,674.0,real,TDRSS relay,25.0
+larouco,Terra,MODIS,2025-08-14T09:42:30Z,16.79,674.0,real + US direct readout,TDRSS relay,25.0
 molezuelas,Aqua,MODIS,2025-08-10T15:18:00Z,2.88,701.0,month2,Svalbard (SvalSat),7.5
 molezuelas,Aqua,MODIS,2025-08-10T15:18:00Z,2.88,701.0,real,Svalbard (SvalSat),7.5
 molezuelas,Aqua,MODIS,2025-08-10T15:18:00Z,2.88,701.0,real + US direct readout,Svalbard (SvalSat),7.5
@@ -51,8 +57,8 @@ molezuelas,NOAA-20,VIIRS,2025-08-10T14:13:00Z,1.8,1141.0,month2,Svalbard (SvalSa
 molezuelas,NOAA-20,VIIRS,2025-08-10T14:13:00Z,1.8,1141.0,real,Svalbard (SvalSat),7.0
 molezuelas,NOAA-20,VIIRS,2025-08-10T14:13:00Z,1.8,1141.0,real + US direct readout,Svalbard (SvalSat),7.0
 molezuelas,NOAA-20,VIIRS,2025-08-11T02:30:30Z,14.09,202.0,month2,Troll (TrollSat),29.5
-molezuelas,NOAA-20,VIIRS,2025-08-11T02:30:30Z,14.09,202.0,real,Troll (TrollSat),29.5
-molezuelas,NOAA-20,VIIRS,2025-08-11T02:30:30Z,14.09,202.0,real + US direct readout,Troll (TrollSat),29.5
+molezuelas,NOAA-20,VIIRS,2025-08-11T02:30:30Z,14.09,202.0,real,McMurdo,35.5
+molezuelas,NOAA-20,VIIRS,2025-08-11T02:30:30Z,14.09,202.0,real + US direct readout,McMurdo,35.5
 molezuelas,NOAA-20,VIIRS,2025-08-11T12:14:00Z,23.82,1249.0,month2,Kiruna (Esrange),1.0
 molezuelas,NOAA-20,VIIRS,2025-08-11T12:14:00Z,23.82,1249.0,real,Svalbard (SvalSat),4.0
 molezuelas,NOAA-20,VIIRS,2025-08-11T12:14:00Z,23.82,1249.0,real + US direct readout,Svalbard (SvalSat),4.0
@@ -60,8 +66,8 @@ molezuelas,NOAA-21,VIIRS,2025-08-10T13:23:30Z,0.98,114.0,month2,Kiruna (Esrange)
 molezuelas,NOAA-21,VIIRS,2025-08-10T13:23:30Z,0.98,114.0,real,Svalbard (SvalSat),6.0
 molezuelas,NOAA-21,VIIRS,2025-08-10T13:23:30Z,0.98,114.0,real + US direct readout,Svalbard (SvalSat),6.0
 molezuelas,NOAA-21,VIIRS,2025-08-11T01:41:30Z,13.28,827.0,month2,Troll (TrollSat),27.5
-molezuelas,NOAA-21,VIIRS,2025-08-11T01:41:30Z,13.28,827.0,real,Troll (TrollSat),27.5
-molezuelas,NOAA-21,VIIRS,2025-08-11T01:41:30Z,13.28,827.0,real + US direct readout,Troll (TrollSat),27.5
+molezuelas,NOAA-21,VIIRS,2025-08-11T01:41:30Z,13.28,827.0,real,McMurdo,35.5
+molezuelas,NOAA-21,VIIRS,2025-08-11T01:41:30Z,13.28,827.0,real + US direct readout,McMurdo,35.5
 molezuelas,NOAA-21,VIIRS,2025-08-11T03:21:30Z,14.94,1184.0,month2,McMurdo,36.0
 molezuelas,NOAA-21,VIIRS,2025-08-11T03:21:30Z,14.94,1184.0,real,McMurdo,36.0
 molezuelas,NOAA-21,VIIRS,2025-08-11T03:21:30Z,14.94,1184.0,real + US direct readout,McMurdo,36.0
@@ -80,6 +86,15 @@ molezuelas,Suomi NPP,VIIRS,2025-08-10T13:50:00Z,1.42,603.0,real + US direct read
 molezuelas,Suomi NPP,VIIRS,2025-08-11T02:07:30Z,13.71,340.0,month2,Troll (TrollSat),29.0
 molezuelas,Suomi NPP,VIIRS,2025-08-11T02:07:30Z,13.71,340.0,real,Svalbard (SvalSat),85.0
 molezuelas,Suomi NPP,VIIRS,2025-08-11T02:07:30Z,13.71,340.0,real + US direct readout,Svalbard (SvalSat),85.0
+molezuelas,Terra,MODIS,2025-08-10T21:25:30Z,9.01,251.0,month2,Kiruna (Esrange),6.0
+molezuelas,Terra,MODIS,2025-08-10T21:25:30Z,9.01,251.0,real,TDRSS relay,25.0
+molezuelas,Terra,MODIS,2025-08-10T21:25:30Z,9.01,251.0,real + US direct readout,TDRSS relay,25.0
+molezuelas,Terra,MODIS,2025-08-11T09:22:30Z,20.96,1000.0,month2,Troll (TrollSat),27.0
+molezuelas,Terra,MODIS,2025-08-11T09:22:30Z,20.96,1000.0,real,TDRSS relay,25.0
+molezuelas,Terra,MODIS,2025-08-11T09:22:30Z,20.96,1000.0,real + US direct readout,TDRSS relay,25.0
+molezuelas,Terra,MODIS,2025-08-11T11:00:00Z,22.58,973.0,month2,McMurdo,35.5
+molezuelas,Terra,MODIS,2025-08-11T11:00:00Z,22.58,973.0,real,TDRSS relay,25.0
+molezuelas,Terra,MODIS,2025-08-11T11:00:00Z,22.58,973.0,real + US direct readout,TDRSS relay,25.0
 oimbra,Aqua,MODIS,2025-08-12T14:57:30Z,2.31,174.0,month2,Kiruna (Esrange),6.0
 oimbra,Aqua,MODIS,2025-08-12T14:57:30Z,2.31,174.0,real,Svalbard (SvalSat),6.5
 oimbra,Aqua,MODIS,2025-08-12T14:57:30Z,2.31,174.0,real + US direct readout,Svalbard (SvalSat),6.5
@@ -93,8 +108,8 @@ oimbra,NOAA-20,VIIRS,2025-08-12T13:35:00Z,0.93,250.0,month2,Kiruna (Esrange),5.5
 oimbra,NOAA-20,VIIRS,2025-08-12T13:35:00Z,0.93,250.0,real,Svalbard (SvalSat),6.5
 oimbra,NOAA-20,VIIRS,2025-08-12T13:35:00Z,0.93,250.0,real + US direct readout,Svalbard (SvalSat),6.5
 oimbra,NOAA-20,VIIRS,2025-08-13T01:53:00Z,13.23,682.0,month2,Troll (TrollSat),28.0
-oimbra,NOAA-20,VIIRS,2025-08-13T01:53:00Z,13.23,682.0,real,Troll (TrollSat),28.0
-oimbra,NOAA-20,VIIRS,2025-08-13T01:53:00Z,13.23,682.0,real + US direct readout,Troll (TrollSat),28.0
+oimbra,NOAA-20,VIIRS,2025-08-13T01:53:00Z,13.23,682.0,real,McMurdo,35.5
+oimbra,NOAA-20,VIIRS,2025-08-13T01:53:00Z,13.23,682.0,real + US direct readout,McMurdo,35.5
 oimbra,NOAA-20,VIIRS,2025-08-13T03:32:30Z,14.89,1320.0,month2,McMurdo,36.5
 oimbra,NOAA-20,VIIRS,2025-08-13T03:32:30Z,14.89,1320.0,real,McMurdo,36.5
 oimbra,NOAA-20,VIIRS,2025-08-13T03:32:30Z,14.89,1320.0,real + US direct readout,McMurdo,36.5
@@ -105,8 +120,8 @@ oimbra,NOAA-21,VIIRS,2025-08-12T14:26:30Z,1.79,1291.0,month2,Svalbard (SvalSat),
 oimbra,NOAA-21,VIIRS,2025-08-12T14:26:30Z,1.79,1291.0,real,Svalbard (SvalSat),7.5
 oimbra,NOAA-21,VIIRS,2025-08-12T14:26:30Z,1.79,1291.0,real + US direct readout,Svalbard (SvalSat),7.5
 oimbra,NOAA-21,VIIRS,2025-08-13T02:44:00Z,14.08,350.0,month2,Troll (TrollSat),30.5
-oimbra,NOAA-21,VIIRS,2025-08-13T02:44:00Z,14.08,350.0,real,Troll (TrollSat),30.5
-oimbra,NOAA-21,VIIRS,2025-08-13T02:44:00Z,14.08,350.0,real + US direct readout,Troll (TrollSat),30.5
+oimbra,NOAA-21,VIIRS,2025-08-13T02:44:00Z,14.08,350.0,real,McMurdo,36.0
+oimbra,NOAA-21,VIIRS,2025-08-13T02:44:00Z,14.08,350.0,real + US direct readout,McMurdo,36.0
 oimbra,NOAA-21,VIIRS,2025-08-13T12:27:30Z,23.81,1113.0,month2,Kiruna (Esrange),1.5
 oimbra,NOAA-21,VIIRS,2025-08-13T12:27:30Z,23.81,1113.0,real,Svalbard (SvalSat),4.5
 oimbra,NOAA-21,VIIRS,2025-08-13T12:27:30Z,23.81,1113.0,real + US direct readout,Svalbard (SvalSat),4.5
@@ -128,6 +143,12 @@ oimbra,Suomi NPP,VIIRS,2025-08-13T01:30:00Z,12.85,1218.0,real + US direct readou
 oimbra,Suomi NPP,VIIRS,2025-08-13T03:10:30Z,14.52,823.0,month2,Troll (TrollSat),32.0
 oimbra,Suomi NPP,VIIRS,2025-08-13T03:10:30Z,14.52,823.0,real,Svalbard (SvalSat),85.0
 oimbra,Suomi NPP,VIIRS,2025-08-13T03:10:30Z,14.52,823.0,real + US direct readout,Svalbard (SvalSat),85.0
+oimbra,Terra,MODIS,2025-08-12T21:06:00Z,8.45,260.0,month2,Kiruna (Esrange),4.5
+oimbra,Terra,MODIS,2025-08-12T21:06:00Z,8.45,260.0,real,TDRSS relay,25.0
+oimbra,Terra,MODIS,2025-08-12T21:06:00Z,8.45,260.0,real + US direct readout,TDRSS relay,25.0
+oimbra,Terra,MODIS,2025-08-13T10:41:00Z,22.03,500.0,month2,Troll (TrollSat),30.5
+oimbra,Terra,MODIS,2025-08-13T10:41:00Z,22.03,500.0,real,TDRSS relay,25.0
+oimbra,Terra,MODIS,2025-08-13T10:41:00Z,22.03,500.0,real + US direct readout,TDRSS relay,25.0
 piodao,Aqua,MODIS,2025-08-13T04:32:00Z,0.4,875.0,month2,McMurdo,35.0
 piodao,Aqua,MODIS,2025-08-13T04:32:00Z,0.4,875.0,real,Svalbard (SvalSat),83.0
 piodao,Aqua,MODIS,2025-08-13T04:32:00Z,0.4,875.0,real + US direct readout,Svalbard (SvalSat),83.0
@@ -144,11 +165,11 @@ piodao,NOAA-20,VIIRS,2025-08-13T13:16:00Z,9.13,224.0,month2,Kiruna (Esrange),4.5
 piodao,NOAA-20,VIIRS,2025-08-13T13:16:00Z,9.13,224.0,real,Svalbard (SvalSat),6.0
 piodao,NOAA-20,VIIRS,2025-08-13T13:16:00Z,9.13,224.0,real + US direct readout,Svalbard (SvalSat),6.0
 piodao,NOAA-20,VIIRS,2025-08-14T01:34:30Z,21.44,1075.0,month2,Troll (TrollSat),27.0
-piodao,NOAA-20,VIIRS,2025-08-14T01:34:30Z,21.44,1075.0,real,Troll (TrollSat),27.0
-piodao,NOAA-20,VIIRS,2025-08-14T01:34:30Z,21.44,1075.0,real + US direct readout,Troll (TrollSat),27.0
+piodao,NOAA-20,VIIRS,2025-08-14T01:34:30Z,21.44,1075.0,real,McMurdo,35.0
+piodao,NOAA-20,VIIRS,2025-08-14T01:34:30Z,21.44,1075.0,real + US direct readout,McMurdo,35.0
 piodao,NOAA-20,VIIRS,2025-08-14T03:14:30Z,23.11,1006.0,month2,Troll (TrollSat),33.0
-piodao,NOAA-20,VIIRS,2025-08-14T03:14:30Z,23.11,1006.0,real,Troll (TrollSat),33.0
-piodao,NOAA-20,VIIRS,2025-08-14T03:14:30Z,23.11,1006.0,real + US direct readout,Troll (TrollSat),33.0
+piodao,NOAA-20,VIIRS,2025-08-14T03:14:30Z,23.11,1006.0,real,McMurdo,35.5
+piodao,NOAA-20,VIIRS,2025-08-14T03:14:30Z,23.11,1006.0,real + US direct readout,McMurdo,35.5
 piodao,NOAA-21,VIIRS,2025-08-13T12:27:00Z,8.32,1216.0,month2,Kiruna (Esrange),2.0
 piodao,NOAA-21,VIIRS,2025-08-13T12:27:00Z,8.32,1216.0,real,Svalbard (SvalSat),5.0
 piodao,NOAA-21,VIIRS,2025-08-13T12:27:00Z,8.32,1216.0,real + US direct readout,Svalbard (SvalSat),5.0
@@ -156,8 +177,8 @@ piodao,NOAA-21,VIIRS,2025-08-13T14:07:00Z,9.98,848.0,month2,Svalbard (SvalSat),8
 piodao,NOAA-21,VIIRS,2025-08-13T14:07:00Z,9.98,848.0,real,Svalbard (SvalSat),8.0
 piodao,NOAA-21,VIIRS,2025-08-13T14:07:00Z,9.98,848.0,real + US direct readout,Svalbard (SvalSat),8.0
 piodao,NOAA-21,VIIRS,2025-08-14T02:26:00Z,22.3,91.0,month2,Troll (TrollSat),28.5
-piodao,NOAA-21,VIIRS,2025-08-14T02:26:00Z,22.3,91.0,real,Troll (TrollSat),28.5
-piodao,NOAA-21,VIIRS,2025-08-14T02:26:00Z,22.3,91.0,real + US direct readout,Troll (TrollSat),28.5
+piodao,NOAA-21,VIIRS,2025-08-14T02:26:00Z,22.3,91.0,real,McMurdo,35.0
+piodao,NOAA-21,VIIRS,2025-08-14T02:26:00Z,22.3,91.0,real + US direct readout,McMurdo,35.0
 piodao,Sentinel-3A,SLSTR,2025-08-13T10:39:00Z,6.52,463.0,month2,Troll (TrollSat),28.0
 piodao,Sentinel-3A,SLSTR,2025-08-13T10:39:00Z,6.52,463.0,real,Svalbard (SvalSat),84.0
 piodao,Sentinel-3A,SLSTR,2025-08-13T10:39:00Z,6.52,463.0,real + US direct readout,Svalbard (SvalSat),84.0
@@ -173,6 +194,12 @@ piodao,Suomi NPP,VIIRS,2025-08-13T14:33:30Z,10.42,1360.0,real + US direct readou
 piodao,Suomi NPP,VIIRS,2025-08-14T02:52:00Z,22.73,482.0,month2,Troll (TrollSat),30.5
 piodao,Suomi NPP,VIIRS,2025-08-14T02:52:00Z,22.73,482.0,real,Svalbard (SvalSat),84.5
 piodao,Suomi NPP,VIIRS,2025-08-14T02:52:00Z,22.73,482.0,real + US direct readout,Svalbard (SvalSat),84.5
+piodao,Terra,MODIS,2025-08-13T10:41:30Z,6.56,534.0,month2,Troll (TrollSat),30.0
+piodao,Terra,MODIS,2025-08-13T10:41:30Z,6.56,534.0,real,TDRSS relay,25.0
+piodao,Terra,MODIS,2025-08-13T10:41:30Z,6.56,534.0,real + US direct readout,TDRSS relay,25.0
+piodao,Terra,MODIS,2025-08-13T21:45:00Z,17.62,495.0,month2,Svalbard (SvalSat),7.5
+piodao,Terra,MODIS,2025-08-13T21:45:00Z,17.62,495.0,real,TDRSS relay,25.0
+piodao,Terra,MODIS,2025-08-13T21:45:00Z,17.62,495.0,real + US direct readout,TDRSS relay,25.0
 red_canyon,Aqua,MODIS,2025-08-14T10:06:30Z,9.96,549.0,month2,McMurdo,31.5
 red_canyon,Aqua,MODIS,2025-08-14T10:06:30Z,9.96,549.0,real,Svalbard (SvalSat),79.0
 red_canyon,Aqua,MODIS,2025-08-14T10:06:30Z,9.96,549.0,real + US direct readout,Madison WI (SSEC),0.0
@@ -192,7 +219,7 @@ red_canyon,NOAA-21,VIIRS,2025-08-14T09:11:00Z,9.03,89.0,month2,McMurdo,31.0
 red_canyon,NOAA-21,VIIRS,2025-08-14T09:11:00Z,9.03,89.0,real,McMurdo,31.0
 red_canyon,NOAA-21,VIIRS,2025-08-14T09:11:00Z,9.03,89.0,real + US direct readout,Madison WI (SSEC),0.0
 red_canyon,NOAA-21,VIIRS,2025-08-14T18:55:00Z,18.77,1309.0,month2,Fairbanks (FCDAS),5.0
-red_canyon,NOAA-21,VIIRS,2025-08-14T18:55:00Z,18.77,1309.0,real,Troll (TrollSat),57.0
+red_canyon,NOAA-21,VIIRS,2025-08-14T18:55:00Z,18.77,1309.0,real,Svalbard (SvalSat),113.5
 red_canyon,NOAA-21,VIIRS,2025-08-14T18:55:00Z,18.77,1309.0,real + US direct readout,Madison WI (SSEC),0.0
 red_canyon,NOAA-21,VIIRS,2025-08-14T20:35:00Z,20.43,627.0,month2,Fairbanks (FCDAS),3.0
 red_canyon,NOAA-21,VIIRS,2025-08-14T20:35:00Z,20.43,627.0,real,Svalbard (SvalSat),13.5
@@ -215,6 +242,15 @@ red_canyon,Suomi NPP,VIIRS,2025-08-14T19:21:30Z,19.21,866.0,real + US direct rea
 red_canyon,Suomi NPP,VIIRS,2025-08-14T21:01:30Z,20.88,1110.0,month2,Fairbanks (FCDAS),2.5
 red_canyon,Suomi NPP,VIIRS,2025-08-14T21:01:30Z,20.88,1110.0,real,Svalbard (SvalSat),13.5
 red_canyon,Suomi NPP,VIIRS,2025-08-14T21:01:30Z,20.88,1110.0,real + US direct readout,Svalbard (SvalSat),13.5
+red_canyon,Terra,MODIS,2025-08-14T04:20:30Z,4.19,436.0,month2,Fairbanks (FCDAS),3.5
+red_canyon,Terra,MODIS,2025-08-14T04:20:30Z,4.19,436.0,real,TDRSS relay,25.0
+red_canyon,Terra,MODIS,2025-08-14T04:20:30Z,4.19,436.0,real + US direct readout,TDRSS relay,25.0
+red_canyon,Terra,MODIS,2025-08-14T16:16:30Z,16.12,865.0,month2,McMurdo,31.5
+red_canyon,Terra,MODIS,2025-08-14T16:16:30Z,16.12,865.0,real,TDRSS relay,25.0
+red_canyon,Terra,MODIS,2025-08-14T16:16:30Z,16.12,865.0,real + US direct readout,Madison WI (SSEC),0.0
+red_canyon,Terra,MODIS,2025-08-14T17:54:00Z,17.75,1047.0,month2,McMurdo,31.0
+red_canyon,Terra,MODIS,2025-08-14T17:54:00Z,17.75,1047.0,real,TDRSS relay,25.0
+red_canyon,Terra,MODIS,2025-08-14T17:54:00Z,17.75,1047.0,real + US direct readout,TDRSS relay,25.0
 derdara,Aqua,MODIS,2025-08-12T14:55:30Z,1.92,188.0,month2,Kiruna (Esrange),8.0
 derdara,Aqua,MODIS,2025-08-12T14:55:30Z,1.92,188.0,real,Svalbard (SvalSat),8.5
 derdara,Aqua,MODIS,2025-08-12T14:55:30Z,1.92,188.0,real + US direct readout,Svalbard (SvalSat),8.5
@@ -225,17 +261,17 @@ derdara,NOAA-20,VIIRS,2025-08-12T13:33:00Z,0.55,276.0,month2,Kiruna (Esrange),7.
 derdara,NOAA-20,VIIRS,2025-08-12T13:33:00Z,0.55,276.0,real,Svalbard (SvalSat),8.5
 derdara,NOAA-20,VIIRS,2025-08-12T13:33:00Z,0.55,276.0,real + US direct readout,Svalbard (SvalSat),8.5
 derdara,NOAA-20,VIIRS,2025-08-13T01:54:30Z,12.91,353.0,month2,Troll (TrollSat),26.5
-derdara,NOAA-20,VIIRS,2025-08-13T01:54:30Z,12.91,353.0,real,Troll (TrollSat),26.5
-derdara,NOAA-20,VIIRS,2025-08-13T01:54:30Z,12.91,353.0,real + US direct readout,Troll (TrollSat),26.5
+derdara,NOAA-20,VIIRS,2025-08-13T01:54:30Z,12.91,353.0,real,McMurdo,34.0
+derdara,NOAA-20,VIIRS,2025-08-13T01:54:30Z,12.91,353.0,real + US direct readout,McMurdo,34.0
 derdara,NOAA-21,VIIRS,2025-08-12T14:24:30Z,1.41,1421.0,month2,Svalbard (SvalSat),9.5
 derdara,NOAA-21,VIIRS,2025-08-12T14:24:30Z,1.41,1421.0,real,Svalbard (SvalSat),9.5
 derdara,NOAA-21,VIIRS,2025-08-12T14:24:30Z,1.41,1421.0,real + US direct readout,Svalbard (SvalSat),9.5
 derdara,NOAA-21,VIIRS,2025-08-13T01:05:30Z,12.09,1484.0,month2,Troll (TrollSat),25.0
-derdara,NOAA-21,VIIRS,2025-08-13T01:05:30Z,12.09,1484.0,real,Troll (TrollSat),25.0
-derdara,NOAA-21,VIIRS,2025-08-13T01:05:30Z,12.09,1484.0,real + US direct readout,Troll (TrollSat),25.0
+derdara,NOAA-21,VIIRS,2025-08-13T01:05:30Z,12.09,1484.0,real,McMurdo,33.5
+derdara,NOAA-21,VIIRS,2025-08-13T01:05:30Z,12.09,1484.0,real + US direct readout,McMurdo,33.5
 derdara,NOAA-21,VIIRS,2025-08-13T02:45:30Z,13.76,776.0,month2,Troll (TrollSat),29.0
-derdara,NOAA-21,VIIRS,2025-08-13T02:45:30Z,13.76,776.0,real,Troll (TrollSat),29.0
-derdara,NOAA-21,VIIRS,2025-08-13T02:45:30Z,13.76,776.0,real + US direct readout,Troll (TrollSat),29.0
+derdara,NOAA-21,VIIRS,2025-08-13T02:45:30Z,13.76,776.0,real,McMurdo,34.5
+derdara,NOAA-21,VIIRS,2025-08-13T02:45:30Z,13.76,776.0,real + US direct readout,McMurdo,34.5
 derdara,NOAA-21,VIIRS,2025-08-13T12:25:30Z,23.42,1235.0,month2,Kiruna (Esrange),3.5
 derdara,NOAA-21,VIIRS,2025-08-13T12:25:30Z,23.42,1235.0,real,Svalbard (SvalSat),6.5
 derdara,NOAA-21,VIIRS,2025-08-13T12:25:30Z,23.42,1235.0,real + US direct readout,Svalbard (SvalSat),6.5
@@ -260,3 +296,9 @@ derdara,Suomi NPP,VIIRS,2025-08-13T03:12:00Z,14.2,1284.0,real + US direct readou
 derdara,Suomi NPP,VIIRS,2025-08-13T12:51:30Z,23.86,722.0,month2,Kiruna (Esrange),5.0
 derdara,Suomi NPP,VIIRS,2025-08-13T12:51:30Z,23.86,722.0,real,Svalbard (SvalSat),7.0
 derdara,Suomi NPP,VIIRS,2025-08-13T12:51:30Z,23.86,722.0,real + US direct readout,Svalbard (SvalSat),7.0
+derdara,Terra,MODIS,2025-08-12T21:04:00Z,8.07,282.0,month2,Kiruna (Esrange),6.5
+derdara,Terra,MODIS,2025-08-12T21:04:00Z,8.07,282.0,real,TDRSS relay,25.0
+derdara,Terra,MODIS,2025-08-12T21:04:00Z,8.07,282.0,real + US direct readout,TDRSS relay,25.0
+derdara,Terra,MODIS,2025-08-13T10:42:30Z,21.71,919.0,month2,Troll (TrollSat),29.0
+derdara,Terra,MODIS,2025-08-13T10:42:30Z,21.71,919.0,real,TDRSS relay,25.0
+derdara,Terra,MODIS,2025-08-13T10:42:30Z,21.71,919.0,real + US direct readout,TDRSS relay,25.0

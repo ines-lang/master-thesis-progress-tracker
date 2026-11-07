@@ -155,9 +155,9 @@ In Month 2 every satellite could use all five polar stations. In reality each sa
 \textbf{Satellite} & \textbf{Stored-data downlink in 2025} \\
 \midrule
 \endhead
-Suomi NPP, Sentinel-3A/B & Svalbard only \\
-NOAA-20, NOAA-21 & Svalbard and McMurdo (Troll as backup) \\
-Aqua & Svalbard and Poker Flat \\
+Suomi NPP, Sentinel-3A/B & Svalbard only~\cite{esa2026s3dataflow} \\
+NOAA-20, NOAA-21 & Svalbard and McMurdo. Troll is only a backup and is not modelled \\
+Aqua & Svalbard and Poker Flat~\cite{nasa2002aquaidd} \\
 Terra & TDRSS relay satellites (not representable with direct-view stations) \\
 US direct readout & Madison, Hampton, Mayaguez: receive passes over the United States in real time \\
 \bottomrule
@@ -166,9 +166,11 @@ US direct readout & Madison, Hampton, Mayaguez: receive passes over the United S
 For every S1 pass over the six events, the time from the observation to the first ground contact was computed with both station sets (10$^\circ$ elevation mask, Terra excluded):
 \begin{itemize}[leftmargin=1.2cm]
     \item Month 2 set: median 8\,min, maximum 37\,min.
-    \item Real ground segments: median 25\,min, maximum 114\,min. Suomi NPP and Sentinel-3 often wait a full orbit for Svalbard.
+    \item Real ground segments: median 31\,min, maximum 114\,min. Suomi NPP and Sentinel-3 often wait a full orbit for Svalbard.
     \item With the US direct-readout stations, Red Canyon passes are received while the satellite still sees the fire (median 0\,min). No such fire path exists for Europe or Morocco.
 \end{itemize}
+
+The first contact is the time the satellite rises above the elevation mask, not the time its stored data have been downlinked, and every visible pass is assumed to be used for a downlink. Both assumptions make these values a few minutes optimistic.
 
 The Month 2 set was therefore optimistic: it made S1 too fast and would understate the gain of the central nodes. The baseline uses the real ground segment of each satellite plus the US direct-readout stations. The same set is used in all scenarios; since ground links are filtered in post-processing, other sets can be tested later without new runs. Processing latency (under 3\,h for FIRMS and SL\_2\_FRP) is not modelled.
 
@@ -445,49 +447,28 @@ El Questro / King River, WA & $-$16.1, 128.4 & warnings from 13 Aug~\cite{broome
 \bottomrule
 \end{longtable}
 
+Figure~\ref{fig:es_funnel} summarises the whole selection. It is read from top to bottom: each box is a step, the number on its right is how many fire complexes are left after it, and the arrow beside the step says how many were removed and why. A fire complex is a group of FIRMS detections in neighbouring 1\,km cells, pooled over the window, so one large fire is one complex and 1.69 million detections become 160{,}783 complexes.
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Steps 1 to 5} are the automatic screen of Section~\ref{subsec:screen} (Table~\ref{tab:funnel} gives them per continent). Size (step 3) removes almost everything: most complexes are small agricultural or short-lived fires. Step 5 removes 570 complexes, most of them African and South American dry-season fires in the southern hemisphere.
+    \item \textbf{Checked against official sources}: the 76 remaining complexes are ranked by FIRMS area per continent, and the largest are looked up in official records (Section~\ref{subsec:groundtruth}). Because FIRMS underestimates the area of fires still burning after 15 August, the check goes far beyond the top four: down to rank 21 in Europe, where Larouco is only 12th by FIRMS area but second by official area.
+    \item \textbf{Official ignition time and final area}: 6 of the 27 checked complexes have no official record (Balkans, Greece, Northwest Territories) and cannot give a T0.
+    \item \textbf{Ranked by official final area}: the selection rule (the four largest in Europe, the largest on every other continent) leaves 7 events, including the alternative Mount Underwood.
+\end{itemize}
+
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/event_selection_02_top_by_continent.png}
-\caption{Largest complexes per continent after criteria 1 to 3. Bars: FIRMS burned-area estimate up to 15 August; diamonds: official final area. Selected events outside the top 8 are added with their rank.}
-\label{fig:es_top}
+\includegraphics[width=0.9\linewidth]{figures/event_selection_selection_funnel.png}
+\caption{Event selection: fire complexes left after each step (right of each box) and the number removed with the reason (arrows). Steps 1 to 5 are the FIRMS screen (Table~\ref{tab:funnel}); the last three use the official records.}
+\label{fig:es_funnel}
 \end{figure}
 
-\review{Three alternatives to Figure~\ref{fig:es_top}, all ranked by official final area (the rule actually used); one will replace it.}
-
-\textbf{Alternative A: decision matrix.} The selection steps as rows, the continents as columns; it continues Table~\ref{tab:funnel}.
-
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{p{3.3cm}p{2.5cm}p{2.3cm}p{1.6cm}p{1.6cm}p{1.4cm}p{1.4cm}}
-\toprule
-\textbf{Step} & \textbf{Europe} & \textbf{N. America} & \textbf{Africa} & \textbf{Asia} & \textbf{S. America} & \textbf{Oceania} \\
-\midrule
-After criteria 1 to 5 (Table~\ref{tab:funnel}) & 50 & 25 & 1 & 0 & 0 & 0 \\
-Largest checked against official sources & 18 & 8 & 1 & -- & -- & -- \\
-With official ignition time and final area & 13 & 7 & 1 & -- & -- & -- \\
-Rule & four largest & largest & only one & -- & -- & -- \\
-\midrule
-\textbf{Selected} & Pi\'od\~ao, Larouco, Molezuelas, O\'imbra & Red Canyon (alternative: Mount Underwood) & Derdara & none & none & none \\
-Why not more & next: Jarilla (16{,}315\,ha) & Mount Underwood: time is record creation & 459 others in austral winter & outside Siberia; in Siberia volcano, gas flares & austral winter & austral winter \\
-\bottomrule
-\end{tabular}
-\caption{Alternative A: from the screen to the seven events, per continent.}
-\label{tab:alt_a}
-\end{table}
+Figure~\ref{fig:es_candidates} shows the last step: the 20 candidates with an official final area, and why the official area, not FIRMS, ranks them.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/event_selection_alt_B_candidates_official_area.png}
-\caption{Alternative B: every candidate with an official final area, grouped by continent and sorted by it. Bars: official final area; black line: FIRMS estimate up to 15 August. Asia, South America and Oceania have no candidate (volcano, gas flares or austral winter; Table~\ref{tab:funnel}).}
-\label{fig:alt_b}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\linewidth]{figures/event_selection_alt_C_selection_funnel.png}
-\caption{Alternative C: number of fire complexes left after each step of the selection, and the reason the others were removed.}
-\label{fig:alt_c}
+\includegraphics[width=\linewidth]{figures/event_selection_candidates_official_area.png}
+\caption{Candidates with an official final area, grouped by continent and sorted by it. Bars: official final area; black line: FIRMS estimate up to 15 August. Derdara's official area is a press figure (about 500\,ha); EFFIS maps 1{,}538\,ha. Asia, South America and Oceania have no candidate (volcano, gas flares or austral winter; Table~\ref{tab:funnel}).}
+\label{fig:es_candidates}
 \end{figure}
 
 \subsection{Selected events}\label{subsec:selected}
@@ -576,7 +557,7 @@ The Month 2 data were requested for Spain only. Table~\ref{tab:s0data} lists wha
 FIRMS & VIIRS (Suomi NPP, NOAA-20/21) and MODIS (Terra, Aqua) detections & global, until 15 Aug 21:26\,UTC & open (archive request) \\
 Sentinel-3 SL\_2\_FRP & SLSTR fire list (1\,km MWIR, 500\,m SWIR), 100 products & all seven events & CDSE account \\
 LSA SAF FRP-PIXEL & SEVIRI, every 15\,min & Meteosat disk: Europe, Africa & open \\
-GOES ABI FDC & GOES-18 and GOES-19, CONUS sector, every 5\,min & North America & open (NOAA on AWS) \\
+GOES ABI FDC & GOES-18 and GOES-19, US sector (CONUS, PACUS), every 5\,min & North America & open (NOAA on AWS) \\
 EFFIS burnt areas & records and final perimeters & Spain, Portugal, Morocco & request form; perimeters open (WFS) \\
 NIFC WFIGS & final perimeter & Red Canyon & open \\
 BC Wildfire Service & final perimeter & Mount Underwood & open \\
@@ -621,7 +602,13 @@ Mount Underwood & 3.17 & 4.10 & -- & 0.18 (GOES-18) \\
     \item \textbf{GOES} is first for both North American events. GOES-19 detects Red Canyon at 23:56\,UTC on 13 Aug, 13\,min before the official discovery and 4.4\,h before FIRMS; no GOES pixel lies in the perimeter in the 24\,h before, so it is not a static source. GOES-18 detects Mount Underwood 11\,min after the record creation, 3\,h before FIRMS.
     \item \textbf{Sentinel-3} is never clearly first: for Pi\'od\~ao it detects 2\,min before FIRMS, for the others 0.2 to 20\,h after. Its two satellites add few passes to the five FIRMS satellites at the first detection; their value for tracking is still to be measured.
     \item \textbf{Derdara:} its T0 reference, the first SEVIRI detection, is 13:10\,UTC, the same as the first confident FIRMS detection.
-    \item \textbf{Detections before the window} inside the perimeters: SEVIRI 3 for Larouco and 2 for O\'imbra (neighbouring fires within one 3\,km SEVIRI pixel are possible), FIRMS 1 for Pi\'od\~ao (Aldeia das Dez). To be checked in the per-event pipeline.
+    \item \textbf{Detections in the 24\,h before the window}, inside the perimeters:
+    \begin{itemize}
+        \item Larouco: three SEVIRI pixels of nominal confidence at 05:26 and 05:56\,UTC on 13 Aug, about 11\,h before the official ignition, at the Larouco reference point. FIRMS cannot confirm it: no polar satellite passed between 04:31 and 10:41\,UTC, and the 10:41 Terra pass saw nothing.
+        \item O\'imbra: two high-confidence SEVIRI pixels (96 and 159\,MW) at 11:55\,UTC on 11 Aug, a day before the ignition, inside the later perimeter: an earlier, separate fire at the same place, or a false alarm.
+        \item Pi\'od\~ao: one FIRMS detection, the Aldeia das Dez fire.
+    \end{itemize}
+    These do not change the first detections above, but they must be resolved in the per-event pipeline before the T0 is fixed.
 \end{itemize}
 
 \begin{itemize}[leftmargin=1.2cm]

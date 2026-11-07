@@ -2,9 +2,13 @@
 
 For every S1 satellite, every pass with the event inside the instrument swath (reference time to +24 h) is found;
 for each pass, the time to the first contact (elevation >= MIN_ELEVATION_DEG) with a station of each set is
-computed. Zero means a station sees the satellite while it observes the fire (direct readout possible).
+computed. The rule depends on the link type of the station (column link):
+  stored  the satellite records the data and dumps them at the first contact after the observation;
+  direct  direct readout: the station only receives what the satellite observes while in view, so it counts
+          (latency 0) only if it sees the satellite at the observation time;
+  relay   TDRSS relay (Terra): no direct-view geometry; fixed wait RELAY_WAIT_MIN.
 Inputs:  processed/eo_census.csv (S1 TLEs), notes/ground_stations.csv (station sets; column satellites = the
-         satellites a station serves, "all" for every satellite),
+         satellites a station serves, "all" for every satellite; column link = stored, direct or relay),
          ../Event Selection/notes/candidates_ground_truth.csv (event location and reference time)
 Outputs: processed/ground_contacts.csv (one row per pass and station set), figures/02_downlink_latency.png
 
@@ -26,13 +30,13 @@ HORIZON_H = 24                      # passes from the reference time to +24 h
 LOOKAHEAD_H = 6                     # search window for the next ground contact after a pass
 STEP_S = 30
 MIN_ELEVATION_DEG = 10              # Month 2 mask
-RELAY = {"Terra"}                   # downlinks through TDRSS relays: not representable with direct-view stations
+RELAY_WAIT_MIN = 25                 # Terra: two TDRSS contacts per orbit (LANCE), so about 49 min apart; mean wait
 EARTH_RADIUS_KM = 6371.0
 DPI = 300
 
 ts = load.timescale()
 census = pd.read_csv(PROC / "eo_census.csv")
-s1 = census[(census["role"] == "S1 EO layer") & ~census["mission"].isin(RELAY)]
+s1 = census[census["role"] == "S1 EO layer"]
 stations = pd.read_csv(CENSUS_DIR / "notes" / "ground_stations.csv")
 gt = pd.read_csv(CENSUS_DIR.parent / "Event Selection" / "notes" / "candidates_ground_truth.csv").set_index("candidate_id")
 
@@ -58,31 +62,36 @@ for ev in EVENTS:
         # passes = runs of consecutive samples inside the swath; observation = closest approach of the run
         run_id = np.cumsum(np.diff(np.r_[0, inside.astype(int)]) == 1) * inside
         elev = {st.station: (sat - wgs84.latlon(st.lat, st.lon)).at(t).altaz()[0].degrees
-                for st in stations.drop_duplicates("station").itertuples()}
+                for st in stations[stations["link"] != "relay"].drop_duplicates("station").itertuples()}
         for r in np.unique(run_id[run_id > 0]):
             idx = np.flatnonzero(run_id == r)
             i_obs = idx[np.argmin(d[idx])]
             for set_name, members in stations.groupby("station_set", sort=False):
                 serves = members["satellites"].eq("all") | members["satellites"].str.split(";").apply(
                     lambda sats: sat_row.mission in sats)
-                best = None
-                for st in members.loc[serves, "station"]:
-                    vis = np.flatnonzero(elev[st][i_obs:] >= MIN_ELEVATION_DEG)
-                    if vis.size and (best is None or vis[0] < best[0]):
-                        best = (vis[0], st)
+                best = None                 # (latency in minutes, station)
+                for st in members[serves].itertuples():
+                    if st.link == "relay":
+                        cand = RELAY_WAIT_MIN
+                    elif st.link == "direct":
+                        cand = 0.0 if elev[st.station][i_obs] >= MIN_ELEVATION_DEG else None
+                    else:
+                        vis = np.flatnonzero(elev[st.station][i_obs:] >= MIN_ELEVATION_DEG)
+                        cand = vis[0] * STEP_S / 60 if vis.size else None
+                    if cand is not None and (best is None or cand < best[0]):
+                        best = (cand, st.station)
                 rows.append(dict(event=ev, satellite=sat_row.mission, instrument=sat_row.instrument,
                                  obs_utc=t_ref + pd.Timedelta(seconds=int(secs[i_obs])),
                                  hours_after_reference=round(secs[i_obs] / 3600, 2),
                                  off_track_km=round(float(d[i_obs]), 0), station_set=set_name,
                                  first_station=best[1] if best else None,
-                                 latency_min=round(best[0] * STEP_S / 60, 1) if best else np.nan))
+                                 latency_min=round(best[0], 1) if best else np.nan))
 gc = pd.DataFrame(rows)
 gc.to_csv(PROC / "ground_contacts.csv", index=False, date_format="%Y-%m-%dT%H:%M:%SZ")
 
 # ---- report: per event and set, first observation and its latency, and the median over all passes ----
 first = gc.sort_values("hours_after_reference").groupby(["event", "station_set"]).first()
 summ = gc.groupby(["event", "station_set"])["latency_min"].agg(passes="size", median="median", max="max")
-print(f"not modelled (relay downlink): {sorted(RELAY)}")
 print(first[["satellite", "hours_after_reference", "latency_min", "first_station"]].join(summ).round(1).to_string())
 
 # ---- figure: downlink latency of every pass, per event and station set ----
@@ -98,7 +107,7 @@ for k, s in enumerate(sets):
         ax.plot([x - 0.08, x + 0.08], [v.median()] * 2, color=colors[k], lw=2)
 ax.set_xticks(range(len(EVENTS)), [gt.loc[e, "name"].split(",")[0] for e in EVENTS], fontsize=7)
 ax.set_ylabel("Observation to first\nground contact (min)")
-ax.set_title(f"S1 passes over each event (reference to +{HORIZON_H} h, Terra excluded: TDRSS relay): downlink latency "
+ax.set_title(f"S1 passes over each event (reference to +{HORIZON_H} h; Terra via TDRSS: fixed {RELAY_WAIT_MIN} min): downlink latency "
              f"per station set (elevation >= {MIN_ELEVATION_DEG} deg; line = median)", loc="left", fontsize=8)
 ax.legend(fontsize=7, frameon=False)
 for s in ["top", "right"]:

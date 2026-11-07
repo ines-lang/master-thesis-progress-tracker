@@ -1,8 +1,8 @@
-"""Step 2.7: two alternative figures for the event selection (to replace 02_top_by_continent.png, choice pending).
+"""Step 2.7: event-selection figures that replace 02_top_by_continent.png (chosen 7 Nov 2026).
 
-alt_B_candidates_official_area.png   vertical bars: every candidate with an official final area, grouped by continent
+candidates_official_area.png   vertical bars: every candidate with an official final area, grouped by continent
                                       and sorted by it (the selection rule); tick: FIRMS estimate up to 15 Aug
-alt_C_selection_funnel.png           flow from all FIRMS fire complexes to the seven events, with the number removed
+selection_funnel.png           flow from all FIRMS fire complexes to the seven events, with the number removed
                                       and the reason at every step
 Counts come from processed/complexes_criteria.csv, processed/ranking.csv and notes/candidates_ground_truth.csv.
 
@@ -60,7 +60,7 @@ def alt_b():
     handles.append(Line2D([], [], color=INK, lw=1.4, label="FIRMS estimate up to 15 Aug"))
     ax.legend(handles=handles, loc="upper right", fontsize=7, frameon=False)
     fig.tight_layout()
-    fig.savefig(FIGS / "alt_B_candidates_official_area.png", dpi=DPI)
+    fig.savefig(FIGS / "candidates_official_area.png", dpi=DPI)
     plt.close(fig)
 
 
@@ -109,7 +109,7 @@ def alt_c():
     ax.set_title("From all FIRMS fire complexes to the seven events: number left after each step and reason for "
                  "the rest", loc="left", fontsize=9)
     fig.tight_layout()
-    fig.savefig(FIGS / "alt_C_selection_funnel.png", dpi=DPI)
+    fig.savefig(FIGS / "selection_funnel.png", dpi=DPI)
     plt.close(fig)
     return steps
 
