@@ -158,16 +158,16 @@ In Month 2 every satellite could use all five polar stations. In reality each sa
 Suomi NPP, Sentinel-3A/B & Svalbard only~\cite{esa2026s3dataflow} \\
 NOAA-20, NOAA-21 & Svalbard and McMurdo. Troll is only a backup and is not modelled \\
 Aqua & Svalbard and Poker Flat~\cite{nasa2002aquaidd} \\
-Terra & TDRSS relay satellites (not representable with direct-view stations) \\
+Terra & TDRSS relay satellites, two contacts per orbit~\cite{nasa2010lance}. The contacts follow a schedule, not the geometry, so a fixed mean wait of 25\,min (a quarter orbit) is used \\
 US direct readout & Madison, Hampton, Mayaguez: receive passes over the United States in real time \\
 \bottomrule
 \end{longtable}
 
-For every S1 pass over the six events, the time from the observation to the first ground contact was computed with both station sets (10$^\circ$ elevation mask, Terra excluded):
+A direct-readout station receives only what the satellite observes while the station sees it, so it counts only if it sees the satellite at the observation time. For every S1 pass over the six events, the time from the observation to the first ground contact was computed with each station set (10$^\circ$ elevation mask):
 \begin{itemize}[leftmargin=1.2cm]
-    \item Month 2 set: median 8\,min, maximum 37\,min.
-    \item Real ground segments: median 31\,min, maximum 114\,min. Suomi NPP and Sentinel-3 often wait a full orbit for Svalbard.
-    \item With the US direct-readout stations, Red Canyon passes are received while the satellite still sees the fire (median 0\,min). No such fire path exists for Europe or Morocco.
+    \item Month 2 set: median 8.5\,min, maximum 37\,min.
+    \item Real ground segments: median 25\,min, maximum 114\,min. Suomi NPP and Sentinel-3 often wait a full orbit for Svalbard.
+    \item With the US direct-readout stations, 10 of the 17 Red Canyon passes are received while the satellite still sees the fire (median 0\,min). No such fire path exists for Europe or Morocco.
 \end{itemize}
 
 The first contact is the time the satellite rises above the elevation mask, not the time its stored data have been downlinked, and every visible pass is assumed to be used for a downlink. Both assumptions make these values a few minutes optimistic.
