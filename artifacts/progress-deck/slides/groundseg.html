@@ -15,7 +15,7 @@
     <div style="display:flex; flex-direction:column; gap:16px; flex:1">
       <div style="display:flex; flex-direction:column; gap:4px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
         <p style="font-size:24px; color:#5b6573">Median wait to first contact</p>
-        <p style="font-size:56px; font-weight:600; color:#1f6f6b">8 &#8594; 25 min</p>
+        <p style="font-size:56px; font-weight:600; color:#1f6f6b">8 &#8594; 31 min</p>
         <p style="font-size:24px; color:#5b6573">Month 2 set &#8594; real segments</p>
       </div>
       <div style="display:flex; flex-direction:column; gap:4px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
@@ -25,5 +25,5 @@
     </div>
   </div>
   <p style="font-size:24px; color:#5b6573">One fixed set for all scenarios, applied in post-processing. Product latency (under 3 h) not modelled.</p>
-  <aside>Every S1 pass over the six events from the reference time to +24 h, elevation mask 10 degrees, Terra excluded because its downlink goes through the TDRSS relays. The Month 2 set was optimistic: Suomi NPP and Sentinel-3 downlink only at Svalbard and often wait a full orbit. US direct-readout stations, which feed the FIRMS ultra-real-time product, receive Red Canyon passes while the satellite still sees the fire; no such fire path exists for Europe or Morocco. A slower, realistic baseline avoids overstating the gain of the central nodes in S2. Sources: NOAA OSPO notices, ESA Sentinel-3 data flow, NASA Aqua interface document, NASA Earthdata FIRMS URT.</aside>
+  <aside>Every S1 pass over the six events from the reference time to +24 h, elevation mask 10 degrees, Terra excluded because its downlink goes through the TDRSS relays. The Month 2 set was optimistic: Suomi NPP and Sentinel-3 downlink only at Svalbard and often wait a full orbit. US direct-readout stations, which feed the FIRMS ultra-real-time product, receive Red Canyon passes while the satellite still sees the fire; no such fire path exists for Europe or Morocco. First contact is the rise above the elevation mask, and every visible pass is assumed to be used for a downlink, so these values are a few minutes optimistic. A slower, realistic baseline avoids overstating the gain of the central nodes in S2. Sources: NOAA OSPO notices, ESA Sentinel-3 data flow, NASA Aqua interface document, NASA Earthdata FIRMS URT.</aside>
 </section>

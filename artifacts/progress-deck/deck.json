@@ -17,6 +17,7 @@
     "cover",
     "progress",
     "events",
+    "s0first",
     "eolayer",
     "gaps",
     "groundseg",
@@ -26,8 +27,7 @@
     "alertpaths",
     "architecture",
     "simresults",
-    "nextsteps",
-    "baseline"
+    "nextsteps"
   ],
   "sections": {
     "s1": {
@@ -35,7 +35,7 @@
       "start": "cover"
     },
     "s2": {
-      "description": "This week: action items, events, satellite census, coverage gaps and ground segment",
+      "description": "This week: action items, events, public record of all events, satellite census, coverage gaps and ground segment",
       "start": "progress"
     },
     "s3": {
@@ -47,8 +47,10 @@
       "start": "simresults"
     },
     "s5": {
+      "before": null,
       "description": "Backup: public record (S0) of the Spanish events",
-      "start": "baseline"
+      "seq": 0,
+      "start": null
     }
   },
   "title": "Thesis progress: update after 27 October"

@@ -1,0 +1,30 @@
+<section id="s0first" data-transition="fade" style="display:flex; flex-direction:column; gap:40px; padding:128px; background:#f4f1ea; font-family:'IBM Plex Sans', Arial, sans-serif; color:#1c2430">
+  <div style="display:flex; flex-direction:column; gap:12px">
+    <h2 style="font-size:56px; font-weight:600; line-height:1.1">Public record (S0): first detection per source</h2>
+    <p style="font-size:24px; color:#5b6573">Hours after the reference time; first fire pixel inside the official final perimeter (+2 km). Preliminary, before the per-event pipeline.</p>
+  </div>
+  <div style="display:flex; flex-direction:row; gap:40px">
+    <table style="width:1100px; font-size:24px; color:#1c2430; background:#fbfaf6">
+      <tr style="background:#16263d"><th style="width:34%; color:#f4f1ea">Event</th><th style="width:18%; color:#f4f1ea">FIRMS</th><th style="width:18%; color:#f4f1ea">Sentinel-3</th><th style="width:30%; color:#f4f1ea">Geostationary</th></tr>
+      <tr><td>Larouco</td><td>4.83</td><td>5.06</td><td><b style="color:#1f6f6b">1.75</b> SEVIRI</td></tr>
+      <tr><td>Molezuelas</td><td><b style="color:#1f6f6b">0.12</b></td><td>9.19</td><td>0.25 SEVIRI</td></tr>
+      <tr><td>O&#237;mbra</td><td><b style="color:#1f6f6b">2.30</b></td><td>22.00</td><td>3.02 SEVIRI</td></tr>
+      <tr><td>Pi&#243;d&#227;o</td><td>6.55</td><td>6.52</td><td><b style="color:#1f6f6b">0.78</b> SEVIRI</td></tr>
+      <tr><td>Derdara</td><td><b style="color:#1f6f6b">0.17</b></td><td>8.74</td><td><b style="color:#1f6f6b">0.17</b> SEVIRI</td></tr>
+      <tr><td>Red Canyon</td><td>4.18</td><td>4.57</td><td><b style="color:#1f6f6b">&#8722;0.21</b> GOES-19</td></tr>
+      <tr><td>Mount Underwood (alt.)</td><td>3.17</td><td>4.10</td><td><b style="color:#1f6f6b">0.18</b> GOES-18</td></tr>
+    </table>
+    <div style="display:flex; flex-direction:column; gap:16px; flex:1">
+      <div style="display:flex; flex-direction:column; gap:4px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
+        <p style="font-size:56px; font-weight:600; color:#1f6f6b">4 of 7</p>
+        <p style="font-size:24px; color:#1c2430">first seen by the geostationary satellite; Red Canyon 13 min before its official discovery</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:4px; padding:24px; background:#fbfaf6; border:2px solid #d9d3c7; border-radius:16px">
+        <p style="font-size:56px; font-weight:600; color:#a8431a">0 of 7</p>
+        <p style="font-size:24px; color:#1c2430">clearly first by Sentinel-3 (Pi&#243;d&#227;o: 2 min before FIRMS)</p>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:24px; color:#5b6573">To resolve: SEVIRI pixels at Larouco 11 h before the ignition, and in O&#237;mbra a day before.</p>
+  <aside>Data now complete for all seven events: FIRMS (global), Sentinel-3 SL_2_FRP (100 products, Copernicus Data Space; only the reprocessed NTC products remain archived, not the near-real-time ones), LSA SAF SEVIRI for Europe and Morocco, GOES-18 and GOES-19 fire product for North America, and official final perimeters from EFFIS (Spain, Portugal, Morocco), NIFC WFIGS and the BC Wildfire Service. The perimeter rule is the same footprint for every source; it reproduces all seven FIRMS first detections and the Larouco SEVIRI time of the pipeline. The per-event pipeline (FIRMS-cluster rule) still has to be run for the new events. Earlier pixels inside the perimeters: three SEVIRI pixels at the Larouco reference point at 05:26 and 05:56 UTC on 13 August, with no polar pass between 04:31 and 10:41 UTC to confirm them; two high-confidence SEVIRI pixels in the Oimbra perimeter on 11 August; the Aldeia das Dez fire for Piodao.</aside>
+</section>
