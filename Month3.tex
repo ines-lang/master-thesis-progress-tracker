@@ -196,7 +196,7 @@ The first contact is the time the satellite rises above the elevation mask, not 
 
 The previous Month 2 set was therefore optimistic: it made S1 too fast and would understate the gain of the central nodes. The baseline uses the real ground segment of each satellite plus the US direct-readout stations. 
 
-The same set is used in all scenarios; since ground links are filtered in post-processing, other sets can be tested later without new runs. The processing on the ground is added in Section~\ref{subsec:s1latency}. \textbf{Design freeze: one ground segment for all scenarios.} The ground segment is frozen as the stations of the table above: Svalbard, McMurdo and Poker Flat for stored data, the TDRSS relay for Terra, and Madison, Hampton and Mayag\"uez for direct readout over the United States. The satellites added in S3 and S4 downlink only to these stations, and only satellites that broadcast their data directly can use the direct-readout stations. The reason is comparability: with the same stations in every scenario, a difference between scenarios comes from the space segment alone, not from a different ground network.
+The same set is used in all scenarios; since ground links are filtered in post-processing, other sets can be tested later without new runs. The processing on the ground is not modelled (Section~\ref{subsec:s1latency}). \textbf{Design freeze: one ground segment for all scenarios.} The ground segment is frozen as the stations of the table above: Svalbard, McMurdo and Poker Flat for stored data, the TDRSS relay for Terra, and Madison, Hampton and Mayag\"uez for direct readout over the United States. The satellites added in S3 and S4 downlink only to these stations, and only satellites that broadcast their data directly can use the direct-readout stations. The reason is comparability: with the same stations in every scenario, a difference between scenarios comes from the space segment alone, not from a different ground network.
 \begin{itemize}[leftmargin=1.2cm]
     \item \textbf{Not public, but realistic.} The stations serve public missions but are not open to any satellite: Svalbard and Troll belong to a commercial operator (KSAT) that rents antennas to NASA, NOAA and ESA; McMurdo, Poker Flat and TDRSS are NASA's; the direct-readout stations belong to universities and NASA. A commercial S4 satellite could buy Svalbard passes, so the assumption is plausible, but it is a modelling choice, not the satellites' real network.
     \item \textbf{What it changes.} Some S3 satellites have their own stations, e.g.\ FY-3D downlinks to Kiruna and four stations in China (Section~\ref{sec:census}). Their real segment is kept as a sensitivity case, which costs no new run because ground links are filtered in post-processing. \vincenzoq{Will we really do this?} \actionitem{Then we should consider this GS since the beginning in the set: check}
@@ -204,39 +204,14 @@ The same set is used in all scenarios; since ground links are filtered in post-p
 \end{itemize}
 \vincenzoq{Is a common ground segment for all scenarios acceptable, with each satellite's real segment as a sensitivity case? Which stations should the coordination layer (central nodes) of S2 use: the same set, or a dedicated one?}
 
-\subsection{Latency of the S1 layer}\label{subsec:s1latency}
+\subsection{Latency: what the simulation measures}\label{subsec:s1latency}
 
-The latency is the time from the observation to the fire product being online. The providers publish only an upper bound, ``within 3\,h''~\cite{nasa2026datalatency,mecklenburg2015s3ops}. Table~\ref{tab:s1latency} gives the measured median over the study window, 8 to 16 August 2025, split into the wait for a ground station and the processing on the ground.
-
-\begin{longtable}{|p{2.1cm}|p{1.6cm}|p{1.9cm}|p{1.8cm}|p{6.4cm}|}
-\caption{Latency of the S1 fire products, median over 8 to 16 August 2025, in minutes. Wait: orbit average to the first ground contact (Section~\ref{sec:runs}). Processing: latency minus wait.}\label{tab:s1latency}\\
-\hline
-\rowcolor{tablehead}
-\textbf{Satellite} & \textbf{Latency} & \textbf{Wait for a ground station} & \textbf{Processing} & \textbf{Source of the latency} \\
-\hline
-\endhead
-Terra & 69 & 25 & 44 & LANCE MOD14 files~\cite{nasa2026lancenrt}$^{a}$ \\
-\hline
-Aqua & 98 & 38 & 61 & LANCE MYD14 files~\cite{nasa2026lancenrt}$^{a}$ \\
-\hline
-Suomi NPP & 152 & 51 & 101 & NOAA VIIRS files~\cite{noaa2025jpssaws}$^{b}$ \\
-\hline
-NOAA-20 & 138 & 21 & 117 & NOAA VIIRS files~\cite{noaa2025jpssaws}$^{b}$ \\
-\hline
-NOAA-21 & 116 & 20 & 96 & NOAA VIIRS files~\cite{noaa2025jpssaws}$^{b}$ \\
-\hline
-Sentinel-3A & 96 & 50 & 46 & Sentinel-3 SL\_2\_AOD NR files~\cite{cdse2026catalogue}$^{c}$ \\
-\hline
-Sentinel-3B & 95 & 52 & 43 & Sentinel-3 SL\_2\_AOD NR files~\cite{cdse2026catalogue}$^{c}$ \\
-\hline
-\multicolumn{5}{|p{15.2cm}|}{\footnotesize
-$^{a}$ MODIS files of August 2025 are not archived; the files of 31 October to 7 November 2026 are used. Their share within 3\,h matches August 2025~\cite{esdis2025metrics}. \newline
-$^{b}$ The VIIRS fire files of August 2025 are deleted. Latency = creation time of NOAA's input files plus the measured delay of the LANCE fire product after them. \newline
-$^{c}$ The Sentinel-3 fire files of August 2025 are deleted. The aerosol product of the same chain is created within 1\,min of them.} \\
-\hline
-\end{longtable}
-
-The processing depends on the processing chain, not on the satellite. The simulation therefore uses two constants: \textbf{50\,min for MODIS and Sentinel-3, 105\,min for VIIRS}. The wait for a ground station is computed by the simulation itself. The time from the product being online to the user (e.g.\ FIRMS ingestion) is not measured and is taken as 0.
+The scenarios are compared on two times, both computed by the simulation:
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Time to detection:} from the ignition to the first observation of the fire. S1 is validated on it against S0.
+    \item \textbf{Time to ground:} from the observation to the data reaching a ground station or ground node (ground segment above; from S2 on, through the coordination layer).
+\end{itemize}
+The processing on the ground, from the data to the published fire product, is \textbf{not modelled}. As long as it happens on the ground it is the same in every scenario, so it shifts all results equally and does not change their comparison. For reference, the published product follows the observation by about 2.5\,h for FIRMS~\cite{wooster2021active} and 3\,h for Sentinel-3~\cite{mecklenburg2015s3ops}, ground wait included. The processing would differ between scenarios only if S2 processed the data on board or on the central nodes (open question in Section~\ref{subsec:latency}).
 
 % =========================================================
 \section{Wildfire-Detection Satellite Census}\label{sec:census}
@@ -777,7 +752,7 @@ Mount Underwood & 3.17 & 4.10 & -- & 0.18 (GOES-18) \\
 The first detections above are observation times. A user could only act on them once the product was published. Table~\ref{tab:latency} gives the time from the observation to the product for each source.
 
 \begin{longtable}{|p{3.4cm}|p{3.6cm}|p{3.6cm}|p{4.0cm}|}
-\caption{Time from the observation to the product. Geostationary values measured from the downloaded files (GOES: scan start to file creation in the file name, 5{,}179 files; LSA SAF: acquisition to product time in the file attributes, 864 files). Product creation, not arrival at the user.}\label{tab:latency}\\
+\caption{Time from the observation to the product. Geostationary values measured from the downloaded files (GOES: scan start to file creation in the file name, 5{,}179 files; LSA SAF: acquisition to product time in the file attributes, 864 files). Product creation, not arrival at the user. Polar: the archived files record no production time, so the total is taken from the literature.}\label{tab:latency}\\
 \hline
 \rowcolor{tablehead}
 \textbf{Product} & \textbf{Observation to ground} & \textbf{Processing} & \textbf{Source of the value} \\
@@ -787,13 +762,13 @@ GOES ABI FDC & none (permanent contact) & 3\,min (max.\ 10\,min) & measured \\
 \hline
 LSA SAF FRP-PIXEL (SEVIRI) & none (permanent contact) & 17.5\,min (max.\ 21\,min) & measured; includes the 15\,min scan \\
 \hline
-FIRMS (VIIRS, MODIS) & median 25\,min, up to 114\,min & 50\,min (MODIS), 105\,min (VIIRS) & ground: computed (Section~\ref{sec:runs}); processing: measured (Section~\ref{subsec:s1latency}) \\
+FIRMS (VIIRS, MODIS) & median 25\,min, up to 114\,min & not modelled; 2.5\,h in total & ground: computed (Section~\ref{sec:runs}); total: literature~\cite{wooster2021active} \\
 \hline
-Sentinel-3 SL\_2\_FRP & Svalbard only, often a full orbit & 50\,min & as FIRMS \\
+Sentinel-3 SL\_2\_FRP & Svalbard only, often a full orbit & not modelled; 3\,h in total & ground: computed; total: mission requirement~\cite{mecklenburg2015s3ops} \\
 \hline
 \end{longtable}
 
-\textbf{Conclusion.} In the public record, the delay after the detection is set by the ground and processing chain, not by the observation. Geostationary products appear within 3 to 18\,min. Polar products first wait for a ground station (median 25\,min, up to about 2\,h) and then for processing (50 to 105\,min). Where a polar satellite sees the fire first, which is the case for Molezuelas and O\'imbra, the public alert can therefore come hours after the detection. The gain of a faster space segment (S2) must be measured against this whole chain, not against the detection time alone.
+\textbf{Conclusion.} In the public record, the delay after the detection is set by the ground and processing chain, not by the observation. Geostationary products appear within 3 to 18\,min. Polar products first wait for a ground station (median 25\,min, up to about 2\,h) and then for processing; the product is published about 2.5 to 3\,h after the observation~\cite{wooster2021active,mecklenburg2015s3ops}. Where a polar satellite sees the fire first, which is the case for Molezuelas and O\'imbra, the public alert can therefore come hours after the detection. A faster space segment (S2) shortens the time to ground; the processing after it is the same in every scenario (Section~\ref{subsec:s1latency}), unless it moves on board or to the central nodes.
 
 \textbf{Implications (ideas, not results).} The finding points to ways of shortening the chain beyond the network links studied here:
 \begin{itemize}[leftmargin=1.2cm]

@@ -15,15 +15,24 @@
       <p style="font-size:24px; color:#1f6f6b"><b>18 min</b> scan and processing, measured</p>
     </div>
     <div style="display:flex; flex-direction:row; align-items:center; gap:24px">
-      <p style="width:380px; font-size:24px; font-weight:600">FIRMS, Sentinel-3 (polar)</p>
+      <p style="width:380px; font-size:24px; font-weight:600">FIRMS: MODIS, VIIRS (polar)</p>
       <div style="display:flex; flex-direction:row">
         <div style="width:130px; height:44px; background:#a8431a; border-radius:4px 0px 0px 4px"></div>
-        <div style="width:930px; height:44px; background:#fbeee6; border:2px solid #c4501f; border-radius:0px 4px 4px 0px; display:flex; align-items:center; padding:0px 16px">
-          <p style="font-size:24px; color:#a8431a">+ processing, up to 3 h (provider statement)</p>
+        <div style="width:650px; height:44px; background:#fbeee6; border:2px solid #c4501f; border-radius:0px 4px 4px 0px; display:flex; align-items:center; padding:0px 16px">
+          <p style="font-size:24px; color:#a8431a">+ processing, about 2 h</p>
         </div>
       </div>
     </div>
-    <p style="font-size:24px; color:#5b6573; padding:0px 0px 0px 404px"><span style="color:#a8431a"><b>Ground station: median 25 min</b></span>, up to 114 min. Same time scale for all bars.</p>
+    <div style="display:flex; flex-direction:row; align-items:center; gap:24px">
+      <p style="width:380px; font-size:24px; font-weight:600">Sentinel-3 (polar)</p>
+      <div style="display:flex; flex-direction:row">
+        <div style="width:130px; height:44px; background:#a8431a; border-radius:4px 0px 0px 4px"></div>
+        <div style="width:806px; height:44px; background:#fbeee6; border:2px solid #c4501f; border-radius:0px 4px 4px 0px; display:flex; align-items:center; padding:0px 16px">
+          <p style="font-size:24px; color:#a8431a">+ processing, about 2.5 h</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:24px; color:#5b6573; padding:0px 0px 0px 404px"><span style="color:#a8431a"><b>Ground station: median 25 min</b></span>, up to 114 min. In total 2.5 h for FIRMS (Wooster et al., 2021) and 3 h for Sentinel-3 (ESA requirement). Same time scale for all bars.</p>
   </div>
   <div style="display:flex; flex-direction:column; gap:16px">
     <h3 style="font-size:32px; font-weight:600; color:#1c2430">Ideas to shorten the chain (not results)</h3>
@@ -46,6 +55,6 @@
       </div>
     </div>
   </div>
-  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#5b6573">Product creation, not arrival at the user. Polar processing cannot be measured: FIRMS publishes no production time.</p>
-  <aside>The detection times of the public-record slide are observation times; users could act only once the product was published. Geostationary satellites are always in contact with the ground, so their products appear within minutes: measured from the downloaded files, GOES products are created 3 minutes after the scan start (5,179 files, maximum 10 minutes) and LSA SAF products 17.5 minutes after the slot start, which includes the 15-minute scan (864 files, maximum 21 minutes). Polar satellites first wait for a ground station: median 25 minutes, up to 114 minutes on the real ground segments. Then the data are processed; FIRMS and Sentinel-3 state under 3 hours, an upper bound we cannot measure because FIRMS publishes no production time and only the reprocessed Sentinel-3 products remain archived. Conclusion: after the detection, the ground and processing chain, not the observation, sets the delay. Where a polar satellite sees the fire first (Molezuelas, Oimbra), the public alert can come hours later. The S2 gain must be measured against this whole chain. The ideas below are directions, not results; question for Vincenzo: model in-orbit processing as a variant of S2 (a processing delay per node), or only discuss it?</aside>
+  <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:#5b6573">Processing is not modelled: it is the same in every scenario. Polar totals: Wooster et al. (2021); ESA.</p>
+  <aside>The detection times of the public-record slide are observation times; users could act only once the product was published. Geostationary satellites are always in contact with the ground, so their products appear within minutes: measured from the downloaded files, GOES products are created 3 minutes after the scan start (5,179 files, maximum 10 minutes) and LSA SAF products 17.5 minutes after the slot start, which includes the 15-minute scan (864 files, maximum 21 minutes). Polar satellites first wait for a ground station: median 25 minutes, up to 114 minutes on the real ground segments. Then the data are processed. The literature gives the total from observation to product: FIRMS usually within 2.5 hours (Wooster et al. 2021, Remote Sensing of Environment), Sentinel-3 under 3 hours (ESA mission requirement). Processing is not modelled: as long as it happens on the ground it is the same in every scenario, so it shifts all results equally. The scenarios are compared on two simulated times: time to detection (validated against S0) and time to ground. Conclusion: after the detection, the ground and processing chain, not the observation, sets the delay. Where a polar satellite sees the fire first (Molezuelas, Oimbra), the public alert can come hours later. S2 shortens the time to ground; the processing after it is the same in every scenario unless it moves on board or to the central nodes. The ideas below are directions, not results; question for Vincenzo: model in-orbit processing as a variant of S2 (a processing delay per node), or only discuss it?</aside>
 </section>

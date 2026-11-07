@@ -1,7 +1,7 @@
 # Progress deck: update after 27 October
 
 Source files of the claude.ai Slides artifact used for progress tracking:
-https://claude.ai/artifact/UvBN5vaqoZZhDDp3KZHCFp (version 113, 7 Nov 2026)
+https://claude.ai/artifact/UvBN5vaqoZZhDDp3KZHCFp (version 132, 7 Nov 2026)
 
 - `deck.json`: slide order, sections, title, fonts
 - `slides/<id>.html`: one slide each (fixed 1920 x 1080 canvas, inline styles, speaker notes in `<aside>`)
