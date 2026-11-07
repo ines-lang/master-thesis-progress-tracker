@@ -172,7 +172,44 @@ A direct-readout station receives only what the satellite observes while the sta
 
 The first contact is the time the satellite rises above the elevation mask, not the time its stored data have been downlinked, and every visible pass is assumed to be used for a downlink. Both assumptions make these values a few minutes optimistic.
 
-The Month 2 set was therefore optimistic: it made S1 too fast and would understate the gain of the central nodes. The baseline uses the real ground segment of each satellite plus the US direct-readout stations. The same set is used in all scenarios; since ground links are filtered in post-processing, other sets can be tested later without new runs. Processing latency (under 3\,h for FIRMS and SL\_2\_FRP) is not modelled.
+The Month 2 set was therefore optimistic: it made S1 too fast and would understate the gain of the central nodes. The baseline uses the real ground segment of each satellite plus the US direct-readout stations. The same set is used in all scenarios; since ground links are filtered in post-processing, other sets can be tested later without new runs. The processing on the ground is added in Section~\ref{subsec:latency}.
+
+\subsection{Latency of the S1 layer}\label{subsec:latency}
+
+The time from an observation to a public fire detection has two parts: the wait for a ground station, which the simulation computes from the orbits, and the ground processing up to the fire product being online, which it does not. The ingestion into FIRMS after the file is online is not included.
+
+The near-real-time files are kept online only for days (LANCE~\cite{nasa2026lancenrt} about 7 days, Sentinel-3 NR products on the Copernicus Data Space Ecosystem~\cite{cdse2026catalogue} about two weeks), so those of August 2025 no longer exist. The latency was therefore measured on all files online on 7 November 2026, as the time from the end of the observation to the file being online. The downlink wait is the orbit average of the time to the first contact with the real ground segment; the processing is the difference of the two medians.
+
+\begin{longtable}{p{2.1cm}p{2.3cm}p{1.0cm}p{2.2cm}p{1.3cm}p{2.2cm}p{1.8cm}}
+\caption{Near-real-time latency of the S1 fire products, from the end of the observation to the file being online, in minutes: median (90th percentile). LANCE files 31 October to 7 November 2026, Sentinel-3 files 24 October to 7 November 2026.}\label{tab:latency}\\
+\toprule
+\textbf{Satellite} & \textbf{Product} & \textbf{Files} & \textbf{Measured latency} & \textbf{Within 3\,h} & \textbf{Downlink wait (model)} & \textbf{Processing} \\
+\midrule
+\endhead
+Terra & MOD14 & 2021 & 69 (99) & 100\,\% & 25 (relay) & 44 \\
+Aqua & MYD14 & 2000 & 98 (139) & 99.6\,\% & 38 (78) & 61 \\
+Suomi NPP & VNP14IMG & 528 & 151 (512) & 73.9\,\% & 51 (161) & 100 \\
+NOAA-20 & VJ114IMG & 1599 & 141 (179) & 90.5\,\% & 21 (68) & 120 \\
+NOAA-21 & VJ214IMG & 1645 & 120 (322) & 85.4\,\% & 20 (54) & 100 \\
+Sentinel-3A & SL\_2\_FRP NR & 6786 & 104 (149) & 92.7\,\% & 50 (166) & 54 \\
+Sentinel-3B & SL\_2\_FRP NR & 6785 & 102 (144) & 94.7\,\% & 52 (141) & 51 \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item The processing depends on the processing chain, not on the satellite: about 45 to 60\,min for MODIS and Sentinel-3, 100 to 120\,min for VIIRS. VIIRS is the slowest although NOAA-20/21 have the shortest downlink wait.
+    \item The published ``within 3\,h'' is an upper bound, not a typical value: the medians are 1 to 2.5\,h. Between 5 and 15\,\% of the VIIRS and Sentinel-3 files miss it.
+    \item Suomi NPP was measured in its last three days of data delivery (it ended on 2 November 2026), so its row is not representative; the NOAA-20/21 processing applies to it as well.
+    \item The values are from November 2026, not August 2025. The EOSDIS weekly metrics~\cite{esdis2025metrics} give the share of LANCE files within 3\,h for August 2025 and can show whether the two periods are comparable.
+\end{itemize}
+
+The latency model is refined in steps, each one keeping the previous as a bound:
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Downlink wait only (the runs so far): a lower bound.
+    \item Downlink wait plus the median processing of each chain (Table~\ref{tab:latency}): the baseline for S1 against S0.
+    \item Downlink wait plus a processing time drawn from the measured files: the spread of the detection time, not only its median.
+    \item Consistency check: the modelled total, over the same days and orbits as the measured files, should reproduce the measured distribution.
+\end{enumerate}
 
 % =========================================================
 \section{Wildfire-Detection Satellite Census}\label{sec:census}
@@ -610,6 +647,34 @@ Mount Underwood & 3.17 & 4.10 & -- & 0.18 (GOES-18) \\
     \end{itemize}
     These do not change the first detections above, but they must be resolved in the per-event pipeline before the T0 is fixed.
 \end{itemize}
+
+\subsection{From detection to publication}\label{subsec:latency}
+
+The first detections above are observation times. A user could only act on them once the product was published. Table~\ref{tab:latency} gives the time from the observation to the product for each source.
+
+\begin{longtable}{p{3.4cm}p{3.6cm}p{3.6cm}p{4.2cm}}
+\caption{Time from the observation to the product. Geostationary values measured from the downloaded files (GOES: scan start to file creation in the file name, 5{,}179 files; LSA SAF: acquisition to product time in the file attributes, 864 files). Product creation, not arrival at the user.}\label{tab:latency}\\
+\toprule
+\textbf{Product} & \textbf{Observation to ground} & \textbf{Processing} & \textbf{Source of the value} \\
+\midrule
+\endhead
+GOES ABI FDC & none (permanent contact) & 3\,min (max.\ 10\,min) & measured \\
+LSA SAF FRP-PIXEL (SEVIRI) & none (permanent contact) & 17.5\,min (max.\ 21\,min) & measured; includes the 15\,min scan \\
+FIRMS (VIIRS, MODIS) & median 25\,min, up to 114\,min & under 3\,h & ground: computed (Section~\ref{sec:runs}); processing: provider statement, not measured \\
+Sentinel-3 SL\_2\_FRP & Svalbard only, often a full orbit & under 3\,h & as FIRMS \\
+\bottomrule
+\end{longtable}
+
+\textbf{Conclusion.} In the public record, the delay after the detection is set by the ground and processing chain, not by the observation. Geostationary products appear within 3 to 18\,min. Polar products first wait for a ground station (median 25\,min, up to about 2\,h) and then for processing (up to 3\,h). Where a polar satellite sees the fire first, which is the case for Molezuelas and O\'imbra, the public alert can therefore come hours after the detection. The gain of a faster space segment (S2) must be measured against this whole chain, not against the detection time alone. The polar processing time is the provider's upper bound: FIRMS publishes no production time, and only the reprocessed Sentinel-3 products remain archived, so it cannot be measured here.
+
+\textbf{Implications (ideas, not results).} The finding points to ways of shortening the chain beyond the network links studied here:
+\begin{itemize}[leftmargin=1.2cm]
+    \item \textbf{Onboard processing}: detect the fire on the satellite (e.g.\ with an onboard AI model) and send a short alert instead of the raw data, which removes the ground processing time.
+    \item \textbf{Processing on the central nodes}: the coordination layer of S2 could host the processing as an in-orbit computing (cloud) node, so the alert leaves the space segment ready to use.
+    \item \textbf{Direct readout outside the US}: stations that receive the data while the satellite still sees the fire, as for Red Canyon, would remove the ground wait for Europe and Morocco.
+    \item \textbf{Alert from GEO, confirmation from LEO}: the geostationary product gives the fast alert, the polar products the position and size.
+\end{itemize}
+\vincenzoq{Should onboard or in-orbit processing be modelled as a variant of S2 (a processing delay per node), or only discussed?}
 
 \begin{itemize}[leftmargin=1.2cm]
     \item \actionitem{Add O\'imbra, Pi\'od\~ao, Red Canyon and Derdara (and Mount Underwood if kept) to the registry and run them through the per-event pipeline with the FIRMS-cluster rule; make the EFFIS step optional outside Europe and Morocco.}

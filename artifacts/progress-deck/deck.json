@@ -21,6 +21,7 @@
     "eolayer",
     "gaps",
     "groundseg",
+    "latency",
     "scenarios",
     "scenario3",
     "roles",
@@ -35,7 +36,7 @@
       "start": "cover"
     },
     "s2": {
-      "description": "This week: action items, events, public record of all events, satellite census, coverage gaps and ground segment",
+      "description": "This week: action items, events, public record of all events, satellite census, coverage gaps, ground segment and the time from detection to publication",
       "start": "progress"
     },
     "s3": {
